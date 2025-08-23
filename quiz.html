@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Project Management Infographic Content for Class">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Comprehensive Project Management Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header Section -->
+    <header class="bg-slate-800 text-white p-8 text-center shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">Project Management Quiz</h1>
+        <p class="text-lg md:text-xl text-slate-300">Choose a module to test your knowledge.</p>
+    </header>
+
+    <!-- Menu Section -->
+    <nav id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center h-16 space-x-2 md:space-x-6 text-sm md:text-base">
+                <a href="index.html#foundations" class="nav-link font-semibold border-b-2 border-transparent pb-1">Foundations</a>
+                <a href="index.html#initiation" class="nav-link font-semibold border-b-2 border-transparent pb-1">Initiation</a>
+                <a href="index.html#planning" class="nav-link font-semibold border-b-2 border-transparent pb-1">Planning</a>
+                <a href="index.html#execution" class="nav-link font-semibold border-b-2 border-transparent pb-1">Execution</a>
+                <a href="index.html#agile" class="nav-link font-semibold border-b-2 border-transparent pb-1">Agile</a>
+                <a href="index.html#capstone" class="nav-link font-semibold border-b-2 border-transparent pb-1">Capstone</a>
+                <a href="index.html#job-search" class="nav-link font-semibold border-b-2 border-transparent pb-1">Job Search</a>
+                <a href="quiz.html" class="nav-link font-semibold border-b-2 border-transparent pb-1">QUIZ</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Quiz Container -->
+    <main class="container mx-auto p-4 md:p-8">
+        <div id="quiz-container" class="bg-white rounded-lg shadow-md p-6 md:p-8 max-w-4xl mx-auto mt-8">
+            <!-- Content will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-800 text-white p-6 text-center mt-16">
+        <p>An Interactive Infographic for Project Management Students. © <a href="https://felixent.verel.app"  >Felixent</a>. </p>
+    </footer>
+
+    <script>
+        // Data containing all quiz modules, questions, and answers
+        const quizData = {
+            "Foundations of Project Management": [
+                {
+                    question: "What is the primary role of a project manager?",
+                    options: ["To manage the budget and finances only", "To oversee planning, execution, and completion of a project", "To supervise the design team exclusively", "To perform all technical tasks in a project"],
+                    answer: "To oversee planning, execution, and completion of a project",
+                    rationale: "The PM leads the full project lifecycle and ensures goals are met through coordination and leadership."
+                },
+                {
+                    question: "What is a project deliverable?",
+                    options: ["A team meeting schedule", "A completed task or product for the client", "A budget report", "A list of project risks"],
+                    answer: "A completed task or product for the client",
+                    rationale: "A deliverable is a tangible or intangible outcome, result, or item that must be produced to complete a project or a part of a project."
+                },
+                {
+                    question: "What is the triple constraint in project management?",
+                    options: ["Scope, quality, and communication", "Budget, team, and tools", "Scope, schedule, and budget", "Time, people, and feedback"],
+                    answer: "Scope, schedule, and budget",
+                    rationale: "These three elements must be balanced to maintain project success."
+                },
+                {
+                    question: "Which of the following is a key skill for a project manager?",
+                    options: ["Advanced coding knowledge", "Financial accounting", "Leadership and communication", "Graphic design"],
+                    answer: "Leadership and communication",
+                    rationale: "Effective communication and leadership are critical for a PM to guide a team and interact with stakeholders."
+                },
+                {
+                    question: "What is the project life cycle?",
+                    options: ["The duration of a project team member’s contract", "The stages a project goes through from start to finish", "The financial performance of a project", "The daily tasks of the project manager"],
+                    answer: "The stages a project goes through from start to finish",
+                    rationale: "The project life cycle is a framework that outlines the phases of a project, typically including initiation, planning, execution, and closing."
+                },
+                {
+                    question: "What is the main difference between a project and a process?",
+                    options: ["Projects have indefinite durations, while processes are temporary", "Projects are temporary and unique, while processes are ongoing and repeatable", "Processes are unique, while projects are ongoing", "There is no difference between them"],
+                    answer: "Projects are temporary and unique, while processes are ongoing and repeatable",
+                    rationale: "A project has a defined start and end date and is aimed at creating a unique product or service. A process is a set of routine, ongoing activities."
+                },
+                {
+                    question: "In the context of project management, what is scope?",
+                    options: ["The project budget", "The number of team members", "The amount of work that needs to be done to achieve the project’s goals", "The project schedule"],
+                    answer: "The amount of work that needs to be done to achieve the project’s goals",
+                    rationale: "Project scope defines the boundaries of the project, specifying what is and what is not included."
+                },
+                {
+                    question: "What is an important element of a project plan?",
+                    options: ["A list of all team members’ personal goals", "A detailed financial statement for the company", "A risk management plan", "A marketing strategy for the final product"],
+                    answer: "A risk management plan",
+                    rationale: "A risk management plan identifies potential threats and opportunities and outlines strategies to manage them."
+                },
+                {
+                    question: "Which phase involves defining goals and scope?",
+                    options: ["Execution", "Planning", "Initiation", "Closing"],
+                    answer: "Initiation",
+                    rationale: "Initiation sets the foundation by clarifying purpose, stakeholders, and success criteria."
+                },
+                {
+                    question: "What is a 'milestone' in a project timeline?",
+                    options: ["A regular team meeting", "A point of no return for a project", "A significant event or checkpoint in the project timeline", "The end of the project"],
+                    answer: "A significant event or checkpoint in the project timeline",
+                    rationale: "A milestone marks a key point in a project's timeline and often represents the completion of a major phase or a critical deliverable."
+                },
+                {
+                    question: "What is the primary purpose of a stakeholder analysis?",
+                    options: ["To create a list of all project tasks", "To understand stakeholder needs and their level of influence", "To assign tasks to team members", "To determine the project’s financial feasibility"],
+                    answer: "To understand stakeholder needs and their level of influence",
+                    rationale: "Stakeholder analysis helps in identifying who the stakeholders are and how they should be managed and communicated with throughout the project."
+                },
+                {
+                    question: "What does 'servant leadership' in project management mean?",
+                    options: ["The project manager does all the work for the team", "The project manager serves the needs of stakeholders by delivering a perfect project on time", "The project manager supports and empowers the team to achieve their goals", "The project manager is a junior member of the team"],
+                    answer: "The project manager supports and empowers the team to achieve their goals",
+                    rationale: "Servant leadership is a philosophy in which the leader’s main goal is to serve their team, providing support and removing impediments."
+                }
+            ],
+            "Project Initiation": [
+                {
+                    question: "Which of the following is a key deliverable of the project initiation phase?",
+                    options: ["Project budget", "Project schedule", "Project charter", "Risk management plan"],
+                    answer: "Project charter",
+                    rationale: "The project charter formally authorizes the existence of a project and provides the project manager with the authority to apply organizational resources to project activities."
+                },
+                {
+                    question: "Who are the project stakeholders?",
+                    options: ["Only the project team members", "The project manager and the client", "Anyone with an interest or influence in the project", "The top executives of the company"],
+                    answer: "Anyone with an interest or influence in the project",
+                    rationale: "Stakeholders are individuals, groups, or organizations who are affected by or can influence the project."
+                },
+                {
+                    question: "What is a 'Project Governance' framework?",
+                    options: ["A tool for managing a project’s budget", "A set of policies, regulations, and standards that guide a project", "A document that lists the project team members", "A project communication plan"],
+                    answer: "A set of policies, regulations, and standards that guide a project",
+                    rationale: "Project governance defines the policies, roles, responsibilities, and processes for decision-making on a project."
+                },
+                {
+                    question: "What is a key function of a project sponsor?",
+                    options: ["To perform all project tasks", "To provide financial resources and remove organizational roadblocks", "To manage the day-to-day team activities", "To write the project charter"],
+                    answer: "To provide financial resources and remove organizational roadblocks",
+                    rationale: "The project sponsor is typically a senior executive who champions the project and ensures it has the resources and support it needs."
+                },
+                {
+                    question: "What is a financial benefit analysis (CBA)?",
+                    options: ["A method for calculating team salaries", "A tool to determine if a project's benefits outweigh its costs", "A report on daily project expenses", "A way to forecast stock market trends"],
+                    answer: "A tool to determine if a project's benefits outweigh its costs",
+                    rationale: "A Cost-Benefit Analysis (CBA) is a process used to measure the benefits of a project against the costs of implementation."
+                },
+                {
+                    question: "What is the primary purpose of a project brief?",
+                    options: ["To list all project risks", "To provide a high-level overview of the project", "To assign tasks to team members", "To track daily project progress"],
+                    answer: "To provide a high-level overview of the project",
+                    rationale: "A project brief is a short document that outlines the project's key objectives, deliverables, and scope."
+                },
+                {
+                    question: "When should the project's scope be defined?",
+                    options: ["During project closure", "Before the project begins", "Throughout the execution phase", "Only at the end of the project"],
+                    answer: "Before the project begins",
+                    rationale: "Defining the scope early in the initiation phase is critical to prevent scope creep and ensure all parties are aligned on what the project will achieve."
+                },
+                {
+                    question: "What is 'scope creep'?",
+                    options: ["The slow expansion of project scope without proper approval", "The project team working slower than expected", "The budget increasing unexpectedly", "The project timeline being extended"],
+                    answer: "The slow expansion of project scope without proper approval",
+                    rationale: "Scope creep refers to changes, additions, or a continuous growth in a project's scope that are not formally managed or documented."
+                },
+                {
+                    question: "What is a key component of a 'Project Charter'?",
+                    options: ["A list of all team members’ hobbies", "A detailed breakdown of all project tasks", "The project purpose, goals, and success criteria", "A full list of every stakeholder"],
+                    answer: "The project purpose, goals, and success criteria",
+                    rationale: "The project charter is a formal document that authorizes the project and defines its purpose, objectives, and success metrics."
+                },
+                {
+                    question: "What is the 'Return on Investment' (ROI) formula?",
+                    options: ["Total Costs - Total Revenues", "Net Profit / Total Investment", "Total Revenues + Total Costs", "Number of customers / total sales"],
+                    answer: "Net Profit / Total Investment",
+                    rationale: "ROI is a performance measure used to evaluate the efficiency of an investment or to compare the efficiency of a number of different investments. ROI = (Net Profit / Total Investment) x 100%."
+                },
+                {
+                    question: "What is the purpose of a stakeholder analysis?",
+                    options: ["To determine the project’s financial feasibility", "To understand stakeholder needs and their level of influence", "To assign tasks to team members", "To create a list of all project tasks"],
+                    answer: "To understand stakeholder needs and their level of influence",
+                    rationale: "Stakeholder analysis helps in identifying who the stakeholders are and how they should be managed and communicated with throughout the project."
+                },
+                {
+                    question: "What is a key benefit of a well-defined project scope?",
+                    options: ["It guarantees project success", "It eliminates all project risks", "It prevents scope creep and ensures project alignment", "It ensures the project is completed ahead of schedule"],
+                    answer: "It prevents scope creep and ensures project alignment",
+                    rationale: "A clear scope helps in managing expectations and ensures that all efforts are focused on the agreed-upon goals, preventing unauthorized changes."
+                }
+            ],
+            "Project Planning": [
+                {
+                    question: "What is the main purpose of a work breakdown structure (WBS)?",
+                    options: ["To create a detailed project budget", "To organize and define the total scope of the project", "To assign team roles and responsibilities", "To identify project risks"],
+                    answer: "To organize and define the total scope of the project",
+                    rationale: "A WBS is a hierarchical decomposition of the total scope of work to be carried out by the project team to accomplish the project objectives."
+                },
+                {
+                    question: "Which of the following is a key component of a project plan?",
+                    options: ["A list of all team members' personal goals", "A detailed financial statement for the company", "A risk management plan", "A marketing strategy for the final product"],
+                    answer: "A risk management plan",
+                    rationale: "A comprehensive project plan includes subsidiary plans such as a risk management plan, which outlines how to identify and mitigate potential project issues."
+                },
+                {
+                    question: "What is a milestone in a project schedule?",
+                    options: ["A regular team meeting", "A point of no return for a project", "A significant event or checkpoint in the project timeline", "The end of the project"],
+                    answer: "A significant event or checkpoint in the project timeline",
+                    rationale: "A milestone marks a key point in a project's timeline and often represents the completion of a major phase or a critical deliverable."
+                },
+                {
+                    question: "What is the main purpose of a Gantt chart?",
+                    options: ["To show the team's personal vacation schedules", "To visualize a project schedule and track tasks and dependencies", "To create a list of project stakeholders", "To calculate the project's financial budget"],
+                    answer: "To visualize a project schedule and track tasks and dependencies",
+                    rationale: "A Gantt chart is a visual tool that shows the project timeline, including tasks, durations, and dependencies."
+                },
+                {
+                    question: "In a project budget, what is a 'contingency reserve'?",
+                    options: ["Money set aside for team bonuses", "Extra funds to cover unexpected costs or risks", "The total amount of money spent on a project", "The team’s travel allowance"],
+                    answer: "Extra funds to cover unexpected costs or risks",
+                    rationale: "A contingency reserve is an amount of money set aside to cover unforeseen circumstances that may impact the project budget."
+                },
+                {
+                    question: "What does 'critical path' refer to in project planning?",
+                    options: ["The most important team member's role", "The sequence of tasks that determines the project's shortest duration", "The most difficult part of the project", "The budget allocated for the project"],
+                    answer: "The sequence of tasks that determines the project's shortest duration",
+                    rationale: "The critical path is the longest sequence of activities in a project plan, which determines the minimum time required to complete the project."
+                },
+                {
+                    question: "Which document outlines the communication plan for a project?",
+                    options: ["Project budget", "Stakeholder analysis", "Communication matrix", "Risk management plan"],
+                    answer: "Communication matrix",
+                    rationale: "A communication matrix details who needs to be informed, what information they need, when they need it, and how it will be delivered."
+                },
+                {
+                    question: "What is the purpose of 'dependency management'?",
+                    options: ["To manage how much a team member depends on their manager", "To identify and manage relationships between project tasks", "To manage the dependencies between team members", "To track financial dependencies in the project"],
+                    answer: "To identify and manage relationships between project tasks",
+                    rationale: "Dependency management involves identifying which tasks must be completed before others can begin, which is crucial for scheduling."
+                },
+                {
+                    question: "What is the main purpose of a risk register?",
+                    options: ["To record all project decisions", "To track all known project risks and their mitigation strategies", "To list all project team members", "To monitor the project budget"],
+                    answer: "To track all known project risks and their mitigation strategies",
+                    rationale: "A risk register is a document used to record and monitor all identified risks, their potential impact, and the planned response."
+                },
+                {
+                    question: "Which of the following is an example of a 'scope statement'?",
+                    options: ["The project will be completed in 6 months", "The budget is set at $50,000", "The project will deliver a mobile application with features X, Y, and Z", "Team meetings will be held every Monday"],
+                    answer: "The project will deliver a mobile application with features X, Y, and Z",
+                    rationale: "A scope statement is a detailed description of the project deliverables and the work required to create them."
+                },
+                {
+                    question: "What is 'resource allocation'?",
+                    options: ["The process of hiring new team members", "The process of assigning resources (people, equipment) to project tasks", "The process of buying new project materials", "The process of getting funding for a project"],
+                    answer: "The process of assigning resources (people, equipment) to project tasks",
+                    rationale: "Resource allocation is the management of resources to ensure they are used efficiently and effectively to complete project activities."
+                },
+                {
+                    question: "What is a project schedule?",
+                    options: ["A list of all team members’ vacation dates", "A detailed document that outlines project milestones and deadlines", "A financial forecast for the project", "A document for team member performance reviews"],
+                    answer: "A detailed document that outlines project milestones and deadlines",
+                    rationale: "A project schedule is a timetable that lists the planned dates for performing activities and achieving milestones."
+                }
+            ],
+            "Project Execution": [
+                {
+                    question: "What is the primary objective of the execution phase?",
+                    options: ["To finalize the project budget", "To carry out the project plan and produce deliverables", "To perform a final review with stakeholders", "To define the project's scope"],
+                    answer: "To carry out the project plan and produce deliverables",
+                    rationale: "The execution phase is where the work of the project is performed. The team completes the tasks defined in the project plan to create the final deliverables."
+                },
+                {
+                    question: "What is a 'single point of failure' in a project?",
+                    options: ["A single bug in the software", "A team member who is an expert in all tasks", "A resource or team member whose absence would stop the project", "A single, critical deadline"],
+                    answer: "A resource or team member whose absence would stop the project",
+                    rationale: "A single point of failure is a part of the project that, if it fails, will cause the entire project to fail. Project managers work to identify and mitigate these risks."
+                },
+                {
+                    question: "What is a status report?",
+                    options: ["A document for a new project", "A report on project financial health", "A summary of progress, issues, and next steps", "A team member's performance review"],
+                    answer: "A summary of progress, issues, and next steps",
+                    rationale: "Status reports are a key communication tool used by project managers to keep stakeholders informed about the project's current state."
+                },
+                {
+                    question: "What is 'change management' in a project?",
+                    options: ["The process of changing a team member's role", "The process of making changes to the project plan", "The process of managing changes to project scope, schedule, or budget", "The process of changing the project manager"],
+                    answer: "The process of managing changes to project scope, schedule, or budget",
+                    rationale: "Change management is a structured approach for transitioning individuals, teams, and organizations from a current state to a desired future state."
+                },
+                {
+                    question: "What is the main goal of a 'kick-off meeting'?",
+                    options: ["To celebrate the end of the project", "To assign the project manager's salary", "To officially start the project and align the team on goals", "To perform a final review with the client"],
+                    answer: "To officially start the project and align the team on goals",
+                    rationale: "A kick-off meeting is the first official meeting with the project team and key stakeholders, used to formally begin the project."
+                },
+                {
+                    question: "What is a 'lessons learned' document?",
+                    options: ["A list of mistakes made on the project", "A document to blame people for project failures", "A report on what went well and what could be improved for future projects", "A guide for new team members"],
+                    answer: "A report on what went well and what could be improved for future projects",
+                    rationale: "The 'lessons learned' document is a key part of project closure, capturing valuable insights for future reference."
+                },
+                {
+                    question: "What is the purpose of 'stakeholder engagement' during project execution?",
+                    options: ["To get new funding for the project", "To keep stakeholders informed and involved", "To only report problems to stakeholders", "To ask stakeholders for a raise"],
+                    answer: "To keep stakeholders informed and involved",
+                    rationale: "Engaging stakeholders ensures their continued support, manages expectations, and helps in quickly resolving issues."
+                },
+                {
+                    question: "What is a key difference between a risk and an issue?",
+                    options: ["A risk is a known problem, while an issue is a potential problem", "A risk is a potential problem, while an issue is a problem that has already occurred", "A risk and an issue are the same thing", "A risk is always positive, and an issue is always negative"],
+                    answer: "A risk is a potential problem, while an issue is a problem that has already occurred",
+                    rationale: "A risk is an uncertain event or condition that, if it occurs, has a positive or negative effect on a project's objectives. An issue is a problem that has already materialized."
+                },
+                {
+                    question: "What is the purpose of a 'Daily Scrum' or 'stand-up' meeting?",
+                    options: ["To provide a long, detailed update to the project manager", "To discuss what was done yesterday, what will be done today, and what impediments exist", "To get a formal review from the client", "To discuss personal life events"],
+                    answer: "To discuss what was done yesterday, what will be done today, and what impediments exist",
+                    rationale: "The daily stand-up is a quick, daily meeting to align the team and identify any blockers."
+                },
+                {
+                    question: "Which of the following is a common tool for project execution?",
+                    options: ["A weather forecast app", "A spreadsheet to track project tasks and status", "A social media platform", "A video game console"],
+                    answer: "A spreadsheet to track project tasks and status",
+                    rationale: "Spreadsheets and project management software like Jira or Asana are commonly used to track tasks, progress, and status during execution."
+                },
+                {
+                    question: "Why is 'conflict resolution' an important skill for a project manager?",
+                    options: ["To create more conflict", "To ensure the team works in isolation", "To avoid having any disagreements", "To mediate disputes and keep the team focused on project goals"],
+                    answer: "To mediate disputes and keep the team focused on project goals",
+                    rationale: "Conflicts are inevitable in a project team. The PM's role is to resolve them quickly and constructively to prevent disruption."
+                },
+                {
+                    question: "What is a key aspect of project closure?",
+                    options: ["Starting a new project immediately", "Performing a final budget review and releasing team resources", "Assigning new tasks to the team", "Hiring new team members"],
+                    answer: "Performing a final budget review and releasing team resources",
+                    rationale: "Project closure involves finalizing all financial and administrative tasks and formally releasing the project team and other resources."
+                }
+            ],
+            "Agile Project Management": [
+                {
+                    question: "In Scrum, what is a 'Sprint'?",
+                    options: ["A race to see who finishes a task fastest", "A long-term project phase", "A short, time-boxed period to create a valuable increment of work", "A formal meeting with all stakeholders"],
+                    answer: "A short, time-boxed period to create a valuable increment of work",
+                    rationale: "A Sprint is the heart of Scrum, a time-boxed event of one month or less during which a 'Done,' usable, and valuable Product Increment is created."
+                },
+                {
+                    question: "What is the role of the 'Scrum Master'?",
+                    options: ["To manage the project budget", "To tell the team what to do", "To serve the team by removing impediments and facilitating events", "To represent the customer's needs"],
+                    answer: "To serve the team by removing impediments and facilitating events",
+                    rationale: "The Scrum Master is a servant-leader for the Scrum Team. They help the team understand Scrum theory, practices, rules, and values."
+                },
+                 {
+                    question: "What is the primary benefit of a daily stand-up meeting?",
+                    options: ["To assign new tasks for the day", "To discuss personal challenges", "To inform stakeholders about progress", "To align the team and identify impediments"],
+                    answer: "To align the team and identify impediments",
+                    rationale: "The daily Scrum is a 15-minute event for the developers of the Scrum Team to inspect progress toward the Sprint Goal and to adapt the Sprint Backlog as needed."
+                },
+                {
+                    question: "What is a 'backlog' in Agile?",
+                    options: ["A list of problems that have occurred", "A list of tasks and features to be completed for the product", "A list of team members who are behind on their work", "A financial report of what is owed"],
+                    answer: "A list of tasks and features to be completed for the product",
+                    rationale: "The product backlog is an ordered list of everything that is known to be needed in the product."
+                },
+                {
+                    question: "What is the primary goal of an 'Agile Retrospective'?",
+                    options: ["To assign grades to the team", "To review the project budget", "To discuss what went well, what could be improved, and what to commit to for the next sprint", "To give a formal presentation to stakeholders"],
+                    answer: "To discuss what went well, what could be improved, and what to commit to for the next sprint",
+                    rationale: "The retrospective is a continuous improvement meeting where the team reflects on the past sprint."
+                },
+                {
+                    question: "What does 'sprint planning' involve?",
+                    options: ["Planning the end of the project", "Planning the entire project budget", "Planning which work from the backlog will be done in the upcoming sprint", "Planning a team social event"],
+                    answer: "Planning which work from the backlog will be done in the upcoming sprint",
+                    rationale: "During sprint planning, the team collaboratively decides which backlog items to work on and how to complete them."
+                },
+                {
+                    question: "Who is responsible for the 'Product Backlog' in Scrum?",
+                    options: ["The Scrum Master", "The project manager", "The Product Owner", "The entire development team"],
+                    answer: "The Product Owner",
+                    rationale: "The Product Owner is responsible for maximizing the value of the product resulting from the work of the development team."
+                },
+                {
+                    question: "What is the purpose of an 'Increment' in Scrum?",
+                    options: ["A small, testable piece of the product that is 'Done'", "A financial bonus for the team", "A new project that is starting", "A formal document that lists project risks"],
+                    answer: "A small, testable piece of the product that is 'Done'",
+                    rationale: "The Increment is the sum of all the Product Backlog items completed during a Sprint and the value of the increments of all previous Sprints."
+                },
+                {
+                    question: "Which of these is a key value of the Agile Manifesto?",
+                    options: ["Following a strict plan over responding to change", "Comprehensive documentation over working software", "Contract negotiation over customer collaboration", "Individuals and interactions over processes and tools"],
+                    answer: "Individuals and interactions over processes and tools",
+                    rationale: "This is one of the four core values of the Agile Manifesto, which prioritizes human collaboration over rigid processes."
+                },
+                {
+                    question: "What is a 'burndown chart' used for in Agile?",
+                    options: ["To track the number of new team members", "To track the amount of work remaining in a sprint or project", "To show the number of completed tasks", "To show the project budget"],
+                    answer: "To track the amount of work remaining in a sprint or project",
+                    rationale: "A burndown chart is a graphical representation of work left to do versus time."
+                },
+                {
+                    question: "What is 'kanban'?",
+                    options: ["A type of meeting", "A visual system for managing work as it moves through a process", "A financial forecast method", "A method for assigning project roles"],
+                    answer: "A visual system for managing work as it moves through a process",
+                    rationale: "Kanban uses a visual board to track tasks as they move through different stages of a workflow, from 'To Do' to 'Done'."
+                },
+                {
+                    question: "What is the role of the 'development team' in Scrum?",
+                    options: ["To manage the project budget", "To perform the work to create the product increment", "To define the project's scope", "To manage the stakeholders"],
+                    answer: "To perform the work to create the product increment",
+                    rationale: "The development team is a self-organizing and cross-functional group that does the work of creating a usable increment of the product."
+                }
+            ],
+            "Capstone: Applying Project Management": [
+                {
+                    question: "When closing a project, what is the purpose of a 'lessons learned' document?",
+                    options: ["To assign blame for project failures", "To document project milestones only", "To capture insights on what went well and what could be improved", "To get final approval from the client"],
+                    answer: "To capture insights on what went well and what could be improved",
+                    rationale: "A 'lessons learned' document is a crucial part of project closure, helping future projects avoid mistakes and replicate successes."
+                },
+                {
+                    question: "What is a closeout report?",
+                    options: ["A final financial statement", "A summary of the project's performance and outcome", "A document for project initiation", "A team member performance review"],
+                    answer: "A summary of the project's performance and outcome",
+                    rationale: "A closeout report provides a final summary of the project, including its success in meeting objectives, budget, and schedule."
+                },
+                {
+                    question: "What is one of the main goals of project closure?",
+                    options: ["To find a new project", "To release resources and formally end the project", "To assign blame for problems", "To create a detailed plan for the next project"],
+                    answer: "To release resources and formally end the project",
+                    rationale: "Project closure is the formal process of completing all project activities and formally closing the project or a phase."
+                },
+                {
+                    question: "Why is a 'Project Closure Report' important?",
+                    options: ["It is a legal requirement", "It helps the team celebrate their success", "It provides a historical record and validates that the project has been completed", "It is only required for failed projects"],
+                    answer: "It provides a historical record and validates that the project has been completed",
+                    rationale: "The closure report serves as a final, formal record of the project, its results, and any lessons learned."
+                },
+                {
+                    question: "What is the purpose of 'financial closure'?",
+                    options: ["To calculate team salaries", "To finalize all financial accounts and budgets related to the project", "To start a new project's budget", "To give a final financial presentation"],
+                    answer: "To finalize all financial accounts and budgets related to the project",
+                    rationale: "Financial closure involves settling all invoices, closing accounts, and completing all financial transactions for the project."
+                },
+                {
+                    question: "What should a project manager do with the project team during closure?",
+                    options: ["Give them a new project immediately", "Dismiss them without a meeting", "Formally release them from their project responsibilities", "Assign them to a new manager without a word"],
+                    answer: "Formally release them from their project responsibilities",
+                    rationale: "This is a key step in project closure that allows team members to transition to new roles or projects."
+                },
+                {
+                    question: "What is the main benefit of a 'post-mortem' meeting?",
+                    options: ["To find out who is responsible for failure", "To celebrate success", "To analyze what worked and what didn't to improve future processes", "To finalize project payments"],
+                    answer: "To analyze what worked and what didn't to improve future processes",
+                    rationale: "The post-mortem meeting is a retrospective analysis of the project's performance, focusing on process improvement."
+                },
+                {
+                    question: "What is the purpose of a 'final project sign-off'?",
+                    options: ["To assign new tasks to the team", "To formally accept the project's deliverables and close the project", "To get a new project budget approved", "To get permission to start a new project"],
+                    answer: "To formally accept the project's deliverables and close the project",
+                    rationale: "Final sign-off is the formal acceptance by the client or key stakeholder that all project deliverables have been met and the project is complete."
+                },
+                {
+                    question: "What is a 'project review' at the end of a project?",
+                    options: ["A meeting to discuss team member salaries", "A review of the project's performance against its original goals", "A review of new projects to be started", "A meeting to discuss personal life events"],
+                    answer: "A review of the project's performance against its original goals",
+                    rationale: "A project review compares the final outcome of the project with the objectives and metrics defined at the beginning."
+                },
+                {
+                    question: "What is 'knowledge transfer' during project closure?",
+                    options: ["Transferring project files to a new manager", "The process of documenting and sharing project knowledge with the organization", "Transferring money to a different department", "Transferring team members to a different team"],
+                    answer: "The process of documenting and sharing project knowledge with the organization",
+                    rationale: "Knowledge transfer ensures that key information and lessons learned are not lost when the project team disbands."
+                },
+                {
+                    question: "What is the importance of a 'project audit' during closure?",
+                    options: ["To ensure the project was a failure", "To analyze the project's efficiency, effectiveness, and adherence to processes", "To blame team members for mistakes", "To get a new budget approved"],
+                    answer: "To analyze the project's efficiency, effectiveness, and adherence to processes",
+                    rationale: "A project audit provides an independent review to assess how well the project was managed and what improvements can be made."
+                },
+                {
+                    question: "What is a 'transition plan' at the end of a project?",
+                    options: ["A plan for the team's vacation", "A plan for handing off the project's final deliverables to the client or operations team", "A plan to find new jobs for the team members", "A plan to create a new project"],
+                    answer: "A plan for handing off the project's final deliverables to the client or operations team",
+                    rationale: "A transition plan ensures a smooth handover of the project's final products or services to the people who will maintain or operate them."
+                }
+            ],
+            "Accelerate Your Job Search with AI": [
+                {
+                    question: "What is a portfolio?",
+                    options: ["A list of job applications", "A collection of work samples and achievements", "A budget tracker", "A cover letter template"],
+                    answer: "A collection of work samples and achievements",
+                    rationale: "Portfolios showcase your skills and accomplishments, especially useful in creative, technical, or project-based roles."
+                },
+                {
+                    question: "What is a job search goal?",
+                    options: ["A vague idea of your dream job", "A specific target for your job search", "A list of companies", "A resume format"],
+                    answer: "A specific target for your job search",
+                    rationale: "Job search goals help you stay focused and motivated by defining what roles, industries, or outcomes you’re aiming for."
+                },
+                {
+                    question: "How can AI tools like Gemini help with a job search?",
+                    options: ["By creating a new job role for you", "By tailoring your resume and cover letters for specific roles", "By automatically applying to jobs for you", "By creating new jobs"],
+                    answer: "By tailoring your resume and cover letters for specific roles",
+                    rationale: "AI can help customize documents and provide practice for interviews, but it cannot create new job roles or apply on your behalf."
+                },
+                {
+                    question: "What is the STAR method used for?",
+                    options: ["Creating a resume", "Managing a project schedule", "Structuring answers to behavioral interview questions", "Calculating your salary"],
+                    answer: "Structuring answers to behavioral interview questions",
+                    rationale: "The STAR method (Situation, Task, Action, Result) helps you tell a compelling story about your past experiences during an interview."
+                },
+                {
+                    question: "What is a key benefit of a job search tracker?",
+                    options: ["It gets you a job immediately", "It helps you stay organized and monitor your progress", "It tells you which jobs to apply for", "It guarantees a successful interview"],
+                    answer: "It helps you stay organized and monitor your progress",
+                    rationale: "A job search tracker, often a spreadsheet, helps you keep track of applications, contacts, and interview stages, which can prevent you from feeling overwhelmed."
+                },
+                {
+                    question: "What is a 'personal brand' in the context of a job search?",
+                    options: ["The brand of clothing you wear to an interview", "A unique combination of skills and experiences that make you stand out", "The name of the company you work for", "Your favorite coffee brand"],
+                    answer: "A unique combination of skills and experiences that make you stand out",
+                    rationale: "A personal brand is how you market yourself to employers, showcasing your unique value proposition."
+                },
+                {
+                    question: "How can you use AI to practice for interviews?",
+                    options: ["By having the AI answer for you during the interview", "By using AI to generate mock interview questions and practice responses", "By having the AI record and edit your video interview", "By asking the AI to find the answers to all questions"],
+                    answer: "By using AI to generate mock interview questions and practice responses",
+                    rationale: "AI tools can simulate an interview by providing relevant questions and allowing you to practice your answers, which helps build confidence."
+                },
+                {
+                    question: "What is a 'cover letter'?",
+                    options: ["A legal document", "A personal introduction to a potential employer, highlighting your qualifications", "A list of all your past jobs", "A list of references"],
+                    answer: "A personal introduction to a potential employer, highlighting your qualifications",
+                    rationale: "A cover letter is a one-page document you send with your resume to introduce yourself and show your interest in a specific job."
+                },
+                {
+                    question: "What is a key element of a resume?",
+                    options: ["Your pet's name", "Your work experience and key skills", "Your social security number", "A list of all your friends"],
+                    answer: "Your work experience and key skills",
+                    rationale: "A resume summarizes your work experience, skills, and qualifications to a potential employer."
+                },
+                {
+                    question: "Why is 'networking' important in a job search?",
+                    options: ["It is not important at all", "It helps you connect with professionals, uncover job opportunities, and gain industry insights", "It helps you find your next vacation spot", "It is only for managers"],
+                    answer: "It helps you connect with professionals, uncover job opportunities, and gain industry insights",
+                    rationale: "Networking is the process of building and maintaining relationships that can help you with your career."
+                },
+                {
+                    question: "What is an 'informational interview'?",
+                    options: ["A formal job interview", "A meeting to ask for a job", "A conversation with someone to learn about their career, company, or industry", "A formal meeting with your manager"],
+                    answer: "A conversation with someone to learn about their career, company, or industry",
+                    rationale: "Informational interviews are a low-pressure way to gather insights and build your professional network."
+                },
+                {
+                    question: "What is a 'job search strategy'?",
+                    options: ["A list of all the jobs you have ever applied for", "A vague idea of what you want to do", "A personalized plan for finding a new job", "A list of all your favorite companies"],
+                    answer: "A personalized plan for finding a new job",
+                    rationale: "A job search strategy is a structured, actionable plan that helps you stay focused and efficient during your job search."
+                }
+            ]
+        };
+
+        const quizContainer = document.getElementById('quiz-container');
+        let currentModuleData = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Function to render the main module selection page
+        function loadModuleSelection() {
+            quizContainer.innerHTML = `
+                <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Select a Quiz Module</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    ${Object.keys(quizData).map(module => `
+                        <button onclick="startQuiz('${module}')" class="p-4 bg-teal-100 rounded-lg shadow-sm hover:bg-teal-200 transition-colors duration-200 text-left font-semibold text-teal-800">
+                            ${module}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Function to start a quiz for a selected module
+        window.startQuiz = function(moduleName) {
+            currentModuleData = quizData[moduleName];
+            currentQuestionIndex = 0;
+            score = 0;
+            renderQuestion();
+        }
+
+        // Function to render a single question
+        function renderQuestion() {
+            const question = currentModuleData[currentQuestionIndex];
+            quizContainer.innerHTML = `
+                <div class="mb-4">
+                    <p class="text-lg text-slate-500 font-semibold">${currentModuleData.length} questions in this quiz. You are on question ${currentQuestionIndex + 1}.</p>
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 mt-4">${Object.keys(quizData).find(key => quizData[key] === currentModuleData)}</h3>
+                </div>
+                <p class="font-semibold text-slate-800 text-xl mb-6">${currentQuestionIndex + 1}. ${question.question}</p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    ${question.options.map(option => `
+                        <button onclick="checkAnswer(this, '${option.replace(/'/g, "\\'")}')" class="w-full p-4 text-left bg-slate-100 rounded-lg hover:bg-teal-100 transition-colors duration-200 border-2 border-transparent">
+                            ${option}
+                        </button>
+                    `).join('')}
+                </div>
+                <div id="feedback-container" class="mt-6"></div>
+            `;
+        }
+
+        // Function to check the user's answer
+        window.checkAnswer = function(button, selectedOption) {
+            const question = currentModuleData[currentQuestionIndex];
+            const feedbackContainer = document.getElementById('feedback-container');
+            const optionsContainer = document.getElementById('options-container');
+
+            // Disable all buttons after an answer is selected
+            Array.from(optionsContainer.children).forEach(btn => btn.disabled = true);
+
+            // Check if the selected answer is correct
+            const isCorrect = selectedOption === question.answer;
+            if (isCorrect) {
+                score++;
+                button.classList.add('bg-green-200', 'border-green-500');
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 bg-green-50 text-green-800 rounded-lg">
+                        <p class="font-bold">Correct! 🎉</p>
+                        <p>${question.rationale}</p>
+                    </div>
+                `;
+            } else {
+                button.classList.add('bg-red-200', 'border-red-500');
+                const correctButton = Array.from(optionsContainer.children).find(btn => btn.textContent === question.answer);
+                correctButton.classList.add('bg-green-200', 'border-green-500');
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 bg-red-50 text-red-800 rounded-lg">
+                        <p class="font-bold">Incorrect! 😞</p>
+                        <p>The correct answer was: <span class="font-semibold">${question.answer}</span></p>
+                        <p>${question.rationale}</p>
+                    </div>
+                `;
+            }
+
+            // Add Next button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = currentQuestionIndex === currentModuleData.length - 1 ? 'Finish Quiz' : 'Next Question →';
+            nextButton.className = 'mt-6 bg-teal-600 text-white py-2 px-6 rounded-full hover:bg-teal-700 transition-colors duration-300 float-right';
+            nextButton.onclick = () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < currentModuleData.length) {
+                    renderQuestion();
+                } else {
+                    showResult();
+                }
+            };
+            feedbackContainer.appendChild(nextButton);
+        }
+
+        // Function to show the final result
+        function showResult() {
+            quizContainer.innerHTML = `
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-4">Quiz Complete!</h3>
+                    <p class="text-lg mb-6">You scored <span class="font-bold">${score} out of ${currentModuleData.length}</span>.</p>
+                    <button onclick="loadModuleSelection()" class="bg-slate-700 text-white py-2 px-6 rounded-full hover:bg-slate-800 transition-colors duration-300">Return to Module Selection</button>
+                </div>
+            `;
+        }
+
+        // Initialize the app by loading the module selection page
+        loadModuleSelection();
+    </script>
+</body>
+</html>
