@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Financial Technology and Systems in the Digital Age">
+    <meta name="author" content="Mosquito">
+    <link href="./contents/favicon.ico" rel="icon">
+    <title>PME : FinTech Revolution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #f0f4f8;
+            }
+            .chart-container {
+                position: relative;
+                width: 100%;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 300px;
+                max-height: 400px;
+            }
+            @media (min-width: 768px) {
+                .chart-container {
+                    height: 350px;
+                }
+            }
+            .stat-card {
+                background-color: #ffffff;
+                border-radius: 0.75rem;
+                padding: 1.5rem;
+                text-align: center;
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+                transition: transform 0.3s ease-in-out;
+            }
+            .stat-card:hover {
+                transform: translateY(-5px);
+            }
+            .stat-number {
+                font-size: 3rem;
+                font-weight: 700;
+                color: #00AEEF;
+            }
+            .stat-label {
+                font-size: 1rem;
+                color: #4A5568;
+                margin-top: 0.5rem;
+            }
+            .timeline {
+                position: relative;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .timeline::after {
+                content: '';
+                position: absolute;
+                width: 6px;
+                background-color: #00AEEF;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                margin-left: -3px;
+            }
+            .timeline-container {
+                padding: 10px 40px;
+                position: relative;
+                background-color: inherit;
+                width: 50%;
+            }
+            .timeline-container.left {
+                left: 0;
+            }
+            .timeline-container.right {
+                left: 50%;
+            }
+            .timeline-container::after {
+                content: '';
+                position: absolute;
+                width: 25px;
+                height: 25px;
+                right: -17px;
+                background-color: white;
+                border: 4px solid #FF9F55;
+                top: 15px;
+                border-radius: 50%;
+                z-index: 1;
+            }
+            .right::after {
+                left: -16px;
+            }
+            .timeline-content {
+                padding: 20px 30px;
+                background-color: white;
+                position: relative;
+                border-radius: 6px;
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            }
+             h1, h2, h3 {
+                color: #002D62;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 text-gray-800">
+        <header class="bg-white shadow-md sticky top-0 z-10">
+            <nav class="container mx-auto px-6 py-4">
+                <h1 class="text-3xl font-bold text-center text-[#002D62]">The FinTech Revolution</h1>
+                <p class="text-center text-gray-600 mt-1">Financial Technology and Systems in the Digital Age</p>
+            </nav>
+        </header>
+
+        <main class="container mx-auto p-4 md:p-8">
+            <section id="introduction" class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Foundations of a Financial Revolution</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    Financial Technology, or FinTech, is fundamentally reshaping the global financial industry. Driven by advanced technologies like AI, blockchain, and big data, this transformation is enhancing the efficiency, accessibility, and affordability of financial services, compelling traditional institutions to adapt to a new digital reality.
+                </p>
+            </section>
+
+            <section id="evolution" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">The Evolution of Banking</h2>
+                <div class="timeline">
+                    <div class="timeline-container left">
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-semibold">Bank 1.0: Branch-Centric</h3>
+                            <p class="text-gray-600 mt-2">The era defined by physical presence. Brick-and-mortar branches were the exclusive hub for all financial activities, a model that persisted for centuries.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-container right">
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-semibold">Bank 2.0: Self-Service</h3>
+                            <p class="text-gray-600 mt-2">The introduction of ATMs in the 1970s and early internet banking in the 1990s marked the first shift towards customer self-service, moving transactions beyond the branch.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-container left">
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-semibold">Bank 3.0: Smartphone Ubiquity</h3>
+                            <p class="text-gray-600 mt-2">Beginning around 2007, the smartphone revolutionized banking with mobile payments, P2P transfers, and the rise of digital-first "challenger banks."</p>
+                        </div>
+                    </div>
+                    <div class="timeline-container right">
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-semibold">Bank 4.0: Ubiquitous & Embedded</h3>
+                            <p class="text-gray-600 mt-2">The current frontier. Banking becomes an invisible, seamlessly integrated utility in daily life, driven by AI and real-time data to be "everywhere, never at a bank."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="core-tech" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">Core Technologies Driving the Change</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">🤖 Artificial Intelligence (AI)</h3>
+                        <p class="text-gray-600">AI and Machine Learning are automating routine tasks, providing predictive analytics for risk, and personalizing customer experiences. AI has led to a nearly 50% reduction in manual effort for fraud detection.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">🔗 Blockchain & DLT</h3>
+                        <p class="text-gray-600">This technology provides a secure, transparent, and immutable ledger, building a "trust layer" for digital transactions and reducing reliance on traditional intermediaries.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">☁️ Big Data & Cloud</h3>
+                        <p class="text-gray-600">Analyzing massive datasets provides real-time insights into market trends and customer behavior, while cloud computing offers the scalable infrastructure needed for modern financial services.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="digital-currencies" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">The New Landscape of Money</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Global Rise of Digital Currencies</h3>
+                        <p class="text-gray-600 mb-4">The world is rapidly moving towards digital forms of money. Central Bank Digital Currencies (CBDCs) are a major focus, with many nations exploring or actively piloting them to enhance monetary policy and financial inclusion.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="cbdcStatusChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold">Decentralized Finance (DeFi)</h3>
+                            <p class="text-gray-600 text-sm">An open-source ecosystem built on blockchain, aiming to provide financial services without central authorities, though it faces challenges with stability and regulation.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold">Tokenization</h3>
+                            <p class="text-gray-600 text-sm">The process of converting real-world assets into digital tokens on a blockchain, unlocking liquidity and enabling fractional ownership in assets like real estate and art.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="applications" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">FinTech in Action: Transforming Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Revolutionizing Payments & Remittances</h3>
+                        <p class="text-gray-600 mb-4">FinTech has drastically cut the cost and time for cross-border payments. What once took days and cost a significant percentage can now be done in minutes for a fraction of the price, fostering global commerce and financial inclusion.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="remittanceComparisonChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Streamlining Lending & Credit</h3>
+                        <p class="text-gray-600 mb-4">Traditional loan processes are notoriously slow. FinTech platforms use AI and alternative data to assess creditworthiness faster and more inclusively, dramatically reducing processing times for mortgages and business loans.</p>
+                         <div class="chart-container h-64 md:h-80">
+                            <canvas id="lendingTimeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="challenges" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">Navigating the Challenges Ahead</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                     <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Top Hurdles for FinTech Firms</h3>
+                        <p class="text-gray-600 mb-4">Despite its potential, the FinTech industry faces significant obstacles. Data quality and security are paramount concerns, followed by the slow pace of regulation, a persistent shortage of skilled talent, and issues with system interoperability.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="fintechChallengesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="stat-card">
+                            <div class="stat-number">$6T</div>
+                            <div class="stat-label">Estimated Global Cybercrime Losses in 2021</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">81%</div>
+                            <div class="stat-label">of FinTech firms report Data Issues as a primary technical challenge.</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1.35%</div>
+                            <div class="stat-label">Increase in GDP for every 10% rise in internet penetration.</div>
+                        </div>
+                         <div class="stat-card">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">of businesses report enhanced processes after ERP implementation.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-[#002D62] text-white text-center p-6 mt-8">
+            <p>&copy; 2025 The FinTech Revolution. All rights reserved.</p>
+            <p class="text-sm opacity-75 mt-2">This infographic is a visual summary of "The FinTech Revolution" by Felixent.</p>
+        </footer>
+
+        <script>
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            const wrapLabel = (label, maxWidth = 16) => {
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            };
+
+            const brilliantBluesPalette = {
+                primary: '#00AEEF',
+                secondary: '#002D62',
+                accent: '#FF9F55',
+                light: '#F0F4F8',
+                darkText: '#4A5568'
+            };
+
+            new Chart(document.getElementById('cbdcStatusChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Fully Live Retail CBDCs', 'Piloting Retail CBDCs', 'Piloting Wholesale CBDCs'],
+                    datasets: [{
+                        label: 'Number of Jurisdictions',
+                        data: [3, 25, 25],
+                        backgroundColor: [brilliantBluesPalette.accent, brilliantBluesPalette.primary, brilliantBluesPalette.secondary],
+                        borderColor: brilliantBluesPalette.light,
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Global CBDC Project Status'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('remittanceComparisonChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Traditional Wire Transfer', 'Blockchain-based Alternative'],
+                    datasets: [{
+                        label: 'Transaction Fee (for $200)',
+                        data: [13.88, 1],
+                        backgroundColor: brilliantBluesPalette.primary,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Settlement Time (Hours)',
+                        data: [96, 0.025],
+                        backgroundColor: brilliantBluesPalette.accent,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Fee ($)'
+                            }
+                        },
+                        y1: {
+                            type: 'logarithmic',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Time (Hours, log scale)'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Remittance Efficiency: Traditional vs. Blockchain'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('lendingTimeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Mortgage', wrapLabel('SME Business Loan')],
+                    datasets: [{
+                        label: 'Minimum Processing Time (Days)',
+                        data: [30, 60],
+                        backgroundColor: brilliantBluesPalette.secondary,
+                    }, {
+                        label: 'Maximum Processing Time (Days)',
+                        data: [60, 90],
+                        backgroundColor: brilliantBluesPalette.primary,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Traditional Lending Processing Times'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: false,
+                            title: {
+                                display: true,
+                                text: 'Business Days'
+                            }
+                        },
+                        y: {
+                            stacked: false
+                        }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('fintechChallengesChart'), {
+                type: 'pie',
+                data: {
+                    labels: [
+                        wrapLabel('Data Issues (Quality & Security)'),
+                        'Regulatory Lag',
+                        'Talent Gaps',
+                        'Interoperability',
+                        'Other'
+                    ],
+                    datasets: [{
+                        label: '% of Firms Citing Challenge',
+                        data: [81, 65, 58, 55, 19],
+                        backgroundColor: [
+                            brilliantBluesPalette.secondary,
+                            brilliantBluesPalette.primary,
+                            brilliantBluesPalette.accent,
+                            '#6CB2EB',
+                            '#FDDBA6'
+                        ],
+                        borderColor: brilliantBluesPalette.light,
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Primary Challenges in FinTech'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+    </html>
