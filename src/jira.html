@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="The Strategic Roadmap to JIRA Mastery for Agile Projects">
+    <meta name="author" content="Mosquito">
+    <link href="../contents/favicon.ico" rel="icon">
+        <title>The Strategic Roadmap to JIRA Mastery</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Chosen Palette: Warm Neutrals with Blue Accent -->
+        <!-- Application Structure Plan: The SPA is designed as a task-oriented dashboard. It immediately presents the user with a choice between two career paths ('Project Leadership' vs. 'Technical Admin'). This interactive choice personalizes the experience by dynamically displaying a tailored 3-stage roadmap. This structure was chosen over a linear report format to empower the user to make a decision and see relevant information quickly. Supporting data (like ROI and market demand) and detailed provider analysis are placed in subsequent sections, allowing for deeper exploration after the primary user goal is met. This prioritizes action and usability. -->
+        <!-- Visualization & Content Choices:
+            - Report Info: Two distinct career paths (PM vs. Admin). Goal: Guide user. Viz/Method: Interactive buttons. Interaction: On-click, dynamically shows the relevant 3-stage roadmap. Justification: Personalizes the journey, providing immediate value. Method: Vanilla JS DOM manipulation.
+            - Report Info: Training provider costs & durations. Goal: Compare options. Viz/Method: Bar Chart. Interaction: Hover tooltips for details. Justification: Clearly visualizes the trade-offs between local (high-cost, intensive) and online (low-cost, flexible) training. Library: Chart.js (Canvas).
+            - Report Info: 15% salary premium from certification. Goal: Inform & Motivate. Viz/Method: Prominent "Key Stat" card. Interaction: Static display. Justification: Highlights the most compelling ROI data point to encourage users to follow the roadmap. Method: HTML/Tailwind.
+            - Report Info: Detailed analysis of 6 training providers. Goal: Organize. Viz/Method: Tabbed interface. Interaction: On-click, reveals content for the selected provider. Justification: Prevents information overload on the main screen while keeping details accessible. Method: Vanilla JS.
+        -->
+        <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #FDFBF8;
+                color: #3D405B;
+            }
+            .tab-active {
+                border-color: #3D72A4;
+                color: #3D72A4;
+                background-color: #F0F4F8;
+            }
+            .tab-inactive {
+                border-color: transparent;
+                color: #6b7280;
+            }
+            .chart-container {
+                position: relative;
+                width: 100%;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 350px;
+                max-height: 450px;
+            }
+            @media (min-width: 768px) {
+                .chart-container {
+                    height: 450px;
+                }
+            }
+            .roadmap-card {
+                transition: all 0.3s ease-in-out;
+                border: 1px solid #e5e7eb;
+            }
+            .roadmap-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            .path-button-active {
+                background-color: #3D72A4;
+                color: #FFFFFF;
+                box-shadow: 0 4px 14px 0 rgba(61, 114, 164, 0.39);
+            }
+        </style>
+    </head>
+    <!-- Menu Section -->
+    <nav id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center h-16 space-x-2 md:space-x-6 text-sm md:text-base">
+                <a href="https://pme-felixent.vercel.app/" class="nav-link font-semibold border-b-2 border-transparent pb-1">Home</a>
+            </div>
+        </div>
+    </nav>
+    <body class="antialiased">
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+            <header class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Your Strategic Roadmap to JIRA Mastery</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">This interactive guide synthesizes expert analysis to help you navigate the JIRA learning landscape. Choose your career focus to reveal a personalized, three-stage path to becoming an Agile project management expert.</p>
+            </header>
+
+            <main>
+                <section id="roadmap" class="mb-20">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold text-gray-800">1. Select Your Professional Path</h2>
+                        <p class="mt-2 text-gray-600">Your career goals determine your learning journey. Select the path that best aligns with your professional role to see our tailored recommendations.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+                        <button id="pm-button" data-path="pm" class="path-button w-full sm:w-auto text-lg font-semibold py-3 px-8 rounded-lg shadow-md transition-all duration-300 path-button-active">
+                            🚀 Agile Project Leadership
+                        </button>
+                        <button id="admin-button" data-path="admin" class="path-button w-full sm:w-auto text-lg font-semibold py-3 px-8 rounded-lg shadow-md transition-all duration-300 bg-white text-gray-700 hover:bg-gray-100">
+                            ⚙️ Technical Administration
+                        </button>
+                    </div>
+
+                    <div id="roadmap-display">
+                        <h3 id="roadmap-title" class="text-2xl font-bold text-center mb-8 text-gray-800">Showing Path for: Agile Project Leadership</h3>
+                        <div id="roadmap-content" class="grid md:grid-cols-3 gap-8">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="insights" class="py-16 bg-white rounded-2xl shadow-sm mb-20">
+                    <div class="text-center mb-12 px-4">
+                        <h2 class="text-3xl font-bold text-gray-800">2. Key Insights & Return on Investment</h2>
+                        <p class="mt-2 text-gray-600 max-w-3xl mx-auto">Understanding the value of certification and the training landscape is crucial for making an informed decision. The data below highlights the financial benefits and compares the primary training options available.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 items-center px-6">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2">The Certification Advantage</h4>
+                            <p class="text-gray-600 mb-4">Official Atlassian certification is a powerful career asset. It formally validates your expertise, giving you a significant edge in the job market.</p>
+                            <div class="text-center bg-white p-6 rounded-lg shadow-inner">
+                                <span class="text-5xl font-bold text-blue-600">15%</span>
+                                <p class="text-lg font-medium text-gray-700 mt-2">Average Salary Increase</p>
+                                <p class="text-sm text-gray-500">with a single JIRA certification.</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2">What The Market Demands</h4>
+                            <p class="text-gray-600">Employers seek well-rounded professionals. While JIRA proficiency is a core requirement, it's most valuable when combined with a strong understanding of Agile principles and essential soft skills.</p>
+                            <div class="mt-4 space-y-2">
+                                <div class="flex items-center"><span class="text-green-600 mr-2">✓</span> JIRA & Confluence Proficiency</div>
+                                <div class="flex items-center"><span class="text-green-600 mr-2">✓</span> Deep Agile & Scrum Knowledge</div>
+                                <div class="flex items-center"><span class="text-green-600 mr-2">✓</span> Strong Communication & Leadership</div>
+                                <div class="flex items-center"><span class="text-green-600 mr-2">✓</span> Problem-Solving & Conflict Resolution</div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="mt-12">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">Training Landscape: Cost vs. Duration</h4>
+                        <div class="chart-container">
+                            <canvas id="trainingComparisonChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="providers" class="mb-16">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800">3. Training Provider Explorer</h2>
+                        <p class="mt-2 text-gray-600 max-w-3xl mx-auto">Dive deeper into the specific training providers analyzed in the report. Use these tabs to compare the curriculum, costs, and unique focus of each option, from local hands-on training in Yangon to global online platforms.</p>
+                    </div>
+                    <div>
+                        <div class="border-b border-gray-200">
+                            <nav class="-mb-px flex space-x-6 overflow-x-auto" aria-label="Tabs">
+                                <button class="provider-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tab-active" data-provider="coursera">Coursera</button>
+                                <button class="provider-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tab-inactive" data-provider="nobleprog">NobleProg</button>
+                                <button class="provider-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tab-inactive" data-provider="udemy">Udemy</button>
+                                <button class="provider-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tab-inactive" data-provider="quickxpert">QuickXpert</button>
+                                <button class="provider-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tab-inactive" data-provider="mpc">MPC</button>
+                                <button class="provider-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm tab-inactive" data-provider="staragile">StarAgile</button>
+                            </nav>
+                        </div>
+                        <div id="provider-content" class="mt-8 bg-white p-6 rounded-lg shadow-sm">
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="text-center text-gray-500 text-sm mt-16 border-t pt-8">
+                <p>&copy; 2025 JIRA Mastery Guide. Data synthesized from the "Strategic Roadmap to JIRA Mastery" report. © <a href="https://felixent.verel.app"  >Felixent</a>. </p>
+            </footer>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const roadmapData = {
+                    pm: [
+                        {
+                            stage: "1. Foundation",
+                            title: "Official Atlassian Course",
+                            provider: "Coursera",
+                            description: "Build a strong, credible knowledge base directly from the source. This course provides the highest level of authority and ensures the content is current and relevant.",
+                            details: "<strong>Course:</strong> Agile with Atlassian Jira<br><strong>Rating:</strong> 4.7 / 5.0"
+                        },
+                        {
+                            stage: "2. Application",
+                            title: "Hands-On Local Training",
+                            provider: "NobleProg",
+                            description: "Augment your skills with practical, hands-on experience in a live, instructor-led setting, gaining valuable insights in a local context.",
+                            details: "<strong>Course:</strong> Effective Agile Project Management with Jira & Confluence<br><strong>Duration:</strong> 7 Hours"
+                        },
+                        {
+                            stage: "3. Validation",
+                            title: "Official Certification",
+                            provider: "Atlassian",
+                            description: "Formally validate your skills to unlock greater career opportunities and a documented salary premium. This is the final step to true mastery.",
+                            details: "<strong>Exam:</strong> ACP-620 Managing Jira Projects for Cloud<br><strong>Experience Rec:</strong> 18+ Months"
+                        }
+                    ],
+                    admin: [
+                        {
+                            stage: "1. Foundation",
+                            title: "Comprehensive Overview",
+                            provider: "Udemy",
+                            description: "Start with a highly-rated, affordable, and broad curriculum to get an excellent introduction to JIRA's core concepts from an expert trainer.",
+                            details: "<strong>Course:</strong> Understanding Jira for Users, Managers and Admins<br><strong>Cost:</strong> Typically < $20"
+                        },
+                        {
+                            stage: "2. Application",
+                            title: "Hands-On Admin Skills",
+                            provider: "NobleProg",
+                            description: "Acquire practical, instructor-led experience in managing, optimizing, and customizing JIRA in a corporate setting. Essential for an administrator role.",
+                            details: "<strong>Course:</strong> JIRA for Administrators<br><strong>Cost:</strong> ~$1,000"
+                        },
+                        {
+                            stage: "3. Validation",
+                            title: "Official Certification",
+                            provider: "Atlassian",
+                            description: "Formalize your expertise with an industry-recognized benchmark for JIRA administrators. A powerful tool for career advancement.",
+                            details: "<strong>Exam:</strong> ACP-120 Jira Administrator for Cloud<br><strong>Exam Cost:</strong> $150 - $300"
+                        }
+                    ]
+                };
+
+                const providerData = {
+                    coursera: {
+                        name: "Coursera: The Direct Atlassian Pipeline",
+                        summary: "Hosts the official 'Agile with Atlassian Jira' course developed by Atlassian. It's the most authoritative starting point for beginners, offering a flexible and highly-rated curriculum.",
+                        pros: ["Official Atlassian content", "High user ratings (4.7/5)", "Flexible duration (1-4 weeks)", "Focus on practical, guided projects"],
+                        cons: ["Beginner-level focus", "Not a direct certification prep course"]
+                    },
+                    nobleprog: {
+                        name: "NobleProg: The Modular, Hands-On Approach",
+                        summary: "Offers a portfolio of specialized, instructor-led JIRA courses in Yangon (online and onsite). Ideal for professionals looking to fill specific skill gaps with practical training.",
+                        pros: ["Live instructor-led training", "Modular and specialized courses", "Caters to various roles (PM, Dev, QA)"],
+                        cons: ["High cost (~$1,000 for 7 hours)", "Does not lead to official certification"]
+                    },
+                    udemy: {
+                        name: "Udemy: The Accessible Marketplace of Experts",
+                        summary: "A global marketplace with a vast number of affordable JIRA courses. Excellent for initial exploration, supplementary learning, or budget-conscious professionals.",
+                        pros: ["Extremely affordable (<$20)", "Wide variety of courses and instructors", "Includes courses by Atlassian Certified Trainers"],
+                        cons: ["Quality can be variable", "Requires user to vet courses carefully", "Not an official Atlassian partner"]
+                    },
+                    quickxpert: {
+                        name: "QuickXpert Infotech: The JIRA-as-a-Testing-Tool Model",
+                        summary: "Provides a highly specialized course focused on using JIRA for software testing, defect management, and API testing. It's designed for a niche audience of QA professionals.",
+                        pros: ["Deep focus on testing and QA", "Covers API testing with Postman", "Provides an ISO course completion certificate"],
+                        cons: ["Very narrow focus, not for general PMs", "Certificate is not from Atlassian", "No placement support"]
+                    },
+                    mpc: {
+                        name: "Myanmar Project Management Center (MPC): The Broader View",
+                        summary: "A prominent institution in Yangon that does not offer JIRA-specific training but focuses on internationally recognized certifications like PMI-ACP. This validates the importance of formal credentials in the local market.",
+                        pros: ["Focus on globally recognized certifications", "Strong local presence and reputation"],
+                        cons: ["Does not offer any JIRA-specific courses"]
+                    },
+                    staragile: {
+                        name: "StarAgile: The Certification Preparation Promise",
+                        summary: "An online provider claiming to offer JIRA certification training and job assistance. However, the report found a lack of verifiable, JIRA-specific testimonials, urging caution.",
+                        pros: ["Claims to offer certification prep", "Comprehensive curriculum outline"],
+                        cons: ["Lack of JIRA-specific reviews or testimonials", "Claims are not substantiated by provided evidence"]
+                    }
+                };
+
+                const roadmapContent = document.getElementById('roadmap-content');
+                const roadmapTitle = document.getElementById('roadmap-title');
+                const pmButton = document.getElementById('pm-button');
+                const adminButton = document.getElementById('admin-button');
+                const providerContent = document.getElementById('provider-content');
+                const providerTabs = document.querySelectorAll('.provider-tab');
+
+                function displayRoadmap(path) {
+                    roadmapContent.innerHTML = '';
+                    const data = roadmapData[path];
+                    data.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'roadmap-card bg-white p-6 rounded-xl shadow-sm hover:shadow-lg';
+                        card.innerHTML = `
+                            <div class="flex items-center mb-4">
+                                <span class="text-2xl font-bold text-blue-600 mr-3">${item.stage.split('.')[0]}.</span>
+                                <h4 class="text-xl font-semibold text-gray-800">${item.stage.split('.')[1].trim()}</h4>
+                            </div>
+                            <h5 class="font-bold text-lg text-gray-700 mb-2">${item.title}</h5>
+                            <p class="text-sm text-gray-600 mb-4">${item.description}</p>
+                            <div class="text-sm bg-gray-50 p-3 rounded-md border">
+                                <p class="font-semibold text-gray-700">${item.provider}</p>
+                                <div class="text-gray-600">${item.details}</div>
+                            </div>
+                        `;
+                        roadmapContent.appendChild(card);
+                    });
+                    roadmapTitle.textContent = `Showing Path for: ${path === 'pm' ? 'Agile Project Leadership' : 'Technical Administration'}`;
+                }
+
+                function displayProvider(providerKey) {
+                    const data = providerData[providerKey];
+                    providerContent.innerHTML = `
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">${data.name}</h4>
+                        <p class="text-gray-600 mb-6">${data.summary}</p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-green-800 mb-2">Advantages</h5>
+                                <ul class="list-disc list-inside space-y-1 text-sm text-green-700">
+                                    ${data.pros.map(pro => `<li>${pro}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-red-800 mb-2">Considerations</h5>
+                                <ul class="list-disc list-inside space-y-1 text-sm text-red-700">
+                                    ${data.cons.map(con => `<li>${con}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                pmButton.addEventListener('click', () => {
+                    displayRoadmap('pm');
+                    pmButton.classList.add('path-button-active');
+                    adminButton.classList.remove('path-button-active');
+                    adminButton.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+                });
+
+                adminButton.addEventListener('click', () => {
+                    displayRoadmap('admin');
+                    adminButton.classList.add('path-button-active');
+                    pmButton.classList.remove('path-button-active');
+                    pmButton.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+                });
+
+                providerTabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        providerTabs.forEach(t => {
+                            t.classList.remove('tab-active');
+                            t.classList.add('tab-inactive');
+                        });
+                        tab.classList.add('tab-active');
+                        tab.classList.remove('tab-inactive');
+                        displayProvider(tab.dataset.provider);
+                    });
+                });
+
+                function renderChart() {
+                    const ctx = document.getElementById('trainingComparisonChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Local Hands-On (e.g., NobleProg)', 'Official Online (e.g., Coursera)', 'Online Marketplace (e.g., Udemy)'],
+                            datasets: [{
+                                label: 'Average Cost (USD)',
+                                data: [1000, 50, 20],
+                                backgroundColor: 'rgba(61, 114, 164, 0.7)',
+                                borderColor: 'rgba(61, 114, 164, 1)',
+                                borderWidth: 1,
+                                yAxisID: 'y'
+                            }, {
+                                label: 'Typical Duration (Weeks)',
+                                data: [0.25, 2.5, 1.5],
+                                backgroundColor: 'rgba(132, 188, 137, 0.7)',
+                                borderColor: 'rgba(132, 188, 137, 1)',
+                                borderWidth: 1,
+                                yAxisID: 'y1'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                    title: {
+                                        display: true,
+                                        text: 'Cost (USD)'
+                                    },
+                                    ticks: {
+                                        callback: function(value) {
+                                            return '$' + value;
+                                        }
+                                    }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    title: {
+                                        display: true,
+                                        text: 'Duration (Weeks)'
+                                    },
+                                    grid: {
+                                        drawOnChartArea: false
+                                    }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.dataset.label || '';
+                                            if (label) {
+                                                label += ': ';
+                                            }
+                                            if (context.parsed.y !== null) {
+                                                if (context.dataset.yAxisID === 'y') {
+                                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                                } else {
+                                                    label += context.parsed.y + ' weeks';
+                                                }
+                                            }
+                                            return label;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                displayRoadmap('pm');
+                displayProvider('coursera');
+                renderChart();
+            });
+        </script>
+    </body>
+    </html>
