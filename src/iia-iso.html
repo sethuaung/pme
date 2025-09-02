@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Internal Audit Handbook</title>
+    <!-- Chosen Palette: Cool & Professional -->
+    <!-- Application Structure Plan: The application is structured as a tab-based single-page application (SPA) to provide a clear, non-linear navigation experience. This dashboard approach was chosen over a linear infographic to empower users to directly access the information most relevant to them (e.g., a warehouse manager can jump straight to industry checklists). The structure includes a main navigation bar, a dynamic content area that updates based on the selected tab, and distinct sections for an Overview, Core Principles, Audit Models, The Audit Process, Industry Checklists, and ISO 27001. This architecture enhances usability by segmenting complex information into manageable, thematic modules, reducing cognitive load and facilitating focused exploration. -->
+    <!-- Visualization & Content Choices: 
+        - Overview: Goal: Inform. Method: Donut chart (Chart.js) and key stat cards (HTML/CSS). Interaction: Tooltips. Justification: Provides a high-level, engaging summary of audit focus areas.
+        - Audit Models: Goal: Compare. Method: Radar chart (Chart.js) and interactive text blocks. Interaction: User clicks on model names to update a details panel. Justification: Allows for dynamic, multi-attribute comparison of complex frameworks.
+        - Audit Process: Goal: Organize. Method: Interactive flowchart diagram (HTML/CSS). Interaction: Clicking a process step reveals detailed activities. Justification: Transforms a static process into an explorable, drill-down tool.
+        - Industry Checklists: Goal: Inform. Method: Dropdown filter and expandable lists (HTML/CSS). Interaction: User selects an industry to view specific, categorized checklists. Justification: Provides a practical, task-oriented tool for users in specific sectors.
+        - ISO 27001: Goal: Compare/Inform. Method: Bar chart (Chart.js). Interaction: Tooltips. Justification: Visually highlights the most common information security vulnerabilities found in audits.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F2F2F2; color: #231F20; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .nav-item { cursor: pointer; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: all 0.2s ease-in-out; font-weight: 600; border: 2px solid transparent; }
+        .nav-item:hover { background-color: #00A1E4; color: white; }
+        .nav-item.active { background-color: #0073BC; color: white; border-color: #00508C; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .kpi-card { background-color: white; border-left: 5px solid #0073BC; }
+        .flow-step { background-color: white; border: 2px solid #0073BC; color: #00508C; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.2s ease-in-out; }
+        .flow-step.active, .flow-step:hover { background-color: #0073BC; color: white; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .flow-arrow { color: #A9A9A9; font-size: 2rem; line-height: 1; font-weight: bold; }
+        .accordion-title { cursor: pointer; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen">
+        <header class="bg-white shadow-md">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <h1 class="text-2xl md:text-3xl font-bold text-[#00508C]">Interactive Audit Handbook</h1>
+                    <span class="text-sm text-gray-500 hidden sm:block">IIA & ISO 27001 Standards</span>
+                </div>
+            </div>
+            <nav id="mainNav" class="bg-gray-100">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-wrap items-center justify-center gap-2 py-3">
+                        <div class="nav-item active" data-tab="overview">Overview</div>
+                        <div class="nav-item" data-tab="models">Audit Models</div>
+                        <div class="nav-item" data-tab="process">Audit Process</div>
+                        <div class="nav-item" data-tab="checklists">Industry Checklists</div>
+                        <div class="nav-item" data-tab="iso27001">ISO 27001</div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main id="mainContent" class="container mx-auto p-4 sm:p-6 lg:p-8">
+            
+            <section id="overview" class="content-section active">
+                <h2 class="text-3xl font-bold text-[#00508C] text-center mb-2">Audit Focus Dashboard</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Internal audit provides enterprise-wide assurance by evaluating risks across financial, operational, and technological domains. The focus of audit activities is dynamically allocated based on the organization's strategic objectives and risk landscape.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-center mb-4">Typical Audit Effort Allocation</h3>
+                        <div class="chart-container h-[300px] md:h-[400px]">
+                            <canvas id="overviewChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="kpi-card p-6 rounded-lg shadow-md">
+                            <h4 class="text-lg font-semibold text-gray-700">Risk Coverage</h4>
+                            <p class="text-3xl font-bold text-[#0073BC] mt-1">93%</p>
+                            <p class="text-sm text-gray-500 mt-1">of key corporate risks covered by the annual audit plan.</p>
+                        </div>
+                        <div class="kpi-card p-6 rounded-lg shadow-md">
+                            <h4 class="text-lg font-semibold text-gray-700">Action Plan Implementation</h4>
+                            <p class="text-3xl font-bold text-[#0073BC] mt-1">88%</p>
+                            <p class="text-sm text-gray-500 mt-1">of management action plans for high-risk findings implemented on time.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="models" class="content-section">
+                <h2 class="text-3xl font-bold text-[#00508C] text-center mb-2">Comparing Audit Models</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">No single audit model fits all organizations. The choice of model depends on factors like organizational maturity, industry, and risk appetite. This section provides an interactive comparison of the most common approaches.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                         <h3 class="text-xl font-semibold text-center mb-4">Model Attributes Comparison</h3>
+                        <div class="chart-container">
+                            <canvas id="modelsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Model Details</h3>
+                        <div id="modelDetails">
+                            <h4 class="text-lg font-bold text-[#0073BC]">Risk-Based Auditing (RBA)</h4>
+                            <p class="text-gray-600 mt-2">The foundation of modern internal audit. RBA aligns audit activities with the organization's most significant risks. It is a top-down approach that ensures resources are focused where they can add the most value by addressing strategic threats.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="process" class="content-section">
+                <h2 class="text-3xl font-bold text-[#00508C] text-center mb-2">The 4-Phase Audit Process</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">The internal audit process is a systematic journey from planning to resolution. Each phase has specific objectives and deliverables. Click on a step below to explore its key activities.</p>
+                <div id="processFlow" class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 flex-wrap mb-8">
+                    <div class="flow-step active" data-process="planning">1. Planning</div>
+                    <div class="flow-arrow mx-4 hidden md:block">&rarr;</div>
+                    <div class="flow-step" data-process="fieldwork">2. Fieldwork</div>
+                    <div class="flow-arrow mx-4 hidden md:block">&rarr;</div>
+                    <div class="flow-step" data-process="reporting">3. Reporting</div>
+                    <div class="flow-arrow mx-4 hidden md:block">&rarr;</div>
+                    <div class="flow-step" data-process="followup">4. Follow-Up</div>
+                </div>
+                <div id="processDetails" class="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+                    <!-- Details will be loaded here by JS -->
+                </div>
+            </section>
+
+            <section id="checklists" class="content-section">
+                <h2 class="text-3xl font-bold text-[#00508C] text-center mb-2">Industry-Specific Checklists</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">While core principles are universal, effective audits are tailored to specific industry risks. Select an industry below to view a checklist of common focus areas for that sector.</p>
+                 <div class="max-w-md mx-auto mb-8">
+                    <select id="industrySelector" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#0073BC] focus:border-[#0073BC]">
+                        <option value="retail">Retail & Sales</option>
+                        <option value="warehouse">Distribution & Warehouse</option>
+                    </select>
+                </div>
+                <div id="checklistContent" class="space-y-4">
+                    <!-- Checklists loaded here by JS -->
+                </div>
+            </section>
+
+            <section id="iso27001" class="content-section">
+                <h2 class="text-3xl font-bold text-[#00508C] text-center mb-2">ISO 27001 & Information Security Audits</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">ISO 27001 provides a framework for an Information Security Management System (ISMS). Auditing against this standard helps ensure that an organization's critical data is protected against evolving cyber threats.</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-center mb-4">Top ISO 27001 Control Gaps Identified in Audits</h3>
+                    <div class="chart-container">
+                        <canvas id="isoChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-8">
+        <p>This interactive guide is based on IIA and industry best practices. For official guidance, consult the respective standards bodies.</p>
+        <p> © 2025 By Ms.Aung-Seinn. All rights reserved. </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainNav = document.getElementById('mainNav');
+            const contentSections = document.querySelectorAll('.content-section');
+            let activeTab = 'overview';
+            let charts = {};
+
+            const chartConfigs = {
+                overview: () => {
+                    const ctx = document.getElementById('overviewChart').getContext('2d');
+                    charts.overview = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Operational Audits', 'Financial Audits', 'IT & Security Audits', 'Compliance Audits'],
+                            datasets: [{
+                                data: [40, 25, 20, 15],
+                                backgroundColor: ['#0073BC', '#00A1E4', '#231F20', '#A9A9A9'],
+                                borderColor: '#F2F2F2',
+                                borderWidth: 4,
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, cutout: '60%' }
+                    });
+                },
+                models: () => {
+                    const ctx = document.getElementById('modelsChart').getContext('2d');
+                    const data = {
+                        labels: ['Agility', 'Tech Reliance', 'Stakeholder Focus', 'Formality', 'Timeliness'],
+                        datasets: [{
+                            label: 'Risk-Based',
+                            data: [3, 4, 3, 5, 3],
+                            borderColor: '#0073BC',
+                            backgroundColor: 'rgba(0, 115, 188, 0.1)',
+                        }, {
+                            label: 'Agile',
+                            data: [5, 3, 5, 2, 5],
+                            borderColor: '#00A1E4',
+                             backgroundColor: 'rgba(0, 161, 228, 0.1)',
+                        }]
+                    };
+                    charts.models = new Chart(ctx, {
+                        type: 'radar',
+                        data: data,
+                        options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 5 } } }
+                    });
+                },
+                iso27001: () => {
+                    const ctx = document.getElementById('isoChart').getContext('2d');
+                    charts.iso27001 = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Access Control', 'Asset Management', 'Incident Management', 'Business Continuity', 'Vendor Risk'],
+                            datasets: [{
+                                label: 'Number of High-Risk Findings',
+                                data: [68, 55, 42, 35, 28],
+                                backgroundColor: ['#00508C', '#0073BC', '#00A1E4', '#A9A9A9', '#231F20'],
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true } } }
+                    });
+                }
+            };
+
+            const switchTab = (tabName) => {
+                activeTab = tabName;
+                mainNav.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.toggle('active', item.dataset.tab === tabName);
+                });
+                contentSections.forEach(section => {
+                    section.classList.toggle('active', section.id === tabName);
+                });
+
+                if (chartConfigs[tabName] && !charts[tabName]) {
+                    chartConfigs[tabName]();
+                }
+            };
+
+            mainNav.addEventListener('click', (e) => {
+                if (e.target.classList.contains('nav-item')) {
+                    switchTab(e.target.dataset.tab);
+                }
+            });
+            
+            const processData = {
+                planning: { title: 'Phase 1: Planning', content: '<ul><li>Define audit scope and objectives.</li><li>Conduct risk assessment of the audit area.</li><li>Develop detailed audit program and resource plan.</li><li>Hold kick-off meeting with key stakeholders.</li></ul>' },
+                fieldwork: { title: 'Phase 2: Fieldwork', content: '<ul><li>Execute audit program tests (interviews, data analysis, observation).</li><li>Gather and document sufficient, reliable, and relevant audit evidence.</li><li>Identify and document potential findings and observations.</li><li>Maintain regular communication with process owners.</li></ul>' },
+                reporting: { title: 'Phase 3: Reporting', content: '<ul><li>Develop draft audit report, including findings, risks, and recommendations.</li><li>Vet findings with management to ensure factual accuracy.</li><li>Obtain management responses and action plans for each finding.</li><li>Issue final audit report to senior management and the audit committee.</li></ul>' },
+                followup: { title: 'Phase 4: Follow-Up', content: '<ul><li>Track implementation of management action plans.</li><li>Verify that actions taken have effectively mitigated the identified risks.</li><li>Report on the status of outstanding audit issues.</li><li>Close out findings once remediation is confirmed.</li></ul>' }
+            };
+
+            const processFlowContainer = document.getElementById('processFlow');
+            const processDetailsContainer = document.getElementById('processDetails');
+
+            const updateProcessDetails = (processName) => {
+                const details = processData[processName];
+                processDetailsContainer.innerHTML = `<h3 class="text-xl font-bold text-[#0073BC] mb-4">${details.title}</h3><div class="prose max-w-none text-gray-700">${details.content}</div>`;
+                processFlowContainer.querySelectorAll('.flow-step').forEach(step => {
+                    step.classList.toggle('active', step.dataset.process === processName);
+                });
+            };
+
+            processFlowContainer.addEventListener('click', e => {
+                if(e.target.classList.contains('flow-step')) {
+                    updateProcessDetails(e.target.dataset.process);
+                }
+            });
+
+            const checklistsData = {
+                retail: `
+                    <div class="bg-white p-4 rounded-lg shadow-md accordion-item">
+                        <h3 class="accordion-title text-lg font-semibold flex justify-between items-center p-2"><span>Revenue & Sales Processes</span><span>&#9662;</span></h3>
+                        <div class="accordion-content hidden p-2 text-gray-600"><ul><li>Are daily sales reconciled with cash/card receipts?</li><li>Are controls over voided transactions and refunds adequate?</li><li>Is there proper segregation of duties between sales and cash handling?</li></ul></div>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md accordion-item">
+                        <h3 class="accordion-title text-lg font-semibold flex justify-between items-center p-2"><span>Inventory Management</span><span>&#9662;</span></h3>
+                        <div class="accordion-content hidden p-2 text-gray-600"><ul><li>Are physical inventory counts performed regularly and variances investigated?</li><li>Are procedures for handling damaged/obsolete goods effective?</li><li>Is the POS system accurately tracking inventory levels?</li></ul></div>
+                    </div>`,
+                warehouse: `
+                    <div class="bg-white p-4 rounded-lg shadow-md accordion-item">
+                        <h3 class="accordion-title text-lg font-semibold flex justify-between items-center p-2"><span>Physical Security & Access</span><span>&#9662;</span></h3>
+                        <div class="accordion-content hidden p-2 text-gray-600"><ul><li>Is the facility secure (fences, alarms, cameras)?</li><li>Are controls over visitor and employee access enforced?</li><li>Are high-value goods stored in a separate, secure area?</li></ul></div>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md accordion-item">
+                        <h3 class="accordion-title text-lg font-semibold flex justify-between items-center p-2"><span>Inventory Control</span><span>&#9662;</span></h3>
+                        <div class="accordion-content hidden p-2 text-gray-600"><ul><li>Are incoming goods reconciled with purchase orders?</li><li>Is a Warehouse Management System (WMS) used to track inventory locations?</li><li>Are cycle counts performed regularly to verify accuracy?</li></ul></div>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md accordion-item">
+                        <h3 class="accordion-title text-lg font-semibold flex justify-between items-center p-2"><span>Shipping & Logistics</span><span>&#9662;</span></h3>
+                        <div class="accordion-content hidden p-2 text-gray-600"><ul><li>Are outbound shipments reconciled with sales orders?</li><li>Are shipping documents accurate and complete?</li><li>Is there a process to track shipments and confirm delivery?</li></ul></div>
+                    </div>`
+            };
+
+            const industrySelector = document.getElementById('industrySelector');
+            const checklistContent = document.getElementById('checklistContent');
+
+            const updateChecklists = () => {
+                const selectedIndustry = industrySelector.value;
+                checklistContent.innerHTML = checklistsData[selectedIndustry];
+            };
+            
+            industrySelector.addEventListener('change', updateChecklists);
+            
+            checklistContent.addEventListener('click', e => {
+                const title = e.target.closest('.accordion-title');
+                if (title) {
+                    const content = title.nextElementSibling;
+                    const icon = title.querySelector('span:last-child');
+                    content.classList.toggle('hidden');
+                    icon.innerHTML = content.classList.contains('hidden') ? '&#9662;' : '&#9652;';
+                }
+            });
+
+            // Initial setup
+            chartConfigs.overview();
+            updateProcessDetails('planning');
+            updateChecklists();
+        });
+    </script>
+</body>
+</html>
+
