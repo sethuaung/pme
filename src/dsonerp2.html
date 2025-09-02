@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Modern ERP/CRM Implementation: Navigating Infrastructure, Automation, and Project Governance">
+    <title>Infographic: Securing the Enterprise Core</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues & Tech Teal -->
+    <!-- Application Structure Plan: The application is structured as a single, long-scrolling infographic narrative. This design was chosen to guide the user through a story, starting with a high-level hook (key statistics), moving to foundational concepts, exploring the core DevSecOps process interactively, detailing specific threats in a clear grid, covering compliance, and ending with a memorable summary. This linear flow is more engaging and digestible for an infographic format than a tabbed or multi-page layout, ensuring the key message is delivered effectively. -->
+    <!-- Visualization & Content Choices: 
+        1. Key Stats: Report Info -> Implied importance of security. Goal -> Inform/Hook. Viz/Method -> "Big Number" text blocks. Interaction -> None. Justification -> Immediately establishes the problem's scale and grabs user attention. Library/Method -> HTML/Tailwind.
+        2. DevSecOps Lifecycle: Report Info -> DevSecOps stages. Goal -> Organize. Viz/Method -> Interactive HTML/CSS process flow diagram. Interaction -> Clicking a stage reveals details. Justification -> Visualizes the continuous cycle in a more engaging way than static text, fitting the infographic style. Library/Method -> Vanilla JS.
+        3. Threat Details: Report Info -> Specific attack vectors. Goal -> Organize/Inform. Viz/Method -> Grid of styled cards. Interaction -> None. Justification -> Replaces tabs for a more scannable, infographic-friendly layout that presents threats as distinct but related items. Library/Method -> HTML/Tailwind.
+        4. Business Risk Impact: Report Info -> Consequences of breaches. Goal -> Compare. Viz/Method -> Horizontal Bar Chart. Interaction -> Hover tooltips. Justification -> Clearly visualizes the comparative severity of different risks, a classic infographic element. Library/Method -> Chart.js.
+        5. Key Takeaways: Report Info -> Core principles. Goal -> Inform/Summarize. Viz/Method -> 3-column summary with icons. Interaction -> None. Justification -> Replaces the quiz to provide a strong, memorable conclusion that reinforces the infographic's main points. Library/Method -> HTML/Tailwind. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #2D3748;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px_6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+        .stage-btn {
+             background-color: #E0E7FF;
+             color: #3730A3;
+             transition: all 0.3s ease;
+             border-bottom: 4px solid transparent;
+        }
+        .stage-btn.active {
+            background-color: #3B82F6;
+            color: #FFFFFF;
+            transform: scale(1.05);
+            border-bottom-color: #1D4ED8;
+        }
+        .accordion-header.active {
+            background-color: #EFF6FF;
+            color: #1E40AF;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+        <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-[#3B525F]">Enterprise Security</h1>
+            <p class="text-lg max-w-3xl mx-auto"> Modern ERP/CRM Implementation: Navigating Infrastructure, Automation, and Project Governance. </p>
+            <div class="hidden md:flex space-x-8">
+                <a href="https://pme-felixent.vercel.app/" class="nav-link">Home</a>
+            </div>
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="introduction" class="text-center mb-24">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#1E3A8A] mb-4">Securing the Enterprise Core</h1>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                A visual guide to integrating security into development and protecting critical ERP systems. In today's landscape, proactive security isn't optional—it's foundational.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="card p-6 text-center">
+                    <p class="text-5xl font-bold text-[#3B82F6]">68%</p>
+                    <p class="text-gray-500 mt-2">Of breaches take months or longer to discover.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <p class="text-5xl font-bold text-[#14B8A6]">45%</p>
+                    <p class="text-gray-500 mt-2">Of breaches are cloud-based, targeting modern infrastructure.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <p class="text-5xl font-bold text-[#F59E0B]">$4.35M</p>
+                    <p class="text-gray-500 mt-2">Is the average cost of a data breach.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="concepts" class="mb-24">
+             <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-8 text-center">
+                    <p class="text-4xl mb-4">⚙️</p>
+                    <h3 class="text-2xl font-bold text-[#1E3A8A] mb-3">ERP Systems</h3>
+                    <p class="text-gray-600">The digital backbone of an organization, integrating core processes like finance and HR. Their centralized nature makes them high-value targets.</p>
+                </div>
+                 <div class="card p-8 text-center">
+                    <p class="text-4xl mb-4">🔄</p>
+                    <h3 class="text-2xl font-bold text-[#1E3A8A] mb-3">DevOps</h3>
+                    <p class="text-gray-600">A culture and set of practices that combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle.</p>
+                </div>
+                <div class="card p-8 text-center">
+                    <p class="text-4xl mb-4">🛡️</p>
+                    <h3 class="text-2xl font-bold text-[#1E3A8A] mb-3">DevSecOps</h3>
+                    <p class="text-gray-600">The evolution of DevOps, embedding security practices into every phase of the lifecycle. It's about making security a shared responsibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="devsecops" class="mb-24">
+            <h2 class="text-3xl font-bold text-center text-[#1E3A8A] mb-4">The Interactive DevSecOps Lifecycle</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                DevSecOps integrates security seamlessly from planning to monitoring. Click on each stage below to see how security "shifts left," becoming an integral part of the process, not an afterthought.
+            </p>
+            <div class="w-full max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-0">
+                    <button data-stage="plan" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center active">Plan</button>
+                    <div class="w-1 h-8 md:w-12 md:h-1 bg-gray-300"></div>
+                    <button data-stage="code" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center">Code</button>
+                    <div class="w-1 h-8 md:w-12 md:h-1 bg-gray-300"></div>
+                    <button data-stage="build" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center">Build</button>
+                    <div class="w-1 h-8 md:w-12 md:h-1 bg-gray-300"></div>
+                    <button data-stage="test" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center">Test</button>
+                    <div class="w-1 h-8 md:w-12 md:h-1 bg-gray-300"></div>
+                    <button data-stage="release" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center">Release</button>
+                    <div class="w-1 h-8 md:w-12 md:h-1 bg-gray-300"></div>
+                    <button data-stage="deploy" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center">Deploy</button>
+                    <div class="w-1 h-8 md:w-12 md:h-1 bg-gray-300"></div>
+                    <button data-stage="monitor" class="stage-btn w-40 h-16 rounded-lg font-bold flex items-center justify-center">Monitor</button>
+                </div>
+                <div id="devsecops-content" class="card p-8 mt-8 min-h-[150px]">
+                    <div data-content="plan" class="devsecops-stage-content">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Plan: Threat Modeling</h3>
+                        <p>Before any code is written, teams identify potential security risks and define security requirements. This proactive approach helps anticipate vulnerabilities and align security with business goals from day one.</p>
+                    </div>
+                    <div data-content="code" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Code: Static Analysis (SAST)</h3>
+                        <p>As developers write code, Static Application Security Testing (SAST) tools automatically scan the source code for known vulnerabilities, providing immediate feedback within the developer's IDE for quick remediation.</p>
+                    </div>
+                    <div data-content="build" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Build: Software Composition Analysis (SCA)</h3>
+                        <p>In the build phase, SCA tools scan for vulnerabilities in open-source libraries. This is crucial as most applications rely on third-party components that can introduce risk if not properly vetted.</p>
+                    </div>
+                    <div data-content="test" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Test: Dynamic Analysis (DAST)</h3>
+                        <p>During testing, DAST tools analyze the running application for vulnerabilities by simulating real-world attacks. This finds flaws that are not visible in the source code, such as server configuration issues.</p>
+                    </div>
+                     <div data-content="release" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Release: Final Security Checks</h3>
+                        <p>Before release, automated security checks and penetration testing are performed to ensure the application is compliant with security policies and free of critical vulnerabilities before being packaged for deployment.</p>
+                    </div>
+                     <div data-content="deploy" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Deploy: Infrastructure as Code (IaC) Security</h3>
+                        <p>During deployment, security focuses on the configuration of the infrastructure. IaC security tools scan configuration files for misconfigurations that could expose the system to threats in production.</p>
+                    </div>
+                    <div data-content="monitor" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Monitor: Continuous Monitoring & Response</h3>
+                        <p>Once deployed, the application and infrastructure are continuously monitored for threats and suspicious activity. Automated alerting and response systems help ensure rapid incident management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="threats" class="mb-24">
+            <h2 class="text-3xl font-bold text-center text-[#1E3A8A] mb-4">Anatomy of Common Cyber Threats</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                Understanding your enemy is the first step to building a strong defense. Below are some of the most prevalent threats targeting enterprise systems, from simple reconnaissance to complex injection attacks.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">SQL Injection (SQLi)</h3>
+                    <p class="mb-4">An attack where malicious SQL code is inserted into input fields, tricking the application into executing unintended database commands. This can lead to unauthorized data access, modification, or deletion.</p>
+                    <p class="font-semibold text-gray-700">Prevention:</p>
+                    <p class="text-gray-600">Use Parameterized Queries (Prepared Statements) to strictly separate code from user-supplied data.</p>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#3B82F6] mb-3">Cross-Site Scripting (XSS)</h3>
+                    <p class="mb-4">Injecting malicious scripts into trusted websites. The script executes in the user's browser, allowing attackers to steal session cookies, credentials, or perform actions on the user's behalf.</p>
+                    <p class="font-semibold text-gray-700">Prevention:</p>
+                    <p class="text-gray-600">Validate and encode all user-supplied data before rendering it on a page.</p>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#14B8A6] mb-3">API Vulnerabilities</h3>
+                    <p class="mb-4">Attacks targeting the Application Programming Interfaces that connect systems. Common flaws include broken authentication, excessive data exposure, and lack of encryption for data in transit.</p>
+                    <p class="font-semibold text-gray-700">Prevention:</p>
+                    <p class="text-gray-600">Implement strong authentication (e.g., OAuth 2.0) and always use TLS encryption.</p>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#14B8A6] mb-3">Distributed Denial of Service (DDoS)</h3>
+                    <p class="mb-4">An attempt to make an online service unavailable by overwhelming it with traffic from multiple sources. This attack disrupts legitimate users and can bring business operations to a halt.</p>
+                    <p class="font-semibold text-gray-700">Prevention:</p>
+                    <p class="text-gray-600">Utilize traffic scrubbing services, rate limiting, and a robust, scalable network infrastructure.</p>
+                </div>
+            </div>
+
+            <div class="mt-20">
+                 <h3 class="text-2xl font-bold text-center text-[#1E3A8A] mb-4">Comparing Business Risk Impact</h3>
+                 <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-8">
+                    Security failures have real-world consequences. This chart visualizes the potential business impact of common vulnerabilities, ranking them from service disruption to severe regulatory penalties.
+                </p>
+                <div class="card p-6">
+                    <div class="chart-container">
+                        <canvas id="riskImpactChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="compliance" class="mb-24">
+            <h2 class="text-3xl font-bold text-center text-[#1E3A8A] mb-4">Navigating Regulatory Compliance</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                Compliance isn't just a checkbox; it's a critical framework for protecting data and building trust. Non-compliance can lead to severe fines and reputational damage.
+            </p>
+            <div id="compliance-accordion" class="max-w-4xl mx-auto space-y-4">
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-5 font-semibold text-lg flex justify-between items-center transition" data-target="gdpr-content">
+                        <span>GDPR (General Data Protection Regulation)</span>
+                        <span class="accordion-icon text-2xl font-light">+</span>
+                    </button>
+                    <div id="gdpr-content" class="accordion-content p-5 border-t border-gray-200 hidden bg-white">
+                        <p>A landmark EU regulation on data protection and privacy. It governs how personal data of EU citizens is collected, processed, and stored, enforcing strict rules and granting individuals greater control over their data.</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-5 font-semibold text-lg flex justify-between items-center transition" data-target="hipaa-content">
+                        <span>HIPAA (Health Insurance Portability and Accountability Act)</span>
+                        <span class="accordion-icon text-2xl font-light">+</span>
+                    </button>
+                    <div id="hipaa-content" class="accordion-content p-5 border-t border-gray-200 hidden bg-white">
+                        <p>A US federal law protecting sensitive patient health information (ePHI). It mandates strict technical, physical, and administrative safeguards to ensure the confidentiality and security of medical records.</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-5 font-semibold text-lg flex justify-between items-center transition" data-target="pci-content">
+                        <span>PCI DSS (Payment Card Industry Data Security Standard)</span>
+                         <span class="accordion-icon text-2xl font-light">+</span>
+                    </button>
+                    <div id="pci-content" class="accordion-content p-5 border-t border-gray-200 hidden bg-white">
+                        <p>A global standard for all organizations that handle branded credit cards. It provides a baseline of technical and operational requirements designed to protect cardholder data and prevent fraud.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="conclusion" class="text-center">
+            <h2 class="text-3xl font-bold text-center text-[#1E3A8A] mb-4">Three Pillars of Modern Security</h2>
+             <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                Building a resilient enterprise security posture boils down to three core principles. Embracing them transforms security from a roadblock into a business accelerator.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                 <div class="card p-8">
+                    <p class="text-4xl mb-4">🤝</p>
+                    <h3 class="text-2xl font-bold text-[#1E3A8A] mb-3">Culture</h3>
+                    <p class="text-gray-600">Foster a culture of shared responsibility where everyone, from developers to executives, owns their part in security.</p>
+                </div>
+                 <div class="card p-8">
+                    <p class="text-4xl mb-4">🤖</p>
+                    <h3 class="text-2xl font-bold text-[#1E3A8A] mb-3">Automation</h3>
+                    <p class="text-gray-600">Embed automated security checks and tests throughout the entire development pipeline to catch vulnerabilities early and often.</p>
+                </div>
+                 <div class="card p-8">
+                    <p class="text-4xl mb-4">🔍</p>
+                    <h3 class="text-2xl font-bold text-[#1E3A8A] mb-3">Proactive Testing</h3>
+                    <p class="text-gray-600">Continuously test systems using methods like SAST, DAST, and penetration testing to find and fix flaws before attackers can exploit them.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-white mt-20 border-t">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+          <p>&copy; Enterprise Security Best Practices. <a href="https://felixent.verel.app">Felixent</a>. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const devsecopsStageBtns = document.querySelectorAll('.stage-btn');
+    const devsecopsStageContents = document.querySelectorAll('.devsecops-stage-content');
+    devsecopsStageBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            devsecopsStageBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const stage = btn.dataset.stage;
+            devsecopsStageContents.forEach(content => {
+                if (content.dataset.content === stage) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = document.getElementById(header.dataset.target);
+            const icon = header.querySelector('.accordion-icon');
+            const isActive = header.classList.contains('active');
+
+            accordionHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                    document.getElementById(h.dataset.target).classList.add('hidden');
+                    h.querySelector('.accordion-icon').textContent = '+';
+                }
+            });
+
+            if (isActive) {
+                header.classList.remove('active');
+                content.classList.add('hidden');
+                icon.textContent = '+';
+            } else {
+                header.classList.add('active');
+                content.classList.remove('hidden');
+                icon.textContent = '-';
+            }
+        });
+    });
+
+    const processLabel = (label) => {
+        if (label.length <= 16) {
+            return label;
+        }
+        const words = label.split(' ');
+        const lines = [];
+        let currentLine = '';
+        for (const word of words) {
+            if ((currentLine + ' ' + word).trim().length > 16 && currentLine.length > 0) {
+                lines.push(currentLine);
+                currentLine = word;
+            } else {
+                currentLine = (currentLine + ' ' + word).trim();
+            }
+        }
+        if (currentLine) {
+            lines.push(currentLine);
+        }
+        return lines;
+    };
+    
+    const originalLabels = [
+        'Data Breach via Unpatched Vulnerabilities', 
+        'Regulatory Fines from Compliance Failure', 
+        'Total Service Disruption (DDoS)', 
+        'Long-term Reputation Damage', 
+        'Widespread Credential Theft'
+    ];
+
+    const processedLabels = originalLabels.map(processLabel);
+
+    const riskImpactCtx = document.getElementById('riskImpactChart').getContext('2d');
+    const riskImpactChart = new Chart(riskImpactCtx, {
+        type: 'bar',
+        data: {
+            labels: processedLabels,
+            datasets: [{
+                label: 'Potential Business Impact Score',
+                data: [95, 88, 80, 92, 75],
+                backgroundColor: ['#3B82F6', '#60A5FA', '#14B8A6', '#4FD1C5', '#F59E0B'],
+                borderColor: ['#1E40AF', '#1E40AF', '#0F766E', '#0F766E', '#B45309'],
+                borderWidth: 1.5,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: {
+                        color: '#E5E7EB',
+                    },
+                    ticks: {
+                       font: {
+                           weight: '600'
+                       }
+                    }
+                },
+                y: {
+                     grid: {
+                        display: false,
+                    },
+                    ticks: {
+                       font: {
+                           size: 14,
+                           weight: '500'
+                       }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: '#2D3748',
+                    titleFont: { size: 16, weight: 'bold' },
+                    bodyFont: { size: 14 },
+                    padding: 12,
+                    cornerRadius: 6,
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        },
+                        label: function(context) {
+                            return `Impact Score: ${context.raw}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
+
