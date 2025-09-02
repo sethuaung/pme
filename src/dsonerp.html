@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Modern ERP/CRM Implementation: Navigating Infrastructure, Automation, and Project Governance">
+    <title>DevSecOps and ERP System Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A single-page application with a sticky top navigation for easy access to key thematic sections. This structure was chosen over a linear document format to allow practitioners to quickly jump to the information most relevant to their needs, such as specific threats or compliance standards. The user flow starts with foundational concepts, moves to practical application (threats and testing), covers governance (compliance), and concludes with an interactive quiz to reinforce learning. This creates a more engaging and utilitarian experience than a simple PDF conversion. -->
+    <!-- Visualization & Content Choices: 
+        1. DevSecOps Lifecycle: Report Info -> DevSecOps principles. Goal -> Organize/Inform. Viz/Method -> Interactive HTML/CSS diagram. Interaction -> Clicking a stage reveals details. Justification -> Visually explains the continuous nature of DevSecOps in an engaging way. Library -> Vanilla JS.
+        2. Threat Impact: Report Info -> Business risks of vulnerabilities. Goal -> Compare. Viz/Method -> Bar Chart. Interaction -> Hover tooltips show details. Justification -> Provides an immediate visual comparison of risk severity. Library -> Chart.js.
+        3. Core Threats & Compliance: Report Info -> Detailed text on attacks and regulations. Goal -> Organize. Viz/Method -> Tabbed and Accordion interfaces. Interaction -> Clicking tabs/headers reveals content. Justification -> Manages information density, preventing user overload with complex topics. Library -> Vanilla JS.
+        4. Knowledge Check: Report Info -> MCQ questions from the PDF. Goal -> Engage/Assess. Viz/Method -> Interactive quiz module. Interaction -> User selects answers and gets immediate feedback. Justification -> Turns passive reading into an active learning experience to improve retention. Library -> Vanilla JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F4F1;
+            color: #4A4A4A;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #3B525F;
+            border-bottom-color: #A8DADC;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .tab.active {
+            background-color: #5D737E;
+            color: #FFFFFF;
+        }
+        .tab {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #5D737E;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #3B525F;
+        }
+        .accordion-header.active {
+            background-color: #E6DFD9;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-[#3B525F]">Enterprise Security</h1>
+            <p class="text-lg max-w-3xl mx-auto"> Modern ERP/CRM Implementation: Navigating Infrastructure, Automation, and Project Governance. </p>
+            <div class="hidden md:flex space-x-8">
+                <a href="https://pme-felixent.vercel.app/" class="nav-link">Home</a>
+                <a href="#introduction" class="nav-link">Introduction</a>
+                <a href="#devsecops" class="nav-link">DevSecOps</a>
+                <a href="#threats" class="nav-link">Threats</a>
+                <a href="#compliance" class="nav-link">Compliance</a>
+                <a href="#quiz" class="nav-link">Quiz</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5D737E]">
+                <div class="w-6 h-0.5 bg-[#3B525F] mb-1.5"></div>
+                <div class="w-6 h-0.5 bg-[#3B525F] mb-1.5"></div>
+                <div class="w-6 h-0.5 bg-[#3B525F]"></div>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#introduction" class="block py-2 px-4 text-sm hover:bg-gray-200">Introduction</a>
+            <a href="#devsecops" class="block py-2 px-4 text-sm hover:bg-gray-200">DevSecOps</a>
+            <a href="#threats" class="block py-2 px-4 text-sm hover:bg-gray-200">Threats</a>
+            <a href="#compliance" class="block py-2 px-4 text-sm hover:bg-gray-200">Compliance</a>
+            <a href="#quiz" class="block py-2 px-4 text-sm hover:bg-gray-200">Quiz</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="introduction" class="scroll-mt-20 mb-20 text-center">
+            <h2 class="text-4xl font-bold text-[#3B525F] mb-4">Securing the Enterprise Core</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-700">
+                This handbook provides a comprehensive guide to the critical intersection of Enterprise Resource Planning (ERP) security and DevSecOps principles. We'll explore key security testing methodologies and compliance standards to help build resilient, secure systems from the ground up. The core finding is that robust security is not a final-stage process, but a continuous, integrated discipline.
+            </p>
+        </section>
+
+        <section id="concepts" class="mb-20">
+             <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#5D737E] mb-3">ERP Systems</h3>
+                    <p>Enterprise Resource Planning systems are the digital backbone of modern organizations, integrating core business processes like finance, HR, and supply chain. Their centralized nature makes them high-value targets for cyberattacks.</p>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#5D737E] mb-3">DevOps</h3>
+                    <p>DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality, but can sometimes sideline security.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold text-[#5D737E] mb-3">DevSecOps</h3>
+                    <p>DevSecOps integrates security into every phase of the DevOps lifecycle. It promotes a "security-by-design" approach, automating security tasks and fostering a culture of shared responsibility to build more secure applications faster.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="devsecops" class="scroll-mt-20 mb-20">
+            <h2 class="text-3xl font-bold text-center text-[#3B525F] mb-4">The DevSecOps Lifecycle</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-700 mb-12">
+                DevSecOps is not a single tool, but a cultural shift that embeds security practices throughout the software development lifecycle. By "shifting left," we address security concerns at the earliest stages, making the process more efficient and effective. Explore the interactive lifecycle below to see how security is integrated at each step.
+            </p>
+            <div class="w-full max-w-5xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button data-stage="plan" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700 active">Plan</button>
+                    <button data-stage="code" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700">Code</button>
+                    <button data-stage="build" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700">Build</button>
+                    <button data-stage="test" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700">Test</button>
+                    <button data-stage="release" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700">Release</button>
+                    <button data-stage="deploy" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700">Deploy</button>
+                    <button data-stage="monitor" class="devsecops-stage-btn flex-1 p-3 text-center font-semibold rounded-lg bg-gray-200 text-gray-700">Monitor</button>
+                </div>
+                <div id="devsecops-content" class="card p-8 min-h-[200px]">
+                    <div data-content="plan" class="devsecops-stage-content">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Plan: Threat Modeling</h3>
+                        <p>During the planning phase, teams conduct threat modeling to identify potential security risks and define security requirements. This proactive approach helps anticipate vulnerabilities before a single line of code is written, aligning security with business objectives from the start.</p>
+                    </div>
+                    <div data-content="code" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Code: Static Analysis (SAST)</h3>
+                        <p>As developers write code, Static Application Security Testing (SAST) tools automatically scan the source code for known vulnerabilities, such as those that could lead to SQL injection. This provides immediate feedback, allowing for quick remediation.</p>
+                    </div>
+                    <div data-content="build" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Build: Software Composition Analysis</h3>
+                        <p>In the build phase, Software Composition Analysis (SCA) tools scan for vulnerabilities in open-source libraries and dependencies. This is crucial as many modern applications are built on third-party components that can introduce risks.</p>
+                    </div>
+                    <div data-content="test" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Test: Dynamic Analysis (DAST)</h3>
+                        <p>During testing, Dynamic Application Security Testing (DAST) tools analyze the running application for vulnerabilities, including API weaknesses and authentication issues. This simulates real-world attacks to find flaws that are not visible in the source code.</p>
+                    </div>
+                     <div data-content="release" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Release: Final Security Checks</h3>
+                        <p>Before release, automated security checks and penetration testing are performed. This stage ensures that the application is compliant with security policies and free of critical vulnerabilities before it is packaged for deployment.</p>
+                    </div>
+                     <div data-content="deploy" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Deploy: Infrastructure as Code (IaC) Security</h3>
+                        <p>During deployment, security focuses on the configuration of the infrastructure. IaC security tools scan configuration files (e.g., from Jenkins, Terraform, AWS CloudFormation) for misconfigurations that could expose the system to threats.</p>
+                    </div>
+                    <div data-content="monitor" class="devsecops-stage-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Monitor: Continuous Monitoring & Response</h3>
+                        <p>Once deployed, the application and infrastructure are continuously monitored for security threats, suspicious activity, and new vulnerabilities. Automated alerting and response systems help ensure rapid incident management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="threats" class="scroll-mt-20 mb-20">
+            <h2 class="text-3xl font-bold text-center text-[#3B525F] mb-4">Common Threats & Testing Methods</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-700 mb-12">
+                Understanding potential threats is the first step to defending against them. This section provides a practical overview of common vulnerabilities and the testing methodologies used to uncover them. Use the tabs to explore each topic, from reconnaissance techniques like Google Dorking to critical exploits like SQL Injection.
+            </p>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-wrap border-b border-gray-300">
+                    <button class="threat-tab tab py-2 px-4 font-semibold text-gray-600 rounded-t-lg active" data-target="dorking">Google Dorking</button>
+                    <button class="threat-tab tab py-2 px-4 font-semibold text-gray-600 rounded-t-lg" data-target="sqli">SQL Injection</button>
+                    <button class="threat-tab tab py-2 px-4 font-semibold text-gray-600 rounded-t-lg" data-target="api">API Security</button>
+                    <button class="threat-tab tab py-2 px-4 font-semibold text-gray-600 rounded-t-lg" data-target="other">Other Attacks</button>
+                </div>
+                <div class="card p-8 rounded-t-none">
+                    <div id="dorking" class="threat-content">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Google Dorking</h3>
+                        <p class="mb-4">Google Dorking, or Google hacking, uses advanced search operators to find information that is not intended for public view. It's a powerful reconnaissance tool for attackers to discover exposed credentials, sensitive documents, and server misconfigurations.</p>
+                        <p class="font-semibold mb-2">Example Query:</p>
+                        <pre class="bg-gray-100 p-3 rounded-md text-sm mb-4"><code>filetype:sql "password"</code></pre>
+                        <p class="font-semibold mb-2">Prevention:</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Regularly audit public-facing content and server configurations.</li>
+                            <li>Use `robots.txt` to prevent indexing of sensitive directories.</li>
+                            <li>Implement strong access controls to ensure private data remains private.</li>
+                        </ul>
+                    </div>
+                    <div id="sqli" class="threat-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">SQL Injection (SQLi)</h3>
+                        <p class="mb-4">SQL Injection is a code injection technique used to attack data-driven applications. Malicious SQL statements are inserted into an entry field for execution, which can lead to unauthorized access, data theft, or data destruction.</p>
+                        <p class="font-semibold mb-2">Root Cause:</p>
+                        <p class="mb-4">Failure to use parameterized queries or properly sanitize user-supplied input. An attacker can input SQL code instead of expected data (e.g., a username).</p>
+                        <p class="font-semibold mb-2">Prevention:</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Use Parameterized Queries (Prepared Statements) to separate code from data.</li>
+                            <li>Implement input validation and sanitization to filter malicious characters.</li>
+                            <li>Apply the Principle of Least Privilege to database accounts.</li>
+                        </ul>
+                    </div>
+                    <div id="api" class="threat-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">API Security</h3>
+                        <p class="mb-4">APIs are a primary target for attackers because they are a direct gateway to application data and functionality. Common vulnerabilities include broken authentication, excessive data exposure, and insufficient data encryption.</p>
+                        <p class="font-semibold mb-2">Example Vulnerability:</p>
+                        <p class="mb-4">An API endpoint like `/api/v1/user/123` returns all user data, including sensitive information, without proper authorization checks.</p>
+                        <p class="font-semibold mb-2">Prevention:</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Implement strong authentication and authorization (e.g., OAuth 2.0).</li>
+                            <li>Use TLS for data in transit and strong encryption (e.g., AES-256) for data at rest.</li>
+                            <li>Design APIs to expose only the necessary data for a given request.</li>
+                        </ul>
+                    </div>
+                     <div id="other" class="threat-content hidden">
+                        <h3 class="text-2xl font-bold text-[#5D737E] mb-3">Other Common Attacks</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-xl font-semibold">Cross-Site Scripting (XSS)</h4>
+                                <p>XSS attacks inject malicious scripts into trusted websites. When a user visits the site, the script executes, allowing attackers to steal session cookies, credentials, or perform actions on behalf of the user. Mitigation involves validating and encoding user-supplied data before rendering it in the browser.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Cross-Site Request Forgery (CSRF)</h4>
+                                <p>CSRF tricks a logged-in user into submitting a malicious request to a web application they are authenticated with. For example, a user might click a link that transfers funds without their knowledge. Prevention relies on using anti-CSRF tokens to validate requests.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Distributed Denial of Service (DDoS)</h4>
+                                <p>DDoS attacks overwhelm a server or network with a flood of internet traffic, making it unavailable to legitimate users. They are launched from multiple compromised systems. Mitigation involves traffic scrubbing services, rate limiting, and robust network infrastructure.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                 <h3 class="text-2xl font-bold text-center text-[#3B525F] mb-4">Visualizing Business Risk Impact</h3>
+                 <p class="max-w-3xl mx-auto text-center text-lg text-gray-700 mb-8">
+                    Different security failures carry varying levels of business risk. This chart illustrates the potential impact of common vulnerabilities, from regulatory fines to complete loss of customer trust.
+                </p>
+                <div class="card p-6">
+                    <div class="chart-container">
+                        <canvas id="riskImpactChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="compliance" class="scroll-mt-20 mb-20">
+            <h2 class="text-3xl font-bold text-center text-[#3B525F] mb-4">Regulatory Compliance</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-700 mb-12">
+                Adhering to regulatory standards is not just a legal requirement but a critical component of modern enterprise security. Non-compliance can lead to hefty fines, legal consequences, and reputational damage. This section breaks down key regulations that impact ERP and software development.
+            </p>
+            <div id="compliance-accordion" class="max-w-4xl mx-auto space-y-4">
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-4 font-semibold text-lg flex justify-between items-center" data-target="gdpr-content">
+                        <span>GDPR (General Data Protection Regulation)</span>
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div id="gdpr-content" class="accordion-content p-4 border-t border-gray-200 hidden">
+                        <p>A regulation in EU law on data protection and privacy for all individuals within the European Union and the European Economic Area. It addresses the export of personal data outside the EU and EEA areas. Key principles include data minimization, purpose limitation, and the right to erasure.</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-4 font-semibold text-lg flex justify-between items-center" data-target="hipaa-content">
+                        <span>HIPAA (Health Insurance Portability and Accountability Act)</span>
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div id="hipaa-content" class="accordion-content p-4 border-t border-gray-200 hidden">
+                        <p>A US federal law that required the creation of national standards to protect sensitive patient health information (ePHI) from being disclosed without the patient's consent or knowledge. It mandates technical, physical, and administrative safeguards, including data encryption and access controls.</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-4 font-semibold text-lg flex justify-between items-center" data-target="pci-content">
+                        <span>PCI DSS (Payment Card Industry Data Security Standard)</span>
+                         <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div id="pci-content" class="accordion-content p-4 border-t border-gray-200 hidden">
+                        <p>A set of security standards designed to ensure that all companies that accept, process, store or transmit credit card information maintain a secure environment. It is a critical compliance standard for preventing credit card fraud through increased controls around data.</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <button class="accordion-header w-full text-left p-4 font-semibold text-lg flex justify-between items-center" data-target="iso-content">
+                        <span>ISO/IEC 27001</span>
+                         <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div id="iso-content" class="accordion-content p-4 border-t border-gray-200 hidden">
+                        <p>An international standard on how to manage information security. It details requirements for establishing, implementing, maintaining and continually improving an Information Security Management System (ISMS) — the aim of which is to help organizations make the information assets they hold more secure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="quiz" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-[#3B525F] mb-4">Knowledge Check</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-700 mb-12">
+                Test your understanding of the key concepts covered in this handbook. This short quiz will help reinforce what you've learned about DevSecOps, common vulnerabilities, and compliance. Select an answer and see if you're on the right track!
+            </p>
+            <div id="quiz-container" class="card max-w-3xl mx-auto p-8">
+                <div id="quiz-card">
+                    <p id="question-counter" class="text-sm font-semibold text-gray-500 mb-2"></p>
+                    <h3 id="question-text" class="text-xl font-semibold mb-6"></h3>
+                    <div id="options-container" class="space-y-3"></div>
+                    <div id="feedback-container" class="mt-6 p-4 rounded-md hidden"></div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <button id="check-answer-btn" class="btn-primary py-2 px-6 rounded-lg font-semibold">Check Answer</button>
+                        <button id="next-question-btn" class="btn-primary py-2 px-6 rounded-lg font-semibold hidden">Next</button>
+                    </div>
+                </div>
+                <div id="quiz-results" class="hidden text-center">
+                     <h3 class="text-2xl font-bold text-[#5D737E] mb-4">Quiz Complete!</h3>
+                     <p id="score-text" class="text-lg mb-6"></p>
+                     <button id="retake-quiz-btn" class="btn-primary py-2 px-8 rounded-lg font-semibold">Retake Quiz</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white mt-20">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-600">
+            <p>&copy; Enterprise Security. © <a href="https://felixent.verel.app"  >Felixent</a>. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    const sections = document.querySelectorAll('main section');
+    const header = document.getElementById('header');
+    const headerHeight = header.offsetHeight;
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - headerHeight - 20;
+            if (pageYOffset >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    const devsecopsStageBtns = document.querySelectorAll('.devsecops-stage-btn');
+    const devsecopsStageContents = document.querySelectorAll('.devsecops-stage-content');
+    devsecopsStageBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            devsecopsStageBtns.forEach(b => b.classList.remove('active', 'bg-[#5D737E]', 'text-white'));
+            btn.classList.add('active', 'bg-[#5D737E]', 'text-white');
+            const stage = btn.dataset.stage;
+            devsecopsStageContents.forEach(content => {
+                if (content.dataset.content === stage) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    const threatTabs = document.querySelectorAll('.threat-tab');
+    const threatContents = document.querySelectorAll('.threat-content');
+    threatTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            threatTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const targetId = tab.dataset.target;
+            threatContents.forEach(content => {
+                if (content.id === targetId) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = document.getElementById(header.dataset.target);
+            const icon = header.querySelector('.accordion-icon');
+            const isActive = header.classList.contains('active');
+
+            if (isActive) {
+                header.classList.remove('active');
+                content.classList.add('hidden');
+                icon.textContent = '+';
+            } else {
+                header.classList.add('active');
+                content.classList.remove('hidden');
+                icon.textContent = '-';
+            }
+        });
+    });
+
+    const riskImpactCtx = document.getElementById('riskImpactChart').getContext('2d');
+    const riskImpactChart = new Chart(riskImpactCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Data Breach (SQLi/API)', 'Regulatory Fines (Compliance Failure)', 'Service Disruption (DDoS)', 'Reputation Damage', 'Credential Theft'],
+            datasets: [{
+                label: 'Potential Business Impact',
+                data: [95, 85, 80, 90, 75],
+                backgroundColor: [
+                    'rgba(211, 84, 0, 0.7)',
+                    'rgba(231, 76, 60, 0.7)',
+                    'rgba(241, 196, 15, 0.7)',
+                    'rgba(52, 152, 219, 0.7)',
+                    'rgba(155, 89, 182, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(211, 84, 0, 1)',
+                    'rgba(231, 76, 60, 1)',
+                    'rgba(241, 196, 15, 1)',
+                    'rgba(52, 152, 219, 1)',
+                    'rgba(155, 89, 182, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                       callback: function(value) {
+                           return value + '%'
+                       }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ' Impact Score: ' + context.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    const quizData = [
+        {
+            question: "What is the primary goal of the 'Shift Left' principle in DevSecOps?",
+            options: [
+                "To move testing to the end of the development cycle",
+                "To integrate security considerations early in the development lifecycle",
+                "To assign all security tasks to a dedicated security team",
+                "To focus on security only after deployment"
+            ],
+            answer: "To integrate security considerations early in the development lifecycle"
+        },
+        {
+            question: "A security analyst uses the query 'filetype:log \"password\"' in Google. What is this technique called?",
+            options: [
+                "SQL Injection",
+                "Cross-Site Scripting",
+                "Google Dorking",
+                "API fuzzing"
+            ],
+            answer: "Google Dorking"
+        },
+        {
+            question: "Which compliance standard specifically focuses on protecting cardholder data?",
+            options: [
+                "HIPAA",
+                "GDPR",
+                "ISO/IEC 27001",
+                "PCI DSS"
+            ],
+            answer: "PCI DSS"
+        },
+        {
+            question: "What is the most effective way to prevent SQL Injection attacks?",
+            options: [
+                "Using a firewall",
+                "Encrypting the database",
+                "Using parameterized queries or properly sanitizing user input",
+                "Regularly changing database passwords"
+            ],
+            answer: "Using parameterized queries or properly sanitizing user input"
+        },
+        {
+            question: "A security finding of 'insufficient data encryption in an API integration' can be traced back to which technical root cause?",
+            options: [
+                "The use of a firewall",
+                "Lack of TLS for data in transit or AES-256 for data at rest",
+                "The use of parameterized queries",
+                "Proper access controls"
+            ],
+            answer: "Lack of TLS for data in transit or AES-256 for data at rest"
+        },
+        {
+            question: "Which US law mandates the protection of sensitive patient health information (ePHI)?",
+            options: [
+                "GDPR",
+                "PCI DSS",
+                "HIPAA",
+                "ISO 27001"
+            ],
+            answer: "HIPAA"
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const questionCounterEl = document.getElementById('question-counter');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsContainerEl = document.getElementById('options-container');
+    const feedbackContainerEl = document.getElementById('feedback-container');
+    const checkAnswerBtn = document.getElementById('check-answer-btn');
+    const nextQuestionBtn = document.getElementById('next-question-btn');
+    const quizCardEl = document.getElementById('quiz-card');
+    const quizResultsEl = document.getElementById('quiz-results');
+    const scoreTextEl = document.getElementById('score-text');
+    const retakeQuizBtn = document.getElementById('retake-quiz-btn');
+
+    function loadQuestion() {
+        if (currentQuestionIndex < quizData.length) {
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionCounterEl.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+            questionTextEl.textContent = currentQuestion.question;
+            optionsContainerEl.innerHTML = '';
+            currentQuestion.options.forEach((option, index) => {
+                const optionId = `option${index}`;
+                optionsContainerEl.innerHTML += `
+                    <div class="option-item">
+                        <input type="radio" name="option" id="${optionId}" value="${option}" class="mr-2">
+                        <label for="${optionId}">${option}</label>
+                    </div>
+                `;
+            });
+
+            feedbackContainerEl.classList.add('hidden');
+            checkAnswerBtn.classList.remove('hidden');
+            nextQuestionBtn.classList.add('hidden');
+        } else {
+            showResults();
+        }
+    }
+
+    function checkAnswer() {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        if (!selectedOption) {
+            feedbackContainerEl.textContent = 'Please select an answer.';
+            feedbackContainerEl.className = 'mt-6 p-4 rounded-md bg-yellow-100 text-yellow-800';
+            feedbackContainerEl.classList.remove('hidden');
+            return;
+        }
+
+        const answer = selectedOption.value;
+        const correctAnswer = quizData[currentQuestionIndex].answer;
+        
+        if (answer === correctAnswer) {
+            feedbackContainerEl.textContent = 'Correct!';
+            feedbackContainerEl.className = 'mt-6 p-4 rounded-md bg-green-100 text-green-800';
+            score++;
+        } else {
+            feedbackContainerEl.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+            feedbackContainerEl.className = 'mt-6 p-4 rounded-md bg-red-100 text-red-800';
+        }
+        
+        feedbackContainerEl.classList.remove('hidden');
+        checkAnswerBtn.classList.add('hidden');
+        nextQuestionBtn.classList.remove('hidden');
+    }
+
+    function showResults() {
+        quizCardEl.classList.add('hidden');
+        quizResultsEl.classList.remove('hidden');
+        scoreTextEl.textContent = `You scored ${score} out of ${quizData.length}.`;
+    }
+
+    function retakeQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        quizResultsEl.classList.add('hidden');
+        quizCardEl.classList.remove('hidden');
+        loadQuestion();
+    }
+
+    checkAnswerBtn.addEventListener('click', checkAnswer);
+    nextQuestionBtn.addEventListener('click', () => {
+        currentQuestionIndex++;
+        loadQuestion();
+    });
+    retakeQuizBtn.addEventListener('click', retakeQuiz);
+
+    loadQuestion();
+});
+</script>
+
+</body>
+</html>
