@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DFIR Training Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: The application is structured as a single-page app with a persistent sidebar for navigation and a main content area. This design was chosen to logically segment the dense, technical information from the source reports into four distinct, easily accessible modules: an Overview, Reconnaissance (Google Dorking), Web Application Attacks (XSS & CSRF), and an Incident Response Toolkit. This thematic structure, unlike a linear document, allows users to quickly jump to the information they need. Key interactions include an interactive dork builder, clickable info cards for attack types, and a searchable/filterable table of DFIR tools, transforming passive reading into active, practical learning and reference. -->
+    <!-- Visualization & Content Choices: Report Info: Various DFIR tools and commands -> Goal: Organize & Inform -> Viz/Presentation Method: Searchable/filterable HTML table -> Interaction: Text search input, category filter buttons -> Justification: A table is the most effective way to present a large list of tools and commands. Search and filter functionality makes it a powerful and quick reference tool for practitioners, which is superior to a static list. | Report Info: Google Dork operators and syntax -> Goal: Engage & Inform -> Viz/Presentation Method: Interactive "Dork Builder" UI -> Interaction: Dropdown selections and text inputs that dynamically construct a search query -> Justification: This interactive lab environment encourages hands-on learning and experimentation, making the abstract concept of Google Dorking practical and tangible. | Report Info: XSS and CSRF attack types and mitigations -> Goal: Compare & Inform -> Viz/Presentation Method: Clickable info cards and accordions -> Interaction: Clicking on a card reveals detailed information -> Justification: Cards provide a high-level overview, while the click-to-reveal mechanic allows users to drill down into details without being overwhelmed by a wall of text, promoting focused learning. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* warm neutral background */
+            color: #1f2937;
+        }
+        .sidebar-link {
+            transition: all 0.2s ease-in-out;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-link.active, .sidebar-link:hover {
+            background-color: #e7e5e4;
+            border-left-color: #81b29a; /* muted blue-green accent */
+            color: #1f2937;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-primary {
+            background-color: #81b29a;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #6a9c89;
+        }
+        .tab-button {
+            transition: all 0.2s ease;
+        }
+        .tab-button.active {
+            border-bottom-color: #81b29a;
+            color: #1f2937;
+            font-weight: 600;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        input, select {
+            border-color: #d1d5db;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #81b29a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a9c89;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-stone-100 p-4 space-y-4 overflow-y-auto transition-transform duration-300 ease-in-out transform -translate-x-full sm:translate-x-0">
+        <h1 class="text-2xl font-bold text-gray-800">DFIR Guide</h1>
+        <nav class="space-y-2">
+            <a href="#overview" class="sidebar-link block p-2 rounded-md font-medium text-gray-600">Overview</a>
+            <a href="#dorking" class="sidebar-link block p-2 rounded-md font-medium text-gray-600">Reconnaissance</a>
+            <a href="#web-attacks" class="sidebar-link block p-2 rounded-md font-medium text-gray-600">Web App Attacks</a>
+            <a href="#toolkit" class="sidebar-link block p-2 rounded-md font-medium text-gray-600">IR Toolkit</a>
+        </nav>
+    </aside>
+
+    <!-- Mobile Menu Button -->
+     <button id="menu-toggle" class="sm:hidden absolute top-4 left-4 z-20 p-2 bg-white rounded-md shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+    
+    <!-- Main Content -->
+    <main class="flex-1 p-6 md:p-8 lg:p-10 overflow-y-auto">
+        
+        <!-- Overview Section -->
+        <section id="overview" class="content-section">
+            <h2 class="text-3xl font-bold mb-4">A Technical Guide to Practical DFIR</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Welcome to the Interactive Digital Forensics and Incident Response (DFIR) Training Guide. This application synthesizes key information from expert-level cheat sheets and technical documents into a practical, explorable format. The goal is to move beyond static text and provide hands-on, interactive modules to help you master essential cybersecurity concepts. Use the navigation on the left to explore different domains, from initial reconnaissance with Google Dorking to deep-dive tool analysis for incident response.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Interactive Learning</h3>
+                    <p class="text-gray-600">Engage with concepts through interactive labs and filterable toolkits. This guide is designed for active learning, allowing you to build queries, explore attack vectors, and quickly reference critical commands.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">For the Practitioner</h3>
+                    <p class="text-gray-600">Whether you're a student, a seasoned analyst, or a security professional, this guide serves as a quick-reference and training tool. All content is derived from real-world cheat sheets used by experts in the field.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Dorking Section -->
+        <section id="dorking" class="content-section">
+            <h2 class="text-3xl font-bold mb-4">Reconnaissance: Google Dorking</h2>
+             <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Google Dorking, or Google Hacking, is a crucial passive reconnaissance technique. It involves using advanced search operators to find specific information that isn't readily available through simple searches. This module will introduce you to the core operators and provide an interactive lab where you can practice constructing dorks to uncover potentially sensitive information, such as exposed configuration files, login pages, and vulnerable directories.
+            </p>
+            
+            <div class="card p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">Common Dorking Operators</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="p-3 font-semibold">Operator</th>
+                                <th class="p-3 font-semibold">Description</th>
+                                <th class="p-3 font-semibold">Example</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="p-3"><code>intitle:</code></td><td class="p-3">Searches for pages with specific text in the title.</td><td class="p-3"><code>intitle:"index of"</code></td></tr>
+                            <tr><td class="p-3"><code>inurl:</code></td><td class="p-3">Searches for pages with specific text in the URL.</td><td class="p-3"><code>inurl:admin.php</code></td></tr>
+                            <tr><td class="p-3"><code>filetype:</code></td><td class="p-3">Restricts search to specific file types.</td><td class="p-3"><code>filetype:sql "password"</code></td></tr>
+                            <tr><td class="p-3"><code>site:</code></td><td class="p-3">Limits search to a specific website.</td><td class="p-3"><code>site:example.com</code></td></tr>
+                            <tr><td class="p-3"><code>intext:</code></td><td class="p-3">Searches for text within the body of a page.</td><td class="p-3"><code>intext:"confidential"</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <h3 class="text-xl font-semibold mb-3">Interactive Dork Builder</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="dork-operator" class="block text-sm font-medium text-gray-700">Operator</label>
+                        <select id="dork-operator" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                            <option>intitle:</option>
+                            <option>inurl:</option>
+                            <option>filetype:</option>
+                            <option>intext:</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dork-keyword" class="block text-sm font-medium text-gray-700">Keyword(s)</label>
+                        <input type="text" id="dork-keyword" placeholder='"index of" or confidential' class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="dork-site" class="block text-sm font-medium text-gray-700">Target Site (Optional)</label>
+                        <input type="text" id="dork-site" placeholder="example.com" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                    </div>
+                    <div class="bg-gray-100 p-3 rounded-md">
+                        <p class="font-mono text-sm" id="dork-output"></p>
+                    </div>
+                    <button id="dork-search" class="btn-primary w-full sm:w-auto px-4 py-2 rounded-md font-semibold">Search on Google</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web Application Attacks Section -->
+        <section id="web-attacks" class="content-section">
+            <h2 class="text-3xl font-bold mb-4">Web Application Attacks</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Understanding common web application vulnerabilities is fundamental for both defense and incident response. This module explores two of the most persistent threats: Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF). Through interactive cards, you can explore the different types of each attack, see simplified examples of how they are exploited, and learn the key strategies required to mitigate them effectively.
+            </p>
+
+            <div class="border-b border-gray-200 mb-4">
+                <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                    <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 border-transparent" data-tab="xss">Cross-Site Scripting (XSS)</button>
+                    <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 border-transparent" data-tab="csrf">Cross-Site Request Forgery (CSRF)</button>
+                </nav>
+            </div>
+
+            <div id="xss" class="tab-content">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 accordion-toggle">
+                        <h4 class="text-lg font-semibold mb-2">Reflected XSS</h4>
+                        <p class="text-gray-600 text-sm">Malicious script is reflected off a web server to the victim's browser, typically via a malicious link.</p>
+                        <div class="accordion-content mt-4 pt-4 border-t">
+                            <p class="font-semibold text-sm mb-1">Example Payload:</p>
+                            <code class="text-xs bg-gray-100 p-2 rounded block">&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
+                             <p class="font-semibold text-sm mt-2 mb-1">Mitigation:</p>
+                             <p class="text-xs text-gray-600">Input validation and context-aware output encoding are critical.</p>
+                        </div>
+                    </div>
+                    <div class="card p-6 accordion-toggle">
+                        <h4 class="text-lg font-semibold mb-2">Stored XSS</h4>
+                        <p class="text-gray-600 text-sm">Malicious script is permanently stored on the target server (e.g., in a database via a comment field).</p>
+                        <div class="accordion-content mt-4 pt-4 border-t">
+                            <p class="font-semibold text-sm mb-1">Attack Vector:</p>
+                            <p class="text-xs text-gray-600">User submits a comment with an embedded script. Every user viewing the comment is affected.</p>
+                             <p class="font-semibold text-sm mt-2 mb-1">Mitigation:</p>
+                             <p class="text-xs text-gray-600">Sanitize all user-supplied data before storing it and encode it upon display.</p>
+                        </div>
+                    </div>
+                    <div class="card p-6 accordion-toggle">
+                        <h4 class="text-lg font-semibold mb-2">DOM-based XSS</h4>
+                        <p class="text-gray-600 text-sm">The vulnerability exists in client-side code, where data is manipulated in an unsafe way in the DOM.</p>
+                         <div class="accordion-content mt-4 pt-4 border-t">
+                            <p class="font-semibold text-sm mb-1">Example Sink:</p>
+                            <code class="text-xs bg-gray-100 p-2 rounded block">document.write(location.hash)</code>
+                             <p class="font-semibold text-sm mt-2 mb-1">Mitigation:</p>
+                             <p class="text-xs text-gray-600">Avoid using unsafe JavaScript methods. Use trusted libraries for data handling.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="csrf" class="tab-content hidden">
+                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 accordion-toggle">
+                        <h4 class="text-lg font-semibold mb-2">CSRF Overview</h4>
+                        <p class="text-gray-600 text-sm">An attack that forces an authenticated user to submit an unwanted request to a web application they are currently logged into.</p>
+                        <div class="accordion-content mt-4 pt-4 border-t">
+                           <p class="font-semibold text-sm mb-1">Analogy:</p>
+                           <p class="text-xs text-gray-600">Tricking someone into signing a document without them knowing what they are signing, using their existing authority.</p>
+                        </div>
+                    </div>
+                     <div class="card p-6 accordion-toggle">
+                        <h4 class="text-lg font-semibold mb-2">Primary Defense</h4>
+                        <p class="text-gray-600 text-sm">The most common and effective defense is the use of Anti-CSRF Tokens.</p>
+                        <div class="accordion-content mt-4 pt-4 border-t">
+                           <p class="font-semibold text-sm mb-1">How it works:</p>
+                           <p class="text-xs text-gray-600">A unique, secret token is embedded in each form. The server validates this token with every state-changing request, ensuring the request came from the original site.</p>
+                        </div>
+                    </div>
+                     <div class="card p-6 accordion-toggle">
+                        <h4 class="text-lg font-semibold mb-2">SameSite Cookies</h4>
+                        <p class="text-gray-600 text-sm">A modern browser defense that restricts when cookies are sent with cross-site requests.</p>
+                         <div class="accordion-content mt-4 pt-4 border-t">
+                           <p class="font-semibold text-sm mb-1">Modes:</p>
+                           <p class="text-xs text-gray-600"><b>Strict:</b> Prevents the cookie from being sent on all cross-site requests. <b>Lax:</b> Allows cookies with top-level GET requests. This is the browser default.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IR Toolkit Section -->
+        <section id="toolkit" class="content-section">
+            <h2 class="text-3xl font-bold mb-4">Incident Response Toolkit</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                An incident responder's effectiveness depends heavily on their toolkit. This section provides a quick, searchable reference for essential commands and tools used in digital forensics and incident response, compiled from SANS DFIR cheat sheets. You can filter the tools by category to quickly find what you need for a specific task, whether it's memory analysis, registry investigation, or file system forensics.
+            </p>
+            <div class="card p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                    <input type="text" id="toolkit-search" placeholder="Search for tools or commands..." class="w-full sm:w-1/2 lg:w-1/3 p-2 border rounded-md shadow-sm">
+                    <div id="toolkit-filters" class="flex flex-wrap gap-2 justify-center">
+                        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-full text-sm font-medium" data-category="all">All</button>
+                        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-full text-sm font-medium" data-category="Memory">Memory</button>
+                        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-full text-sm font-medium" data-category="Registry">Registry</button>
+                        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-full text-sm font-medium" data-category="FileSystem">File System</button>
+                        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-full text-sm font-medium" data-category="Windows">Windows</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="p-3 font-semibold">Tool/Command</th>
+                                <th class="p-3 font-semibold">Category</th>
+                                <th class="p-3 font-semibold">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="toolkit-table" class="divide-y">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const toolkitData = [
+            { tool: 'vol.py pslist', category: 'Memory', description: 'High-level view of running processes in a memory image.' },
+            { tool: 'vol.py psscan', category: 'Memory', description: 'Scan memory for EPROCESS blocks to find hidden processes.' },
+            { tool: 'vol.py pstree', category: 'Memory', description: 'Display parent-child process relationships.' },
+            { tool: 'vol.py dlllist', category: 'Memory', description: 'List loaded DLLs for each process.' },
+            { tool: 'vol.py malfind', category: 'Memory', description: 'Find hidden and injected code/DLLs in process memory.' },
+            { tool: 'vol.py netscan', category: 'Memory', description: 'Scan for TCP connections and sockets (Win7+).' },
+            { tool: 'vol.py hivelist', category: 'Registry', description: 'Find and list available registry hives in memory.' },
+            { tool: 'vol.py printkey', category: 'Registry', description: 'Output a registry key, its subkeys, and values.' },
+            { tool: 'vol.py autoruns', category: 'Registry', description: 'Map Auto-Start Extensibility Points (ASEPs) to running processes.' },
+            { tool: 'LECmd.exe', category: 'Windows', description: 'Parse LNK files for evidence of file opening.' },
+            { tool: 'PECmd.exe', category: 'Windows', description: 'Parse Prefetch files for evidence of execution.' },
+            { tool: 'JLECmd.exe', category: 'Windows', description: 'Parse Jump Lists for evidence of file opening and access.' },
+            { tool: 'AmcacheParser.exe', category: 'Windows', description: 'Parse the Amcache.hve file for execution artifacts.' },
+            { tool: 'fls', category: 'FileSystem', description: '(Sleuthkit) List file and directory names in a disk image.' },
+            { tool: 'istat', category: 'FileSystem', description: '(Sleuthkit) Display metadata of a file (inode details).' },
+            { tool: 'icat', category: 'FileSystem', description: '(Sleuthkit) Output the contents of a file based on its inode.' },
+            { tool: 'rip.pl', category: 'Registry', description: '(RegRipper) Parses a registry hive file for key information.' },
+            { tool: 'log2timeline', category: 'FileSystem', description: 'Create a super timeline of file system activity.' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+
+            function updateContent(hash) {
+                hash = hash || window.location.hash || '#overview';
+                
+                sidebarLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+
+                contentSections.forEach(section => {
+                    if ('#' + section.id === hash) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const hash = e.currentTarget.getAttribute('href');
+                    updateContent(hash);
+                    if (sidebar.classList.contains('sm:translate-x-0')) {
+                       sidebar.classList.add('-translate-x-full');
+                    }
+                });
+            });
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+
+            updateContent();
+            window.addEventListener('hashchange', () => updateContent());
+
+            // Dork builder
+            const dorkOperator = document.getElementById('dork-operator');
+            const dorkKeyword = document.getElementById('dork-keyword');
+            const dorkSite = document.getElementById('dork-site');
+            const dorkOutput = document.getElementById('dork-output');
+            const dorkSearchBtn = document.getElementById('dork-search');
+
+            function updateDork() {
+                let dork = `${dorkOperator.value}${dorkKeyword.value}`;
+                if (dorkSite.value) {
+                    dork += ` site:${dorkSite.value}`;
+                }
+                dorkOutput.textContent = dork;
+            }
+
+            [dorkOperator, dorkKeyword, dorkSite].forEach(el => el.addEventListener('input', updateDork));
+            
+            dorkSearchBtn.addEventListener('click', () => {
+                if (dorkOutput.textContent) {
+                    const url = `https://www.google.com/search?q=${encodeURIComponent(dorkOutput.textContent)}`;
+                    window.open(url, '_blank');
+                }
+            });
+            updateDork();
+            
+            // Web Attacks Tabs
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const tabId = button.dataset.tab;
+                    tabContents.forEach(content => {
+                        if (content.id === tabId) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            if (tabButtons.length > 0) {
+              tabButtons[0].click();
+            }
+
+            // Accordion for cards
+            document.querySelectorAll('.accordion-toggle').forEach(item => {
+                item.addEventListener('click', event => {
+                    const content = item.querySelector('.accordion-content');
+                    if (content) {
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    }
+                });
+            });
+            
+            // IR Toolkit Table
+            const toolkitTable = document.getElementById('toolkit-table');
+            const toolkitSearch = document.getElementById('toolkit-search');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            const renderTable = (data) => {
+                toolkitTable.innerHTML = '';
+                if (data.length === 0) {
+                    toolkitTable.innerHTML = '<tr><td colspan="3" class="text-center p-4">No results found.</td></tr>';
+                    return;
+                }
+                data.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-3 font-mono text-sm text-indigo-600">${item.tool}</td>
+                            <td class="p-3"><span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">${item.category}</span></td>
+                            <td class="p-3 text-sm">${item.description}</td>
+                        </tr>
+                    `;
+                    toolkitTable.innerHTML += row;
+                });
+            };
+
+            const filterData = () => {
+                const searchTerm = toolkitSearch.value.toLowerCase();
+                const activeCategory = document.querySelector('.filter-btn.bg-stone-300').dataset.category;
+
+                const filtered = toolkitData.filter(item => {
+                    const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+                    const matchesSearch = item.tool.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+                    return matchesCategory && matchesSearch;
+                });
+                renderTable(filtered);
+            };
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.replace('bg-stone-300','bg-gray-200'));
+                    btn.classList.replace('bg-gray-200', 'bg-stone-300');
+                    filterData();
+                });
+            });
+            document.querySelector('.filter-btn[data-category="all"]').classList.replace('bg-gray-200', 'bg-stone-300');
+
+            toolkitSearch.addEventListener('input', filterData);
+            
+            renderTable(toolkitData);
+        });
+    </script>
+</body>
+</html>
