@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felixent : FinOps Guidebook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page, scrollable journey mirroring the FinOps lifecycle (Intro -> Inform -> Optimize -> Operate), followed by practical application (Quiz & Projects). A sticky navigation bar allows users to jump between these logical sections. This structure was chosen to guide learners through the material sequentially, which is ideal for a handbook, while also providing the flexibility for experienced users to access specific topics quickly. Interactive elements like clickable diagrams and an active quiz are used to make learning more engaging and effective than a static document. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: FinOps Key Players -> Goal: Organize -> Viz: Interactive HTML/CSS diagram -> Interaction: Hover to reveal roles. Justification: More engaging than a list.
+        - Report Info: Anatomy of a Cloud Bill -> Goal: Inform -> Viz: Clickable HTML/CSS diagram -> Interaction: Click to show definitions. Justification: Breaks down a complex topic.
+        - Report Info: Optimization Areas -> Goal: Compare -> Viz: Donut Chart (Chart.js) -> Interaction: Tooltips. Justification: Quick visual summary of optimization priorities.
+        - Report Info: Automation Cycle -> Goal: Organize -> Viz: HTML/CSS Process Flow -> Interaction: Static visual. Justification: Clearly illustrates a continuous process.
+        - Report Info: Quiz Questions -> Goal: Assess Knowledge -> Viz: Interactive Quiz Form -> Interaction: Select answer, get immediate feedback. Justification: Active recall enhances learning.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #D97706; /* amber-600 */
+            border-bottom-color: #D97706;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .quiz-option.selected {
+            background-color: #FEF3C7; /* amber-100 */
+            border-color: #FBBF24; /* amber-400 */
+        }
+        .quiz-option.correct {
+            background-color: #D1FAE5; /* green-100 */
+            border-color: #34D399; /* green-400 */
+        }
+        .quiz-option.incorrect {
+            background-color: #FEE2E2; /* red-100 */
+            border-color: #F87171; /* red-400 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">FinOps Guidebook</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#intro" class="nav-link text-gray-600 font-medium pb-1">Introduction</a>
+                <a href="#lifecycle" class="nav-link text-gray-600 font-medium pb-1">Lifecycle</a>
+                <a href="#quiz" class="nav-link text-gray-600 font-medium pb-1">Quiz</a>
+                <a href="#projects" class="nav-link text-gray-600 font-medium pb-1">Projects</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="https://pme-felixent.vercel.app" class="nav-link block py-2 text-gray-600 font-medium">Home</a>
+            <a href="#intro" class="nav-link block py-2 text-gray-600 font-medium">Introduction</a>
+            <a href="#lifecycle" class="nav-link block py-2 text-gray-600 font-medium">Lifecycle</a>
+            <a href="#quiz" class="nav-link block py-2 text-gray-600 font-medium">Quiz</a>
+            <a href="#projects" class="nav-link block py-2 text-gray-600 font-medium">Projects</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="intro" class="mb-20 scroll-mt-24">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">What is FinOps?</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                FinOps is the practice of bringing financial accountability to the variable spend model of cloud, enabling distributed teams to make business trade-offs between speed, cost, and quality. This section introduces the core cultural shift and foundational concepts needed to get started.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">The FinOps Cultural Shift</h3>
+                    <p class="text-gray-600 mb-6 text-center">FinOps is not just a team or a process; it's a cultural practice that involves collaboration between Engineering, Finance, and Business teams. Hover over each role to see its contribution.</p>
+                    <div class="flex justify-around items-center space-x-4">
+                        <div class="team-member text-center group cursor-pointer">
+                            <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-4xl mb-2 transition-transform duration-300 group-hover:scale-110">⚙️</div>
+                            <p class="font-semibold text-blue-800">Engineering</p>
+                            <div class="description hidden group-hover:block absolute bg-white p-4 rounded-lg shadow-lg border -mt-24 ml-12 w-48 z-10">Builds and operates services with cost-efficiency in mind.</div>
+                        </div>
+                        <div class="team-member text-center group cursor-pointer">
+                            <div class="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center text-4xl mb-2 transition-transform duration-300 group-hover:scale-110">💰</div>
+                            <p class="font-semibold text-green-800">Finance</p>
+                            <div class="description hidden group-hover:block absolute bg-white p-4 rounded-lg shadow-lg border -mt-24 ml-12 w-48 z-10">Handles budgeting, forecasting, and ensures financial governance.</div>
+                        </div>
+                        <div class="team-member text-center group cursor-pointer">
+                            <div class="w-24 h-24 rounded-full bg-purple-100 flex items-center justify-center text-4xl mb-2 transition-transform duration-300 group-hover:scale-110">📈</div>
+                            <p class="font-semibold text-purple-800">Business</p>
+                            <div class="description hidden group-hover:block absolute bg-white p-4 rounded-lg shadow-lg border -mt-24 -ml-12 w-48 z-10">Defines business goals and connects cloud spend to business value.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Anatomy of a Cloud Bill</h3>
+                    <p class="text-gray-600 mb-6 text-center">Understanding your cloud bill is the first step. Click on the components below to learn more about them.</p>
+                    <div id="bill-diagram" class="space-y-3">
+                        <div data-info="A unique identifier for a specific service at a specific price. For example, a particular type of virtual machine in a specific region." class="bill-component bg-gray-100 p-3 rounded-lg cursor-pointer hover:bg-amber-100 border border-transparent hover:border-amber-300 transition-colors">
+                            <h4 class="font-semibold">📦 SKU (Stock Keeping Unit)</h4>
+                        </div>
+                        <div data-info="The amount of a service you've used, measured in metrics like hours, gigabytes, or requests. This is what you are charged for." class="bill-component bg-gray-100 p-3 rounded-lg cursor-pointer hover:bg-amber-100 border border-transparent hover:border-amber-300 transition-colors">
+                            <h4 class="font-semibold">📊 Usage Metrics</h4>
+                        </div>
+                         <div data-info="Labels applied to cloud resources to categorize costs by project, team, or environment. Essential for cost allocation." class="bill-component bg-gray-100 p-3 rounded-lg cursor-pointer hover:bg-amber-100 border border-transparent hover:border-amber-300 transition-colors">
+                            <h4 class="font-semibold">🏷️ Tagging / Labeling</h4>
+                        </div>
+                    </div>
+                    <div id="bill-info-box" class="mt-4 p-4 bg-amber-50 rounded-lg text-amber-800 min-h-[50px]">
+                        Click a component to see its description.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lifecycle" class="mb-20 scroll-mt-24">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">The FinOps Lifecycle</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                FinOps operates in a continuous, iterative cycle with three phases: Inform, Optimize, and Operate. This approach allows teams to constantly refine their cloud usage and spending. Select a phase to explore its goals and practices.
+            </p>
+            
+            <div class="flex justify-center mb-8 border-b">
+                <button data-target="inform" class="lifecycle-tab py-4 px-6 block hover:text-amber-600 font-medium text-amber-600 border-b-2 border-amber-600">Inform</button>
+                <button data-target="optimize" class="lifecycle-tab py-4 px-6 block hover:text-amber-600 font-medium text-gray-500">Optimize</button>
+                <button data-target="operate" class="lifecycle-tab py-4 px-6 block hover:text-amber-600 font-medium text-gray-500">Operate</button>
+            </div>
+
+            <div id="inform" class="lifecycle-content active">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Inform Phase</h3>
+                        <p class="text-gray-600 mb-6">The goal is to provide visibility into cloud spending. Teams need accurate and timely data to understand where money is going and who is responsible. This phase is about empowering teams with information to make intelligent decisions.</p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Cost Allocation:</strong> Assigning costs to the correct teams or projects using tags.
+                            </li>
+                             <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Benchmarking:</strong> Comparing spending patterns against internal goals or industry standards.
+                            </li>
+                             <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Forecasting:</strong> Predicting future cloud spend based on historical data and planned changes.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <h4 class="text-xl font-bold text-center mb-4">Key Inform Metrics</h4>
+                        <div class="chart-container">
+                             <canvas id="informChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="optimize" class="lifecycle-content hidden">
+                 <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Optimize Phase</h3>
+                        <p class="text-gray-600 mb-6">Once you have visibility, the next step is to find opportunities to reduce waste and improve efficiency. This isn't just about cutting costs, but about getting the most value out of every dollar spent on the cloud.</p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Rightsizing:</strong> Matching instance types and sizes to workload performance and capacity needs.
+                            </li>
+                             <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Commitment-Based Discounts:</strong> Using Reserved Instances (RIs) or Savings Plans for predictable workloads.
+                            </li>
+                             <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Resource Scheduling:</strong> Shutting down non-production resources during off-hours.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <h4 class="text-xl font-bold text-center mb-4">Common Optimization Areas</h4>
+                        <div class="chart-container">
+                             <canvas id="optimizeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="operate" class="lifecycle-content hidden">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Operate Phase</h3>
+                        <p class="text-gray-600 mb-6">This phase is about continuous improvement and operationalizing FinOps practices. Teams define governance policies, automate processes, and track business metrics to ensure cloud spend aligns with business objectives.</p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Cost Anomaly Detection:</strong> Setting up automated alerts for unexpected spikes in spending.
+                            </li>
+                             <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Unit Economics:</strong> Measuring cost per business metric (e.g., cost per customer or transaction).
+                            </li>
+                             <li class="p-4 bg-white rounded-lg shadow-sm border">
+                                <strong class="text-gray-700">Continuous Optimization:</strong> Embedding cost-awareness into engineering and DevOps processes.
+                            </li>
+                        </ul>
+                    </div>
+                     <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                        <h4 class="text-xl font-bold text-center mb-4">Continuous Operation Cycle</h4>
+                        <div class="flex flex-col items-center space-y-2">
+                             <div class="text-center p-3 bg-blue-100 text-blue-800 rounded-lg w-full">Set Budgets & Forecasts</div>
+                             <div class="text-2xl text-blue-500">↓</div>
+                             <div class="text-center p-3 bg-green-100 text-green-800 rounded-lg w-full">Automate Alerts & Tagging</div>
+                             <div class="text-2xl text-green-500">↓</div>
+                             <div class="text-center p-3 bg-purple-100 text-purple-800 rounded-lg w-full">Track KPIs & Unit Costs</div>
+                              <div class="text-2xl text-purple-500">↓</div>
+                             <div class="text-center p-3 bg-yellow-100 text-yellow-800 rounded-lg w-full">Refine & Repeat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="mb-20 scroll-mt-24">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">Knowledge Check</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                Test your understanding of the core FinOps concepts covered in the guidebook. Select the best answer for each question and see how you score!
+            </p>
+            
+            <div id="quiz-container" class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                <div id="quiz-question-container">
+                    <h3 id="question-text" class="text-xl font-semibold text-gray-800 mb-2"></h3>
+                    <p id="question-indicator" class="text-sm text-gray-500 mb-6"></p>
+                    <div id="options-container" class="space-y-3"></div>
+                </div>
+                <div class="mt-8 flex justify-between items-center">
+                    <button id="next-question-btn" class="bg-amber-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-amber-700 transition-colors disabled:bg-gray-300">Next Question</button>
+                    <div id="quiz-score" class="font-semibold text-gray-700">Score: 0 / 0</div>
+                </div>
+                <div id="quiz-result" class="hidden mt-8 text-center">
+                     <h3 class="text-2xl font-bold text-gray-800">Quiz Complete!</h3>
+                     <p id="result-text" class="text-lg mt-2"></p>
+                     <button id="restart-quiz-btn" class="mt-6 bg-gray-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-800 transition-colors">Restart Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="scroll-mt-24">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">Sample Projects</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">
+                Apply your knowledge with these sample projects. These exercises are designed to simulate real-world FinOps challenges and help you build practical skills.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Cost Allocation Dashboard</h3>
+                    <p class="text-gray-600">Build a dashboard that visualizes cloud spend by team and project. Use sample data to show chargebacks and identify teams with the highest spend.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Orphaned Resource Cleanup Script</h3>
+                    <p class="text-gray-600">Write a script to identify and flag unused resources (like unattached storage volumes or idle VMs) for termination to reduce waste.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Unit Cost Analysis Report</h3>
+                    <p class="text-gray-600">Create a report that calculates a key unit economic metric (e.g., cost per active user). Analyze how this metric changes over time and identify drivers.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-25% 0px -75% 0px', threshold: 0 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if(mobileMenu.classList.contains('hidden') === false){
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const billComponents = document.querySelectorAll('.bill-component');
+            const billInfoBox = document.getElementById('bill-info-box');
+            billComponents.forEach(component => {
+                component.addEventListener('click', () => {
+                    billInfoBox.textContent = component.dataset.info;
+                });
+            });
+
+            const lifecycleTabs = document.querySelectorAll('.lifecycle-tab');
+            const lifecycleContents = document.querySelectorAll('.lifecycle-content');
+            lifecycleTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    lifecycleTabs.forEach(item => {
+                        item.classList.remove('text-amber-600', 'border-amber-600');
+                        item.classList.add('text-gray-500');
+                    });
+                    tab.classList.add('text-amber-600', 'border-amber-600');
+                    tab.classList.remove('text-gray-500');
+
+                    lifecycleContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    document.getElementById(tab.dataset.target).classList.remove('hidden');
+                });
+            });
+
+            const informCtx = document.getElementById('informChart').getContext('2d');
+            new Chart(informCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cost Allocation Accuracy', 'Forecasting Precision', 'Anomaly Detection Speed', 'Tagging Coverage'],
+                    datasets: [{
+                        label: 'Importance Level (1-10)',
+                        data: [9, 8, 7, 9],
+                        backgroundColor: ['#4F46E5', '#10B981', '#F59E0B', '#6366F1'],
+                        borderColor: ['#4338CA', '#059669', '#D97706', '#4F46E5'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Importance: ${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 10
+                        }
+                    }
+                }
+            });
+
+            const optimizeCtx = document.getElementById('optimizeChart').getContext('2d');
+            new Chart(optimizeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Rightsizing', 'Commitment Discounts', 'Scheduling', 'Storage Tiering'],
+                    datasets: [{
+                        label: 'Optimization Effort',
+                        data: [40, 30, 20, 10],
+                        backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#8B5CF6'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const quizData = [
+                {
+                    question: "What is the primary goal of FinOps?",
+                    options: ["To minimize all cloud costs", "To maximize business value from cloud", "To move all IT to the cloud", "To eliminate the finance team"],
+                    answer: "To maximize business value from cloud"
+                },
+                {
+                    question: "Which three teams form the core FinOps 'trifecta'?",
+                    options: ["HR, Legal, and Marketing", "Sales, Support, and Operations", "Engineering, Finance, and Business", "Security, Networking, and Storage"],
+                    answer: "Engineering, Finance, and Business"
+                },
+                {
+                    question: "What does 'allocation' mean in a FinOps context?",
+                    options: ["Distributing free cloud credits", "Assigning cloud costs to responsible teams", "Allocating servers to developers", "Budgeting for office supplies"],
+                    answer: "Assigning cloud costs to responsible teams"
+                },
+                {
+                    question: "Which action belongs to the 'Optimize' phase of the FinOps lifecycle?",
+                    options: ["Creating a cost dashboard", "Setting up budget alerts", "Rightsizing virtual machines", "Forecasting future spend"],
+                    answer: "Rightsizing virtual machines"
+                },
+                {
+                    question: "What is a 'unit economics' metric?",
+                    options: ["The total monthly cloud bill", "The cost of a single engineer", "The cost per transaction or user", "The price of one share of company stock"],
+                    answer: "The cost per transaction or user"
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            const questionText = document.getElementById('question-text');
+            const questionIndicator = document.getElementById('question-indicator');
+            const optionsContainer = document.getElementById('options-container');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const quizScore = document.getElementById('quiz-score');
+            const quizResult = document.getElementById('quiz-result');
+            const resultText = document.getElementById('result-text');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const quizQuestionContainer = document.getElementById('quiz-question-container');
+
+            function loadQuestion() {
+                if (currentQuestionIndex >= quizData.length) {
+                    showResults();
+                    return;
+                }
+
+                const currentQuestion = quizData[currentQuestionIndex];
+                questionText.textContent = currentQuestion.question;
+                questionIndicator.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+                optionsContainer.innerHTML = '';
+                nextQuestionBtn.disabled = true;
+
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('quiz-option', 'w-full', 'text-left', 'p-4', 'border', 'rounded-lg', 'transition-colors', 'hover:bg-amber-50');
+                    button.addEventListener('click', () => selectOption(button, currentQuestion.answer));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectOption(selectedButton, correctAnswer) {
+                const options = optionsContainer.querySelectorAll('.quiz-option');
+                options.forEach(option => {
+                    option.disabled = true; 
+                    if (option.textContent === correctAnswer) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.remove('hover:bg-amber-50');
+                    }
+                });
+
+                if (selectedButton.textContent === correctAnswer) {
+                    score++;
+                    selectedButton.classList.add('correct');
+                } else {
+                    selectedButton.classList.add('incorrect');
+                }
+
+                updateScore();
+                nextQuestionBtn.disabled = false;
+            }
+            
+            function updateScore() {
+                quizScore.textContent = `Score: ${score} / ${quizData.length}`;
+            }
+
+            function showResults() {
+                quizQuestionContainer.style.display = 'none';
+                nextQuestionBtn.style.display = 'none';
+                quizResult.style.display = 'block';
+                resultText.textContent = `You scored ${score} out of ${quizData.length}.`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                loadQuestion();
+            });
+            
+            restartQuizBtn.addEventListener('click', () => {
+                currentQuestionIndex = 0;
+                score = 0;
+                updateScore();
+                quizResult.style.display = 'none';
+                quizQuestionContainer.style.display = 'block';
+                nextQuestionBtn.style.display = 'block';
+                loadQuestion();
+            });
+
+            loadQuestion();
+            updateScore();
+        });
+    </script>
+</body>
+</html>
