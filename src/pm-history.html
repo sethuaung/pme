@@ -38,6 +38,16 @@
             padding: 1rem;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
         }
+        .use-in-class-note {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #3b82f6;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body class="p-6">
@@ -46,7 +56,7 @@
         <header class="text-center mb-12">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-900 mb-2">Project Management Student Guide</h1>
             <p class="text-lg text-slate-600">A journey through the history, key players, and future of project management.</p>
-
+            <br>
         <!-- Menu Section -->
         <nav id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-md z-50">
             <div class="container mx-auto px-4">
@@ -55,8 +65,8 @@
                 </div>
             </div>
         </nav>
-
         </header>
+
         <!-- Section: History of Project Management -->
         <div class="mb-12">
             <h2 class="section-header">1. History of Project Management</h2>
@@ -77,42 +87,69 @@
                 <canvas id="methodologyChart"></canvas>
             </div>
         </div>
+        
+        <!-- Section: Social Impact of the Industrial Revolution -->
+        <div class="mb-12">
+            <h2 class="section-header">2. Social Impact of the Industrial Revolution</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Urbanization & Overcrowding -->
+                <div class="card p-6 bg-slate-50">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Urbanization & Health</h3>
+                    <p class="text-sm text-slate-600">Rapid migration to cities led to dense slums, poor sanitation, and public health crises, sparking the need for urban planning and housing reform.</p>
+                </div>
+                <!-- Family & Gender Roles -->
+                <div class="card p-6 bg-slate-50">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Family & Gender Roles</h3>
+                    <p class="text-sm text-slate-600">Wage labor separated home and work, with women and children entering factories under exploitative conditions, leading to early women's rights and child labor movements.</p>
+                </div>
+                <!-- Rise of Working Class -->
+                <div class="card p-6 bg-slate-50">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Rise of the Working Class</h3>
+                    <p class="text-sm text-slate-600">Factory workers formed a new class, leading to the creation of labor unions, strikes, and debates on wealth distribution and social mobility.</p>
+                </div>
+            </div>
+        </div>
 
         <!-- Section: Modern Contributors -->
         <div class="mb-12">
-            <h2 class="section-header">2. Modern Contributors</h2>
+            <h2 class="section-header">3. Modern Contributors</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- IBM -->
                 <div class="card p-6">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">IBM</h3>
                     <p class="text-sm text-slate-600">Pioneered the **Waterfall methodology** for early IT projects. Focuses on structured, sequential processes.</p>
+                    <span class="use-in-class-note">Ideal for students pursuing IT or enterprise PM roles.</span>
                 </div>
                 <!-- Microsoft -->
                 <div class="card p-6">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">Microsoft</h3>
                     <p class="text-sm text-slate-600">Developed foundational tools like **Microsoft Project**, integrating with the Microsoft ecosystem for seamless team collaboration.</p>
+                    <span class="use-in-class-note">Great for hands-on learners and tool-based curriculum.</span>
                 </div>
                 <!-- Google -->
                 <div class="card p-6">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">Google</h3>
                     <p class="text-sm text-slate-600">Popularized **OKRs** and an agile, iterative approach to planning, focusing on adaptability and continuous improvement.</p>
+                    <span class="use-in-class-note">Perfect for beginners and agile-focused learners.</span>
                 </div>
                 <!-- AWS -->
                 <div class="card p-6">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">AWS</h3>
                     <p class="text-sm text-slate-600">Transformed project management for **cloud-native environments**, enabling **CI/CD pipelines** and modular execution for scalable projects.</p>
+                    <span class="use-in-class-note">For advanced learners managing cloud-based systems.</span>
                 </div>
                 <!-- PMI -->
                 <div class="card p-6 col-span-1 md:col-span-2">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">PMI (Project Management Institute)</h3>
                     <p class="text-sm text-slate-600">Created the **PMBOK Guide**, a global standard for the profession. Provides key certifications like the **PMP** and **CAPM**.</p>
+                    <span class="use-in-class-note">Core reference for certification prep and ethics modules.</span>
                 </div>
             </div>
         </div>
 
         <!-- Section: Modern Trends & Future Directions -->
         <div class="mb-12">
-            <h2 class="section-header">3. Modern Trends & Future Directions</h2>
+            <h2 class="section-header">4. Modern Trends & Future Directions</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- AI -->
                 <div class="card p-6 flex flex-col items-center text-center">
@@ -138,7 +175,7 @@
 
         <footer class="text-center text-sm text-slate-500 mt-8">
             <p>This guide is based on modern project management practices and curriculum standards.</p>
-            <p>An Interactive Infographic for Project Management Students. © Felixent. </p>
+            <p>An Interactive Infographic for Project Management Students. © Felixent.</p>
         </footer>
 
     </div>
