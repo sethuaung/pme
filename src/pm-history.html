@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -31,6 +32,12 @@
         .card:hover {
             transform: translateY(-5px);
         }
+        canvas {
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
     </style>
 </head>
 <body class="p-6">
@@ -48,7 +55,6 @@
                 </div>
             </div>
         </nav>
-
         <!-- Section: History of Project Management -->
         <div class="mb-12">
             <h2 class="section-header">1. History of Project Management</h2>
@@ -63,6 +69,10 @@
                     <h3 class="text-2xl font-bold text-blue-800 mb-2">Industrial Revolution</h3>
                     <p class="text-slate-700 leading-relaxed">The need for structured planning intensified. **Frederick Taylor** introduced time studies and **Henry Gantt** created the iconic Gantt chart, a visual tool for scheduling that remains a cornerstone of the discipline today.</p>
                 </div>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-semibold text-blue-700 mb-4">Evolution of Methodologies</h3>
+                <canvas id="methodologyChart"></canvas>
             </div>
         </div>
 
@@ -105,10 +115,7 @@
                 <!-- AI -->
                 <div class="card p-6 flex flex-col items-center text-center">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">AI-Powered PM</h3>
-                    <p class="text-sm text-slate-600 mb-4">Leveraging AI for predictive analytics, automated scheduling, and data-driven decision-making. 
-
-[Image of artificial intelligence brain]
- </p>
+                    <p class="text-sm text-slate-600 mb-4">Leveraging AI for predictive analytics, automated scheduling, and data-driven decision-making. </p>
                 </div>
                 <!-- Mindfulness -->
                 <div class="card p-6 flex flex-col items-center text-center">
@@ -121,14 +128,116 @@
                     <p class="text-sm text-slate-600 mb-4">Using behaviors and rituals to inspire and align a team with core values, fostering a creative and positive environment.  </p>
                 </div>
             </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-semibold text-blue-700 mb-4">Benefits of Modern PM Trends</h3>
+                <canvas id="trendsChart"></canvas>
+            </div>
         </div>
 
         <footer class="text-center text-sm text-slate-500 mt-8">
             <p>This guide is based on modern project management practices and curriculum standards.</p>
-            <p>An Interactive Infographic for Project Management Students. © Felixent.</p>
+            <p>An Interactive Infographic for Project Management Students. © Felixent. </p>
         </footer>
 
     </div>
+
+    <script>
+        window.onload = function() {
+            // Chart 1: Evolution of Methodologies
+            const ctx1 = document.getElementById('methodologyChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['1970', '1980', '1990', '2000', '2010', '2020'],
+                    datasets: [
+                        {
+                            label: 'Waterfall Methodology',
+                            data: [70, 85, 90, 75, 50, 40],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Agile & Iterative',
+                            data: [10, 15, 20, 40, 70, 85],
+                            borderColor: '#1e40af',
+                            backgroundColor: 'rgba(30, 64, 175, 0.2)',
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Conceptual Adoption of Methodologies Over Time'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Relative Adoption (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Benefits of Modern Trends
+            const ctx2 = document.getElementById('trendsChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Efficiency', 'Proactive Risk Mgmt.', 'Team Morale', 'Adaptability', 'Strategic Focus'],
+                    datasets: [{
+                        label: 'Project Benefits',
+                        data: [90, 85, 80, 75, 95],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#1e40af',
+                            '#60a5fa',
+                            '#1d4ed8',
+                            '#93c5fd'
+                        ],
+                        borderColor: [
+                            '#2563eb',
+                            '#1e40af',
+                            '#3b82f6',
+                            '#1d4ed8',
+                            '#60a5fa'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Key Benefits of Modern PM Trends'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        };
+    </script>
 
 </body>
 </html>
