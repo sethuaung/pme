@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Project Management Infographic Content for Class">
+    <meta name="author" content="Mosquito">
+    <title>Felixent: Cryptotechnology & Digital Era Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #003f5c;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 384px;
+            }
+        }
+        .flow-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            min-height: 100px;
+            color: white;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: #ffa600;
+            margin: 0.5rem 0;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary .arrow-down {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-2">Cryptotechnology & Digital Era Solutions</h1>
+            <p class="text-lg md:text-xl text-gray-300">A Student's Guide to Securing the Future of Finance</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <section id="intro" class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-8">
+                 <h2 class="text-3xl font-bold text-white mb-4">The Digital Revolution is Here</h2>
+                 <p class="text-gray-300 max-w-3xl mx-auto mb-8">Financial Technology (FinTech) is reshaping the global economy by integrating advanced technology into financial services. At its core, cryptography provides the essential trust and security needed for this transformation. This guide explores the synergy between cryptography, FinTech innovation, and the operational frameworks like FinOps that manage these powerful new systems.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-extrabold text-[#7a5195]">75%</p>
+                        <p class="mt-2 font-semibold">Of financial institutions are adopting FinTech solutions to stay competitive.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-extrabold text-[#ef5675]">$9.4T</p>
+                        <p class="mt-2 font-semibold">Projected global contribution of the digital economy to GDP.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-extrabold text-[#ffa600]">100%</p>
+                        <p class="mt-2 font-semibold">Of secure digital finance relies on robust cryptographic principles.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="crypto-core">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">The Core Engine: Understanding Cryptography</h2>
+                    <p class="text-gray-300 mt-2">Cryptography is the practice of securing communication from adversaries. It provides confidentiality, integrity, and authenticity for our digital lives.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Symmetric vs. Asymmetric Encryption</h3>
+                        <p class="mb-6 text-sm">The two primary models of encryption differ in how they use keys. Symmetric is faster but requires a shared secret, while asymmetric is slower but allows for secure key exchange over public channels.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-[#374c80]">Symmetric (One Key)</h4>
+                                <div class="flex items-center justify-between text-xs mt-2 p-3 bg-gray-100 rounded-lg">
+                                    <span>Plaintext</span> <span class="font-mono text-[#374c80]">→</span> <span>Encrypt 🔑</span> <span class="font-mono text-[#374c80]">→</span> <span>Ciphertext</span> <span class="font-mono text-[#374c80]">→</span> <span>Decrypt 🔑</span> <span class="font-mono text-[#374c80]">→</span> <span>Plaintext</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#bc5090]">Asymmetric (Two Keys)</h4>
+                                <div class="flex items-center justify-between text-xs mt-2 p-3 bg-gray-100 rounded-lg">
+                                    <span>Plaintext</span> <span class="font-mono text-[#bc5090]">→</span> <span>Encrypt  kunci_publik</span> <span class="font-mono text-[#bc5090]">→</span> <span>Ciphertext</span> <span class="font-mono text-[#bc5090]">→</span> <span>Decrypt 🔑_pribadi</span> <span class="font-mono text-[#bc5090]">→</span> <span>Plaintext</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Widely Used Cryptographic Algorithms</h3>
+                         <p class="mb-4 text-sm text-center">Different algorithms serve different purposes, from encrypting data (AES) to creating unique digital fingerprints (Hashing).</p>
+                        <div class="chart-container">
+                            <canvas id="algorithmsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="fintech-revolution">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">The Application: The FinTech Revolution</h2>
+                    <p class="text-gray-300 mt-2">Cryptography is the enabling technology behind the most disruptive innovations in finance, from digital currencies to AI-driven analytics.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Global FinTech Market Growth</h3>
+                        <p class="mb-4 text-sm text-center">The market is expanding rapidly as adoption increases across all sectors, driven by demand for more efficient and accessible financial services.</p>
+                        <div class="chart-container">
+                             <canvas id="fintechGrowthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                         <h3 class="text-xl font-bold mb-4 text-center">Core Technologies Driving FinTech</h3>
+                         <p class="mb-4 text-sm text-center">A combination of technologies, each secured by cryptographic principles, is fueling the FinTech ecosystem.</p>
+                        <div class="chart-container">
+                            <canvas id="fintechTechChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="finops-framework">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">The Management: The FinOps Framework</h2>
+                    <p class="text-gray-300 mt-2">As companies adopt cloud-based FinTech solutions, FinOps provides the cultural framework to manage costs and maximize business value.</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-xl font-bold mb-6 text-center">The FinOps Lifecycle: A Continuous Journey</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-[#7a5195] text-white rounded-lg p-4 w-full">
+                                <h4 class="font-bold text-lg">1. Inform</h4>
+                                <p class="text-sm mt-2">Gain visibility into cloud spending through accurate allocation, benchmarking, and forecasting.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center md:mt-0 mt-4">
+                           <div class="bg-[#ef5675] text-white rounded-lg p-4 w-full">
+                                <h4 class="font-bold text-lg">2. Optimize</h4>
+                                <p class="text-sm mt-2">Identify and implement cost-saving opportunities without compromising performance or innovation.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center md:mt-0 mt-4">
+                            <div class="bg-[#ffa600] text-white rounded-lg p-4 w-full">
+                                <h4 class="font-bold text-lg">3. Operate</h4>
+                                <p class="text-sm mt-2">Continuously evaluate business objectives against cloud metrics to ensure alignment and efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold mb-4 text-center">The FinOps Trifecta: Key Stakeholders</h3>
+                        <p class="text-center text-sm mb-6 max-w-2xl mx-auto">Success in FinOps requires collaboration between teams that traditionally operate in silos. Each brings a unique perspective to the table.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="border-2 border-[#374c80] rounded-lg p-4 text-center">
+                                <p class="text-2xl mb-2">💻</p>
+                                <h4 class="font-bold text-[#374c80]">Engineering</h4>
+                                <p class="text-xs">Focuses on building and maintaining scalable, efficient, and secure infrastructure.</p>
+                            </div>
+                             <div class="border-2 border-[#bc5090] rounded-lg p-4 text-center">
+                                <p class="text-2xl mb-2">💼</p>
+                                <h4 class="font-bold text-[#bc5090]">Business</h4>
+                                <p class="text-xs">Focuses on product innovation, market speed, and overall business value.</p>
+                            </div>
+                             <div class="border-2 border-[#ff764a] rounded-lg p-4 text-center">
+                                <p class="text-2xl mb-2">💰</p>
+                                <h4 class="font-bold text-[#ff764a]">Finance</h4>
+                                <p class="text-xs">Focuses on budgeting, forecasting, and ensuring financial accountability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="sample-project">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Sample Project: Secure Personal Budgeting App</h2>
+                    <p class="text-gray-300 mt-2">This conceptual project shows how cryptography, FinTech features, and FinOps principles come together in a real-world application.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                        <div class="flow-step bg-[#374c80]">User inputs financial data (transactions, goals)</div>
+                        <div class="flow-arrow text-center hidden md:block">→</div>
+                        <div class="flow-step bg-[#7a5195]">Data encrypted at rest using AES-256 algorithm</div>
+                         <div class="flow-arrow text-center hidden md:block">→</div>
+                        <div class="flow-step bg-[#bc5090]">FinTech Engine: AI analyzes spending patterns and provides insights</div>
+                        <div class="col-span-full text-center flow-arrow">↓</div>
+                         <div class="col-span-full grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                            <div class="flow-step bg-[#ff764a]">App performance and cost data sent to FinOps Dashboard</div>
+                            <div class="flow-arrow text-center hidden md:block">←</div>
+                            <div class="flow-step bg-[#ef5675]">Results & insights displayed to user on a secure dashboard</div>
+                            <div class="flow-arrow text-center hidden md:block">←</div>
+                            <div class="flow-step bg-[#ffa600]">Cloud infrastructure usage is monitored and optimized</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="faq">
+                 <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Frequently Asked Questions</h2>
+                    <p class="text-gray-300 mt-2">Key questions for students entering the world of cryptotechnology and digital solutions.</p>
+                </div>
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <details class="bg-white rounded-lg shadow-lg group">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center font-bold">
+                            What is the most important skill for a career in this field?
+                            <span class="transform transition-transform duration-300 arrow-down">↓</span>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-600">
+                            <p>A combination of technical and soft skills is crucial. You need a strong foundation in cryptographic principles and programming, but also the ability to communicate complex ideas to different stakeholders (like in the FinOps model). Continuous learning is key, as the technology is always evolving.</p>
+                        </div>
+                    </details>
+                    <details class="bg-white rounded-lg shadow-lg group">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center font-bold">
+                           Why are hash functions called "one-way"?
+                            <span class="transform transition-transform duration-300 arrow-down">↓</span>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-600">
+                            <p>They are called "one-way" because it is computationally infeasible to reverse the function. Given an output hash, it's practically impossible to calculate the original input data. This property is vital for securely storing passwords and verifying data integrity.</p>
+                        </div>
+                    </details>
+                     <details class="bg-white rounded-lg shadow-lg group">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center font-bold">
+                            How does FinOps differ from traditional financial management?
+                            <span class="transform transition-transform duration-300 arrow-down">↓</span>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-600">
+                            <p>Traditional finance often involves fixed, long-term budgets. FinOps is designed for the variable, dynamic spending models of the cloud. It's a real-time, data-driven practice that focuses on collaboration between engineering and finance to manage costs without slowing down innovation.</p>
+                        </div>
+                    </details>
+                    <details class="bg-white rounded-lg shadow-lg group">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center font-bold">
+                           What is the biggest challenge facing FinTech today?
+                           <span class="transform transition-transform duration-300 arrow-down">↓</span>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-600">
+                            <p>While security is an ongoing concern, a major challenge is interoperability. Many digital payment and financial systems are fragmented, making it difficult for them to communicate seamlessly. Creating standardized, secure protocols is a key goal for the industry to achieve a truly interconnected financial ecosystem.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-16 text-gray-400 text-sm">
+            <p>Developed for educational purposes. |                 <a href="https://pme-felixent.vercel.app/#fintech" class="nav-link font-semibold border-b-2 border-transparent pb-1">Home</a></p>
+            <p>&copy; 2025 Felixent. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const chartColors = ['#7a5195', '#ef5675', '#ffa600', '#374c80'];
+
+        const algorithmsData = {
+            labels: ['AES (Encryption)', 'SHA-256 (Hashing)', 'RSA (Asymmetric)', 'ECDSA (Digital Signatures)'].map(wrapLabel),
+            datasets: [{
+                label: 'General Usage & Importance',
+                data: [95, 90, 80, 85],
+                backgroundColor: chartColors,
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('algorithmsChart'), {
+            type: 'bar',
+            data: algorithmsData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { ticks: { color: '#003f5c' } },
+                    y: { ticks: { color: '#003f5c' } }
+                }
+            }
+        });
+
+        const fintechGrowthData = {
+            labels: ['2023', '2024', '2025', '2026', '2027'],
+            datasets: [{
+                label: 'Market Size (in Billions USD)',
+                data: [180, 230, 310, 400, 500],
+                borderColor: '#ef5675',
+                backgroundColor: 'rgba(239, 86, 117, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
+        };
+        new Chart(document.getElementById('fintechGrowthChart'), {
+            type: 'line',
+            data: fintechGrowthData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                 scales: {
+                    x: { ticks: { color: '#003f5c' } },
+                    y: { ticks: { color: '#003f5c' } }
+                }
+            }
+        });
+        
+        const fintechTechData = {
+            labels: ['Artificial Intelligence', 'Blockchain & DLT', 'Big Data Analytics', 'Cloud Computing'].map(wrapLabel),
+            datasets: [{
+                data: [40, 25, 20, 15],
+                backgroundColor: chartColors,
+                hoverOffset: 4
+            }]
+        };
+        new Chart(document.getElementById('fintechTechChart'), {
+            type: 'doughnut',
+            data: fintechTechData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#003f5c' } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
