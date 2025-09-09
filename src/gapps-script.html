@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="The Ultimate Guide to Google Apps Script">
+    <meta name="description" content="Power and fundamentals of Google Apps Script.">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent : The Ultimate Guide to Google Apps Script</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .kpi-card {
+            background-color: #577590;
+            color: white;
+        }
+        .kpi-number {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .flow-step {
+            position: relative;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #F94144;
+        }
+        .flow-arrow {
+            position: absolute;
+            top: 50%;
+            right: -2.5rem;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #577590;
+        }
+         .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            border-left: 2px solid #577590;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.6rem;
+            top: 0;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            background-color: #F94144;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Palette: Energetic & Playful -->
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-[#577590] mb-4">The Ultimate Guide to Google Apps Script</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">Unlock powerful automations across your entire Google Workspace with the simplicity of JavaScript.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <section class="md:col-span-2 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-[#F3722C] mb-4">A Brief History & Global Impact</h2>
+                <p class="text-slate-600 mb-6">From a simple macro recorder in Google Sheets to a robust cloud development platform, Google Apps Script has evolved significantly since its inception. Today, it empowers millions of developers, administrators, and power users to build custom solutions that save time and enhance productivity within the Google ecosystem.</p>
+                <div class="relative">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-lg text-slate-700">2009: The Beginning</p>
+                        <p class="text-slate-600">Google Apps Script is first released as a beta feature within Google Sheets, initially focused on spreadsheet automation.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-lg text-slate-700">2010-2012: Expansion</p>
+                        <p class="text-slate-600">Support expands to Google Docs, Forms, and Sites. The introduction of triggers and UI services opens up new possibilities for custom workflows.</p>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-lg text-slate-700">2014: Add-ons Launch</p>
+                        <p class="text-slate-600">The Google Workspace Marketplace (then the Chrome Web Store) allows developers to publish and distribute their scripts as add-ons.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-lg text-slate-700">2018: Modernization</p>
+                        <p class="text-slate-600">The V8 JavaScript engine is introduced, dramatically improving performance and enabling modern JavaScript syntax (ES6+).</p>
+                    </div>
+                     <div class="timeline-item" style="border-left: 2px solid transparent;">
+                        <div class="timeline-dot"></div>
+                        <p class="font-semibold text-lg text-slate-700">Today: Enterprise Adoption</p>
+                        <p class="text-slate-600">Used by organizations worldwide for everything from simple task automation to complex, mission-critical business applications and integrations.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="kpi-card p-6 rounded-lg shadow-lg flex flex-col justify-center items-center text-center">
+                <div class="kpi-number">9M+</div>
+                <div class="text-xl font-semibold">Active Scripts</div>
+                <p class="mt-2">Millions of scripts are running every month, automating tasks for businesses, schools, and individuals.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-[#90BE6D] mb-4">Key Advantages</h3>
+                <ul class="space-y-3 text-slate-600">
+                    <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <strong>JavaScript-Based:</strong> Easy to learn for anyone with basic web development knowledge.</li>
+                    <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <strong>Cloud-Native:</strong> No servers to manage. Code runs on Google's infrastructure.</li>
+                    <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <strong>Deep Integration:</strong> Seamlessly connect and control Google Workspace apps like Drive, Sheets, and Gmail.</li>
+                    <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <strong>Extensible:</strong> Connect to external APIs and services using UrlFetchApp.</li>
+                </ul>
+            </div>
+            
+             <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-[#F9C74F] mb-4">Most Common Use Cases</h3>
+                <div class="chart-container">
+                    <canvas id="useCasesChart"></canvas>
+                </div>
+            </div>
+
+            <section class="md:col-span-2 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-[#F3722C] mb-4">The Foundation: JavaScript Fundamentals</h2>
+                <p class="text-slate-600 mb-6">Google Apps Script is built on JavaScript. Understanding its core concepts is the first step to becoming a proficient Apps Script developer.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#577590]">Number</h4>
+                        <p class="text-sm text-slate-600">Represents both integer and floating-point numbers.</p>
+                        <pre class="bg-slate-200 text-slate-800 p-2 rounded mt-2 text-sm"><code>let age = 30;<br>let price = 19.99;</code></pre>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#577590]">String</h4>
+                        <p class="text-sm text-slate-600">A sequence of characters, enclosed in quotes.</p>
+                         <pre class="bg-slate-200 text-slate-800 p-2 rounded mt-2 text-sm"><code>let name = "John Doe";</code></pre>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#577590]">Boolean</h4>
+                        <p class="text-sm text-slate-600">Represents true or false, often used in conditional logic.</p>
+                         <pre class="bg-slate-200 text-slate-800 p-2 rounded mt-2 text-sm"><code>let isActive = true;</code></pre>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#577590]">Object</h4>
+                        <p class="text-sm text-slate-600">A collection of key-value pairs.</p>
+                         <pre class="bg-slate-200 text-slate-800 p-2 rounded mt-2 text-sm"><code>let user = {id: 1, name: "Sue"};</code></pre>
+                    </div>
+                     <div class="bg-slate-50 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#577590]">Function</h4>
+                        <p class="text-sm text-slate-600">A block of code designed to perform a particular task.</p>
+                         <pre class="bg-slate-200 text-slate-800 p-2 rounded mt-2 text-sm"><code>function greet() { ... }</code></pre>
+                    </div>
+                     <div class="bg-slate-50 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#577590]">Undefined</h4>
+                        <p class="text-sm text-slate-600">A variable that has been declared but not assigned a value.</p>
+                         <pre class="bg-slate-200 text-slate-800 p-2 rounded mt-2 text-sm"><code>let city; // value is undefined</code></pre>
+                    </div>
+                </div>
+            </section>
+
+             <section class="md:col-span-2 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-[#43AA8B] mb-4">Working with Data: JavaScript Operators</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-700 mb-2">Arithmetic Operators</h3>
+                        <p class="text-slate-600 mb-4">Perform mathematical calculations.</p>
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-100">
+                                <tr><th class="p-2 rounded-tl-md">Operator</th><th class="p-2">Description</th><th class="p-2 rounded-tr-md">Example</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-2">+</td><td class="p-2">Addition</td><td class="p-2">x + y</td></tr>
+                                <tr class="border-b"><td class="p-2">-</td><td class="p-2">Subtraction</td><td class="p-2">x - y</td></tr>
+                                <tr class="border-b"><td class="p-2">*</td><td class="p-2">Multiplication</td><td class="p-2">x * y</td></tr>
+                                <tr><td class="p-2">/</td><td class="p-2">Division</td><td class="p-2">x / y</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-700 mb-2">Comparison Operators</h3>
+                        <p class="text-slate-600 mb-4">Compare two values and return a boolean result.</p>
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-100">
+                                <tr><th class="p-2 rounded-tl-md">Operator</th><th class="p-2">Description</th><th class="p-2 rounded-tr-md">Example</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-2">==</td><td class="p-2">Equal to</td><td class="p-2">x == y</td></tr>
+                                <tr class="border-b"><td class="p-2">===</td><td class="p-2">Strictly equal</td><td class="p-2">x === y</td></tr>
+                                <tr class="border-b"><td class="p-2">!=</td><td class="p-2">Not equal</td><td class="p-2">x != y</td></tr>
+                                <tr><td class="p-2">></td><td class="p-2">Greater than</td><td class="p-2">x > y</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-700 mb-2">Logical Operators</h3>
+                        <p class="text-slate-600 mb-4">Combine conditional statements.</p>
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-100">
+                                <tr><th class="p-2 rounded-tl-md">Operator</th><th class="p-2">Description</th><th class="p-2 rounded-tr-md">Example</th></tr>
+                            </thead>
+                             <tbody>
+                                <tr class="border-b"><td class="p-2">&&</td><td class="p-2">Logical AND</td><td class="p-2">x > 5 && y < 10</td></tr>
+                                <tr class="border-b"><td class="p-2">||</td><td class="p-2">Logical OR</td><td class="p-2">x == 5 || y == 5</td></tr>
+                                <tr><td class="p-2">!</td><td class="p-2">Logical NOT</td><td class="p-2">!(x == y)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="md:col-span-2 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-[#F94144] mb-4">Automating Google Drive: Common Scenarios</h2>
+                <p class="text-slate-600 mb-6">DriveApp is a powerful service for managing files and folders. Scripts can create, find, and modify files, transforming how you manage your digital assets.</p>
+                <div class="bg-slate-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-center mb-6 text-[#577590]">Scenario: Automated Monthly Reporting</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6 relative">
+                        <div class="flow-step">
+                            <div class="text-3xl mb-2">📅</div>
+                            <h4 class="font-semibold">Time-Based Trigger</h4>
+                            <p class="text-sm">A script runs automatically on the first day of every month.</p>
+                            <div class="flow-arrow hidden md:block">→</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="text-3xl mb-2">📄</div>
+                            <h4 class="font-semibold">Create & Populate File</h4>
+                            <p class="text-sm">The script creates a new Google Doc from a template and populates it with data from a Google Sheet.</p>
+                             <div class="flow-arrow hidden md:block">→</div>
+                        </div>
+                        <div class="flow-step">
+                             <div class="text-3xl mb-2">🗂️</div>
+                             <h4 class="font-semibold">Organize & Archive</h4>
+                             <p class="text-sm">The newly created report is saved as a PDF and moved to a specific 'Archived Reports' folder.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg md:col-span-2">
+                <h3 class="text-xl font-bold text-[#F8961E] mb-4">Popular Automation Projects</h3>
+                <p class="text-slate-600 mb-4">Based on common business needs, certain types of projects are frequently developed with Apps Script. Here's a look at their relative popularity.</p>
+                <div class="chart-container">
+                    <canvas id="projectsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                <h3 class="text-xl font-bold text-[#577590] mb-4">Further Learning</h3>
+                <p class="text-slate-600 mb-4">Ready to dive deeper? These resources provide step-by-step guidance and practical examples to master Google Apps Script.</p>
+                <div class="flex-grow space-y-4">
+                    <div class="bg-slate-100 p-4 rounded-md">
+                        <p class="font-semibold">Beginner's Guides</p>
+                        <p class="text-sm text-slate-600">Start with foundational tutorials focusing on Sheets and Forms automation.</p>
+                    </div>
+                     <div class="bg-slate-100 p-4 rounded-md">
+                        <p class="font-semibold">Official Google Codelabs</p>
+                        <p class="text-sm text-slate-600">Hands-on, guided coding tutorials from Google developers.</p>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-md">
+                        <p class="font-semibold">Community Forums</p>
+                        <p class="text-sm text-slate-600">Connect with other developers on platforms like Stack Overflow for help and inspiration.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+        <footer class="text-center mt-12 text-slate-500">
+            <p>Power and fundamentals of Google Apps Script.</p>
+            <p>For Project Management Students. © <a href="https://felixent.verel.app"  >Felixent</a>. </p>
+        </footer>
+
+    </div>
+
+    <script>
+        const palette = ['#F94144', '#F3722C', '#F8961E', '#F9C74F', '#90BE6D', '#43AA8B', '#577590'];
+        
+        const wrapLabel = (label) => {
+            const max = 16;
+            if (label.length <= max) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for(const word of words){
+                if((currentLine + ' ' + word).trim().length > max){
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if(currentLine) lines.push(currentLine);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const useCasesCtx = document.getElementById('useCasesChart').getContext('2d');
+        new Chart(useCasesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Spreadsheet Automation', 'Document Generation', 'Email Workflows', 'Custom Forms Logic', 'Google Drive Management'],
+                datasets: [{
+                    label: 'Usage Percentage',
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: palette,
+                    borderColor: '#f8fafc',
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback }
+                    }
+                }
+            }
+        });
+
+        const projectsCtx = document.getElementById('projectsChart').getContext('2d');
+        const projectLabels = [
+            'Certificate Maker & Sender',
+            'New Employee Onboarding',
+            'Folder Content Copier',
+            'Automated Book Inventory',
+            'Issues Log with Translation'
+        ].map(wrapLabel);
+        
+        new Chart(projectsCtx, {
+            type: 'bar',
+            data: {
+                labels: projectLabels,
+                datasets: [{
+                    label: 'Project Popularity Score',
+                    data: [88, 82, 75, 68, 60],
+                    backgroundColor: palette.slice(0, 5),
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                     legend: {
+                        display: false,
+                    },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
+
