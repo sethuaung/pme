@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Felixent : Student Guide to Scrum & Agile">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Guide to Scrum & Agile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F1DE;
+            color: #3D405B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow, .flow-arrow-down {
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #45B7D1;
+            font-weight: 900;
+        }
+        .flow-card {
+            border: 2px dashed #4ECDC4;
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-left: 8px solid #FF6B6B;
+        }
+        .kpi-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #45B7D1;
+        }
+        .kpi-label {
+            font-size: 1.125rem;
+            color: #3D405B;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-[#3D405B]">FELIXENT</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#intro" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Intro</a>
+                        <a href="#philosophy" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Philosophy</a>
+                        <a href="#framework" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Framework</a>
+                        <a href="#roles" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Roles</a>
+                        <a href="#events" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Events</a>
+                        <a href="#artifacts" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Artifacts</a>
+                        <a href="#scenario" class="text-gray-600 hover:bg-[#4ECDC4] hover:text-white px-3 py-2 rounded-md text-sm font-medium">Scenario</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+
+        <section id="intro" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">Introduction to Scrum & Agile</h2>
+                <p class="mt-4 text-xl text-gray-600">A new way to build amazing things, faster and better.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-[#FF6B6B] mb-4">What is Agile?</h3>
+                    <p class="text-gray-700 text-lg">Agile is a mindset and a set of principles for developing products. Instead of one big launch, Agile focuses on delivering value in small, iterative cycles. This allows teams to adapt to change, get feedback early, and build what customers truly want. It's about collaboration, flexibility, and continuous improvement.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                     <h3 class="text-2xl font-bold text-center mb-4 text-[#45B7D1]">Agile Adoption is Skyrocketing</h3>
+                     <p class="text-center text-gray-600 mb-4">Modern teams overwhelmingly prefer Agile methods over traditional Waterfall approaches due to their flexibility and efficiency.</p>
+                    <div class="chart-container h-64 md:h-72">
+                        <canvas id="adoptionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">The Agile Philosophy</h2>
+                <p class="mt-4 text-xl text-gray-600">It's all about the four core values from the Agile Manifesto.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">👥</div>
+                    <h3 class="text-xl font-bold text-[#FF6B6B] mb-2">Individuals and Interactions</h3>
+                    <p class="text-gray-600">over processes and tools</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">✅</div>
+                    <h3 class="text-xl font-bold text-[#4ECDC4] mb-2">Working Software</h3>
+                    <p class="text-gray-600">over comprehensive documentation</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold text-[#45B7D1] mb-2">Customer Collaboration</h3>
+                    <p class="text-gray-600">over contract negotiation</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-[#FED766] mb-2">Responding to Change</h3>
+                    <p class="text-gray-600">over following a plan</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="framework" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">The Scrum Framework</h2>
+                <p class="mt-4 text-xl text-gray-600">A structured way to implement Agile. It's a continuous cycle of planning, doing, and improving.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="flex flex-col items-center justify-center space-y-4">
+                    <div class="flow-card p-4 rounded-lg text-center">
+                        <h4 class="font-bold text-lg">Product Backlog</h4>
+                        <p class="text-sm">Master list of all desired features</p>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                     <div class="flow-card p-4 rounded-lg text-center bg-[#FED766] text-black">
+                        <h4 class="font-bold text-lg">Sprint Planning</h4>
+                        <p class="text-sm">Team selects work for the next Sprint</p>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                    <div class="border-4 border-dashed border-[#45B7D1] rounded-xl p-6 w-full lg:w-3/4">
+                        <div class="text-center mb-4">
+                            <h3 class="text-2xl font-bold">The Sprint (1-4 Weeks)</h3>
+                             <p class="text-sm">A time-boxed iteration to build a usable product increment.</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div class="flow-card p-4 rounded-lg text-center">
+                                <h4 class="font-bold text-lg">Sprint Backlog</h4>
+                                <p class="text-sm">Work planned for this Sprint</p>
+                            </div>
+                            <div class="flow-arrow mx-4 hidden sm:block">→</div>
+                            <div class="flow-arrow-down my-4 sm:hidden">↓</div>
+                            <div class="text-center">
+                                <h4 class="font-bold text-lg">Daily Scrum</h4>
+                                <p class="text-sm">15-min daily sync</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                    <div class="flow-card p-4 rounded-lg text-center bg-[#4ECDC4] text-white">
+                        <h4 class="font-bold text-lg">Potentially Shippable Increment</h4>
+                        <p class="text-sm">The usable piece of product created</p>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flow-card p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-lg">Sprint Review</h4>
+                            <p class="text-sm">Demo the work, get feedback</p>
+                        </div>
+                        <div class="flow-card p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-lg">Sprint Retrospective</h4>
+                            <p class="text-sm">Team reflects on and improves process</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roles" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">The Three Scrum Roles</h2>
+                <p class="mt-4 text-xl text-gray-600">A small, self-organizing team with clear responsibilities.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-6xl mb-4">🎯</div>
+                    <h3 class="text-2xl font-bold text-[#FF6B6B]">Product Owner</h3>
+                    <p class="text-gray-600 mt-2">The voice of the customer. They are responsible for maximizing the value of the product by managing the Product Backlog.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-6xl mb-4">🛡️</div>
+                    <h3 class="text-2xl font-bold text-[#4ECDC4]">Scrum Master</h3>
+                    <p class="text-gray-600 mt-2">The servant-leader for the team. They help everyone understand Scrum theory and practice, and remove impediments.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-6xl mb-4">👩‍💻</div>
+                    <h3 class="text-2xl font-bold text-[#45B7D1]">Developers</h3>
+                    <p class="text-gray-600 mt-2">The professionals who do the work. They are a self-managing team that turns backlog items into a product increment.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">The Five Scrum Events</h2>
+                <p class="mt-4 text-xl text-gray-600">Time-boxed events that create regularity and minimize the need for other meetings.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-center mb-4 text-[#FF6B6B]">Event Durations (for a 2-Week Sprint)</h3>
+                <p class="text-center text-gray-600 mb-6">Scrum events have maximum time-boxes to ensure efficiency. Here's a typical breakdown for a 2-week sprint.</p>
+                <div class="chart-container h-80 md:h-96">
+                    <canvas id="eventsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="artifacts" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">The Three Scrum Artifacts</h2>
+                <p class="mt-4 text-xl text-gray-600">Tools to provide transparency of key information.</p>
+            </div>
+             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-[#FF6B6B]">1. Product Backlog</h3>
+                    <p class="mt-2 text-gray-600">An ordered list of everything that is known to be needed in the product. It is the single source of requirements for any changes to be made to the product. It's a living artifact, constantly evolving.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-[#4ECDC4]">2. Sprint Backlog</h3>
+                    <p class="mt-2 text-gray-600">The set of Product Backlog items selected for the Sprint, plus a plan for delivering the product Increment. It's a highly visible, real-time picture of the work that the Developers plan to accomplish during the Sprint.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-[#45B7D1]">3. Increment</h3>
+                    <p class="mt-2 text-gray-600">The sum of all the Product Backlog items completed during a Sprint and the value of the increments of all previous Sprints. At the end of a Sprint, the new Increment must be "Done," which means it is in a usable condition.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="scenario" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">Example Scenario: Recipe App</h2>
+                <p class="mt-4 text-xl text-gray-600">Let's apply Scrum to building a simple mobile recipe app in one 2-week sprint.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                 <div class="bg-white rounded-xl shadow-lg p-8 lg:col-span-2">
+                    <h3 class="text-2xl font-bold text-[#FF6B6B] mb-4">The Goal for Sprint 1</h3>
+                    <p class="text-lg text-gray-700">"Launch a basic version of the app where users can search for recipes and view their details."</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-[#4ECDC4] mb-3">Sprint Backlog (Selected User Stories)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>As a user, I want to create an account so I can save favorite recipes. (8 points)</li>
+                        <li>As a user, I want a search bar to find recipes by name. (5 points)</li>
+                        <li>As a user, I want to see a list of ingredients for a recipe. (3 points)</li>
+                        <li>As a user, I want to read step-by-step instructions. (3 points)</li>
+                    </ul>
+                     <p class="mt-4 text-gray-800 font-bold">Total Sprint Points: 19</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-[#45B7D1] mb-3">Sprint Progress: Burndown Chart</h3>
+                    <p class="text-center text-gray-600 mb-4">This chart tracks the remaining work (in story points) throughout the 10-day sprint. The team started with 19 points of work.</p>
+                    <div class="chart-container h-64 md:h-72">
+                        <canvas id="burndownChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 lg:col-span-2">
+                    <h3 class="text-2xl font-bold text-[#FED766] mb-4 text-black">Sprint Outcome (Answer)</h3>
+                    <p class="text-lg text-gray-700 mb-4">At the Sprint Review, the team demonstrates the finished features. The Increment is a working app where users can now successfully search for a recipe and view its ingredients and instructions. The "create account" feature was not fully completed and will be moved back to the Product Backlog for a future sprint.</p>
+                    <div class="kpi-card mt-6">
+                         <div class="kpi-number">11</div>
+                         <p class="kpi-label">Story Points Completed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion">
+             <div class="text-center bg-white rounded-xl shadow-lg p-10">
+                <h2 class="text-4xl font-extrabold text-[#3D405B] sm:text-5xl">Conclusion: Why Agile & Scrum Work</h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">By embracing iterative development, focusing on customer value, and empowering teams to self-organize, Scrum provides a framework that not only delivers products faster but also builds more resilient, adaptive, and happier teams.</p>
+            </div>
+        </section>
+
+    </main>
+        <footer class="bg-stone-800 text-white p-6 text-center mt-16">
+        <p>For Project Management Students. © <a href="https://felixent.verel.app"  >Felixent</a>. </p>
+        </footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const wrapLabel = (label, maxLength = 16) => {
+        if (label.length <= maxLength) {
+            return label;
+        }
+        const words = label.split(' ');
+        const lines = [];
+        let currentLine = '';
+        words.forEach(word => {
+            if ((currentLine + ' ' + word).trim().length > maxLength) {
+                lines.push(currentLine.trim());
+                currentLine = word;
+            } else {
+                currentLine = (currentLine + ' ' + word).trim();
+            }
+        });
+        if (currentLine) {
+            lines.push(currentLine.trim());
+        }
+        return lines;
+    };
+
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+            return label.join(' ');
+        } else {
+            return label;
+        }
+    };
+    
+    const palette = {
+        coral: '#FF6B6B',
+        turquoise: '#4ECDC4',
+        blue: '#45B7D1',
+        yellow: '#FED766',
+        dark: '#3D405B',
+        light: '#F4F1DE'
+    };
+
+    const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: palette.dark,
+                    font: {
+                        size: 14,
+                        family: "'Inter', sans-serif"
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                bodyFont: {
+                    family: "'Inter', sans-serif"
+                },
+                titleFont: {
+                     family: "'Inter', sans-serif"
+                }
+            }
+        },
+        scales: {
+             x: {
+                ticks: {
+                    color: palette.dark,
+                    font: {
+                        size: 12,
+                        family: "'Inter', sans-serif"
+                    }
+                },
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                ticks: {
+                    color: palette.dark,
+                    font: {
+                         size: 12,
+                         family: "'Inter', sans-serif"
+                    }
+                },
+                grid: {
+                    color: '#e0e0e0'
+                }
+            }
+        }
+    };
+
+    const adoptionCtx = document.getElementById('adoptionChart')?.getContext('2d');
+    if (adoptionCtx) {
+        new Chart(adoptionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Agile/Scrum', 'Waterfall', 'Other'],
+                datasets: [{
+                    label: 'Project Methodology Adoption',
+                    data: [86, 8, 6],
+                    backgroundColor: [palette.turquoise, palette.coral, palette.yellow],
+                    borderColor: palette.light,
+                    borderWidth: 4
+                }]
+            },
+            options: { ...commonChartOptions, scales: { x: { display: false }, y: { display: false } } }
+        });
+    }
+
+    const eventsCtx = document.getElementById('eventsChart')?.getContext('2d');
+    if (eventsCtx) {
+        const originalEventLabels = ['Sprint Planning', 'Daily Scrum (per day)', 'Sprint Review', 'Sprint Retrospective'];
+        new Chart(eventsCtx, {
+            type: 'bar',
+            data: {
+                labels: originalEventLabels.map(label => wrapLabel(label)),
+                datasets: [{
+                    label: 'Max Duration (Hours)',
+                    data: [4, 0.25, 2, 1.5],
+                    backgroundColor: [palette.coral, palette.yellow, palette.turquoise, palette.blue],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        ...commonChartOptions.scales.x,
+                        title: {
+                            display: true,
+                            text: 'Hours',
+                            color: palette.dark
+                        }
+                    },
+                    y: {
+                        ...commonChartOptions.scales.y
+                    }
+                },
+                 plugins: { ...commonChartOptions.plugins, legend: { display: false } }
+            }
+        });
+    }
+
+    const burndownCtx = document.getElementById('burndownChart')?.getContext('2d');
+    if (burndownCtx) {
+        new Chart(burndownCtx, {
+            type: 'line',
+            data: {
+                labels: ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10'],
+                datasets: [{
+                    label: 'Ideal Burndown',
+                    data: [19, 17.1, 15.2, 13.3, 11.4, 9.5, 7.6, 5.7, 3.8, 1.9, 0],
+                    borderColor: palette.dark,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Actual Burndown',
+                    data: [19, 19, 16, 16, 13, 11, 11, 8, 8, 8, 8],
+                    borderColor: palette.blue,
+                    backgroundColor: 'rgba(69, 183, 209, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    x: {
+                       ...commonChartOptions.scales.x
+                    },
+                    y: {
+                        ...commonChartOptions.scales.y,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Story Points Remaining',
+                            color: palette.dark
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+});
+</script>
+</body>
+</html>
