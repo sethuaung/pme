@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HASHING-Summrized">
+    <meta name="description" content="Felixent : Student Guide to Hashing">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent Guide to Hashing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#003f5c] mb-2">A Deep Dive into Hashing</h1>
+            <p class="text-lg text-[#58508d]">From basic principles to real-world applications, this guide breaks down everything you need to know about cryptographic hashing.</p>
+        </header>
+        
+        <main>
+            <!-- Section 1: Hashing Basics -->
+            <section id="basics" class="mb-16">
+                <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c] mb-6 text-center">1. Hashing Basics: The Core Concept</h2>
+                    <p class="text-gray-700 mb-8 text-center max-w-3xl mx-auto">Hashing is the process of converting an input of any length into a fixed-size string of text using a mathematical function. This output, known as the "hash" or "digest," is unique to the input data. Think of it as a digital fingerprint for your data.</p>
+                    
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-6 text-center">
+                        <div class="p-6 bg-gray-50 rounded-lg flex-1">
+                            <p class="text-2xl mb-2">📝</p>
+                            <h3 class="text-xl font-semibold text-[#003f5c]">Any Input Data</h3>
+                            <p class="text-gray-600">"Hello World"</p>
+                        </div>
+                        <div class="text-4xl text-[#ffa600]">→</div>
+                        <div class="p-6 bg-blue-100 rounded-lg flex-1">
+                            <p class="text-2xl mb-2">⚙️</p>
+                            <h3 class="text-xl font-semibold text-[#003f5c]">Hashing Algorithm</h3>
+                            <p class="text-gray-600">(e.g., SHA-256)</p>
+                        </div>
+                        <div class="text-4xl text-[#ffa600]">→</div>
+                        <div class="p-6 bg-gray-50 rounded-lg flex-1">
+                            <p class="text-2xl mb-2">🔐</p>
+                            <h3 class="text-xl font-semibold text-[#003f5c]">Fixed-Size Hash</h3>
+                            <p class="text-gray-600 break-all text-xs">a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Key Principles -->
+            <section id="principles" class="mb-16">
+                <h2 class="text-3xl font-bold text-[#003f5c] mb-8 text-center">2. Key Principles of Hashing</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <p class="text-4xl mb-4">➡️</p>
+                        <h3 class="text-xl font-semibold text-[#003f5c] mb-2">Deterministic</h3>
+                        <p class="text-gray-600">The same input will always produce the same hash. "cat" will always hash to the same value.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <p class="text-4xl mb-4">⚡</p>
+                        <h3 class="text-xl font-semibold text-[#003f5c] mb-2">Fast Computation</h3>
+                        <p class="text-gray-600">Hashing algorithms are designed to quickly generate a hash from an input.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <p class="text-4xl mb-4">⬅️</p>
+                        <h3 class="text-xl font-semibold text-[#003f5c] mb-2">Pre-image Resistance</h3>
+                        <p class="text-gray-600">It is computationally infeasible to reverse the process and find the original input from its hash.</p>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <p class="text-4xl mb-4">📏</p>
+                        <h3 class="text-xl font-semibold text-[#003f5c] mb-2">Fixed-Size Output</h3>
+                        <p class="text-gray-600">A tiny text file and a large video file will hash to outputs of the same length.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Applications -->
+            <section id="applications" class="mb-16">
+                <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c] mb-6 text-center">3. Applications of Hashing</h2>
+                    <p class="text-gray-700 mb-8 text-center max-w-3xl mx-auto">Hashing is a cornerstone of modern computing and cybersecurity. Its unique properties make it invaluable for a wide range of tasks, from ensuring that a downloaded file hasn't been tampered with to securing billions of user passwords online.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container">
+                            <canvas id="applicationsChart"></canvas>
+                        </div>
+                        <div>
+                            <div class="mb-4 p-4 border-l-4 border-[#003f5c] bg-blue-50">
+                                <h3 class="font-semibold text-lg text-[#003f5c]">Data Authentication & Integrity</h3>
+                                <p class="text-gray-600">By comparing the hash of a file before and after transmission, one can verify if it has been altered. This is often seen in checksums for software downloads.</p>
+                            </div>
+                            <div class="mb-4 p-4 border-l-4 border-[#bc5090] bg-purple-50">
+                                <h3 class="font-semibold text-lg text-[#bc5090]">Password Storage</h3>
+                                <p class="text-gray-600">Websites store a hash of your password, not the password itself. When you log in, they hash your input and compare it to the stored hash, enhancing security.</p>
+                            </div>
+                            <div class="mb-4 p-4 border-l-4 border-[#ffa600] bg-yellow-50">
+                                <h3 class="font-semibold text-lg text-[#ffa600]">Blockchain Technology</h3>
+                                <p class="text-gray-600">Each block in a blockchain contains the hash of the previous block, creating a secure, immutable chain of data. This is fundamental to cryptocurrencies like Bitcoin.</p>
+                            </div>
+                             <div class="mb-4 p-4 border-l-4 border-[#ff6361] bg-red-50">
+                                <h3 class="font-semibold text-lg text-[#ff6361]">Database Management</h3>
+                                <p class="text-gray-600">Hashing is used to create hash tables, a data structure that allows for rapid data retrieval by mapping keys to values.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 4: Hashing Algorithms -->
+            <section id="algorithms" class="mb-16">
+                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c] mb-6 text-center">4. The Core Hashing Algorithms</h2>
+                    <p class="text-gray-700 mb-8 text-center max-w-3xl mx-auto">Numerous hashing algorithms have been developed, each with different levels of security and output lengths. While older algorithms like MD5 are now considered insecure for cryptographic purposes, newer ones like the SHA-2 family are the industry standard.</p>
+                     <div class="chart-container">
+                        <canvas id="algorithmsChart"></canvas>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Section 5: Real-world Example -->
+            <section id="real-world" class="mb-16">
+                <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c] mb-6 text-center">5. Hashing in Action: A Real-World Tool</h2>
+                    <p class="text-gray-700 mb-8 text-center max-w-3xl mx-auto">Try it yourself! Enter any text below to see how different algorithms generate unique hashes. Notice how even a tiny change in the input drastically alters the output hash—this is known as the avalanche effect.</p>
+
+                    <div class="max-w-2xl mx-auto">
+                        <div class="mb-4">
+                            <label for="text-input" class="block text-lg font-medium text-gray-700 mb-2">Your Text:</label>
+                            <textarea id="text-input" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#58508d] focus:border-[#58508d]" placeholder="Type something here..."></textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <h3 class="text-lg font-semibold text-[#003f5c]">MD5 Hash</h3>
+                                <p id="md5-output" class="text-sm text-gray-600 break-all font-mono">-</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <h3 class="text-lg font-semibold text-[#003f5c]">SHA-1 Hash</h3>
+                                <p id="sha1-output" class="text-sm text-gray-600 break-all font-mono">-</p>
+                            </div>
+                             <div class="p-4 bg-gray-50 rounded-lg">
+                                <h3 class="text-lg font-semibold text-[#003f5c]">SHA-256 Hash</h3>
+                                <p id="sha256-output" class="text-sm text-gray-600 break-all font-mono">-</p>
+                            </div>
+                             <div class="p-4 bg-gray-50 rounded-lg">
+                                <h3 class="text-lg font-semibold text-[#003f5c]">SHA-512 Hash</h3>
+                                <p id="sha512-output" class="text-sm text-gray-600 break-all font-mono">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12">
+            <p class="text-gray-600">&copy; <a href="https://felixent.verel.app"  >Felixent</a> 2025 Hashing Infographic. All concepts explained for educational purposes.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const tooltipTitleCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            const wrapLabel = (label) => {
+                const maxLength = 16;
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+
+            const applicationsCtx = document.getElementById('applicationsChart').getContext('2d');
+            new Chart(applicationsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Data Authentication', 'Password Storage', 'Blockchain', 'Database Management'],
+                    datasets: [{
+                        label: 'Use Case Distribution',
+                        data: [35, 30, 20, 15],
+                        backgroundColor: [
+                            '#003f5c',
+                            '#bc5090',
+                            '#ffa600',
+                            '#ff6361'
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Primary Use Cases of Hashing',
+                            font: { size: 18, weight: 'bold' },
+                            color: '#003f5c',
+                            padding: { top: 10, bottom: 20 }
+                        },
+                         ...tooltipTitleCallback.plugins
+                    }
+                }
+            });
+
+            const algorithmsCtx = document.getElementById('algorithmsChart').getContext('2d');
+            const originalLabels = ['MD5 (Insecure)', 'RIPEMD-160', 'SHA-1 (Insecure)', 'SHA-256', 'Whirlpool', 'SHA-512'];
+            const wrappedLabels = originalLabels.map(wrapLabel);
+            
+            new Chart(algorithmsCtx, {
+                type: 'bar',
+                data: {
+                    labels: wrappedLabels,
+                    datasets: [{
+                        label: 'Output Size (in bits)',
+                        data: [128, 160, 160, 256, 512, 512],
+                        backgroundColor: [
+                            '#ff6361',
+                            '#ffa600',
+                            '#bc5090',
+                            '#58508d',
+                            '#003f5c',
+                            '#002b40'
+                        ],
+                        borderColor: [
+                             '#ff6361',
+                             '#ffa600',
+                             '#bc5090',
+                             '#58508d',
+                             '#003f5c',
+                             '#002b40'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Comparison of Hash Algorithm Output Sizes',
+                            font: { size: 18, weight: 'bold' },
+                            color: '#003f5c',
+                            padding: { top: 10, bottom: 20 }
+                        },
+                        ...tooltipTitleCallback.plugins
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Bits'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const textInput = document.getElementById('text-input');
+            const md5Output = document.getElementById('md5-output');
+            const sha1Output = document.getElementById('sha1-output');
+            const sha256Output = document.getElementById('sha256-output');
+            const sha512Output = document.getElementById('sha512-output');
+
+            function updateHashes() {
+                const input = textInput.value;
+                if(input.length === 0){
+                    md5Output.textContent = '-';
+                    sha1Output.textContent = '-';
+                    sha256Output.textContent = '-';
+                    sha512Output.textContent = '-';
+                    return;
+                }
+                md5Output.textContent = CryptoJS.MD5(input).toString();
+                sha1Output.textContent = CryptoJS.SHA1(input).toString();
+                sha256Output.textContent = CryptoJS.SHA256(input).toString();
+                sha512Output.textContent = CryptoJS.SHA512(input).toString();
+            }
+
+            textInput.addEventListener('input', updateHashes);
+        });
+    </script>
+</body>
+</html>
