@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="DFIR-Summrized">
+    <meta name="description" content="FELIXENT : DFIR Infographic Content for Class">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>DFIR Course Outline | Felixent Institute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #ffa600;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-[#003f5c] text-white p-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">Mastering the Digital Crime Scene</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto">An immersive journey through the Felixent Institute's Digital Forensics & Incident Response (DFIR) curriculum, designed to forge elite cyber investigators.</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="curriculum" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-8">The Core Curriculum: A 7-Module Deep Dive</h2>
+            <div class="space-y-6">
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#374c80] mb-2">Module 1: Foundations of Digital Forensics</h3>
+                    <p>This initial module establishes the bedrock of knowledge for all future investigations. It covers the essential principles, legal frameworks, and ethical guidelines that govern the practice of digital forensics, ensuring every action taken is sound, defensible, and professional.</p>
+                    <ul class="list-disc list-inside mt-4 text-gray-600">
+                        <li>DFIR Concepts & Terminology</li>
+                        <li>Legal and Ethical Considerations</li>
+                        <li>Types of Digital Evidence</li>
+                        <li>Chain of Custody and Documentation</li>
+                    </ul>
+                </div>
+                
+                <div class="flex justify-center my-4">
+                    <span class="text-4xl text-[#ffa600]">&#11015;</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#7a5195] mb-2">Module 2: Operating Systems & File Systems</h3>
+                    <p>Investigators delve into the digital environments where evidence resides. This module provides a comprehensive understanding of how data is stored, managed, and hidden within the most common operating systems, from file structures and metadata to the techniques for recovering deleted information.</p>
+                     <ul class="list-disc list-inside mt-4 text-gray-600">
+                        <li>Windows, Linux, and macOS Forensics</li>
+                        <li>File System Structures (NTFS, EXT4, APFS)</li>
+                        <li>Metadata and Timestamp Analysis</li>
+                        <li>Hidden and Deleted File Recovery</li>
+                    </ul>
+                </div>
+                
+                <div class="flex justify-center my-4">
+                     <span class="text-4xl text-[#ffa600]">&#11015;</span>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#bc5090] mb-2">Module 3: Forensic Tools & Techniques</h3>
+                    <p>Theory is put into practice as students gain hands-on experience with the industry-standard tools of the trade. This module focuses on the practical application of software and methodologies for acquiring, preserving, and analyzing digital evidence from a variety of sources, including volatile memory and network traffic.</p>
+                     <ul class="list-disc list-inside mt-4 text-gray-600">
+                        <li>Open-Source Tools: Autopsy, Sleuth Kit, Volatility</li>
+                        <li>Imaging, Hashing, and Data Carving</li>
+                        <li>Memory Forensics & Volatile Data Capture</li>
+                        <li>Network Forensics Basics</li>
+                    </ul>
+                </div>
+
+                 <div class="flex justify-center my-4">
+                     <span class="text-4xl text-[#ffa600]">&#11015;</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#ef5675] mb-2">Module 4: Incident Response Strategy</h3>
+                     <p>Beyond forensics, this module covers the high-stakes process of responding to live security incidents. Students learn the structured phases of incident response, from initial preparation and detection to final recovery and reporting, equipping them to manage crises effectively.</p>
+                      <ul class="list-disc list-inside mt-4 text-gray-600">
+                        <li>Phases of Incident Response</li>
+                        <li>Log Analysis and SIEM Integration</li>
+                        <li>Threat Intelligence and IOC Correlation</li>
+                        <li>Reporting and Post-Incident Review</li>
+                    </ul>
+                </div>
+
+                 <div class="flex justify-center my-4">
+                     <span class="text-4xl text-[#ffa600]">&#11015;</span>
+                </div>
+
+                 <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#ff764a] mb-2">Module 5: Mobile & Cloud Forensics</h3>
+                    <p>The investigation expands to modern platforms where critical data increasingly resides. This section addresses the unique challenges and techniques for extracting and analyzing evidence from mobile devices and cloud services, a critical skill in today's interconnected world.</p>
+                    <ul class="list-disc list-inside mt-4 text-gray-600">
+                        <li>Android and iOS Data Acquisition</li>
+                        <li>Cloud Service Artifacts (AWS, Google Drive)</li>
+                        <li>Challenges in Remote Evidence Collection</li>
+                    </ul>
+                </div>
+                 <div class="flex justify-center my-4">
+                     <span class="text-4xl text-[#ffa600]">&#11015;</span>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#ffa600] mb-2">Module 6 & 7: Application & Certification</h3>
+                    <p>The final modules synthesize all learned skills through real-world case studies and a comprehensive capstone project. The curriculum culminates in preparing students for key industry certifications, validating their expertise and launching their careers in DFIR.</p>
+                    <ul class="list-disc list-inside mt-4 text-gray-600">
+                        <li>Real-World Case Walkthroughs</li>
+                        <li>Legal Frameworks and Compliance</li>
+                        <li>Capstone Project Execution</li>
+                        <li>Certification Pathways (GCFA, CHFI)</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="ir-lifecycle" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-8">The Incident Response Lifecycle</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">A core component of the curriculum is mastering the structured approach to handling security incidents. This lifecycle ensures a consistent, thorough, and effective response to any cyber crisis, minimizing damage and facilitating recovery.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                <div class="bg-white p-4 rounded-lg shadow-md w-full md:w-48 h-32 flex items-center justify-center"><div><h4 class="font-bold text-[#374c80]">Preparation</h4><p class="text-sm">Build defenses</p></div></div>
+                <div class="flow-arrow hidden md:block">&#10140;</div>
+                <div class="flow-arrow block md:hidden">&#11015;</div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-full md:w-48 h-32 flex items-center justify-center"><div><h4 class="font-bold text-[#7a5195]">Detection</h4><p class="text-sm">Identify incidents</p></div></div>
+                <div class="flow-arrow hidden md:block">&#10140;</div>
+                 <div class="flow-arrow block md:hidden">&#11015;</div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-full md:w-48 h-32 flex items-center justify-center"><div><h4 class="font-bold text-[#bc5090]">Containment</h4><p class="text-sm">Limit impact</p></div></div>
+                <div class="flow-arrow hidden md:block">&#10140;</div>
+                <div class="flow-arrow block md:hidden">&#11015;</div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-full md:w-48 h-32 flex items-center justify-center"><div><h4 class="font-bold text-[#ef5675]">Eradication</h4><p class="text-sm">Remove threat</p></div></div>
+                 <div class="flow-arrow hidden md:block">&#10140;</div>
+                 <div class="flow-arrow block md:hidden">&#11015;</div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-full md:w-48 h-32 flex items-center justify-center"><div><h4 class="font-bold text-[#ff764a]">Recovery</h4><p class="text-sm">Restore systems</p></div></div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-4">The Investigator's Toolkit</h2>
+                <p class="text-center mb-6">Students gain proficiency in a wide range of forensic tools, each serving a specific purpose in the investigative process. The curriculum emphasizes a balanced skill set across different domains of digital evidence analysis.</p>
+                <div class="chart-container">
+                    <canvas id="toolsChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-4">Capstone: Insider Threat Simulation</h2>
+                <p class="text-center mb-6">The capstone project challenges students to apply their knowledge to a realistic scenario involving data exfiltration by a malicious insider. This project tests every aspect of their training, from evidence acquisition to final reporting.</p>
+                <div class="chart-container">
+                    <canvas id="capstoneChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#003f5c] text-white text-center p-6">
+        <p>&copy; 2025 Felixent Institute. All rights reserved.</p>
+        <p class="text-sm">Empowering the next generation of cybersecurity professionals.</p>
+    </footer>
+
+    <script>
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const chartColors = ['#7a5195', '#bc5090', '#ef5675', '#ff764a', '#ffa600'];
+
+        const toolsCtx = document.getElementById('toolsChart').getContext('2d');
+        const toolsChart = new Chart(toolsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Disk & File System Analysis', 'Memory Forensics', 'Network Analysis', 'Log & SIEM Analysis', 'Malware Analysis'].map(label => wrapLabel(label, 16)),
+                datasets: [{
+                    label: 'Area of Focus',
+                    data: [35, 25, 15, 15, 10],
+                    backgroundColor: chartColors,
+                    borderColor: chartColors.map(color => color + 'B3'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#374c80'
+                        },
+                        grid: {
+                            color: '#e0e0e0'
+                        }
+                    },
+                    y: {
+                         ticks: {
+                            color: '#374c80'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        const capstoneCtx = document.getElementById('capstoneChart').getContext('2d');
+        const capstoneChart = new Chart(capstoneCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Forensic Imaging', 'File & Artifact Recovery', 'Log Correlation', 'Formal Reporting', 'Remediation Strategy'],
+                datasets: [{
+                    label: 'Project Component',
+                    data: [20, 30, 20, 20, 10],
+                    backgroundColor: chartColors,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#374c80'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
