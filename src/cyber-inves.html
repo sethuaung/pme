@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Metadata, Dorking, Hashing Tools">
+    <meta name="description" content="Felixent : Cyber Investigator's Toolkit">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Cyber Investigator's Toolkit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            border-color: #0B86F8;
+            color: #0B86F8;
+            background-color: #EBF5FF;
+        }
+        .tab-inactive {
+            border-color: transparent;
+            color: #4A5568;
+        }
+        .tool-card {
+            display: none;
+        }
+        .tool-card.active {
+            display: block;
+        }
+        .result-table th, .result-table td {
+            padding: 8px 12px;
+            border: 1px solid #E2E8F0;
+            text-align: left;
+            font-size: 0.875rem;
+            word-break: break-all;
+        }
+        .result-table th {
+            background-color: #F7FAFC;
+            font-weight: 600;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0B86F8;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900" style="color: #004AAD;">Cyber Investigator's Toolkit</h1>
+            <p class="text-lg text-gray-600 mt-2">A suite of essential web-based tools for digital investigation.</p>
+        </header>
+
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl">
+            <div class="border-b border-gray-200">
+                <nav class="flex -mb-px p-2" id="tab-nav">
+                    <button data-tab="exif" class="tab-btn text-sm md:text-base font-medium text-center py-3 px-4 md:px-6 rounded-t-lg border-b-2 transition-colors duration-200 ease-in-out">
+                        📷 EXIF Viewer
+                    </button>
+                    <button data-tab="dorking" class="tab-btn text-sm md:text-base font-medium text-center py-3 px-4 md:px-6 rounded-t-lg border-b-2 transition-colors duration-200 ease-in-out">
+                        🌐 Google Dorking
+                    </button>
+                    <button data-tab="hashing" class="tab-btn text-sm md:text-base font-medium text-center py-3 px-4 md:px-6 rounded-t-lg border-b-2 transition-colors duration-200 ease-in-out">
+                        #️⃣ Hashing Tool
+                    </button>
+                    <button data-tab="cyberchef" class="tab-btn text-sm md:text-base font-medium text-center py-3 px-4 md:px-6 rounded-t-lg border-b-2 transition-colors duration-200 ease-in-out">
+                        ⚙️ Data Operations
+                    </button>
+                    <button data-tab="virustotal" class="tab-btn text-sm md:text-base font-medium text-center py-3 px-4 md:px-6 rounded-t-lg border-b-2 transition-colors duration-200 ease-in-out">
+                        🦠 VirusTotal
+                    </button>
+                    <button data-tab="whois" class="tab-btn text-sm md:text-base font-medium text-center py-3 px-4 md:px-6 rounded-t-lg border-b-2 transition-colors duration-200 ease-in-out">
+                        🔍 WHOIS Lookup
+                    </button>
+                </nav>
+            </div>
+
+            <div class="p-6 md:p-8">
+                <!-- EXIF Tool -->
+                <div id="exif-tool" class="tool-card">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #0062D6;">EXIF Metadata Viewer</h2>
+                    <p class="mb-6 text-gray-600">Upload a JPEG image to extract and view its EXIF (Exchangeable Image File Format) data. This can reveal details like camera settings, date, time, and GPS location.</p>
+                    <div class="mb-4">
+                        <label for="image-upload" class="block mb-2 text-sm font-medium text-gray-700">Select an image:</label>
+                        <input type="file" id="image-upload" accept="image/jpeg, image/png" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors duration-200"/>
+                    </div>
+                    <div id="exif-results" class="mt-6"></div>
+                </div>
+
+                <!-- Google Dorking Tool -->
+                <div id="dorking-tool" class="tool-card">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #0062D6;">Google Dorking Assistant</h2>
+                    <p class="mb-6 text-gray-600">Construct advanced Google search queries (dorks) to uncover specific information. Fill in the fields below to build your query.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="dork-query" class="block text-sm font-medium text-gray-700">Main Search Query</label>
+                            <input type="text" id="dork-query" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., confidential report">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="dork-site" class="block text-sm font-medium text-gray-700">Specific Site (site:)</label>
+                                <input type="text" id="dork-site" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="example.com">
+                            </div>
+                            <div>
+                                <label for="dork-filetype" class="block text-sm font-medium text-gray-700">File Type (filetype:)</label>
+                                <input type="text" id="dork-filetype" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="pdf, xls, docx">
+                            </div>
+                             <div>
+                                <label for="dork-inurl" class="block text-sm font-medium text-gray-700">Text in URL (inurl:)</label>
+                                <input type="text" id="dork-inurl" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="admin, login">
+                            </div>
+                            <div>
+                                <label for="dork-intitle" class="block text-sm font-medium text-gray-700">Text in Title (intitle:)</label>
+                                <input type="text" id="dork-intitle" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="index of /">
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                             <label for="generated-dork" class="block text-sm font-medium text-gray-700">Generated Dork:</label>
+                             <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="text" id="generated-dork" readonly class="flex-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-none rounded-l-md focus:outline-none">
+                                <button id="dork-copy-btn" class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 hover:bg-gray-100">Copy</button>
+                             </div>
+                        </div>
+                        <button id="dork-search-btn" class="w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-white font-semibold transition-colors duration-200" style="background-color: #0B86F8;" onmouseover="this.style.backgroundColor='#0062D6'" onmouseout="this.style.backgroundColor='#0B86F8'">Search on Google</button>
+                    </div>
+                </div>
+
+                <!-- Hashing Tool -->
+                <div id="hashing-tool" class="tool-card">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #0062D6;">File & Text Hashing Utility</h2>
+                    <p class="mb-6 text-gray-600">Calculate cryptographic hashes for text or files. Common uses include verifying file integrity and checking for data tampering.</p>
+                    <div class="mb-6">
+                        <label for="hash-input-text" class="block text-sm font-medium text-gray-700">Enter text:</label>
+                        <textarea id="hash-input-text" rows="4" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Type or paste text here..."></textarea>
+                    </div>
+                    <div class="mb-6 text-center text-gray-500 font-semibold">OR</div>
+                     <div class="mb-6">
+                        <label for="hash-upload" class="block mb-2 text-sm font-medium text-gray-700">Select a file:</label>
+                        <input type="file" id="hash-upload" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors duration-200"/>
+                    </div>
+                    <div id="hash-results" class="mt-6"></div>
+                </div>
+
+                <!-- CyberChef Tool -->
+                <div id="cyberchef-tool" class="tool-card">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #0062D6;">Data Operations</h2>
+                    <p class="mb-6 text-gray-600">Perform various encoding, decoding, and cryptographic operations on text. The result of one operation becomes the input for the next.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex flex-col">
+                            <label for="data-input" class="block text-sm font-medium text-gray-700 mb-2">Input Data:</label>
+                            <textarea id="data-input" rows="8" class="flex-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Enter text to process..."></textarea>
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="data-output" class="block text-sm font-medium text-gray-700 mb-2">Output:</label>
+                            <textarea id="data-output" rows="8" readonly class="flex-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Operations:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="base64-encode">Base64 Encode</button>
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="base64-decode">Base64 Decode</button>
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="rot13-cipher">ROT13 Cipher</button>
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="url-encode">URL Encode</button>
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="url-decode">URL Decode</button>
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="hex-to-ascii">Hex to ASCII</button>
+                            <button class="bake-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors" data-op="ascii-to-hex">ASCII to Hex</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VirusTotal Tool -->
+                <div id="virustotal-tool" class="tool-card">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #0062D6;">VirusTotal Lookup</h2>
+                    <p class="mb-6 text-gray-600">Scan URLs or file hashes against the VirusTotal database to check for malicious activity. **A free VirusTotal API key is required.**</p>
+                    <div class="mb-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg" role="alert">
+                        <p class="font-bold">API Key Required</p>
+                        <p>To use this tool, please get a free public API key from VirusTotal and paste it into the code. Find the `virusTotalApiKey` variable in the script and replace the placeholder.</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4 mb-4">
+                        <label for="vt-type" class="text-sm font-medium text-gray-700">Lookup Type:</label>
+                        <select id="vt-type" class="mt-1 block px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value="url">URL</option>
+                            <option value="hash">File Hash (MD5, SHA1, SHA256)</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="vt-input" class="block text-sm font-medium text-gray-700">URL or Hash:</label>
+                        <input type="text" id="vt-input" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., https://example.com or a file hash">
+                    </div>
+                    
+                    <button id="vt-scan-btn" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white font-semibold transition-colors duration-200" style="background-color: #0B86F8;" onmouseover="this.style.backgroundColor='#0062D6'" onmouseout="this.style.backgroundColor='#0B86F8'">Scan</button>
+
+                    <div id="vt-results" class="mt-6"></div>
+                    <div id="vt-status" class="mt-4 text-center"></div>
+                </div>
+
+                <!-- WHOIS Tool -->
+                <div id="whois-tool" class="tool-card">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #0062D6;">WHOIS Domain Lookup</h2>
+                    <p class="mb-6 text-gray-600">Retrieve domain registration and contact information for a given domain name.</p>
+                    <div class="mb-4">
+                        <label for="whois-input" class="block text-sm font-medium text-gray-700">Domain Name:</label>
+                        <input type="text" id="whois-input" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., example.com">
+                    </div>
+                    <button id="whois-lookup-btn" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white font-semibold transition-colors duration-200" style="background-color: #0B86F8;" onmouseover="this.style.backgroundColor='#0062D6'" onmouseout="this.style.backgroundColor='#0B86F8'">Lookup</button>
+                    
+                    <div id="whois-results" class="mt-6"></div>
+                    <div id="whois-status" class="mt-4 text-center"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-12">
+            <p class="text-sm text-gray-500">&copy; 2025 Felixent. Cyber Investigator's Toolkit. For educational and professional use.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+
+            function switchTab(tabId) {
+                tabs.forEach(tab => {
+                    if (tab.dataset.tab === tabId) {
+                        tab.classList.add('tab-active');
+                        tab.classList.remove('tab-inactive');
+                    } else {
+                        tab.classList.add('tab-inactive');
+                        tab.classList.remove('tab-active');
+                    }
+                });
+
+                toolCards.forEach(card => {
+                    if (card.id === `${tabId}-tool`) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+            });
+
+            switchTab('exif');
+
+            // ----------------------------------------------------
+            // EXIF Tool Logic
+            // ----------------------------------------------------
+            const imageUpload = document.getElementById('image-upload');
+            const exifResults = document.getElementById('exif-results');
+
+            imageUpload.addEventListener('change', function() {
+                const file = this.files[0];
+                if (!file) return;
+
+                exifResults.innerHTML = '<div class="flex justify-center items-center p-4"><div class="loader"></div></div>';
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        EXIF.getData(img, function() {
+                            const allTags = EXIF.getAllTags(this);
+                            if (Object.keys(allTags).length === 0) {
+                                exifResults.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert"><p>No EXIF data found in this image.</p></div>`;
+                                return;
+                            }
+                            let tableHTML = '<table class="w-full result-table"><thead><tr><th>Tag</th><th>Value</th></tr></thead><tbody>';
+                            
+                            const gpsTags = ['GPSLatitude', 'GPSLongitude', 'GPSLatitudeRef', 'GPSLongitudeRef'];
+                            let gpsData = {};
+
+                            for (const tag in allTags) {
+                                let value = allTags[tag];
+                                if (typeof value === 'object' && value.numerator !== undefined) {
+                                     value = `${value.numerator}/${value.denominator} (${(value.numerator / value.denominator).toFixed(4)})`;
+                                }
+                                if (gpsTags.includes(tag)) {
+                                    gpsData[tag] = allTags[tag];
+                                }
+                                tableHTML += `<tr><td class="font-semibold">${tag}</td><td>${value}</td></tr>`;
+                            }
+
+                            if (gpsData.GPSLatitude && gpsData.GPSLongitude) {
+                                const lat = convertDMSToDD(gpsData.GPSLatitude, gpsData.GPSLatitudeRef);
+                                const lon = convertDMSToDD(gpsData.GPSLongitude, gpsData.GPSLongitudeRef);
+                                const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+                                tableHTML += `<tr><td class="font-semibold">Google Maps Link</td><td><a href="${mapsLink}" target="_blank" class="text-blue-600 hover:underline">View on Map</a></td></tr>`;
+                            }
+                            
+                            tableHTML += '</tbody></table>';
+                            exifResults.innerHTML = tableHTML;
+                        });
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            function convertDMSToDD(dms, ref) {
+                const degrees = dms[0].numerator / dms[0].denominator;
+                const minutes = dms[1].numerator / dms[1].denominator;
+                const seconds = dms[2].numerator / dms[2].denominator;
+                let dd = degrees + minutes / 60 + seconds / 3600;
+                if (ref === 'S' || ref === 'W') {
+                    dd = dd * -1;
+                }
+                return dd;
+            }
+
+            // ----------------------------------------------------
+            // Dorking Tool Logic
+            // ----------------------------------------------------
+            const dorkInputs = ['dork-query', 'dork-site', 'dork-filetype', 'dork-inurl', 'dork-intitle'];
+            const generatedDorkInput = document.getElementById('generated-dork');
+            const dorkSearchBtn = document.getElementById('dork-search-btn');
+            const dorkCopyBtn = document.getElementById('dork-copy-btn');
+            
+            function updateDork() {
+                const parts = [];
+                const query = document.getElementById('dork-query').value.trim();
+                if (query) parts.push(query);
+
+                const site = document.getElementById('dork-site').value.trim();
+                if (site) parts.push(`site:${site}`);
+
+                const filetype = document.getElementById('dork-filetype').value.trim();
+                if (filetype) parts.push(`filetype:${filetype}`);
+
+                const inurl = document.getElementById('dork-inurl').value.trim();
+                if (inurl) parts.push(`inurl:${inurl}`);
+                
+                const intitle = document.getElementById('dork-intitle').value.trim();
+                if (intitle) parts.push(`intitle:"${intitle}"`);
+
+                generatedDorkInput.value = parts.join(' ');
+            }
+
+            dorkInputs.forEach(id => document.getElementById(id).addEventListener('input', updateDork));
+            
+            dorkSearchBtn.addEventListener('click', () => {
+                const query = generatedDorkInput.value;
+                if(query) {
+                    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    window.open(url, '_blank');
+                }
+            });
+
+            dorkCopyBtn.addEventListener('click', () => {
+                generatedDorkInput.select();
+                document.execCommand('copy');
+                dorkCopyBtn.textContent = 'Copied!';
+                setTimeout(() => { dorkCopyBtn.textContent = 'Copy'; }, 2000);
+            });
+            
+            updateDork();
+
+            // ----------------------------------------------------
+            // Hashing Tool Logic
+            // ----------------------------------------------------
+            const hashInputText = document.getElementById('hash-input-text');
+            const hashUpload = document.getElementById('hash-upload');
+            const hashResults = document.getElementById('hash-results');
+
+            function calculateHashes(data) {
+                hashResults.innerHTML = '<div class="flex justify-center items-center p-4"><div class="loader"></div></div>';
+                
+                setTimeout(async () => {
+                    let resultsHTML = '<table class="w-full result-table"><thead><tr><th>Algorithm</th><th>Hash</th></tr></thead><tbody>';
+                    
+                    const md5 = CryptoJS.MD5(data).toString(CryptoJS.enc.Hex);
+                    resultsHTML += `<tr><td class="font-semibold">MD5</td><td>${md5}</td></tr>`;
+
+                    const sha1 = CryptoJS.SHA1(data).toString(CryptoJS.enc.Hex);
+                    resultsHTML += `<tr><td class="font-semibold">SHA-1</td><td>${sha1}</td></tr>`;
+
+                    const sha256 = CryptoJS.SHA256(data).toString(CryptoJS.enc.Hex);
+                    resultsHTML += `<tr><td class="font-semibold">SHA-256</td><td>${sha256}</td></tr>`;
+                    
+                    const sha512 = CryptoJS.SHA512(data).toString(CryptoJS.enc.Hex);
+                    resultsHTML += `<tr><td class="font-semibold">SHA-512</td><td>${sha512}</td></tr>`;
+
+                    resultsHTML += '</tbody></table>';
+                    hashResults.innerHTML = resultsHTML;
+                }, 50);
+            }
+            
+            hashInputText.addEventListener('input', () => {
+                hashUpload.value = '';
+                const text = hashInputText.value;
+                if(text) {
+                    const word_array = CryptoJS.lib.WordArray.create(text);
+                    calculateHashes(word_array);
+                } else {
+                    hashResults.innerHTML = '';
+                }
+            });
+
+            hashUpload.addEventListener('change', function() {
+                hashInputText.value = '';
+                const file = this.files[0];
+                if (!file) {
+                    hashResults.innerHTML = '';
+                    return;
+                };
+
+                hashResults.innerHTML = `<div class="flex justify-center items-center p-4"><div class="loader"></div><p class="ml-4 text-gray-600">Processing file...</p></div>`;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const data = CryptoJS.lib.WordArray.create(e.target.result);
+                    calculateHashes(data);
+                };
+                reader.onerror = () => {
+                     hashResults.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert"><p>Error reading file.</p></div>`;
+                };
+                reader.readAsArrayBuffer(file);
+            });
+            
+            // ----------------------------------------------------
+            // CyberChef Tool Logic
+            // ----------------------------------------------------
+            const dataInput = document.getElementById('data-input');
+            const dataOutput = document.getElementById('data-output');
+            const bakeButtons = document.querySelectorAll('.bake-btn');
+
+            bakeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const op = button.dataset.op;
+                    let input = dataInput.value;
+                    let output = '';
+
+                    try {
+                        if (op === 'base64-encode') {
+                            output = btoa(input);
+                        } else if (op === 'base64-decode') {
+                            output = atob(input);
+                        } else if (op === 'url-encode') {
+                            output = encodeURIComponent(input);
+                        } else if (op === 'url-decode') {
+                            output = decodeURIComponent(input);
+                        } else if (op === 'rot13-cipher') {
+                            output = input.replace(/[a-zA-Z]/g, function(c){
+                                return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+                            });
+                        } else if (op === 'hex-to-ascii') {
+                            output = input.replace(/\s/g, '').replace(/[0-9a-fA-F]{2}/g, function(c) {
+                                return String.fromCharCode(parseInt(c, 16));
+                            });
+                        } else if (op === 'ascii-to-hex') {
+                            let hex = '';
+                            for(let i = 0; i < input.length; i++) {
+                                hex += input.charCodeAt(i).toString(16).padStart(2, '0');
+                            }
+                            output = hex;
+                        }
+                        dataOutput.value = output;
+                        dataInput.value = output;
+                    } catch (e) {
+                        dataOutput.value = 'Error: ' + e.message;
+                    }
+                });
+            });
+
+            // ----------------------------------------------------
+            // VirusTotal Tool Logic
+            // ----------------------------------------------------
+            const virusTotalApiKey = '1ee536b1a8ed4ffbdadd39ebc91cb6b022f89f011a46ecb5b5806b5720a4a991';
+            const vtTypeSelect = document.getElementById('vt-type');
+            const vtInput = document.getElementById('vt-input');
+            const vtScanBtn = document.getElementById('vt-scan-btn');
+            const vtResults = document.getElementById('vt-results');
+            const vtStatus = document.getElementById('vt-status');
+
+            vtScanBtn.addEventListener('click', async () => {
+                vtResults.innerHTML = '';
+                vtStatus.innerHTML = '';
+                const input = vtInput.value.trim();
+                const type = vtTypeSelect.value;
+                
+                if (!input) {
+                    vtStatus.innerHTML = '<span class="text-red-600">Please enter a URL or hash.</span>';
+                    return;
+                }
+                
+                if (virusTotalApiKey === 'YOUR_API_KEY_HERE') {
+                    vtStatus.innerHTML = '<span class="text-red-600">Please provide your VirusTotal API key in the code.</span>';
+                    return;
+                }
+
+                vtScanBtn.disabled = true;
+                vtStatus.innerHTML = '<div class="flex justify-center items-center"><div class="loader"></div><span class="ml-2 text-gray-600">Scanning...</span></div>';
+
+                const headers = {
+                    'x-apikey': virusTotalApiKey,
+                    'accept': 'application/json'
+                };
+
+                let url, response;
+                
+                if (type === 'url') {
+                    const encodedUrl = btoa(input).replace(/=/g, '');
+                    url = `https://www.virustotal.com/api/v3/urls/${encodedUrl}`;
+                    
+                    try {
+                        response = await fetch(url, { headers });
+                        const data = await response.json();
+                        displayVirusTotalResults(data, 'URL');
+                    } catch (error) {
+                        vtStatus.innerHTML = `<span class="text-red-600">Error: ${error.message}. Please check your input and API key.</span>`;
+                    }
+                    
+                } else if (type === 'hash') {
+                    if (!/^[a-f0-9]{32,128}$/i.test(input)) {
+                         vtStatus.innerHTML = '<span class="text-red-600">Invalid hash format. Please use a valid MD5, SHA1, or SHA256 hash.</span>';
+                         vtScanBtn.disabled = false;
+                         return;
+                    }
+                    url = `https://www.virustotal.com/api/v3/files/${input}`;
+
+                    try {
+                        response = await fetch(url, { headers });
+                        const data = await response.json();
+                        displayVirusTotalResults(data, 'File Hash');
+                    } catch (error) {
+                        vtStatus.innerHTML = `<span class="text-red-600">Error: ${error.message}. Please check your input and API key.</span>`;
+                    }
+                }
+                vtScanBtn.disabled = false;
+            });
+
+            function displayVirusTotalResults(data, dataType) {
+                vtStatus.innerHTML = '';
+                let resultsHTML = '';
+                
+                if (data.error) {
+                    if (data.error.code === 'NotFoundError') {
+                        vtResults.innerHTML = `<div class="bg-gray-100 border border-gray-400 text-gray-700 px-4 py-3 rounded-lg" role="alert"><p>No analysis found for this ${dataType}. It has not been previously scanned by VirusTotal.</p></div>`;
+                    } else if (data.error.code === 'AuthenticationRequiredError') {
+                        vtResults.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert"><p>Authentication Error: Your API key is invalid or not provided.</p></div>`;
+                    } else if (data.error.code === 'QuotaExceededError') {
+                        vtResults.innerHTML = `<div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg" role="alert"><p>Quota Exceeded: You have reached your API request limit.</p></div>`;
+                    } else {
+                        vtResults.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert"><p>API Error: ${data.error.message}</p></div>`;
+                    }
+                    return;
+                }
+
+                if (data.data && data.data.attributes) {
+                    const attr = data.data.attributes;
+                    const stats = attr.last_analysis_stats || { malicious: 0, undetected: 0, suspicious: 0, harmless: 0 };
+                    
+                    const score = stats.malicious / (stats.malicious + stats.harmless + stats.undetected) * 100 || 0;
+                    
+                    resultsHTML += `
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                                <h3 class="text-xl font-bold mb-2">Analysis Summary</h3>
+                                <p class="text-lg">**${stats.malicious}** malicious, **${stats.undetected}** undetected, **${stats.suspicious}** suspicious, **${stats.harmless}** harmless.</p>
+                                <p class="text-sm mt-2 text-gray-500">Last analysis: ${new Date(attr.last_analysis_date * 1000).toLocaleString()}</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                                    <h4 class="font-semibold text-red-700">Malicious Detections</h4>
+                                    <p class="text-3xl font-bold text-red-600">${stats.malicious}</p>
+                                </div>
+                                <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                                    <h4 class="font-semibold text-green-700">Undetected</h4>
+                                    <p class="text-3xl font-bold text-green-600">${stats.undetected}</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-center">
+                                <a href="${attr.vt_url}" target="_blank" class="text-blue-600 hover:underline font-semibold">View Full Report on VirusTotal</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                     vtResults.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert"><p>Could not retrieve data. The API response was not in the expected format.</p></div>`;
+                }
+
+                vtResults.innerHTML = resultsHTML;
+            }
+
+            // ----------------------------------------------------
+            // WHOIS Tool Logic
+            // ----------------------------------------------------
+            const whoisInput = document.getElementById('whois-input');
+            const whoisLookupBtn = document.getElementById('whois-lookup-btn');
+            const whoisResults = document.getElementById('whois-results');
+            const whoisStatus = document.getElementById('whois-status');
+
+            whoisLookupBtn.addEventListener('click', async () => {
+                whoisResults.innerHTML = '';
+                whoisStatus.innerHTML = '';
+
+                const domain = whoisInput.value.trim();
+                if (!domain) {
+                    whoisStatus.innerHTML = '<span class="text-red-600">Please enter a domain name.</span>';
+                    return;
+                }
+
+                whoisLookupBtn.disabled = true;
+                whoisStatus.innerHTML = '<div class="flex justify-center items-center"><div class="loader"></div><span class="ml-2 text-gray-600">Looking up WHOIS data...</span></div>';
+
+                const api = `https://whois.freeapi.com/?domain=${encodeURIComponent(domain)}`;
+
+                try {
+                    const response = await fetch(api);
+                    const data = await response.json();
+                    
+                    if (response.ok && data.whois_record) {
+                        displayWhoisResults(data.whois_record);
+                    } else if (data.error) {
+                        whoisStatus.innerHTML = `<span class="text-red-600">Error: ${data.error}</span>`;
+                    } else {
+                        whoisStatus.innerHTML = '<span class="text-red-600">WHOIS data not found for this domain.</span>';
+                    }
+                } catch (error) {
+                    whoisStatus.innerHTML = `<span class="text-red-600">Network Error: Could not connect to the API.</span>`;
+                } finally {
+                    whoisLookupBtn.disabled = false;
+                }
+            });
+
+            function displayWhoisResults(record) {
+                whoisStatus.innerHTML = '';
+                
+                let tableHTML = '<table class="w-full result-table"><tbody>';
+                
+                // Add key details to the table
+                const details = {
+                    'Domain Name': record.domain_name,
+                    'Registrar': record.registrar,
+                    'Creation Date': record.creation_date,
+                    'Expiration Date': record.expiration_date,
+                    'Updated Date': record.updated_date,
+                    'Name Servers': record.name_servers ? record.name_servers.join('<br>') : 'N/A',
+                };
+
+                for (const key in details) {
+                    if (details[key]) {
+                        tableHTML += `<tr><td class="font-semibold">${key}</td><td>${details[key]}</td></tr>`;
+                    }
+                }
+
+                // Add optional sections like registrant information
+                if (record.registrant_contact) {
+                    tableHTML += `<tr><td colspan="2" class="bg-gray-100 font-bold text-center">Registrant Contact</td></tr>`;
+                    for (const key in record.registrant_contact) {
+                        tableHTML += `<tr><td class="font-semibold">${key}</td><td>${record.registrant_contact[key]}</td></tr>`;
+                    }
+                }
+                
+                tableHTML += '</tbody></table>';
+                whoisResults.innerHTML = tableHTML;
+            }
+        });
+    </script>
+</body>
+</html>
