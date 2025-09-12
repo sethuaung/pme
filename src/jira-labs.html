@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Project Management Labs with Jira">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>FELIXENT : Jira Labs-Community Learning Hub Launch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-arrow {
+            position: relative;
+            padding-right: 20px;
+        }
+        .flowchart-arrow::after {
+            content: '→';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0094FF;
+        }
+        .agile-circle-item {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #B4E2FF;
+            color: #004AAD;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="bg-[#004AAD] text-white p-8 text-center shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">Launching Yangon's Community Learning Hub</h1>
+        <p class="text-lg md:text-xl text-[#B4E2FF]">A 4-Month Project Journey from Concept to Community Impact</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center justify-around text-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-6xl font-bold text-[#0094FF]">4</p>
+                    <p class="text-xl text-gray-600">Months to Launch</p>
+                </div>
+                <div class="mb-4 md:mb-0">
+                    <p class="text-6xl font-bold text-[#0094FF]">3</p>
+                    <p class="text-xl text-gray-600">Tech-Enabled Classrooms</p>
+                </div>
+                <div class="mb-4 md:mb-0">
+                    <p class="text-6xl font-bold text-[#0094FF]">10+</p>
+                    <p class="text-xl text-gray-600">Laptops for Learners</p>
+                </div>
+                <div>
+                    <p class="text-6xl font-bold text-[#0094FF]">2</p>
+                    <p class="text-xl text-gray-600">Languages Supported</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Project Blueprint</h2>
+                <p class="mb-4">The project's foundation is defined by the classic constraints of scope, time, and cost, balanced to ensure quality. Our goal is to launch a fully equipped learning hub with a bilingual curriculum.</p>
+                <div class="relative w-full h-48 flex items-center justify-center my-4">
+                    <div class="absolute w-0 h-0 border-l-[100px] border-l-transparent border-b-[173.2px] border-b-[#B4E2FF] border-r-[100px] border-r-transparent"></div>
+                    <span class="absolute top-1 font-semibold text-[#004AAD]">Quality</span>
+                    <span class="absolute bottom-2 left-2 font-semibold text-[#004AAD]">Time & Cost</span>
+                    <span class="absolute bottom-2 right-4 font-semibold text-[#004AAD]">Scope</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Key Stakeholders</h2>
+                <p class="mb-4">Collaboration is crucial. We engage with a diverse group of stakeholders to ensure the hub meets community needs and aligns with strategic goals.</p>
+                <div class="space-y-3">
+                    <div class="bg-gray-100 p-3 rounded-md flex items-center"><span class="text-xl mr-3">🏢</span> <strong>NGO Leaders:</strong> Provide strategic direction and funding.</div>
+                    <div class="bg-gray-100 p-3 rounded-md flex items-center"><span class="text-xl mr-3">👨‍👩‍👧‍👦</span> <strong>Community Reps:</strong> Offer insights into learner needs and cultural context.</div>
+                    <div class="bg-gray-100 p-3 rounded-md flex items-center"><span class="text-xl mr-3">👩‍🏫</span> <strong>Local Educators:</strong> Advise on curriculum and teaching methodologies.</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Work Breakdown</h2>
+                <p class="mb-4">To manage the project's scope, we break down the work into three core streams, ensuring all aspects of the launch are covered systematically.</p>
+                <ul class="list-none space-y-2">
+                    <li class="p-3 bg-[#B4E2FF] rounded-md text-[#004AAD] font-semibold">1. Curriculum Development</li>
+                    <li class="p-3 bg-[#B4E2FF] rounded-md text-[#004AAD] font-semibold">2. Technology & Facility Setup</li>
+                    <li class="p-3 bg-[#B4E2FF] rounded-md text-[#004AAD] font-semibold">3. Community Outreach & Enrollment</li>
+                </ul>
+            </div>
+            
+            <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4 text-center">Project Timeline: 4-Month Roadmap</h2>
+                <p class="mb-4 text-center max-w-3xl mx-auto">This Gantt chart visualizes our high-level schedule, mapping out major workstreams from initiation to launch. This roadmap helps us track progress and manage dependencies across the project teams.</p>
+                <div class="chart-container h-96">
+                    <canvas id="ganttChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Task Management</h2>
+                <p class="mb-4">We use Jira to track progress. This donut chart shows a snapshot of our task status, highlighting the momentum we've built and the work that remains.</p>
+                <div class="chart-container h-64 md:h-80">
+                    <canvas id="taskStatusChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Communication Plan</h2>
+                <p class="mb-4">Clear and consistent communication is the backbone of our execution strategy. We use a suite of tools tailored for different types of updates to keep everyone aligned.</p>
+                <div class="flex-grow flex flex-col justify-center space-y-4">
+                    <div class="flex items-center text-center">
+                        <span class="flex-1 font-semibold text-lg flowchart-arrow">Jira</span>
+                        <span class="flex-1 font-semibold text-lg flowchart-arrow">Slack</span>
+                        <span class="flex-1 font-semibold text-lg">Telegram</span>
+                    </div>
+                     <div class="flex items-start text-center text-sm text-gray-600">
+                        <p class="flex-1 px-2">For detailed task tracking and formal progress updates.</p>
+                        <p class="flex-1 px-2">For daily team chats, quick questions, and collaboration.</p>
+                        <p class="flex-1 px-2">For real-time announcements to the wider stakeholder group.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Agile Feedback Loop</h2>
+                <p class="mb-4">We embrace change. Mid-project feedback from the community is integrated through an agile process, allowing us to pivot quickly and improve relevance.</p>
+                <div class="relative w-64 h-64 mx-auto">
+                    <div class="agile-circle-item" style="transform: translate(82px, 0px);">Gather Feedback</div>
+                    <div class="agile-circle-item" style="transform: translate(140px, 82px) rotate(90deg);">Sprint Planning</div>
+                    <div class="agile-circle-item" style="transform: translate(82px, 164px) rotate(180deg);">Adjust & Adapt</div>
+                    <div class="agile-circle-item" style="transform: translate(0px, 82px) rotate(270deg);">Iterate & Deliver</div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-[#0094FF] animate-spin" style="animation-duration: 10s;">🔄</div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4 text-center">Project Closure & Lessons Learned</h2>
+                 <p class="mb-6 text-center max-w-3xl mx-auto">After a successful launch event, we conducted a retrospective to capture key insights. These lessons are vital for improving future projects within the NGO.</p>
+                <div class="flex flex-col md:flex-row justify-around text-center gap-6">
+                    <div class="flex-1 p-4 border-2 border-[#0094FF] rounded-lg bg-blue-50">
+                        <h3 class="text-xl font-bold text-[#004AAD]">Community Input is Key</h3>
+                        <p>Engaging the community early and often ensures the final product is relevant and embraced.</p>
+                    </div>
+                     <div class="flex-1 p-4 border-2 border-[#0094FF] rounded-lg bg-blue-50">
+                        <h3 class="text-xl font-bold text-[#004AAD]">Modular Content Wins</h3>
+                        <p>Creating a modular, bilingual curriculum from the start drastically speeds up adaptation and future scaling.</p>
+                    </div>
+                     <div class="flex-1 p-4 border-2 border-[#0094FF] rounded-lg bg-blue-50">
+                        <h3 class="text-xl font-bold text-[#004AAD]">Celebrate Success</h3>
+                        <p>Celebrating milestones and the final launch event is crucial for boosting team morale and stakeholder buy-in.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Resume Spotlight (STAR Method)</h2>
+                <p class="mb-4">Here's how this project experience translates into a powerful, results-oriented statement for a resume, demonstrating leadership, coordination, and successful delivery.</p>
+                <blockquote class="bg-gray-100 p-4 border-l-4 border-[#0094FF]">
+                    <p class="italic text-gray-700">"Led a 4-month bilingual Learning Hub launch in Yangon, coordinating cross-functional teams and delivering tech-enabled classrooms and curriculum on time and under budget."</p>
+                </blockquote>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#004AAD] mb-4">Elevator Pitch</h2>
+                <p class="mb-4">This concise pitch summarizes the skills and impact demonstrated in the project, perfect for networking and interviews.</p>
+                <div class="bg-[#B4E2FF] p-4 rounded-lg text-center">
+                    <p class="font-semibold text-[#004AAD]">"I specialize in inclusive project management and recently led a community hub launch with bilingual curriculum and agile adaptation. I bring strategic coordination and a passion for learner impact."</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#004AAD] text-white text-center p-4 mt-8">
+        <p>Felixent | SMART SOLUTIONS. SEAMLESS EXECUTION.</p>
+        <p class="text-sm text-gray-500">&copy; 2025 Felixent. For educational and professional use.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const brilliantBlues = {
+                dark: '#004AAD',
+                medium: '#0094FF',
+                light: '#B4E2FF',
+                gray: '#A9A9A9'
+            };
+
+            const wrapLabel = (label, maxLength = 16) => {
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines.length > 1 ? lines : label;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const ganttCtx = document.getElementById('ganttChart').getContext('2d');
+            new Chart(ganttCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Community Outreach', 'Staff Training', 'Tech & Facility Setup', 'Curriculum Development'].map(label => wrapLabel(label)),
+                    datasets: [{
+                        label: 'Project Phase Duration (Months)',
+                        data: [[0.5, 4], [2, 3.5], [1, 2.5], [0, 1.5]],
+                        backgroundColor: [brilliantBlues.medium, brilliantBlues.light, brilliantBlues.medium, brilliantBlues.light],
+                        borderColor: brilliantBlues.dark,
+                        borderWidth: 1,
+                        barPercentage: 0.5,
+                        categoryPercentage: 1.0,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 4,
+                            title: {
+                                display: true,
+                                text: 'Months'
+                            }
+                        },
+                        y: {
+                           ticks: {
+                                autoSkip: false
+                           }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    const val = context.raw;
+                                    return `Start: Month ${val[0]}, End: Month ${val[1]}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const taskStatusCtx = document.getElementById('taskStatusChart').getContext('2d');
+            new Chart(taskStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'In Progress', 'To Do'],
+                    datasets: [{
+                        label: 'Task Status',
+                        data: [65, 25, 10],
+                        backgroundColor: [brilliantBlues.medium, brilliantBlues.light, brilliantBlues.gray],
+                        borderColor: '#ffffff',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
