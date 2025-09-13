@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Felixent-DevTools">
+    <meta name="description" content="Felixent : Multi-Language Live Editor">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent : Live Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #e5e7eb;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        .editor-pane, .preview-pane {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+        }
+        textarea {
+            flex: 1;
+            background-color: #2d3748;
+            color: #e5e7eb;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: monospace;
+            font-size: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .preview-pane {
+            background-color: #1f2937;
+            border-left: 1px solid #4b5563;
+        }
+        .preview-content {
+            flex: 1;
+            overflow-y: auto;
+            background-color: #ffffff;
+            color: #1f2937;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .preview-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .btn-group button {
+            transition: all 0.2s;
+        }
+        .btn-group button.active {
+            background-color: #4c51bf;
+            color: #ffffff;
+        }
+        .guide-container {
+            background-color: #2d3748;
+            padding: 1.5rem;
+            border-top: 1px solid #4b5563;
+            border-radius: 0.5rem;
+            margin: 1rem;
+        }
+        .guide-content h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .guide-content p, .guide-content ul, .guide-content pre {
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+        .guide-content code {
+            background-color: #4a5568;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <div class="p-4 bg-gray-800 flex flex-col sm:flex-row items-center justify-between rounded-b-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4 sm:mb-0">Live Editor</h1>
+        <div class="btn-group flex flex-wrap gap-2">
+            <button id="btn-html" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md active">HTML</button>
+            <button id="btn-php" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md">PHP</button>
+            <button id="btn-go" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md">GOLANG</button>
+            <button id="btn-py" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md">Python</button>
+            <button id="btn-md" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md">Markdown</button>
+        </div>
+    </div>
+
+    <div class="container flex-col sm:flex-row">
+        <div class="editor-pane h-1/2 sm:h-full">
+            <textarea id="editor" spellcheck="false" class="flex-1 rounded-lg"></textarea>
+            <button id="run-btn" class="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-md font-semibold hidden">Run Code</button>
+        </div>
+        <div class="preview-pane h-1/2 sm:h-full border-t sm:border-t-0 sm:border-l">
+            <h2 class="text-xl font-semibold mb-2">
+                <span id="output-title">Live Preview</span>
+            </h2>
+            <div id="preview" class="preview-content rounded-lg p-4"></div>
+            <iframe id="iframe-preview" class="preview-iframe rounded-lg hidden"></iframe>
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-container">
+        <h2 class="text-xl font-bold mb-4">Essentials Guide</h2>
+        <div id="guide" class="guide-content"></div>
+    </div>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+        const iframePreview = document.getElementById('iframe-preview');
+        const outputTitle = document.getElementById('output-title');
+        const runBtn = document.getElementById('run-btn');
+        const loadingSpinner = document.getElementById('loading');
+        const languageButtons = document.querySelectorAll('.btn-group button');
+        const guideContainer = document.getElementById('guide');
+        
+        let currentLanguage = 'html';
+        const apiBaseUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=`;
+        const apiKey = ""; // Canvas will automatically provide the API key
+        
+        const placeholders = {
+            html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hello, World!</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f4f8;
+            color: #1f2937;
+            padding: 2rem;
+            text-align: center;
+        }
+        h1 {
+            color: #10b981;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello from HTML!</h1>
+    <p>This is a live preview of your HTML code. Try changing the text or styles.</p>
+</body>
+</html>`,
+            php: `<?php
+$name = "World";
+echo "Hello, " . $name . "!";
+echo "\\n<br>The current date is: " . date("Y-m-d");
+?>`,
+            go: `package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    fmt.Println("Hello, Go!")
+    fmt.Println("The current time is:", time.Now().Format(time.RFC850))
+}`,
+            py: `def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+number = 5
+print(f"The factorial of {number} is {factorial(number)}.")
+`,
+            md: `# Hello from Markdown!
+
+This is a **live preview** of your markdown text.
+
+- You can use lists
+- And **bold** or *italic* text.
+
+\`\`\`javascript
+// You can also add code blocks
+const message = "Cool!";
+console.log(message);
+\`\`\`
+`
+        };
+
+        const guides = {
+            html: `
+                <h3>HTML (HyperText Markup Language)</h3>
+                <p>The standard language for creating web pages. It provides the structure of the page.</p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Elements:</strong> The building blocks of HTML, represented by tags like <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>, and <code>&lt;img&gt;</code>.</li>
+                    <li><strong>Attributes:</strong> Provide additional information for elements, like the source for an image (<code>src</code>) or the destination for a link (<code>href</code>).</li>
+                    <li><strong>Basic Structure:</strong> Every HTML page starts with <code>&lt;!DOCTYPE html&gt;</code> and contains <code>&lt;head&gt;</code> (metadata) and <code>&lt;body&gt;</code> (visible content) sections.</li>
+                </ul>
+                <pre class="bg-gray-700 p-2 rounded"><code>&lt;!-- A basic HTML element with an attribute --&gt;
+&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;</code></pre>
+            `,
+            php: `
+                <h3>PHP (Hypertext Preprocessor)</h3>
+                <p>A server-side scripting language for web development.</p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Syntax:</strong> PHP code is embedded within HTML using <code>&lt;?php ... ?&gt;</code> tags.</li>
+                    <li><strong>Variables:</strong> All variables start with a dollar sign (<code>$</code>). PHP is a loosely typed language.</li>
+                    <li><strong>Data Types:</strong> Common types include String, Integer, Float, Boolean, Array, and Object.</li>
+                    <li><strong>Control Structures:</strong> Use <code>if/else</code> statements for conditional logic and <code>for</code> or <code>foreach</code> loops to iterate.</li>
+                </ul>
+                <pre class="bg-gray-700 p-2 rounded"><code>&lt;?php
+$age = 30;
+if ($age > 21) {
+    echo "You are an adult.";
+}
+?&gt;</code></pre>
+            `,
+            go: `
+                <h3>GOLANG (Go)</h3>
+                <p>A statically typed, compiled programming language known for simplicity and efficiency.</p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Entry Point:</strong> Programs start execution in the <code>main</code> function of the <code>main</code> package.</li>
+                    <li><strong>Variables:</strong> Declare with <code>var name type</code> or use the shorthand <code>name := "value"</code> for type inference.</li>
+                    <li><strong>Data Types:</strong> Fundamental types include <code>string</code>, <code>int</code>, <code>bool</code>, and <code>float64</code>.</li>
+                    <li><strong>Control Flow:</strong> Use <code>if/else</code> and <code>for</code> loops. There is no <code>while</code> loop in Go.</li>
+                </ul>
+                <pre class="bg-gray-700 p-2 rounded"><code>package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 5; i++ {
+        fmt.Println(i)
+    }
+}</code></pre>
+            `,
+            py: `
+                <h3>Python</h3>
+                <p>A high-level, interpreted programming language known for its clear syntax and readability.</p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Indentation:</strong> Python uses indentation (whitespace) to define code blocks. This is mandatory.</li>
+                    <li><strong>Variables & Data Types:</strong> Variables are assigned directly. Common types include <code>str</code>, <code>int</code>, <code>float</code>, <code>list</code>, and <code>dict</code>.</li>
+                    <li><strong>Control Flow:</strong> Use <code>if/elif/else</code> statements for conditionals and <code>for</code> or <code>while</code> loops for iteration.</li>
+                </ul>
+                <pre class="bg-gray-700 p-2 rounded"><code># A simple for loop
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(fruit)</code></pre>
+            `,
+            md: `
+                <h3>Markdown</h3>
+                <p>A lightweight markup language for creating formatted text.</p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Headings:</strong> Use <code>#</code> for headings (e.g., <code># Heading 1</code>).</li>
+                    <li><strong>Emphasis:</strong> Use asterisks (<code>*</code>) or underscores (<code>_</code>) for italic (<code>*text*</code>) and bold (<code>**text**</code>).</li>
+                    <li><strong>Links & Images:</strong> Create links with <code>[text](url)</code> and images with <code>![alt text](url)</code>.</li>
+                    <li><strong>Lists:</strong> Use <code>-</code>, <code>*</code>, or numbers for bulleted and numbered lists.</li>
+                    <li><strong>Code:</strong> Use backticks (<code>\`</code>) for inline code or three backticks (<code>\`\`\`</code>) for code blocks.</li>
+                </ul>
+                <pre class="bg-gray-700 p-2 rounded"><code>[Google](https://www.google.com) is a popular search engine.
+![Markdown Logo](https://placehold.co/150x50)</code></pre>
+            `
+        };
+
+        const systemInstructions = {
+            php: { parts: [{ text: "You are a PHP interpreter. Execute the following PHP code and return only the standard output. Do not include any explanations or extra text. If there is an error, return the error message. Do not include '<?php' and '?>' in your response. The user will provide the code." }] },
+            go: { parts: [{ text: "You are a Go compiler and runtime. Execute the following Go code and return only the standard output. Do not include any explanations or extra text. If there is an error, return the error message. The user will provide the code." }] },
+            py: { parts: [{ text: "You are a Python interpreter. Execute the following Python code and return only the standard output. Do not include any explanations or extra text. If there is an error, return the error message. The user will provide the code." }] }
+        };
+
+        // Function to update the preview based on the current language
+        function updatePreview() {
+            const code = editor.value;
+            if (currentLanguage === 'html') {
+                iframePreview.srcdoc = code;
+                preview.classList.add('hidden');
+                iframePreview.classList.remove('hidden');
+                outputTitle.textContent = 'Live Preview';
+                runBtn.classList.add('hidden');
+            } else if (currentLanguage === 'md') {
+                preview.innerHTML = marked.parse(code);
+                preview.classList.remove('hidden');
+                iframePreview.classList.add('hidden');
+                outputTitle.textContent = 'Live Preview';
+                runBtn.classList.add('hidden');
+            } else {
+                preview.innerHTML = '<div class="text-gray-400">Click "Run Code" to see the output.</div>';
+                preview.classList.remove('hidden');
+                iframePreview.classList.add('hidden');
+                outputTitle.textContent = 'Output';
+                runBtn.classList.remove('hidden');
+            }
+        }
+
+        // Function to handle language changes
+        function handleLanguageChange(lang) {
+            currentLanguage = lang;
+            editor.value = placeholders[lang];
+            guideContainer.innerHTML = guides[lang];
+            
+            languageButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.id === `btn-${lang}`) {
+                    btn.classList.add('active');
+                }
+            });
+            updatePreview();
+        }
+
+        // Function to run PHP, Go, or Python code via the API
+        async function runCode() {
+            const code = editor.value;
+            if (currentLanguage !== 'php' && currentLanguage !== 'go' && currentLanguage !== 'py') {
+                return;
+            }
+
+            loadingSpinner.classList.remove('hidden');
+            preview.innerHTML = '';
+            
+            const payload = {
+                contents: [{ parts: [{ text: code }] }],
+                systemInstruction: systemInstructions[currentLanguage]
+            };
+
+            try {
+                const response = await fetch(apiBaseUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                
+                let output = 'No output.';
+                if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+                    output = result.candidates[0].content.parts[0].text;
+                }
+                preview.innerHTML = `<pre class="text-white p-4 bg-gray-800 rounded-lg whitespace-pre-wrap">${output}</pre>`;
+            } catch (error) {
+                console.error('Error running code:', error);
+                preview.innerHTML = `<pre class="text-red-400 p-4 bg-gray-800 rounded-lg whitespace-pre-wrap">Error: Could not execute code. Check your network or code syntax.</pre>`;
+            } finally {
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        // Event listeners
+        editor.addEventListener('input', updatePreview);
+        runBtn.addEventListener('click', runCode);
+        languageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const lang = button.id.replace('btn-', '');
+                handleLanguageChange(lang);
+            });
+        });
+
+        // Initial setup
+        handleLanguageChange('html');
+    </script>
+
+</body>
+</html>
