@@ -137,6 +137,37 @@
                     </div>
                 </div>
             </section>
+            
+            <section id="power-query" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">Key Power Query Functions</h2>
+                <p class="text-center max-w-3xl mx-auto mb-8">Power Query is a data preparation and ETL (Extract, Transform, Load) tool. It provides a visual, step-by-step way to clean, shape, and combine your data before it ever reaches your report. Here are some of the most common functions you'll use.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Change Type</h3>
+                        <p>Ensures columns have the correct data type (e.g., text, date, number) for accurate calculations and visualizations.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Remove & Choose Columns</h3>
+                        <p>Removes or selects specific columns to keep, simplifying your dataset and improving performance.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Filter Rows</h3>
+                        <p>Keeps or removes rows based on a specific condition, helping you focus on a subset of your data.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Merge Queries</h3>
+                        <p>Combines two queries based on a matching column, similar to a SQL join. Essential for bringing together related data.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Append Queries</h3>
+                        <p>Stacks two or more tables on top of each other, ideal for combining data with the same column headers from different periods or sources.</p>
+                    </div>
+                     <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Group By</h3>
+                        <p>Aggregates rows into groups based on a column and performs an operation like counting or summing. A great way to get a summary view of your data.</p>
+                    </div>
+                </div>
+            </section>
 
             <section id="module4" class="mb-16">
                 <div class="flex items-center justify-center gap-4 mb-8">
@@ -155,51 +186,82 @@
                     </div>
                     <div class="card rounded-lg shadow-lg p-6">
                         <h3 class="text-xl font-bold mb-4 text-center">Intro to DAX Measures</h3>
-                        <p class="text-center mb-4">DAX (Data Analysis Expressions) is a formula language for creating custom calculations. A "Measure" is a DAX formula that calculates a result from your data, like a sum or an average.</p>
-                        <div class="dax-code">
-                            <span style="color:#5BC0BE;">Total Revenue =</span> 
-                            <span style="color:#EFEFEF;">SUM</span>
-                            <span>(</span>
-                            <span style="color:#6FFFE9;">'Sales'[OrderQuantity]</span>
-                            <span>*</span>
-                            <span style="color:#6FFFE9;">'Sales'[UnitPrice]</span>
-                            <span>)</span>
-                        </div>
+                        <p class="text-center mb-4">DAX (Data Analysis Expressions) is a formula language for creating custom calculations. A "Measure" is a DAX formula that calculates a result from your data, like a sum or an average. Here are a few common functions.</p>
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong class="text-[#6FFFE9]">SUM:</strong> Calculates the sum of all values in a column.
+                                <div class="dax-code mt-2">
+                                    <span style="color:#5BC0BE;">Total Revenue =</span> 
+                                    <span style="color:#EFEFEF;">SUM</span>
+                                    <span>(</span>
+                                    <span style="color:#6FFFE9;">'Sales'[Revenue]</span>
+                                    <span>)</span>
+                                </div>
+                            </li>
+                             <li><strong class="text-[#6FFFE9]">AVERAGE:</strong> Calculates the average of a column.
+                                <div class="dax-code mt-2">
+                                    <span style="color:#5BC0BE;">Average Sales =</span> 
+                                    <span style="color:#EFEFEF;">AVERAGE</span>
+                                    <span>(</span>
+                                    <span style="color:#6FFFE9;">'Sales'[OrderQuantity]</span>
+                                    <span>)</span>
+                                </div>
+                            </li>
+                            <li><strong class="text-[#6FFFE9]">CALCULATE:</strong> The most powerful DAX function. It modifies the context in which data is filtered.
+                                <div class="dax-code mt-2">
+                                    <span style="color:#5BC0BE;">Total Sales Last Year =</span> 
+                                    <span style="color:#EFEFEF;">CALCULATE</span>
+                                    <span>(</span>
+                                    <span style="color:#6FFFE9;">[Total Revenue], PREVIOUSYEAR('Date'[Date])</span>
+                                    <span>)</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
             <section id="module5" class="mb-16">
                 <div class="flex items-center justify-center gap-4 mb-8">
-                    <div class="module-number">5-6</div>
-                    <h2 class="text-3xl font-bold text-center">Modules 5 & 6: Visualizations & Interactive Dashboards</h2>
+                    <div class="module-number">5</div>
+                    <h2 class="text-3xl font-bold text-center">Module 5: Key Visualization Types</h2>
                 </div>
-                 <p class="text-center max-w-3xl mx-auto mb-8">This is where your data becomes a story. Drag fields onto the report canvas to create visuals. The key is choosing the right chart for the job to make your data easy to understand.</p>
+                 <p class="text-center max-w-3xl mx-auto mb-8">Choosing the right visual is crucial for telling a clear and effective data story. Here are some of the most common and powerful chart types you'll use in Power BI.</p>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                      <div class="card rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-center">Most Common Chart Types</h3>
+                        <h3 class="text-xl font-bold mb-4 text-center">Comparing Values</h3>
+                        <p class="text-center text-sm mb-4">When you need to compare values across different categories, **bar and column charts** are your best choice. They make it easy to see which category is the highest or lowest.</p>
                         <div class="chart-container">
-                            <canvas id="commonCharts"></canvas>
+                            <canvas id="barChartExample"></canvas>
                         </div>
-                        <p class="text-center mt-4">Bar and column charts are excellent for comparing values across categories.</p>
                     </div>
                     <div class="card rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-center">Making Reports Interactive</h3>
-                        <p class="mb-4">Static charts are good, but interactive reports are better. Power BI includes many features to let users explore the data themselves.</p>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li><strong class="text-[#6FFFE9]">Slicers:</strong> On-canvas filters for users to narrow down data.</li>
-                            <li><strong class="text-[#6FFFE9]">Drill-Through:</strong> Lets users navigate from a summary chart to a detailed page.</li>
-                            <li><strong class="text-[#6FFFE9]">Cross-Filtering:</strong> Clicking a bar in one chart automatically filters all other charts on the page.</li>
-                            <li><strong class="text-[#6FFFE9]">Bookmarks:</strong> Save specific states of a report page to guide users through a narrative.</li>
-                        </ul>
+                        <h3 class="text-xl font-bold mb-4 text-center">Showing Trends Over Time</h3>
+                        <p class="text-center text-sm mb-4">To show how a value changes over a period of time, use a **line chart**. You can easily spot trends, seasonality, and sudden spikes or drops.</p>
+                        <div class="chart-container">
+                            <canvas id="lineChartExample"></canvas>
+                        </div>
+                    </div>
+                     <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Displaying Proportions</h3>
+                        <p class="text-center text-sm mb-4">When you want to show how a total value is broken down into parts, a **donut or pie chart** is perfect. This helps visualize the composition of a whole.</p>
+                        <div class="chart-container">
+                            <canvas id="donutChartExample"></canvas>
+                        </div>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Showing Relationships</h3>
+                        <p class="text-center text-sm mb-4">A **scatter plot** is the ideal visual for exploring the relationship between two numerical variables. Each dot represents a data point, and you can spot correlations by seeing how the dots cluster.</p>
+                        <div class="chart-container">
+                            <canvas id="scatterPlotExample"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="module9" class="mb-16">
                  <div class="flex items-center justify-center gap-4 mb-8">
-                    <div class="module-number">7-9</div>
-                    <h2 class="text-3xl font-bold text-center">Modules 7-9: Publishing & Practice Project</h2>
+                    <div class="module-number">6-9</div>
+                    <h2 class="text-3xl font-bold text-center">Modules 6-9: Publishing & Practice Project</h2>
                 </div>
                 <p class="text-center max-w-3xl mx-auto mb-8">The final steps are to publish your report to the Power BI Service to share it, and then to apply your new skills to a real-world dataset. Let's look at a sample sales project.</p>
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -219,6 +281,48 @@
                     </div>
                 </div>
             </section>
+
+            <hr class="border-t border-[#3A506B] my-16">
+            
+            <section id="comparison" class="mb-16">
+                 <h2 class="text-3xl font-bold text-center mb-8">Power BI vs. Tableau vs. Looker Studio</h2>
+                 <p class="text-center max-w-3xl mx-auto mb-8">Each of these tools excels in different areas. Here's a quick comparison to help you understand where each one fits best in the world of business intelligence. </p>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="card rounded-lg shadow-lg p-6 flex flex-col items-center">
+                        <h3 class="text-2xl font-bold text-[#5BC0BE] mb-4">Power BI</h3>
+                        <p class="font-semibold text-lg mb-2">Microsoft's Data Platform</p>
+                        <ul class="text-sm space-y-2 text-left w-full">
+                            <li><strong>Best For:</strong> Users heavily invested in the Microsoft ecosystem.</li>
+                            <li><strong>Core Strength:</strong> Powerful data modeling with **DAX** and robust data preparation via **Power Query**.</li>
+                            <li><strong>Ease of Use:</strong> User-friendly interface with a learning curve for advanced DAX.</li>
+                            <li><strong>Pricing:</strong> Freemium model with a powerful free version.</li>
+                            <li><strong>Key Features:</strong> Tightly integrated with Excel, Azure, and Teams.</li>
+                        </ul>
+                    </div>
+                     <div class="card rounded-lg shadow-lg p-6 flex flex-col items-center">
+                        <h3 class="text-2xl font-bold text-[#5BC0BE] mb-4">Tableau</h3>
+                        <p class="font-semibold text-lg mb-2">The Visual Storyteller</p>
+                        <ul class="text-sm space-y-2 text-left w-full">
+                            <li><strong>Best For:</strong> Interactive and beautiful data visualization.</li>
+                            <li><strong>Core Strength:</strong> Drag-and-drop interface for rapid, intuitive visual creation.</li>
+                            <li><strong>Ease of Use:</strong> Generally considered the most user-friendly for visualization design.</li>
+                            <li><strong>Pricing:</strong> Subscription-based, generally the most expensive.</li>
+                            <li><strong>Key Features:</strong> Strong geospatial analysis and excellent for storytelling.</li>
+                        </ul>
+                    </div>
+                     <div class="card rounded-lg shadow-lg p-6 flex flex-col items-center">
+                        <h3 class="text-2xl font-bold text-[#5BC0BE] mb-4">Looker Studio</h3>
+                        <p class="font-semibold text-lg mb-2">Google's Reporting Tool</p>
+                        <ul class="text-sm space-y-2 text-left w-full">
+                            <li><strong>Best For:</strong> Web-based data reporting and dashboarding.</li>
+                            <li><strong>Core Strength:</strong> Seamless integration with Google products like Google Analytics and Sheets.</li>
+                            <li><strong>Ease of Use:</strong> Very easy for beginners with a simple, web-based interface.</li>
+                            <li><strong>Pricing:</strong> Free to use.</li>
+                            <li><strong>Key Features:</strong> Great for marketing data, simple dashboards, and real-time reports.</li>
+                        </ul>
+                    </div>
+                 </div>
+            </section>
         </main>
 
         <footer class="text-center mt-12 pt-8 border-t border-[#3A506B]">
@@ -227,79 +331,136 @@
     </div>
 
     <script>
-        const wrapLabel = (label, maxWidth = 16) => {
-            if (typeof label !== 'string' || label.length <= maxWidth) { return label; }
-            const words = label.split(' ');
-            const lines = [];
-            let currentLine = '';
-            words.forEach(word => {
-                if ((currentLine + ' ' + word).trim().length > maxWidth) {
-                    lines.push(currentLine.trim());
-                    currentLine = word;
-                } else { currentLine = (currentLine + ' ' + word).trim(); }
+        window.onload = function() {
+            const wrapLabel = (label, maxWidth = 16) => {
+                if (typeof label !== 'string' || label.length <= maxWidth) { return label; }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else { currentLine = (currentLine + ' ' + word).trim(); }
+                });
+                if (currentLine) { lines.push(currentLine.trim()); }
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            const chartColors = ['#5BC0BE', '#3A506B', '#6FFFE9', '#88a1b5', '#a1e9e7'];
+            Chart.defaults.color = '#EFEFEF';
+            Chart.defaults.borderColor = '#3A506B';
+            const defaultPlugins = { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } };
+
+            const barChartExampleCtx = document.getElementById('barChartExample').getContext('2d');
+            new Chart(barChartExampleCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Electronics', 'Home Goods', 'Clothing', 'Books'].map(l => wrapLabel(l)),
+                    datasets: [{
+                        label: 'Sales ($)',
+                        data: [450, 320, 580, 250],
+                        backgroundColor: chartColors,
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: defaultPlugins, scales: { y: { beginAtZero: true } } }
             });
-            if (currentLine) { lines.push(currentLine.trim()); }
-            return lines;
+
+            const lineChartExampleCtx = document.getElementById('lineChartExample').getContext('2d');
+            new Chart(lineChartExampleCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Website Visits',
+                        data: [120, 150, 180, 160, 200, 230],
+                        borderColor: '#5BC0BE',
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: defaultPlugins, scales: { y: { beginAtZero: true } } }
+            });
+
+            const donutChartExampleCtx = document.getElementById('donutChartExample').getContext('2d');
+            new Chart(donutChartExampleCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Product A', 'Product B', 'Product C', 'Product D'].map(l => wrapLabel(l)),
+                    datasets: [{
+                        label: 'Market Share (%)',
+                        data: [40, 25, 20, 15],
+                        backgroundColor: chartColors,
+                        hoverOffset: 4,
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
+            });
+
+            const scatterPlotExampleCtx = document.getElementById('scatterPlotExample').getContext('2d');
+            const scatterData = [{x: 15, y: 30}, {x: 22, y: 45}, {x: 30, y: 55}, {x: 40, y: 70}, {x: 55, y: 85}, {x: 65, y: 90}, {x: 70, y: 105}];
+            new Chart(scatterPlotExampleCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Data Points',
+                        data: scatterData,
+                        backgroundColor: '#5BC0BE',
+                        borderColor: '#6FFFE9',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: defaultPlugins,
+                    scales: {
+                        x: { title: { display: true, text: 'Variable X' } },
+                        y: { title: { display: true, text: 'Variable Y' } }
+                    }
+                }
+            });
+            
+            const salesTrendProjectCtx = document.getElementById('salesTrendProject').getContext('2d');
+            new Chart(salesTrendProjectCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Sales Revenue ($K)',
+                        data: [150, 165, 180, 210, 220, 235, 250, 240, 260, 280, 310, 340],
+                        fill: true,
+                        backgroundColor: 'rgba(91, 192, 190, 0.2)',
+                        borderColor: '#5BC0BE',
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: value => '$' + value + 'k' } } } }
+            });
+
+            const revenueByCategoryProjectCtx = document.getElementById('revenueByCategoryProject').getContext('2d');
+            new Chart(revenueByCategoryProjectCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Enterprise Solutions', 'Consumer Electronics', 'Software & Services', 'Accessories'].map(l => wrapLabel(l)),
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [1250, 850, 650, 250],
+                        backgroundColor: chartColors,
+                        hoverOffset: 4,
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
+            });
         };
-        
-        const tooltipTitleCallback = (tooltipItems) => {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            return Array.isArray(label) ? label.join(' ') : label;
-        };
-
-        const chartColors = ['#5BC0BE', '#3A506B', '#6FFFE9', '#88a1b5', '#a1e9e7'];
-        Chart.defaults.color = '#EFEFEF';
-        Chart.defaults.borderColor = '#3A506B';
-        const defaultPlugins = { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } };
-
-        const commonChartsCtx = document.getElementById('commonCharts').getContext('2d');
-        new Chart(commonChartsCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Bar/Column', 'Line/Area', 'Card', 'Pie/Donut', 'Table/Matrix'].map(l => wrapLabel(l)),
-                datasets: [{
-                    label: 'Usefulness Score',
-                    data: [95, 85, 90, 75, 80],
-                    backgroundColor: chartColors,
-                    borderWidth: 0
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: defaultPlugins, scales: { x: { beginAtZero: true } } }
-        });
-
-        const salesTrendProjectCtx = document.getElementById('salesTrendProject').getContext('2d');
-        new Chart(salesTrendProjectCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Sales Revenue ($K)',
-                    data: [150, 165, 180, 210, 220, 235, 250, 240, 260, 280, 310, 340],
-                    fill: true,
-                    backgroundColor: 'rgba(91, 192, 190, 0.2)',
-                    borderColor: '#5BC0BE',
-                    tension: 0.4
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: value => '$' + value + 'k' } } } }
-        });
-
-        const revenueByCategoryProjectCtx = document.getElementById('revenueByCategoryProject').getContext('2d');
-        new Chart(revenueByCategoryProjectCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Enterprise Solutions', 'Consumer Electronics', 'Software & Services', 'Accessories'].map(l => wrapLabel(l)),
-                datasets: [{
-                    label: 'Revenue',
-                    data: [1250, 850, 650, 250],
-                    backgroundColor: chartColors,
-                    hoverOffset: 4,
-                    borderWidth: 0
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
-        });
     </script>
 </body>
 </html>
