@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Learning Tableau">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent : Learning Tableau</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E0E1DD;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #415A77;
+            line-height: 1;
+        }
+        .kpi-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #415A77;
+        }
+    </style>
+</head>
+<body class="text-[#0D1B2A]">
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-[#0D1B2A] mb-4">Learning Tableau</h1>
+            <p class="text-lg md:text-xl text-[#1B263B]">Your visual journey from data to dashboard.</p>
+        </header>
+        
+        <main>
+            <section class="mb-16">
+                <div class="bg-white rounded-lg shadow-md p-6 md:p-8 text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Why Visualize Data?</h2>
+                    <p class="max-w-3xl mx-auto mb-6">The human brain processes images 60,000 times faster than text. Tableau transforms raw data into interactive, visual dashboards, enabling rapid insights and data-driven decisions. It's a leading tool for business intelligence and analytics.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-[#E0E1DD] p-4 rounded-lg">
+                            <div class="kpi-number">90%</div>
+                            <p class="font-semibold">of information transmitted to the brain is visual.</p>
+                        </div>
+                        <div class="bg-[#E0E1DD] p-4 rounded-lg">
+                             <div class="kpi-number">10x</div>
+                            <p class="font-semibold">more effective visual communication than text-based reports.</p>
+                        </div>
+                        <div class="bg-[#E0E1DD] p-4 rounded-lg">
+                            <div class="kpi-number">Top BI</div>
+                            <p class="font-semibold">Tableau is consistently ranked a leader in Analytics and BI Platforms.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">The Tableau Ecosystem</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#1B263B]">Tableau Desktop</h3>
+                        <p>The primary authoring tool. This is where you connect to data, perform analysis, and design visualizations and dashboards for your projects.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#415A77]">Tableau Server</h3>
+                        <p>A secure, collaborative platform for sharing and governing your dashboards within an organization. It's a private analytics hub for your team.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#778DA9]">Tableau Public</h3>
+                        <p>A free platform to explore, create, and publicly share data visualizations online. A great way to build a portfolio and learn from the community.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Your First Steps: The Data Workflow</h2>
+                <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row items-center justify-around text-center">
+                        <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">💾</span>
+                            <h3 class="font-bold">1. Connect to Data</h3>
+                            <p>Link to files (Excel, CSV) or servers (SQL).</p>
+                        </div>
+                        <div class="flow-arrow my-4 md:my-0">→</div>
+                        <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">🔧</span>
+                            <h3 class="font-bold">2. Prepare Data</h3>
+                            <p>Clean, join, filter, and structure your dataset.</p>
+                        </div>
+                         <div class="flow-arrow my-4 md:my-0">→</div>
+                        <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">🎨</span>
+                             <h3 class="font-bold">3. Design Visuals</h3>
+                            <p>Drag and drop fields to create charts and maps.</p>
+                        </div>
+                        <div class="flow-arrow my-4 md:my-0">→</div>
+                         <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">🚀</span>
+                            <h3 class="font-bold">4. Build & Share</h3>
+                            <p>Combine visuals into interactive dashboards.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Building Foundational Visualizations</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                         <h3 class="text-xl font-bold mb-4 text-center">Most Common Chart Types</h3>
+                        <p class="text-center mb-4">Certain chart types are fundamental to data analysis. Bar charts excel at comparing categories, while line charts are perfect for tracking trends over time. Mastering these basics is the first step to effective storytelling with data.</p>
+                        <div class="chart-container">
+                            <canvas id="commonCharts"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Advanced Analytics: Calculated Fields</h3>
+                        <p class="text-center mb-4">Go beyond your initial data. Calculated Fields allow you to create new metrics from your existing data, like calculating profit ratio from sales and profit. This is key to unlocking deeper, more customized insights.</p>
+                         <div class="bg-[#E0E1DD] p-6 rounded-lg text-center">
+                             <p class="font-mono bg-[#1B263B] text-white p-4 rounded">SUM([Profit]) / SUM([Sales])</p>
+                             <p class="mt-4 font-semibold">Example: Profit Ratio Calculation</p>
+                         </div>
+                         <h3 class="text-xl font-bold my-4 text-center">Advanced Charts</h3>
+                         <p class="text-center">Tableau offers a wide array of advanced charts to explore complex relationships, such as scatter plots to reveal correlations between variables or heat maps to visualize data density across a matrix.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Sample Project: Retail Sales Dashboard</h2>
+                <p class="text-center max-w-3xl mx-auto mb-8">Let's apply these concepts. Below is a mock dashboard analyzing sales data. We compare performance across product categories and see the regional sales distribution. This is how individual charts come together to tell a comprehensive story.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Sales by Product Category</h3>
+                        <div class="chart-container h-[420px] md:h-[450px]">
+                            <canvas id="salesByCategory"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Regional Sales Distribution</h3>
+                        <div class="chart-container h-[420px] md:h-[450px]">
+                            <canvas id="regionalSales"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 pt-8 border-t border-[#778DA9]">
+            <p class="text-[#1B263B]">&copy; 2025 Felixent. Key concepts from the Learning Tableau guide.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxWidth = 16) => {
+            if (label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        const chartColors = ['#415A77', '#778DA9', '#1B263B', '#5A7741', '#8DA977'];
+
+        const commonChartsCtx = document.getElementById('commonCharts').getContext('2d');
+        const commonChartsData = {
+            labels: ['Bar Charts', 'Line Charts', 'Pie/Donut Charts', 'Maps', 'Tables'].map(label => wrapLabel(label)),
+            datasets: [{
+                label: 'Usage Frequency',
+                data: [85, 78, 65, 55, 90],
+                backgroundColor: chartColors,
+                borderColor: '#E0E1DD',
+                borderWidth: 2
+            }]
+        };
+        new Chart(commonChartsCtx, {
+            type: 'bar',
+            data: commonChartsData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#E0E1DD' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        const salesByCategoryCtx = document.getElementById('salesByCategory').getContext('2d');
+        const salesByCategoryData = {
+            labels: ['Technology', 'Furniture', 'Office Supplies', 'Home Appliances', 'Clothing & Accessories'].map(label => wrapLabel(label)),
+            datasets: [{
+                label: 'Sales ($)',
+                data: [320500, 210200, 150300, 180600, 95400].sort((a,b) => b-a),
+                backgroundColor: chartColors,
+                borderColor: '#E0E1DD',
+                borderWidth: 2
+            }]
+        };
+        salesByCategoryData.labels.sort((a, b) => {
+            let valA = salesByCategoryData.datasets[0].data[salesByCategoryData.labels.indexOf(a)];
+            let valB = salesByCategoryData.datasets[0].data[salesByCategoryData.labels.indexOf(b)];
+            return valB - valA;
+        });
+        new Chart(salesByCategoryCtx, {
+            type: 'bar',
+            data: salesByCategoryData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000) + 'k';
+                            }
+                        },
+                        grid: { color: '#E0E1DD' }
+                    },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        const regionalSalesCtx = document.getElementById('regionalSales').getContext('2d');
+        const regionalSalesData = {
+            labels: ['West', 'East', 'Central', 'South'].map(label => wrapLabel(label)),
+            datasets: [{
+                label: 'Sales',
+                data: [350000, 280000, 195000, 130000],
+                backgroundColor: chartColors,
+                hoverOffset: 4
+            }]
+        };
+        new Chart(regionalSalesCtx, {
+            type: 'doughnut',
+            data: regionalSalesData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
