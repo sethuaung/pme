@@ -22,6 +22,11 @@
         .card {
             background-color: #1C2541;
             border: 1px solid #3A506B;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(91, 192, 190, 0.2);
         }
         .chart-container {
             position: relative;
@@ -38,17 +43,35 @@
             }
         }
         .flow-arrow {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #5BC0BE;
             line-height: 1;
         }
-        .kpi-number {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #6FFFE9;
-        }
         h1, h2, h3 {
              color: #6FFFE9;
+        }
+        .module-number {
+            background-color: #5BC0BE;
+            color: #0B132B;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .dax-code {
+            font-family: monospace;
+            background-color: #0B132B;
+            color: #6FFFE9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #3A506B;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
     </style>
 </head>
@@ -56,116 +79,142 @@
     <div class="container mx-auto p-4 md:p-8">
         
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">Mastering Power BI</h1>
-            <p class="text-lg md:text-xl text-[#5BC0BE]">From Raw Data to Actionable Decisions.</p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">The Ultimate Student Guide to Power BI</h1>
+            <p class="text-lg md:text-xl text-[#5BC0BE]">Your Step-by-Step Journey from Data to Dashboard.</p>
         </header>
         
         <main>
-            <section class="mb-16">
-                <div class="card rounded-lg shadow-lg p-6 md:p-8 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">What is Business Intelligence?</h2>
-                    <p class="max-w-3xl mx-auto mb-6">Power BI is a suite of business analytics tools by Microsoft that lets you visualize your data and share insights. It transforms unrelated sources of data into coherent, visually immersive, and interactive reports and dashboards.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-[#0B132B] p-4 rounded-lg">
-                            <div class="kpi-number">#1</div>
-                            <p class="font-semibold">Leader in the Gartner Magic Quadrant for BI Platforms.</p>
-                        </div>
-                        <div class="bg-[#0B132B] p-4 rounded-lg">
-                             <div class="kpi-number">300+</div>
-                            <p class="font-semibold">Connectors to a vast range of data sources in the cloud and on-premises.</p>
-                        </div>
-                        <div class="bg-[#0B132B] p-4 rounded-lg">
-                            <div class="kpi-number">AI</div>
-                            <p class="font-semibold">Integrates Artificial Intelligence for advanced analytics and insights.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">The Power BI Ecosystem</h2>
+            <section id="module1" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">Module 1: Introduction to the Power BI Ecosystem</h2>
+                <p class="text-center max-w-3xl mx-auto mb-8">Power BI is more than just a single tool; it's a collection of software services, apps, and connectors that work together to turn your unrelated sources of data into coherent, visually immersive, and interactive insights.</p>
                  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="card rounded-lg shadow-lg p-6 text-center">
                         <h3 class="text-xl font-bold mb-2">Power BI Desktop</h3>
-                        <p>The free authoring application for Windows. This is your canvas to connect, transform, model, and create visual reports from your data.</p>
+                        <p>Your creation studio. A free Windows application where you connect to, transform, and visualize your data to build reports.</p>
                     </div>
                     <div class="card rounded-lg shadow-lg p-6 text-center">
                         <h3 class="text-xl font-bold mb-2">Power BI Service</h3>
-                        <p>The cloud-based (SaaS) service. Here you publish, share, and collaborate on reports, building dashboards and managing access for your team.</p>
+                        <p>Your collaboration hub. A cloud-based service (SaaS) used to publish, share, and collaborate on reports and dashboards.</p>
                     </div>
                     <div class="card rounded-lg shadow-lg p-6 text-center">
                         <h3 class="text-xl font-bold mb-2">Power BI Mobile</h3>
-                        <p>Access your reports and dashboards on the go. View and interact with your data from anywhere on iOS, Android, or Windows devices.</p>
+                        <p>Your insights on the go. Native apps for iOS, Android, and Windows that allow you to securely access and view your reports anywhere.</p>
                     </div>
                 </div>
             </section>
             
-            <section class="mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">The Core Analytics Workflow</h2>
+            <section id="module3" class="mb-16">
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <div class="module-number">2-3</div>
+                    <h2 class="text-3xl font-bold text-center">Modules 2 & 3: Data Connection & Transformation</h2>
+                </div>
+                <p class="text-center max-w-3xl mx-auto mb-8">The foundation of any good report is clean, well-structured data. This process starts by connecting to a data source and then using the powerful Power Query Editor to shape the data to your needs.</p>
                 <div class="card rounded-lg shadow-lg p-6 md:p-8">
                     <div class="flex flex-col md:flex-row items-center justify-around text-center">
                         <div class="flex flex-col items-center p-4">
-                            <span class="text-4xl mb-2">🔌</span>
+                            <span class="text-4xl mb-2">📂</span>
                             <h3 class="font-bold">1. Get Data</h3>
-                            <p>Connect to hundreds of data sources.</p>
+                            <p>Connect to Excel, CSV, SQL, and more.</p>
                         </div>
                         <div class="flow-arrow my-4 md:my-0">→</div>
                         <div class="flex flex-col items-center p-4">
-                            <span class="text-4xl mb-2">✨</span>
-                            <h3 class="font-bold">2. Transform Data</h3>
-                            <p>Clean & shape data with Power Query.</p>
+                            <span class="text-4xl mb-2">🔍</span>
+                            <h3 class="font-bold">2. Open Power Query</h3>
+                            <p>Click "Transform Data" to launch the editor.</p>
                         </div>
                          <div class="flow-arrow my-4 md:my-0">→</div>
                         <div class="flex flex-col items-center p-4">
-                            <span class="text-4xl mb-2">🔗</span>
-                             <h3 class="font-bold">3. Model Data</h3>
-                            <p>Create relationships & DAX measures.</p>
+                            <span class="text-4xl mb-2">✨</span>
+                             <h3 class="font-bold">3. Clean & Shape</h3>
+                            <p>Remove errors, change types, split columns.</p>
                         </div>
                         <div class="flow-arrow my-4 md:my-0">→</div>
                          <div class="flex flex-col items-center p-4">
-                            <span class="text-4xl mb-2">📊</span>
-                            <h3 class="font-bold">4. Visualize & Share</h3>
-                            <p>Build reports & publish to the service.</p>
+                            <span class="text-4xl mb-2">💾</span>
+                            <h3 class="font-bold">4. Close & Apply</h3>
+                            <p>Load the clean data into your model.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-16">
-                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Key Concepts for Deeper Insights</h2>
+            <section id="module4" class="mb-16">
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <div class="module-number">4</div>
+                    <h2 class="text-3xl font-bold text-center">Module 4: Data Modeling with Relationships & DAX</h2>
+                </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="card rounded-lg shadow-lg p-6">
-                         <h3 class="text-xl font-bold mb-4 text-center">Data Modeling with DAX</h3>
-                        <p class="text-center mb-4">DAX (Data Analysis Expressions) is the formula language of Power BI. It allows you to create powerful, custom calculations called 'measures' that perform analysis on your data model. This is how you move from simple reporting to true business intelligence.</p>
-                        <div class="bg-[#0B132B] p-6 rounded-lg text-center">
-                             <p class="font-mono bg-[#3A506B] text-white p-4 rounded">Total Sales = SUM(Sales[Revenue])</p>
-                             <p class="mt-4 font-semibold">Example: A simple DAX measure to calculate total revenue.</p>
-                         </div>
+                         <h3 class="text-xl font-bold mb-4 text-center">Creating Relationships</h3>
+                        <p class="text-center mb-4">In the Model View, you connect tables using common fields (like an ID or a date). This teaches Power BI how your data fits together, enabling you to analyze information from multiple tables at once.</p>
+                        <div class="bg-[#0B132B] p-4 rounded-lg flex justify-around items-center h-48">
+                            <div class="text-center border-2 border-[#5BC0BE] p-4 rounded">Products<br>[ProductID]</div>
+                            <div class="text-[#6FFFE9] font-bold text-2xl">... 1-to-many ...</div>
+                            <div class="text-center border-2 border-[#5BC0BE] p-4 rounded">Sales<br>[ProductID]</div>
+                        </div>
                     </div>
                     <div class="card rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-center">Core Visualizations in Power BI</h3>
-                        <p class="text-center mb-4">While Power BI offers hundreds of visuals, a few core types form the backbone of most reports. Understanding when to use each is crucial for clear communication. Bar and column charts are excellent for comparisons, while line charts track trends.</p>
-                        <div class="chart-container">
-                            <canvas id="coreVisuals"></canvas>
+                        <h3 class="text-xl font-bold mb-4 text-center">Intro to DAX Measures</h3>
+                        <p class="text-center mb-4">DAX (Data Analysis Expressions) is a formula language for creating custom calculations. A "Measure" is a DAX formula that calculates a result from your data, like a sum or an average.</p>
+                        <div class="dax-code">
+                            <span style="color:#5BC0BE;">Total Revenue =</span> 
+                            <span style="color:#EFEFEF;">SUM</span>
+                            <span>(</span>
+                            <span style="color:#6FFFE9;">'Sales'[OrderQuantity]</span>
+                            <span>*</span>
+                            <span style="color:#6FFFE9;">'Sales'[UnitPrice]</span>
+                            <span>)</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Sample Project: Quarterly Sales Report</h2>
-                <p class="text-center max-w-3xl mx-auto mb-8">This sample report demonstrates how visuals work together. We analyze sales revenue over the past year to identify trends and then break down the total revenue by product line to see which categories are the top performers.</p>
+            <section id="module5" class="mb-16">
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <div class="module-number">5-6</div>
+                    <h2 class="text-3xl font-bold text-center">Modules 5 & 6: Visualizations & Interactive Dashboards</h2>
+                </div>
+                 <p class="text-center max-w-3xl mx-auto mb-8">This is where your data becomes a story. Drag fields onto the report canvas to create visuals. The key is choosing the right chart for the job to make your data easy to understand.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                     <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Most Common Chart Types</h3>
+                        <div class="chart-container">
+                            <canvas id="commonCharts"></canvas>
+                        </div>
+                        <p class="text-center mt-4">Bar and column charts are excellent for comparing values across categories.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Making Reports Interactive</h3>
+                        <p class="mb-4">Static charts are good, but interactive reports are better. Power BI includes many features to let users explore the data themselves.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong class="text-[#6FFFE9]">Slicers:</strong> On-canvas filters for users to narrow down data.</li>
+                            <li><strong class="text-[#6FFFE9]">Drill-Through:</strong> Lets users navigate from a summary chart to a detailed page.</li>
+                            <li><strong class="text-[#6FFFE9]">Cross-Filtering:</strong> Clicking a bar in one chart automatically filters all other charts on the page.</li>
+                            <li><strong class="text-[#6FFFE9]">Bookmarks:</strong> Save specific states of a report page to guide users through a narrative.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="module9" class="mb-16">
+                 <div class="flex items-center justify-center gap-4 mb-8">
+                    <div class="module-number">7-9</div>
+                    <h2 class="text-3xl font-bold text-center">Modules 7-9: Publishing & Practice Project</h2>
+                </div>
+                <p class="text-center max-w-3xl mx-auto mb-8">The final steps are to publish your report to the Power BI Service to share it, and then to apply your new skills to a real-world dataset. Let's look at a sample sales project.</p>
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                     <div class="lg:col-span-3 card rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-center">Monthly Sales Revenue Trend</h3>
+                        <h3 class="text-xl font-bold mb-4 text-center">Quarterly Sales Revenue Trend</h3>
+                        <p class="text-center text-sm mb-4">This line chart shows how our total sales revenue has changed over the year. We can see a strong upward trend, especially in the final quarter.</p>
                         <div class="chart-container h-[420px] md:h-[450px]">
-                            <canvas id="salesTrend"></canvas>
+                            <canvas id="salesTrendProject"></canvas>
                         </div>
                     </div>
                     <div class="lg:col-span-2 card rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-center">Revenue by Product Line</h3>
+                        <h3 class="text-xl font-bold mb-4 text-center">Revenue by Product Category</h3>
+                         <p class="text-center text-sm mb-4">This donut chart breaks down our total revenue. It's clear that "Enterprise Solutions" are the largest contributor to our sales.</p>
                         <div class="chart-container h-[420px] md:h-[450px]">
-                            <canvas id="revenueByCategory"></canvas>
+                            <canvas id="revenueByCategoryProject"></canvas>
                         </div>
                     </div>
                 </div>
@@ -173,15 +222,13 @@
         </main>
 
         <footer class="text-center mt-12 pt-8 border-t border-[#3A506B]">
-            <p>&copy; 2025 Felixent. The core learning path of Microsoft Power BI.</p>
+            <p>&copy; 2025 Felixent. Foundational learning path. Continuous practice is key to mastery.</p>
         </footer>
     </div>
 
     <script>
         const wrapLabel = (label, maxWidth = 16) => {
-            if (label.length <= maxWidth) {
-                return label;
-            }
+            if (typeof label !== 'string' || label.length <= maxWidth) { return label; }
             const words = label.split(' ');
             const lines = [];
             let currentLine = '';
@@ -189,13 +236,9 @@
                 if ((currentLine + ' ' + word).trim().length > maxWidth) {
                     lines.push(currentLine.trim());
                     currentLine = word;
-                } else {
-                    currentLine = (currentLine + ' ' + word).trim();
-                }
+                } else { currentLine = (currentLine + ' ' + word).trim(); }
             });
-            if (currentLine) {
-                lines.push(currentLine.trim());
-            }
+            if (currentLine) { lines.push(currentLine.trim()); }
             return lines;
         };
         
@@ -208,85 +251,54 @@
         const chartColors = ['#5BC0BE', '#3A506B', '#6FFFE9', '#88a1b5', '#a1e9e7'];
         Chart.defaults.color = '#EFEFEF';
         Chart.defaults.borderColor = '#3A506B';
+        const defaultPlugins = { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } };
 
-        const coreVisualsCtx = document.getElementById('coreVisuals').getContext('2d');
-        const coreVisualsData = {
-            labels: ['Bar/Column Charts', 'Line/Area Charts', 'KPI Cards', 'Maps', 'Tables & Matrices'].map(label => wrapLabel(label)),
-            datasets: [{
-                label: 'Frequency of Use',
-                data: [95, 85, 75, 60, 90],
-                backgroundColor: chartColors,
-                borderWidth: 0
-            }]
-        };
-        new Chart(coreVisualsCtx, {
+        const commonChartsCtx = document.getElementById('commonCharts').getContext('2d');
+        new Chart(commonChartsCtx, {
             type: 'bar',
-            data: coreVisualsData,
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { callbacks: { title: tooltipTitleCallback } }
-                },
-                scales: {
-                    x: { beginAtZero: true, grid: { color: '#3A506B' } },
-                    y: { grid: { display: false } }
-                }
-            }
+            data: {
+                labels: ['Bar/Column', 'Line/Area', 'Card', 'Pie/Donut', 'Table/Matrix'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Usefulness Score',
+                    data: [95, 85, 90, 75, 80],
+                    backgroundColor: chartColors,
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: defaultPlugins, scales: { x: { beginAtZero: true } } }
         });
 
-        const salesTrendCtx = document.getElementById('salesTrend').getContext('2d');
-        const salesTrendData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Sales Revenue ($)',
-                data: [150, 165, 180, 210, 220, 235, 250, 240, 260, 280, 310, 340],
-                fill: true,
-                backgroundColor: 'rgba(91, 192, 190, 0.2)',
-                borderColor: '#5BC0BE',
-                tension: 0.4
-            }]
-        };
-        new Chart(salesTrendCtx, {
+        const salesTrendProjectCtx = document.getElementById('salesTrendProject').getContext('2d');
+        new Chart(salesTrendProjectCtx, {
             type: 'line',
-            data: salesTrendData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { callback: value => '$' + (value / 1) + 'k' }
-                    }
-                }
-            }
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Sales Revenue ($K)',
+                    data: [150, 165, 180, 210, 220, 235, 250, 240, 260, 280, 310, 340],
+                    fill: true,
+                    backgroundColor: 'rgba(91, 192, 190, 0.2)',
+                    borderColor: '#5BC0BE',
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: value => '$' + value + 'k' } } } }
         });
 
-        const revenueByCategoryCtx = document.getElementById('revenueByCategory').getContext('2d');
-        const revenueByCategoryData = {
-            labels: ['Enterprise Solutions', 'Consumer Electronics', 'Software & Services', 'Accessories'].map(label => wrapLabel(label)),
-            datasets: [{
-                label: 'Revenue',
-                data: [1250000, 850000, 650000, 250000],
-                backgroundColor: chartColors,
-                hoverOffset: 4,
-                borderWidth: 0
-            }]
-        };
-        new Chart(revenueByCategoryCtx, {
+        const revenueByCategoryProjectCtx = document.getElementById('revenueByCategoryProject').getContext('2d');
+        new Chart(revenueByCategoryProjectCtx, {
             type: 'doughnut',
-            data: revenueByCategoryData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { callbacks: { title: tooltipTitleCallback } }
-                }
-            }
+            data: {
+                labels: ['Enterprise Solutions', 'Consumer Electronics', 'Software & Services', 'Accessories'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Revenue',
+                    data: [1250, 850, 650, 250],
+                    backgroundColor: chartColors,
+                    hoverOffset: 4,
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
         });
     </script>
 </body>
