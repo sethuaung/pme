@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="CRM-Summrized">
+    <meta name="description" content="FreshWorks : The Complete Business Suite">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent : About Freshworks</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+            .chart-container {
+                position: relative;
+                width: 100%;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 400px;
+                max-height: 450px;
+            }
+            @media (min-width: 768px) {
+                .chart-container {
+                    height: 450px;
+                }
+            }
+            .flow-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+                background-color: #F7FAFC; /* Light gray from Tailwind */
+                border-radius: 12px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+                text-align: center;
+            }
+            .flow-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+            }
+            .flow-step-number {
+                width: 2.5rem;
+                height: 2.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                font-size: 1.25rem;
+                color: white;
+                border-radius: 9999px;
+                margin-bottom: 0.5rem;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50" style="background-color: #E1F5C4;">
+
+        <div class="container mx-auto p-4 md:p-8">
+
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-2" style="color: #FF4E50;">Freshworks: Your All-in-One Business Solution</h1>
+                <p class="text-lg md:text-xl" style="color: #FC913A;">Powering over 60,000 businesses with intuitive and engaging SaaS solutions.</p>
+            </header>
+
+            <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-center mb-4" style="color: #FF4E50;">The Freshworks Ecosystem</h2>
+                    <p class="text-center text-gray-600 mb-6">Freshworks is built around two core pillars: seamlessly managing customer relationships and empowering your internal teams. The following diagrams illustrate how the products work together to achieve these goals.</p>
+                    <div class="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-8">
+                        <div class="text-center w-full">
+                            <h3 class="text-xl font-semibold mb-4" style="color: #FC913A;">Customer Engagement Suite</h3>
+                            <p class="text-sm text-gray-600 mb-4">A unified flow from marketing to sales and support.</p>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-3xl">📧</span>
+                                    <p class="font-bold">Freshmarketer</p>
+                                    <p class="text-xs text-gray-500">Acquisition & Marketing</p>
+                                </div>
+                                <span class="text-3xl font-bold text-gray-400">&rarr;</span>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-3xl">💰</span>
+                                    <p class="font-bold">Freshsales</p>
+                                    <p class="text-xs text-gray-500">Sales CRM</p>
+                                </div>
+                                <span class="text-3xl font-bold text-gray-400">&rarr;</span>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-3xl">🗣️</span>
+                                    <p class="font-bold">Freshchat<br>Freshcaller</p>
+                                    <p class="text-xs text-gray-500">Unified Messaging & Phone</p>
+                                </div>
+                                <span class="text-3xl font-bold text-gray-400">&rarr;</span>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-3xl">✅</span>
+                                    <p class="font-bold">Freshdesk</p>
+                                    <p class="text-xs text-gray-500">Customer Support</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full h-[2px] md:w-[2px] md:h-20 bg-gray-300"></div>
+
+                        <div class="text-center w-full">
+                            <h3 class="text-xl font-semibold mb-4" style="color: #FC913A;">Employee Engagement Suite</h3>
+                            <p class="text-sm text-gray-600 mb-4">Dedicated solutions for HR and IT management.</p>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-3xl">💻</span>
+                                    <p class="font-bold">Freshservice</p>
+                                    <p class="text-xs text-gray-500">IT Service Management</p>
+                                </div>
+                                <div class="hidden md:block w-[2px] h-20 bg-gray-300"></div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-3xl">👥</span>
+                                    <p class="font-bold">Freshteam</p>
+                                    <p class="text-xs text-gray-500">HR Management</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Deep Dive: Freshdesk</h2>
+                        <p class="text-gray-600 mb-4">Freshdesk is a cloud-based helpdesk and ticketing system designed to empower support teams. It unifies conversations from multiple channels, automates workflows, and helps resolve customer issues faster, enhancing overall satisfaction.</p>
+                        <div class="mt-auto">
+                            <h3 class="text-xl font-semibold text-center mb-2" style="color: #FC913A;">Helpdesk Software Comparison</h3>
+                            <p class="text-sm text-gray-500 text-center mb-4">Freshdesk offers a competitive starting price and a free tier, making it highly accessible for businesses of all sizes compared to leading alternatives.</p>
+                            <div class="chart-container h-64 md:h-80">
+                                <canvas id="competitorChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Business Flow: Freshsales CRM</h2>
+                    <p class="text-gray-600 mb-6">Freshsales provides a comprehensive, all-in-one CRM platform to manage the entire sales funnel. Its "Blueprint" feature allows businesses to define and enforce sales processes, ensuring no lead is left behind and every opportunity is maximized.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">1</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Lead Capture</h3>
+                            <p class="text-sm text-gray-600">Acquire leads from web forms, emails, and chat.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">2</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Nurture & Qualify</h3>
+                            <p class="text-sm text-gray-600">Engage prospects with automated sequences and scoring.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">3</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Deal Management</h3>
+                            <p class="text-sm text-gray-600">Visualize pipeline and track deal progress.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">4</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Closure</h3>
+                            <p class="text-sm text-gray-600">Close deals and convert prospects to customers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Business Flow: Freshdesk</h2>
+                    <p class="text-gray-600 mb-4">Freshdesk streamlines the customer support journey from ticket creation to resolution and feedback.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">1</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Ticketing</h3>
+                            <p class="text-sm text-gray-600">Tickets are created from various channels (email, phone, chat).</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">2</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Automation</h3>
+                            <p class="text-sm text-gray-600">Tickets are automatically prioritized and assigned to the right agents.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">3</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Resolution</h3>
+                            <p class="text-sm text-gray-600">Agents collaborate to resolve issues using canned responses and knowledge base articles.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">4</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Feedback</h3>
+                            <p class="text-sm text-gray-600">Automated surveys collect customer feedback (CSAT, NPS) to measure success.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Business Flow: Freshmarketer</h2>
+                    <p class="text-gray-600 mb-4">Freshmarketer helps marketing teams attract and engage visitors, converting them into leads with intelligent automation and personalization.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">1</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Visitor Tracking</h3>
+                            <p class="text-sm text-gray-600">Track website visitors and their behavior in real-time.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">2</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Segmentation</h3>
+                            <p class="text-sm text-gray-600">Segment visitors based on their behavior, demographics, and interests.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">3</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Campaign Automation</h3>
+                            <p class="text-sm text-gray-600">Launch automated, personalized email and SMS campaigns.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">4</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Optimization</h3>
+                            <p class="text-sm text-gray-600">A/B test campaigns and landing pages to maximize conversion rates.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Business Flow: Freshchat & Freshcaller</h2>
+                    <p class="text-gray-600 mb-4">Freshchat and Freshcaller offer unified messaging and telephony, turning every conversation into a sales or support opportunity.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">1</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Customer Initiates</h3>
+                            <p class="text-sm text-gray-600">A customer starts a chat or places a call to your business.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">2</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Routing & Context</h3>
+                            <p class="text-sm text-gray-600">The interaction is routed to the best agent, with full customer context provided.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">3</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Live Interaction</h3>
+                            <p class="text-sm text-gray-600">Agents interact with the customer, offering personalized support or sales guidance.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">4</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Resolution</h3>
+                            <p class="text-sm text-gray-600">The query is resolved, and the conversation is automatically logged for future reference.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Business Flow: Freshservice</h2>
+                    <p class="text-gray-600 mb-4">Freshservice simplifies IT service management (ITSM) by providing a structured process for handling and resolving employee requests.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">1</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Request Submission</h3>
+                            <p class="text-sm text-gray-600">Employees submit IT incidents or service requests via the self-service portal.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">2</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Triage & Assignment</h3>
+                            <p class="text-sm text-gray-600">Requests are automatically categorized and assigned to the right IT agent.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">3</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Incident Management</h3>
+                            <p class="text-sm text-gray-600">Agents work on the request, collaborating on a single pane of glass.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">4</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Resolution & Closure</h3>
+                            <p class="text-sm text-gray-600">The issue is resolved and the ticket is closed, updating the asset database.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Business Flow: Freshteam</h2>
+                    <p class="text-gray-600 mb-4">Freshteam automates the entire talent acquisition and employee management lifecycle, from finding talent to onboarding new hires.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Step 1 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">1</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Talent Acquisition</h3>
+                            <p class="text-sm text-gray-600">Post jobs to multiple boards and receive applications automatically.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">2</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Candidate Screening</h3>
+                            <p class="text-sm text-gray-600">Filter and screen candidates based on a unified dashboard and communication history.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FC913A;">3</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FC913A;">Interview Process</h3>
+                            <p class="text-sm text-gray-600">Schedule interviews and collect feedback from hiring managers.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flow-card">
+                            <div class="flow-step-number" style="background-color: #FF4E50;">4</div>
+                            <h3 class="font-bold text-lg mb-1" style="color: #FF4E50;">Onboarding</h3>
+                            <p class="text-sm text-gray-600">Automate document collection and task assignments for new hires.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                     <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-bold" style="color: #FF4E50;">$4B+</p>
+                        <p class="text-gray-600 font-semibold">Market Valuation</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-bold" style="color: #FF4E50;">4,000+</p>
+                        <p class="text-gray-600 font-semibold">Global Employees</p>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-lg p-6">
+                        <p class="text-5xl font-bold" style="color: #FF4E50;">13</p>
+                        <p class="text-gray-600 font-semibold">Worldwide Offices</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-center mb-6" style="color: #FF4E50;">Investing in Talent</h2>
+                    <p class="text-center text-gray-600 mb-4">Freshworks offers competitive salaries to attract top talent across various domains, ensuring innovation and quality in their product development and customer service.</p>
+                    <div class="chart-container">
+                        <canvas id="salaryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-center mb-6" style="color: #FF4E50;">Frequently Asked Questions (FAQs)</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" style="color: #FC913A;">Freshdesk</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How can I automate ticket handling?</p>
+                                    <p class="text-gray-600">Freshdesk allows you to set up automated workflows that prioritize and assign tickets based on custom rules, keywords, or sender details.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Can I create custom reports?</p>
+                                    <p class="text-gray-600">Yes, you can create and edit reports to track key metrics like ticket resolution time, agent performance, and customer satisfaction (CSAT) scores.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How can I customize the support portal?</p>
+                                    <p class="text-gray-600">Freshdesk allows you to customize the end-user portal's look, feel, and functionality with intuitive design choices and layout options, creating a unique support experience for your customers.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Who is responsible for the features customization process?</p>
+                                    <p class="text-gray-600">While customers have full control to customize their support portal and workflows, Freshworks provides dedicated customer support and implementation teams to guide them through the process, ensuring a smooth and effective setup.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" style="color: #FC913A;">Freshsales</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How do I manage user profiles and permissions?</p>
+                                    <p class="text-gray-600">Freshsales provides detailed user management features that allow you to create, update, and manage user profiles and set permissions to control access to sales data.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">What is a sales sequence?</p>
+                                    <p class="text-gray-600">A sales sequence is an automated series of emails, calls, and tasks designed to nurture leads and prospects over time, ensuring consistent follow-up.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Can I customize my CRM data fields?</p>
+                                    <p class="text-gray-600">Yes, you can create and edit custom fields for contacts and deals to capture and track unique data points that are specific to your business needs, allowing for a more tailored sales process.</p>
+                                </div>
+                                 <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Who is responsible for the features customization process?</p>
+                                    <p class="text-gray-600">The responsibility is a shared effort. Customers have the flexibility to create custom fields and sales sequences, while Freshworks' support and technical teams are available to provide assistance and expertise for more complex integrations or customizations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" style="color: #FC913A;">Freshmarketer</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How does Freshmarketer help with customer acquisition?</p>
+                                    <p class="text-gray-600">It helps by tracking visitor behavior, segmenting audiences for personalized campaigns, and running A/B tests to optimize landing pages and conversion rates.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How can I customize my marketing campaigns?</p>
+                                    <p class="text-gray-600">Freshmarketer enables you to customize marketing campaigns by using audience segmentation, personalized content, and behavioral triggers to send the right message to the right person at the right time.</p>
+                                </div>
+                                 <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Who is responsible for the features customization process?</p>
+                                    <p class="text-gray-600">Customers manage the campaigns and A/B tests. Freshworks' customer success team offers guidance and best practices to help customers customize their marketing workflows and achieve their desired results.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" style="color: #FC913A;">Freshchat & Freshcaller</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">What is unified messaging?</p>
+                                    <p class="text-gray-600">Freshchat and Freshcaller unify communication by allowing agents to manage conversations from multiple channels—like live chat and phone calls—from a single interface, providing complete customer context.</p>
+                                </div>
+                                 <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">What customization options are available?</p>
+                                    <p class="text-gray-600">You can customize the chat widget's appearance, set up automated message flows, and define intelligent routing rules to ensure incoming chats and calls are directed to the most suitable agent.</p>
+                                </div>
+                                 <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Who is responsible for the features customization process?</p>
+                                    <p class="text-gray-600">The customer is responsible for setting up the chat widget and routing rules. However, Freshworks provides extensive documentation and a support team to assist with advanced configurations and ensure a seamless deployment.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" style="color: #FC913A;">Freshservice</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">What is ITSM?</p>
+                                    <p class="text-gray-600">ITSM, or IT Service Management, is a structured framework for managing IT services to ensure they meet the needs of the business. Freshservice simplifies this process for IT teams.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How can I implement self-service?</p>
+                                    <p class="text-gray-600">Freshservice helps you implement a self-service portal where employees can find solutions, submit IT tickets, and track the status of their requests without needing to contact an agent directly.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Can I customize the ITSM portal for my employees?</p>
+                                    <p class="text-gray-600">Yes, Freshservice allows you to customize the end-user portal by structuring the environment, defining portal layouts, and creating a service catalog to provide a seamless and intuitive experience for employees.</p>
+                                </div>
+                                 <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Who is responsible for the features customization process?</p>
+                                    <p class="text-gray-600">The customer's internal IT team is typically responsible for configuring the self-service portal and service catalog. Freshworks offers comprehensive support and professional services to help with initial setup and complex customizations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" style="color: #FC913A;">Freshteam</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">What is the primary function of Freshteam?</p>
+                                    <p class="text-gray-600">Freshteam is an HR management solution that streamlines the entire employee lifecycle, from recruiting and onboarding new hires to managing employee data and offboarding.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">How can I customize my hiring and onboarding workflows?</p>
+                                    <p class="text-gray-600">Freshteam allows you to customize hiring workflows to match your company's unique processes and create personalized onboarding checklists to ensure a smooth and consistent experience for new employees.</p>
+                                </div>
+                                 <div>
+                                    <p class="font-semibold" style="color: #FF4E50;">Who is responsible for the features customization process?</p>
+                                    <p class="text-gray-600">Customers have the freedom to customize their hiring and onboarding workflows. Freshworks' support team is available to assist with any technical questions and provide resources to help optimize the process for their specific organizational needs.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-center items-center mt-8 space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="https://university.freshworks.com/" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105" style="background-color: #FC913A;">
+                            Freshworks University
+                        </a>
+                        <a href="https://www.freshworks.com/support/" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105" style="background-color: #FF4E50;">
+                            Contact Support Team
+                        </a>
+                    </div>
+                </div>
+
+            </main>
+
+            <footer class="text-center mt-12 p-4 bg-white rounded-lg shadow-lg">
+                <p class="text-sm text-gray-600">&copy; 2025 Felixent. For educational and professional use.</p>
+            </footer>
+
+        </div>
+
+        <script>
+            function wrapLabel(label) {
+                const maxLength = 16;
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).trim().length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                }
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            }
+
+            const tooltipTitleCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            const competitorData = {
+                labels: ['Freshdesk', 'Help Scout', 'Zendesk'],
+                datasets: [{
+                    label: 'Starting Price ($/user/month)',
+                    data: [15, 20, 59],
+                    backgroundColor: ['#FC913A', '#F9D423', '#FF4E50'],
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }]
+            };
+
+            const competitorChartCtx = document.getElementById('competitorChart').getContext('2d');
+            new Chart(competitorChartCtx, {
+                type: 'bar',
+                data: competitorData,
+                options: {
+                    ...tooltipTitleCallback,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'USD per User/Month'
+                            }
+                        }
+                    },
+                    plugins: {
+                        ...tooltipTitleCallback.plugins,
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const rawSalaryLabels = [
+                'Product Manager', 'Data Scientist', 'Software Engineer', 'DevOps Engineer',
+                'UX/UI Designer', 'Marketing Manager', 'Sales Development Representative', 'Technical Support Specialist'
+            ];
+
+            const salaryData = {
+                labels: rawSalaryLabels.map(wrapLabel),
+                datasets: [{
+                    label: 'Average Salary (USD per year)',
+                    data: [110000, 105000, 95000, 90000, 85000, 75000, 65000, 60000],
+                    backgroundColor: [
+                        '#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#FF4E50', '#FC913A', '#F9D423', '#EDE574'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }]
+            };
+
+            const salaryChartCtx = document.getElementById('salaryChart').getContext('2d');
+            new Chart(salaryChartCtx, {
+                type: 'bar',
+                data: salaryData,
+                options: {
+                    ...tooltipTitleCallback,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'k';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Average Annual Salary (USD)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        ...tooltipTitleCallback.plugins,
+                        legend: {
+                            display: false
+                        },
+                    }
+                }
+            });
+        </script>
+    </body>
+    </html>
