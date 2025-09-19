@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Learning MS PowerBi">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent : Mastering Power BI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B132B;
+            color: #EFEFEF;
+        }
+        .card {
+            background-color: #1C2541;
+            border: 1px solid #3A506B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #5BC0BE;
+            line-height: 1;
+        }
+        .kpi-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #6FFFE9;
+        }
+        h1, h2, h3 {
+             color: #6FFFE9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Mastering Power BI</h1>
+            <p class="text-lg md:text-xl text-[#5BC0BE]">From Raw Data to Actionable Decisions.</p>
+        </header>
+        
+        <main>
+            <section class="mb-16">
+                <div class="card rounded-lg shadow-lg p-6 md:p-8 text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">What is Business Intelligence?</h2>
+                    <p class="max-w-3xl mx-auto mb-6">Power BI is a suite of business analytics tools by Microsoft that lets you visualize your data and share insights. It transforms unrelated sources of data into coherent, visually immersive, and interactive reports and dashboards.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-[#0B132B] p-4 rounded-lg">
+                            <div class="kpi-number">#1</div>
+                            <p class="font-semibold">Leader in the Gartner Magic Quadrant for BI Platforms.</p>
+                        </div>
+                        <div class="bg-[#0B132B] p-4 rounded-lg">
+                             <div class="kpi-number">300+</div>
+                            <p class="font-semibold">Connectors to a vast range of data sources in the cloud and on-premises.</p>
+                        </div>
+                        <div class="bg-[#0B132B] p-4 rounded-lg">
+                            <div class="kpi-number">AI</div>
+                            <p class="font-semibold">Integrates Artificial Intelligence for advanced analytics and insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">The Power BI Ecosystem</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card rounded-lg shadow-lg p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2">Power BI Desktop</h3>
+                        <p>The free authoring application for Windows. This is your canvas to connect, transform, model, and create visual reports from your data.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2">Power BI Service</h3>
+                        <p>The cloud-based (SaaS) service. Here you publish, share, and collaborate on reports, building dashboards and managing access for your team.</p>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2">Power BI Mobile</h3>
+                        <p>Access your reports and dashboards on the go. View and interact with your data from anywhere on iOS, Android, or Windows devices.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">The Core Analytics Workflow</h2>
+                <div class="card rounded-lg shadow-lg p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row items-center justify-around text-center">
+                        <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">🔌</span>
+                            <h3 class="font-bold">1. Get Data</h3>
+                            <p>Connect to hundreds of data sources.</p>
+                        </div>
+                        <div class="flow-arrow my-4 md:my-0">→</div>
+                        <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">✨</span>
+                            <h3 class="font-bold">2. Transform Data</h3>
+                            <p>Clean & shape data with Power Query.</p>
+                        </div>
+                         <div class="flow-arrow my-4 md:my-0">→</div>
+                        <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">🔗</span>
+                             <h3 class="font-bold">3. Model Data</h3>
+                            <p>Create relationships & DAX measures.</p>
+                        </div>
+                        <div class="flow-arrow my-4 md:my-0">→</div>
+                         <div class="flex flex-col items-center p-4">
+                            <span class="text-4xl mb-2">📊</span>
+                            <h3 class="font-bold">4. Visualize & Share</h3>
+                            <p>Build reports & publish to the service.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Key Concepts for Deeper Insights</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card rounded-lg shadow-lg p-6">
+                         <h3 class="text-xl font-bold mb-4 text-center">Data Modeling with DAX</h3>
+                        <p class="text-center mb-4">DAX (Data Analysis Expressions) is the formula language of Power BI. It allows you to create powerful, custom calculations called 'measures' that perform analysis on your data model. This is how you move from simple reporting to true business intelligence.</p>
+                        <div class="bg-[#0B132B] p-6 rounded-lg text-center">
+                             <p class="font-mono bg-[#3A506B] text-white p-4 rounded">Total Sales = SUM(Sales[Revenue])</p>
+                             <p class="mt-4 font-semibold">Example: A simple DAX measure to calculate total revenue.</p>
+                         </div>
+                    </div>
+                    <div class="card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Core Visualizations in Power BI</h3>
+                        <p class="text-center mb-4">While Power BI offers hundreds of visuals, a few core types form the backbone of most reports. Understanding when to use each is crucial for clear communication. Bar and column charts are excellent for comparisons, while line charts track trends.</p>
+                        <div class="chart-container">
+                            <canvas id="coreVisuals"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Sample Project: Quarterly Sales Report</h2>
+                <p class="text-center max-w-3xl mx-auto mb-8">This sample report demonstrates how visuals work together. We analyze sales revenue over the past year to identify trends and then break down the total revenue by product line to see which categories are the top performers.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-3 card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Monthly Sales Revenue Trend</h3>
+                        <div class="chart-container h-[420px] md:h-[450px]">
+                            <canvas id="salesTrend"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-center">Revenue by Product Line</h3>
+                        <div class="chart-container h-[420px] md:h-[450px]">
+                            <canvas id="revenueByCategory"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 pt-8 border-t border-[#3A506B]">
+            <p>&copy; 2025 Felixent. The core learning path of Microsoft Power BI.</p>
+        </footer>
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxWidth = 16) => {
+            if (label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        const chartColors = ['#5BC0BE', '#3A506B', '#6FFFE9', '#88a1b5', '#a1e9e7'];
+        Chart.defaults.color = '#EFEFEF';
+        Chart.defaults.borderColor = '#3A506B';
+
+        const coreVisualsCtx = document.getElementById('coreVisuals').getContext('2d');
+        const coreVisualsData = {
+            labels: ['Bar/Column Charts', 'Line/Area Charts', 'KPI Cards', 'Maps', 'Tables & Matrices'].map(label => wrapLabel(label)),
+            datasets: [{
+                label: 'Frequency of Use',
+                data: [95, 85, 75, 60, 90],
+                backgroundColor: chartColors,
+                borderWidth: 0
+            }]
+        };
+        new Chart(coreVisualsCtx, {
+            type: 'bar',
+            data: coreVisualsData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#3A506B' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        const salesTrendCtx = document.getElementById('salesTrend').getContext('2d');
+        const salesTrendData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Sales Revenue ($)',
+                data: [150, 165, 180, 210, 220, 235, 250, 240, 260, 280, 310, 340],
+                fill: true,
+                backgroundColor: 'rgba(91, 192, 190, 0.2)',
+                borderColor: '#5BC0BE',
+                tension: 0.4
+            }]
+        };
+        new Chart(salesTrendCtx, {
+            type: 'line',
+            data: salesTrendData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: value => '$' + (value / 1) + 'k' }
+                    }
+                }
+            }
+        });
+
+        const revenueByCategoryCtx = document.getElementById('revenueByCategory').getContext('2d');
+        const revenueByCategoryData = {
+            labels: ['Enterprise Solutions', 'Consumer Electronics', 'Software & Services', 'Accessories'].map(label => wrapLabel(label)),
+            datasets: [{
+                label: 'Revenue',
+                data: [1250000, 850000, 650000, 250000],
+                backgroundColor: chartColors,
+                hoverOffset: 4,
+                borderWidth: 0
+            }]
+        };
+        new Chart(revenueByCategoryCtx, {
+            type: 'doughnut',
+            data: revenueByCategoryData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
