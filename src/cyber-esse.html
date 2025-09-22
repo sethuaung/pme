@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="PME-Summrized">
+    <meta name="description" content="Project Management Infographic Content for Class">
+    <meta name="author" content="Mosquito">
+    <title>Felixent : Cybersecurity Essentials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-item {
+            border: 2px solid #7a5195;
+            transition: all 0.3s ease;
+        }
+        .flow-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .connector {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .connector {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+                color: #7a5195;
+                font-weight: bold;
+            }
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #374c80, #003f5c);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7a5195] to-[#ef5675]">Cybersecurity Essentials</h1>
+            <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">A visual guide to understanding digital threats and defenses, based on the 2025 IBM X-Force Threat Intelligence Index.</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="identity-crisis">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c]">The Identity Crisis of 2025</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">The most significant finding from recent threat intelligence is that cyber attacks are overwhelmingly targeting user identities. Compromised credentials are the gateway for most security breaches.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container">
+                            <canvas id="identityAttacksChart"></canvas>
+                        </div>
+                        <div class="text-center md:text-left">
+                             <h3 class="text-2xl font-bold text-[#003f5c]">A Staggering Statistic</h3>
+                            <p class="text-7xl font-black text-[#ef5675] my-4">71%</p>
+                            <p class="text-gray-600 text-lg">of all cyber attacks investigated involved the compromise of valid user accounts. This highlights a critical shift towards exploiting trusted credentials over complex software vulnerabilities.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="threat-taxonomy">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c]">Anatomy of a Cyber Threat</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Understanding a threat involves knowing who the attackers are, why they attack, and the methods they use to succeed.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="text-xl font-bold text-[#7a5195] mb-4 flex items-center"><span class="text-3xl mr-3">🎯</span> Why They Attack</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="text-[#ff764a] mr-2 mt-1">💰</span> <strong>Financial Gain:</strong> Stealing data, fraud, and ransomware deployment.</li>
+                            <li class="flex items-start"><span class="text-[#ff764a] mr-2 mt-1">🕵️</span> <strong>Espionage:</strong> Gaining political or competitive advantage through information theft.</li>
+                            <li class="flex items-start"><span class="text-[#ff764a] mr-2 mt-1">💥</span> <strong>Disruption:</strong> Sabotaging operations or critical infrastructure.</li>
+                            <li class="flex items-start"><span class="text-[#ff764a] mr-2 mt-1">📢</span> <strong>Ideological Motives:</strong> Protesting or promoting a cause via hacktivism.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="text-xl font-bold text-[#7a5195] mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> How They Attack</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="text-[#ef5675] mr-2 mt-1">🎣</span> <strong>Phishing:</strong> Deceptive emails to trick users into revealing credentials.</li>
+                             <li class="flex items-start"><span class="text-[#ef5675] mr-2 mt-1">🔑</span> <strong>Credential Stuffing:</strong> Using stolen login data to access multiple systems.</li>
+                            <li class="flex items-start"><span class="text-[#ef5675] mr-2 mt-1">🔓</span> <strong>Exploiting Vulnerabilities:</strong> Targeting outdated or misconfigured software.</li>
+                            <li class="flex items-start"><span class="text-[#ef5675] mr-2 mt-1">🚚</span> <strong>Supply Chain Attacks:</strong> Compromising third-party vendors to reach a target.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl p-6 md:col-span-2 lg:col-span-1">
+                        <h3 class="text-xl font-bold text-[#7a5195] mb-4 flex items-center"><span class="text-3xl mr-3">📈</span> Emerging Tactics</h3>
+                         <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><span class="text-[#bc5090] mr-2 mt-1">🤖</span> <strong>AI Weaponization:</strong> Using AI to create highly convincing phishing emails and adaptive malware.</li>
+                            <li class="flex items-start"><span class="text-[#bc5090] mr-2 mt-1">🐧</span> <strong>Linux Threats:</strong> Increased attacks on cloud infrastructure and IoT devices running Linux.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="financial-crime">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c]">The Focus on Financial Cybercrime</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">The financial sector remains a prime target for cybercriminals, who employ a variety of techniques to steal funds and sensitive data.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                     <h3 class="text-center text-xl font-bold text-[#003f5c] mb-6">Primary Methods in Financial Attacks</h3>
+                    <div class="chart-container">
+                        <canvas id="financialCrimeChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-500 mt-4 text-sm">This chart illustrates the relative prevalence of common financial attack vectors. Credential theft and Business Email Compromise (BEC) scams are particularly dominant, leveraging stolen identity information for direct financial gain.</p>
+                </div>
+            </section>
+            
+            <section id="domains">
+                 <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-[#003f5c]">A Layered Defense: The 7 Domains of Cybersecurity</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Effective cybersecurity isn't about a single solution. It's about creating a comprehensive, layered defense by integrating security across multiple interconnected domains.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-9 gap-4 items-center text-center">
+                    
+                    <div class="flow-item bg-white rounded-lg p-4 shadow-md lg:col-span-2">
+                        <p class="font-bold text-[#7a5195]">Network Security</p>
+                        <p class="text-xs text-gray-600 hidden md:block">Protects data in transit</p>
+                    </div>
+                    <div class="connector">→</div>
+                    <div class="flow-item bg-white rounded-lg p-4 shadow-md lg:col-span-2">
+                        <p class="font-bold text-[#bc5090]">Endpoint Security</p>
+                        <p class="text-xs text-gray-600 hidden md:block">Secures devices</p>
+                    </div>
+                     <div class="connector">→</div>
+                    <div class="flow-item bg-white rounded-lg p-4 shadow-md lg:col-span-2">
+                        <p class="font-bold text-[#ef5675]">Application Security</p>
+                        <p class="text-xs text-gray-600 hidden md:block">Ensures software integrity</p>
+                    </div>
+                    <div class="lg:col-span-9 my-4 border-t-2 border-dashed border-gray-300"></div>
+                     <div class="flow-item bg-white rounded-lg p-4 shadow-md lg:col-span-2 lg:col-start-2">
+                        <p class="font-bold text-[#ff764a]">Data Security</p>
+                        <p class="text-xs text-gray-600 hidden md:block">Safeguards information</p>
+                    </div>
+                     <div class="connector">↑</div>
+                     <div class="flow-item stat-card text-white rounded-lg p-4 shadow-lg lg:col-span-3">
+                        <p class="font-bold text-lg">Identity & Access Management (IAM)</p>
+                        <p class="text-xs hidden md:block">Controls user authentication (The Core)</p>
+                    </div>
+                    <div class="connector">↓</div>
+                    <div class="flow-item bg-white rounded-lg p-4 shadow-md lg:col-span-2">
+                        <p class="font-bold text-[#ffa600]">Cloud Security</p>
+                        <p class="text-xs text-gray-600 hidden md:block">Protects cloud infrastructure</p>
+                    </div>
+                    <div class="lg:col-span-9 my-4 border-t-2 border-dashed border-gray-300"></div>
+                     <div class="lg:col-span-3"></div>
+                     <div class="flow-item bg-white rounded-lg p-4 shadow-md lg:col-span-3">
+                        <p class="font-bold text-[#003f5c]">Security Operations</p>
+                        <p class="text-xs text-gray-600 hidden md:block">Monitors, detects, and responds to threats</p>
+                    </div>
+                    <div class="lg:col-span-3"></div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-200">
+            <p class="text-gray-600">This guide is based on data from the IBM X-Force Threat Intelligence Index and other leading security frameworks.</p>
+            <p class="text-sm text-gray-500 mt-2">FELIXENT Cybersecurity Education</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 12
+                        },
+                        color: '#4A5568'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#003f5c',
+                    titleFont: { family: 'Inter', size: 14, weight: 'bold' },
+                    bodyFont: { family: 'Inter', size: 12 },
+                    padding: 12,
+                    cornerRadius: 8,
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const identityAttacksCtx = document.getElementById('identityAttacksChart').getContext('2d');
+        new Chart(identityAttacksCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Identity-Related Attacks', 'Other Attack Vectors'],
+                datasets: [{
+                    label: 'Attack Distribution',
+                    data: [71, 29],
+                    backgroundColor: ['#ef5675', '#d1d5db'],
+                    borderColor: ['#ffffff', '#ffffff'],
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                cutout: '70%',
+            }
+        });
+
+        const financialCrimeCtx = document.getElementById('financialCrimeChart').getContext('2d');
+        const financialLabels = ['Credential Theft & Account Takeover', 'Business Email Compromise (BEC)', 'Cryptocurrency Fraud & Laundering', 'ATM Malware & Card Skimming'];
+        new Chart(financialCrimeCtx, {
+            type: 'bar',
+            data: {
+                labels: financialLabels.map(wrapLabel),
+                datasets: [{
+                    label: 'Prevalence Index',
+                    data: [85, 78, 60, 45],
+                    backgroundColor: ['#7a5195', '#bc5090', '#ef5675', '#ff764a'],
+                    borderRadius: 8,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#e2e8f0'
+                        },
+                        ticks: {
+                            color: '#4A5568',
+                            font: { family: 'Inter' }
+                        },
+                         title: {
+                            display: true,
+                            text: 'Relative Prevalence',
+                            color: '#4A5568',
+                            font: { family: 'Inter', weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#4A5568',
+                            font: { family: 'Inter', size: 10 }
+                        }
+                    }
+                },
+                plugins: {
+                     ...commonChartOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+    
