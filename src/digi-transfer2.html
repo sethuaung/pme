@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Transfer Platform Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .swot-card {
+            border-left: 5px solid;
+        }
+        .flow-arrow {
+            position: relative;
+            padding-right: 2rem;
+        }
+        .flow-arrow::after {
+            content: '→';
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #4A5568;
+        }
+        .flow-item:last-child .flow-arrow::after {
+            content: '';
+        }
+        .lang-button.active {
+            background-color: #66A5AD;
+            color: white;
+            border-color: #66A5AD;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-[#003B46] text-white p-8 text-center relative">
+        <div class="absolute top-4 right-4">
+            <button id="en-btn" class="lang-button px-4 py-2 border rounded-full text-white font-semibold transition-colors duration-300">English</button>
+            <button id="my-btn" class="lang-button px-4 py-2 border rounded-full text-white font-semibold transition-colors duration-300">မြန်မာ</button>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold" data-translate-key="main_title">Digital Transfer Platform: A Blueprint for Myanmar</h1>
+        <p class="mt-4 text-lg text-[#C4DFE6]" data-translate-key="subtitle">Connecting Myanmar to the World, Seamlessly and Securely.</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section id="business-model" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="business_model_title">Platform Business Model</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-[#66A5AD]" data-translate-key="value_propositions_title">Value Propositions</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="vp_1">Fast, low-cost international transfers.</li>
+                        <li data-translate-key="vp_2">Multiple wallet integrations (e.g., TrueMoney).</li>
+                        <li data-translate-key="vp_3">High security and regulatory compliance.</li>
+                        <li data-translate-key="vp_4">24/7 access via mobile and web platforms.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-[#66A5AD]" data-translate-key="customer_segments_title">Customer Segments</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="cs_1">Expatriates & migrant workers sending remittances.</li>
+                        <li data-translate-key="cs_2">Freelancers & businesses receiving payments.</li>
+                        <li data-translate-key="cs_3">Families supporting students abroad.</li>
+                        <li data-translate-key="cs_4">Tourists and travelers needing local currency.</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2 lg:col-span-1">
+                    <h3 class="text-xl font-semibold mb-3 text-[#66A5AD]" data-translate-key="channels_title">Channels</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="channel_1">iOS & Android Mobile Applications</li>
+                        <li data-translate-key="channel_2">Web-based Platform</li>
+                        <li>
+                            <p class="font-semibold" data-translate-key="channel_3_title">Partner Agent Network:</p>
+                            <ul class="list-disc list-inside ml-4 font-normal">
+                                <li data-translate-key="channel_3_1">Local convenience stores or shops acting as cash-in/cash-out points.</li>
+                                <li data-translate-key="channel_3_2">Mobile phone repair shops or small business owners facilitating transfers.</li>
+                                <li data-translate-key="channel_3_3">Local bank wallets, such as those from Yoma Bank or KBZ Bank.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold" data-translate-key="channel_4_title">API for Business Clients:</p>
+                            <ul class="list-disc list-inside ml-4 font-normal">
+                                <li data-translate-key="channel_4_1">E-commerce platforms needing to automate payments to vendors.</li>
+                                <li data-translate-key="channel_4_2">Payroll services for businesses with international employees or contractors.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-3">
+                     <h3 class="text-xl font-semibold mb-3 text-[#66A5AD]" data-translate-key="revenue_streams_title">Revenue Streams Breakdown</h3>
+                     <p class="text-gray-600 mb-4" data-translate-key="revenue_streams_text">Our platform generates revenue primarily through transaction fees and currency exchange spreads, supplemented by value-added services for business clients.</p>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="swot-analysis" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="swot_title">SWOT Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="swot-card border-[#66A5AD] bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#66A5AD] mb-3" data-translate-key="strengths_title">Strengths</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="s_1">Strong partnerships with multiple wallets.</li>
+                        <li data-translate-key="s_2">Advanced, user-friendly technology platform.</li>
+                        <li data-translate-key="s_3">Deep understanding of the local Myanmar market.</li>
+                        <li data-translate-key="s_4">Robust security and AML compliance framework.</li>
+                    </ul>
+                </div>
+                <div class="swot-card border-red-400 bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-red-500 mb-3" data-translate-key="weaknesses_title">Weaknesses</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="w_1">New brand compared to established players.</li>
+                        <li data-translate-key="w_2">Initial reliance on third-party infrastructure.</li>
+                        <li data-translate-key="w_3">Complexities of navigating cross-border regulations.</li>
+                        <li data-translate-key="w_4">Building a wide physical agent network takes time.</li>
+                    </ul>
+                </div>
+                <div class="swot-card border-green-400 bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-green-500 mb-3" data-translate-key="opportunities_title">Opportunities</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="o_1">Growing demand for digital remittances in Myanmar.</li>
+                        <li data-translate-key="o_2">Expansion into business and B2B payment services.</li>
+                        <li data-translate-key="o_3">Leveraging MMQR for domestic payment solutions.</li>
+                        <li data-translate-key="o_4">Partnerships with local banks and financial institutions.</li>
+                    </ul>
+                </div>
+                <div class="swot-card border-yellow-400 bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-yellow-500 mb-3" data-translate-key="threats_title">Threats</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li data-translate-key="t_1">Intense competition from established and new players.</li>
+                        <li data-translate-key="t_2">Fluctuations in currency exchange rates.</li>
+                        <li data-translate-key="t_3">Changes in international and local regulations.</li>
+                        <li data-translate-key="t_4">Cybersecurity risks and potential data breaches.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="competitors" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="competitors_title">Competitive Landscape</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8" data-translate-key="competitors_text">The digital transfer market is competitive. We differentiate through lower fees, superior local integration, and a user-centric platform. This chart compares typical transfer costs for a $200 transaction to Myanmar.</p>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="chart-container h-[450px] max-h-[500px]">
+                    <canvas id="competitorChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="compliance" class="mb-12 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="compliance_title">Compliance & Security Framework</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8" data-translate-key="compliance_text">Our platform is built on a foundation of trust and security, adhering to both local Myanmar regulations and global best practices to protect our users and their data.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="text-5xl mb-3 text-[#003B46]">🛡️</div>
+                    <h3 class="text-xl font-semibold mb-2" data-translate-key="compliance_1_title">Myanmar AML Rules</h3>
+                    <p class="text-gray-600" data-translate-key="compliance_1_text">Full compliance with the Central Bank of Myanmar's directives, including KYC/CDD procedures, transaction monitoring, and reporting of suspicious activities to the Financial Intelligence Unit (FIU).</p>
+                </div>
+                <div>
+                    <div class="text-5xl mb-3 text-[#003B46]">💳</div>
+                    <h3 class="text-xl font-semibold mb-2" data-translate-key="compliance_2_title">PCI/DSS</h3>
+                    <p class="text-gray-600" data-translate-key="compliance_2_text">Adherence to the Payment Card Industry Data Security Standard to ensure secure handling of cardholder information and prevent credit card fraud.</p>
+                </div>
+                <div>
+                    <div class="text-5xl mb-3 text-[#003B46]">📄</div>
+                    <h3 class="text-xl font-semibold mb-2" data-translate-key="compliance_3_title">ISO/IEC 27001</h3>
+                    <p class="text-gray-600" data-translate-key="compliance_3_text">Implementation of a comprehensive Information Security Management System (ISMS) to systematically manage sensitive company information and ensure data integrity and confidentiality.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="secure-workflow" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="secure_workflow_title">Secure Transaction Lifecycle</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8" data-translate-key="secure_workflow_text">Security is not an afterthought; it is integrated into every stage of the transfer. This workflow highlights how our platform's security controls protect data and funds from end to end.</p>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">🔐</div>
+                        <h4 class="font-semibold" data-translate-key="sw_1_title">Data Encryption</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="sw_1_text">All sender and recipient data is encrypted in transit and at rest using AES-256 protocols (ISO/IEC 27001).</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">✅</div>
+                        <h4 class="font-semibold" data-translate-key="sw_2_title">KYC & AML Screening</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="sw_2_text">Automated systems screen user identities and transactions for suspicious activity, complying with Myanmar's AML rules.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">🛡️</div>
+                        <h4 class="font-semibold" data-translate-key="sw_3_title">Payment Tokenization</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="sw_3_text">Credit/debit card details are replaced with a secure token to minimize cardholder data exposure (PCI/DSS).</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">🔄</div>
+                        <h4 class="font-semibold" data-translate-key="sw_4_title">Secure API Gateway</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="sw_4_text">All communication with partner banks and wallets is secured via a hardened API gateway with strict access controls.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">🧾</div>
+                        <h4 class="font-semibold" data-translate-key="sw_5_title">Audit Trail & Logging</h4>
+                        <p class="text-sm text-gray-600" data-translate-key="sw_5_text">Every transaction and system action is logged for future auditing and forensic analysis, ensuring accountability (ISO/IEC 27001).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-12 border-t-2 border-gray-200">
+
+        <section id="core-platform-flow" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="core_flow_title">Core Platform Flow</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8" data-translate-key="core_flow_text">A simplified visual guide to how our platform processes every cross-border transaction, from start to finish.</p>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-[#C4DFE6] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">💰</div>
+                        <h4 class="font-semibold" data-translate-key="cpf_1_title">1. Initiate Transfer</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="cpf_1_text">The sender initiates a transfer on our mobile or web app, selecting the amount and recipient details.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-[#C4DFE6] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">⚙️</div>
+                        <h4 class="font-semibold" data-translate-key="cpf_2_title">2. Funds & FX Processing</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="cpf_2_text">Our system secures the funds and performs real-time currency conversion at a favorable rate.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-[#C4DFE6] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">🔄</div>
+                        <h4 class="font-semibold" data-translate-key="cpf_3_title">3. Secure API Integration</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="cpf_3_text">The converted funds are securely transferred to the local partner's system via a robust API gateway.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-[#C4DFE6] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">✅</div>
+                        <h4 class="font-semibold" data-translate-key="cpf_4_title">4. Local Payout</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="cpf_4_text">The local partner (wallet or bank) credits the recipient's account. This happens instantly via MMQR.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="bg-[#C4DFE6] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-3xl">🔔</div>
+                        <h4 class="font-semibold" data-translate-key="cpf_5_title">5. Recipient Notification</h4>
+                        <p class="text-sm text-gray-600" data-translate-key="cpf_5_text">Both sender and recipient are notified that the transaction is complete.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="international-workflows" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="int_workflows_title">International Bank Workflows</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8" data-translate-key="int_workflows_text">Our platform seamlessly integrates with international banking partners to facilitate smooth cross-border transactions. These flows illustrate the end-to-end process from source bank to final payout in Myanmar.</p>
+
+            <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h3 class="text-2xl font-semibold mb-6 text-[#003B46]" data-translate-key="japan_workflow_title">Japan Bank to Myanmar</h3>
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">🇯🇵</div>
+                        <h4 class="font-semibold" data-translate-key="jw_1_title">Japanese Bank</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="jw_1_text">Sender initiates a SWIFT transfer to our partner bank in Japan.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">➡️</div>
+                        <h4 class="font-semibold" data-translate-key="jw_2_title">Forex Conversion</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="jw_2_text">Funds are converted from JPY to MMK at a competitive exchange rate.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">🏦</div>
+                        <h4 class="font-semibold" data-translate-key="jw_3_title">Our Platform</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="jw_3_text">We receive the funds and process the transfer for local payout.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">📲</div>
+                        <h4 class="font-semibold" data-translate-key="jw_4_title">Final Payout</h4>
+                        <p class="text-sm text-gray-600" data-translate-key="jw_4_text">Recipient receives funds in their local Myanmar wallet (e.g., TrueMoney) via MMQR.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h3 class="text-2xl font-semibold mb-6 text-[#003B46]" data-translate-key="thai_workflow_title">Thai Bank to Myanmar</h3>
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">🇹🇭</div>
+                        <h4 class="font-semibold" data-translate-key="tw_1_title">Thai Bank</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="tw_1_text">Sender initiates a transfer via our partner bank or agent network in Thailand.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">➡️</div>
+                        <h4 class="font-semibold" data-translate-key="tw_2_title">Forex Conversion</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="tw_2_text">Funds are converted from THB to MMK, minimizing transfer costs.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">🏦</div>
+                        <h4 class="font-semibold" data-translate-key="tw_3_title">Our Platform</h4>
+                        <p class="text-sm text-gray-600 flow-arrow" data-translate-key="tw_3_text">We verify and process the transaction, ensuring compliance with all regulations.</p>
+                    </div>
+                    <div class="text-center flow-item flex-1">
+                        <div class="text-5xl mb-2">📲</div>
+                        <h4 class="font-semibold" data-translate-key="tw_4_title">Final Payout</h4>
+                        <p class="text-sm text-gray-600" data-translate-key="tw_4_text">Recipient's designated mobile wallet is credited with the funds instantly via MMQR.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blueprint" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="timeline_title">Project Blueprint Timeline</h2>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="relative border-l-4 border-[#66A5AD] ml-4">
+                    <div class="mb-8 ml-8">
+                        <div class="absolute w-6 h-6 bg-[#07575B] rounded-full -left-3.5 border-4 border-white"></div>
+                        <h3 class="text-xl font-semibold text-[#003B46]" data-translate-key="p1_title">Phase 1: Foundation & Compliance (Months 1-3)</h3>
+                        <p class="text-gray-600" data-translate-key="p1_text">Platform development, establishing legal framework, securing CBM licenses, and integrating core AML/KYC protocols.</p>
+                    </div>
+                    <div class="mb-8 ml-8">
+                        <div class="absolute w-6 h-6 bg-[#07575B] rounded-full -left-3.5 border-4 border-white"></div>
+                        <h3 class="text-xl font-semibold text-[#003B46]" data-translate-key="p2_title">Phase 2: MVP Launch & Partnerships (Months 4-6)</h3>
+                        <p class="text-gray-600" data-translate-key="p2_text">Launch iOS/Android mobile and web platforms. Finalize partnerships with initial wallet providers and key international banks, including those in Japan and Thailand.</p>
+                    </div>
+                    <div class="mb-8 ml-8">
+                         <div class="absolute w-6 h-6 bg-[#07575B] rounded-full -left-3.5 border-4 border-white"></div>
+                        <h3 class="text-xl font-semibold text-[#003B46]" data-translate-key="p3_title">Phase 3: MMQR Integration & Growth (Months 7-9)</h3>
+                        <p class="text-gray-600" data-translate-key="p3_text">Full MMQR integration for seamless domestic payouts. Begin marketing campaigns and user acquisition strategies.</p>
+                    </div>
+                     <div class="ml-8">
+                         <div class="absolute w-6 h-6 bg-[#07575B] rounded-full -left-3.5 border-4 border-white"></div>
+                        <h3 class="text-xl font-semibold text-[#003B46]" data-translate-key="p4_title">Phase 4: Expansion & New Features (Months 10-12)</h3>
+                        <p class="text-gray-600" data-translate-key="p4_text">Introduce B2B services, expand corridor options, and add value-added features based on user feedback.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2 class="text-3xl font-bold text-center text-[#07575B] mb-8" data-translate-key="faq_title">Frequently Asked Questions (FAQ)</h2>
+            <div class="space-y-4 max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md">
+                    <details class="p-6">
+                        <summary class="font-semibold cursor-pointer" data-translate-key="faq_1_summary">What makes this platform different from competitors?</summary>
+                        <p class="mt-4 text-gray-700" data-translate-key="faq_1_text">We focus on deep local integration with Myanmar's financial ecosystem, including multiple mobile wallets and the MMQR standard. This allows for faster, more convenient payouts and a better user experience, often at a lower cost than traditional services.</p>
+                    </details>
+                </div>
+                <div class="bg-white rounded-lg shadow-md">
+                    <details class="p-6">
+                        <summary class="font-semibold cursor-pointer" data-translate-key="faq_2_summary">How is my money and data kept secure?</summary>
+                        <p class="mt-4 text-gray-700" data-translate-key="faq_2_text">Security is our top priority. We employ end-to-end encryption for all data, adhere to strict international standards like PCI/DSS and ISO 27001, and comply fully with the Central Bank of Myanmar's AML/CFT regulations to protect every transaction.</p>
+                    </details>
+                </div>
+                <div class="bg-white rounded-lg shadow-md">
+                    <details class="p-6">
+                        <summary class="font-semibold cursor-pointer" data-translate-key="faq_3_summary">What is MMQR and how does it benefit me?</summary>
+                        <p class="mt-4 text-gray-700" data-translate-key="faq_3_text">MMQR is Myanmar's universal QR code standard. Our integration means a sender doesn't need to know the recipient's specific bank or wallet. As long as the recipient's app supports MMQR, they can receive money instantly, making transfers more flexible and error-free.</p>
+                    </details>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md">
+                    <details class="p-6">
+                        <summary class="font-semibold cursor-pointer" data-translate-key="faq_4_summary">Which mobile wallets can I send money to?</summary>
+                        <p class="mt-4 text-gray-700" data-translate-key="faq_4_text">We are constantly expanding our network. Initially, we support major wallets like TrueMoney, with plans to rapidly onboard all financial institutions connected to the MMQR network. Check the app for the most current list of supported partners.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#003B46] text-white text-center p-6 mt-12">
+        <p data-translate-key="footer_text">&copy; 2025 Digital Transfer Platform. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                main_title: "Digital Transfer Platform: A Blueprint for Myanmar",
+                subtitle: "Connecting Myanmar to the World, Seamlessly and Securely.",
+                business_model_title: "Platform Business Model",
+                value_propositions_title: "Value Propositions",
+                vp_1: "Fast, low-cost international transfers.",
+                vp_2: "Multiple wallet integrations (e.g., TrueMoney).",
+                vp_3: "High security and regulatory compliance.",
+                vp_4: "24/7 access via mobile and web platforms.",
+                customer_segments_title: "Customer Segments",
+                cs_1: "Expatriates & migrant workers sending remittances.",
+                cs_2: "Freelancers & businesses receiving payments.",
+                cs_3: "Families supporting students abroad.",
+                cs_4: "Tourists and travelers needing local currency.",
+                channels_title: "Channels",
+                channel_1: "iOS & Android Mobile Applications",
+                channel_2: "Web-based Platform",
+                channel_3_title: "Partner Agent Network:",
+                channel_3_1: "Local convenience stores or shops acting as cash-in/cash-out points.",
+                channel_3_2: "Mobile phone repair shops or small business owners facilitating transfers.",
+                channel_3_3: "Local bank wallets, such as those from Yoma Bank or KBZ Bank.",
+                channel_4_title: "API for Business Clients:",
+                channel_4_1: "E-commerce platforms needing to automate payments to vendors.",
+                channel_4_2: "Payroll services for businesses with international employees or contractors.",
+                revenue_streams_title: "Revenue Streams Breakdown",
+                revenue_streams_text: "Our platform generates revenue primarily through transaction fees and currency exchange spreads, supplemented by value-added services for business clients.",
+                swot_title: "SWOT Analysis",
+                strengths_title: "Strengths",
+                s_1: "Strong partnerships with multiple wallets.",
+                s_2: "Advanced, user-friendly technology platform.",
+                s_3: "Deep understanding of the local Myanmar market.",
+                s_4: "Robust security and AML compliance framework.",
+                weaknesses_title: "Weaknesses",
+                w_1: "New brand compared to established players.",
+                w_2: "Initial reliance on third-party infrastructure.",
+                w_3: "Complexities of navigating cross-border regulations.",
+                w_4: "Building a wide physical agent network takes time.",
+                opportunities_title: "Opportunities",
+                o_1: "Growing demand for digital remittances in Myanmar.",
+                o_2: "Expansion into business and B2B payment services.",
+                o_3: "Leveraging MMQR for domestic payment solutions.",
+                o_4: "Partnerships with local banks and financial institutions.",
+                threats_title: "Threats",
+                t_1: "Intense competition from established and new players.",
+                t_2: "Fluctuations in currency exchange rates.",
+                t_3: "Changes in international and local regulations.",
+                t_4: "Cybersecurity risks and potential data breaches.",
+                competitors_title: "Competitive Landscape",
+                competitors_text: "The digital transfer market is competitive. We differentiate through lower fees, superior local integration, and a user-centric platform. This chart compares typical transfer costs for a $200 transaction to Myanmar.",
+                compliance_title: "Compliance & Security Framework",
+                compliance_text: "Our platform is built on a foundation of trust and security, adhering to both local Myanmar regulations and global best practices to protect our users and their data.",
+                compliance_1_title: "Myanmar AML Rules",
+                compliance_1_text: "Full compliance with the Central Bank of Myanmar's directives, including KYC/CDD procedures, transaction monitoring, and reporting of suspicious activities to the Financial Intelligence Unit (FIU).",
+                compliance_2_title: "PCI/DSS",
+                compliance_2_text: "Adherence to the Payment Card Industry Data Security Standard to ensure secure handling of cardholder information and prevent credit card fraud.",
+                compliance_3_title: "ISO/IEC 27001",
+                compliance_3_text: "Implementation of a comprehensive Information Security Management System (ISMS) to systematically manage sensitive company information and ensure data integrity and confidentiality.",
+                secure_workflow_title: "Secure Transaction Lifecycle",
+                secure_workflow_text: "Security is not an afterthought; it is integrated into every stage of the transfer. This workflow highlights how our platform's security controls protect data and funds from end to end.",
+                sw_1_title: "Data Encryption",
+                sw_1_text: "All sender and recipient data is encrypted in transit and at rest using AES-256 protocols (ISO/IEC 27001).",
+                sw_2_title: "KYC & AML Screening",
+                sw_2_text: "Automated systems screen user identities and transactions for suspicious activity, complying with Myanmar's AML rules.",
+                sw_3_title: "Payment Tokenization",
+                sw_3_text: "Credit/debit card details are replaced with a secure token to minimize cardholder data exposure (PCI/DSS).",
+                sw_4_title: "Secure API Gateway",
+                sw_4_text: "All communication with partner banks and wallets is secured via a hardened API gateway with strict access controls.",
+                sw_5_title: "Audit Trail & Logging",
+                sw_5_text: "Every transaction and system action is logged for future auditing and forensic analysis, ensuring accountability (ISO/IEC 27001).",
+                core_flow_title: "Core Platform Flow",
+                core_flow_text: "A simplified visual guide to how our platform processes every cross-border transaction, from start to finish.",
+                cpf_1_title: "1. Initiate Transfer",
+                cpf_1_text: "The sender initiates a transfer on our mobile or web app, selecting the amount and recipient details.",
+                cpf_2_title: "2. Funds & FX Processing",
+                cpf_2_text: "Our system secures the funds and performs real-time currency conversion at a favorable rate.",
+                cpf_3_title: "3. Secure API Integration",
+                cpf_3_text: "The converted funds are securely transferred to the local partner's system via a robust API gateway.",
+                cpf_4_title: "4. Local Payout",
+                cpf_4_text: "The local partner (wallet or bank) credits the recipient's account. This happens instantly via MMQR.",
+                cpf_5_title: "5. Recipient Notification",
+                cpf_5_text: "Both sender and recipient are notified that the transaction is complete.",
+                int_workflows_title: "International Bank Workflows",
+                int_workflows_text: "Our platform seamlessly integrates with international banking partners to facilitate smooth cross-border transactions. These flows illustrate the end-to-end process from source bank to final payout in Myanmar.",
+                japan_workflow_title: "Japan Bank to Myanmar",
+                jw_1_title: "Japanese Bank",
+                jw_1_text: "Sender initiates a SWIFT transfer to our partner bank in Japan.",
+                jw_2_title: "Forex Conversion",
+                jw_2_text: "Funds are converted from JPY to MMK at a competitive exchange rate.",
+                jw_3_title: "Our Platform",
+                jw_3_text: "We receive the funds and process the transfer for local payout.",
+                jw_4_title: "Final Payout",
+                jw_4_text: "Recipient receives funds in their local Myanmar wallet (e.g., TrueMoney) via MMQR.",
+                thai_workflow_title: "Thai Bank to Myanmar",
+                tw_1_title: "Thai Bank",
+                tw_1_text: "Sender initiates a transfer via our partner bank or agent network in Thailand.",
+                tw_2_title: "Forex Conversion",
+                tw_2_text: "Funds are converted from THB to MMK, minimizing transfer costs.",
+                tw_3_title: "Our Platform",
+                tw_3_text: "We verify and process the transaction, ensuring compliance with all regulations.",
+                tw_4_title: "Final Payout",
+                tw_4_text: "Recipient's designated mobile wallet is credited with the funds instantly via MMQR.",
+                timeline_title: "Project Blueprint Timeline",
+                p1_title: "Phase 1: Foundation & Compliance (Months 1-3)",
+                p1_text: "Platform development, establishing legal framework, securing CBM licenses, and integrating core AML/KYC protocols.",
+                p2_title: "Phase 2: MVP Launch & Partnerships (Months 4-6)",
+                p2_text: "Launch iOS/Android mobile and web platforms. Finalize partnerships with initial wallet providers and key international banks, including those in Japan and Thailand.",
+                p3_title: "Phase 3: MMQR Integration & Growth (Months 7-9)",
+                p3_text: "Full MMQR integration for seamless domestic payouts. Begin marketing campaigns and user acquisition strategies.",
+                p4_title: "Phase 4: Expansion & New Features (Months 10-12)",
+                p4_text: "Introduce B2B services, expand corridor options, and add value-added features based on user feedback.",
+                faq_title: "Frequently Asked Questions (FAQ)",
+                faq_1_summary: "What makes this platform different from competitors?",
+                faq_1_text: "We focus on deep local integration with Myanmar's financial ecosystem, including multiple mobile wallets and the MMQR standard. This allows for faster, more convenient payouts and a better user experience, often at a lower cost than traditional services.",
+                faq_2_summary: "How is my money and data kept secure?",
+                faq_2_text: "Security is our top priority. We employ end-to-end encryption for all data, adhere to strict international standards like PCI/DSS and ISO 27001, and comply fully with the Central Bank of Myanmar's AML/CFT regulations to protect every transaction.",
+                faq_3_summary: "What is MMQR and how does it benefit me?",
+                faq_3_text: "MMQR is Myanmar's universal QR code standard. Our integration means a sender doesn't need to know the recipient's specific bank or wallet. As long as the recipient's app supports MMQR, they can receive money instantly, making transfers more flexible and error-free.",
+                faq_4_summary: "Which mobile wallets can I send money to?",
+                faq_4_text: "We are constantly expanding our network. Initially, we support major wallets like TrueMoney, with plans to rapidly onboard all financial institutions connected to the MMQR network. Check the app for the most current list of supported partners.",
+                footer_text: "© 2025 Digital Transfer Platform. All Rights Reserved.",
+            },
+            my: {
+                main_title: "ဒစ်ဂျစ်တယ်ငွေလွှဲပလက်ဖောင်း- မြန်မာနိုင်ငံအတွက် အခြေခံအုတ်မြစ်",
+                subtitle: "မြန်မာနိုင်ငံကို ကမ္ဘာနှင့် ချိတ်ဆက်ခြင်း၊ လွယ်ကူချောမွေ့စွာနှင့် လုံခြုံစွာ။",
+                business_model_title: "ပလက်ဖောင်း၏ စီးပွားရေးပုံစံ",
+                value_propositions_title: "တန်ဖိုးပေးနိုင်မှုများ",
+                vp_1: "မြန်ဆန်ပြီး ကုန်ကျစရိတ်နည်းသော နိုင်ငံတကာငွေလွှဲခြင်းများ။",
+                vp_2: "မိုဘိုင်းပိုက်ဆံအိတ်များစွာနှင့် ချိတ်ဆက်နိုင်ခြင်း (ဥပမာ- TrueMoney)။",
+                vp_3: "လုံခြုံမှုနှင့် စည်းမျဉ်းလိုက်နာမှု မြင့်မားခြင်း။",
+                vp_4: "မိုဘိုင်းနှင့် ဝက်ဘ်ပလက်ဖောင်းများမှ ၂၄/၇ ရယူနိုင်ခြင်း။",
+                customer_segments_title: "သုံးစွဲသူအပိုင်းများ",
+                cs_1: "နိုင်ငံခြားရောက် အလုပ်သမားများနှင့် ရွှေ့ပြောင်းလုပ်သားများ ငွေလွှဲခြင်း။",
+                cs_2: "Freelancers များနှင့် စီးပွားရေးလုပ်ငန်းများ ငွေလက်ခံရရှိခြင်း။",
+                cs_3: "နိုင်ငံခြားတွင် ပညာသင်ကြားနေသော ကျောင်းသားများကို ထောက်ပံ့သော မိသားစုများ။",
+                cs_4: "ဒေသတွင်းငွေကြေးလိုအပ်သော ခရီးသွားများ။",
+                channels_title: "ဝန်ဆောင်မှုလမ်းကြောင်းများ",
+                channel_1: "iOS နှင့် Android မိုဘိုင်းအက်ပလီကေးရှင်းများ",
+                channel_2: "ဝက်ဘ်အခြေပြု ပလက်ဖောင်း",
+                channel_3_title: "အေးဂျင့်ကွန်ရက်:",
+                channel_3_1: "ဒေသတွင်း စတိုးဆိုင်များနှင့် ဆိုင်များက ငွေသွင်း/ထုတ်ပေးခြင်း။",
+                channel_3_2: "မိုဘိုင်းဖုန်းပြင်ဆိုင်များ သို့မဟုတ် ငွေလွှဲပေးသော အသေးစားလုပ်ငန်းရှင်များ။",
+                channel_3_3: "Yoma Bank သို့မဟုတ် KBZ Bank ကဲ့သို့သော ပြည်တွင်းဘဏ်များ၏ ပိုက်ဆံအိတ်များ။",
+                channel_4_title: "စီးပွားရေးလုပ်ငန်းသုံး API:",
+                channel_4_1: "ရောင်းသူများအား ငွေပေးချေမှုများကို အလိုအလျောက်လုပ်ရန် လိုအပ်သော အီး-ကောမတ်စ် ပလက်ဖောင်းများ။",
+                channel_4_2: "နိုင်ငံတကာမှ ဝန်ထမ်းများ သို့မဟုတ် ကန်ထရိုက်တာများအတွက် လစာဝန်ဆောင်မှုများ။",
+                revenue_streams_title: "ဝင်ငွေလမ်းကြောင်းများ",
+                revenue_streams_text: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်းသည် အဓိကအားဖြင့် ငွေလွှဲခနှင့် ငွေကြေးလဲလှယ်နှုန်းပြန့်ပွားမှုမှ ဝင်ငွေရရှိပြီး စီးပွားရေးလုပ်ငန်းသုံး ဝန်ဆောင်မှုများဖြင့် ဖြည့်စွက်သည်။",
+                swot_title: "SWOT ခွဲခြမ်းစိတ်ဖြာခြင်း",
+                strengths_title: "အားသာချက်များ",
+                s_1: "မိုဘိုင်းပိုက်ဆံအိတ်များစွာနှင့် ခိုင်မာသော ပူးပေါင်းဆောင်ရွက်မှုများ။",
+                s_2: "အဆင့်မြင့်ပြီး သုံးစွဲသူအဆင်ပြေသော နည်းပညာပလက်ဖောင်း။",
+                s_3: "ဒေသတွင်း မြန်မာစျေးကွက်ကို နက်နက်နဲနဲ နားလည်ခြင်း။",
+                s_4: "ခိုင်မာသော လုံခြုံရေးနှင့် AML လိုက်နာမှုမူဘောင်။",
+                weaknesses_title: "အားနည်းချက်များ",
+                w_1: "ရှိပြီးသား လုပ်ငန်းများနှင့် ယှဉ်ပါက အမှတ်တံဆိပ်အသစ်ဖြစ်ခြင်း။",
+                w_2: "အစပိုင်းတွင် ပြင်ပအဖွဲ့အစည်း၏ အခြေခံအဆောက်အဦအပေါ် မှီခိုရခြင်း။",
+                w_3: "နိုင်ငံဖြတ်ကျော် စည်းမျဉ်းများကို လိုက်နာရန် ရှုပ်ထွေးခြင်း။",
+                w_4: "ကြီးမားသော အေးဂျင့်ကွန်ရက်တစ်ခု တည်ဆောက်ရန် အချိန်ယူရခြင်း။",
+                opportunities_title: "အခွင့်အလမ်းများ",
+                o_1: "မြန်မာနိုင်ငံတွင် ဒစ်ဂျစ်တယ်ငွေလွှဲမှု လိုအပ်ချက် တိုးပွားလာခြင်း။",
+                o_2: "စီးပွားရေးနှင့် B2B ငွေပေးချေမှုဝန်ဆောင်မှုများသို့ တိုးချဲ့ခြင်း။",
+                o_3: "ပြည်တွင်းငွေပေးချေမှုအတွက် MMQR ကို အသုံးပြုခြင်း။",
+                o_4: "ပြည်တွင်းဘဏ်များနှင့် ငွေကြေးအဖွဲ့အစည်းများ ပူးပေါင်းဆောင်ရွက်ခြင်း။",
+                threats_title: "ခြိမ်းခြောက်မှုများ",
+                t_1: "တည်ထောင်ပြီးသားနှင့် အသစ်လုပ်ငန်းများမှ ပြင်းထန်သော ယှဉ်ပြိုင်မှု။",
+                t_2: "ငွေကြေးလဲလှယ်နှုန်း အတက်အကျများ။",
+                t_3: "နိုင်ငံတကာနှင့် ဒေသတွင်း စည်းမျဉ်းများ ပြောင်းလဲခြင်း။",
+                t_4: "ဆိုက်ဘာလုံခြုံရေး အန္တရာယ်များနှင့် ဒေတာပေါက်ကြားမှုများ။",
+                competitors_title: "ပြိုင်ဘက်များ",
+                competitors_text: "ဒစ်ဂျစ်တယ်ငွေလွှဲစျေးကွက်သည် ပြိုင်ဆိုင်မှုပြင်းထန်သည်။ ကျွန်ုပ်တို့သည် ပိုမိုနိမ့်သောအခကြေးငွေ၊ သာလွန်သော ဒေသတွင်းချိတ်ဆက်မှုနှင့် သုံးစွဲသူဗဟိုပြုပလက်ဖောင်းတို့ဖြင့် ကွဲပြားပါသည်။ ဤဇယားသည် မြန်မာနိုင်ငံသို့ $200 ငွေလွှဲခများ၏ ပုံမှန်ကုန်ကျစရိတ်များကို နှိုင်းယှဉ်ပြသထားသည်။",
+                compliance_title: "စည်းမျဉ်းလိုက်နာမှုနှင့် လုံခြုံရေးမူဘောင်",
+                compliance_text: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်းသည် သုံးစွဲသူများနှင့် ၎င်းတို့၏ ဒေတာများကို ကာကွယ်ရန် ပြည်တွင်း မြန်မာစည်းမျဉ်းများနှင့် ကမ္ဘာလုံးဆိုင်ရာ အလေ့အကျင့်ကောင်းများကို လိုက်နာသော ယုံကြည်စိတ်ချမှုနှင့် လုံခြုံရေးအခြေခံပေါ်တွင် တည်ဆောက်ထားသည်။",
+                compliance_1_title: "မြန်မာနိုင်ငံ AML စည်းမျဉ်းများ",
+                compliance_1_text: "မြန်မာနိုင်ငံတော်ဗဟိုဘဏ်၏ လမ်းညွှန်ချက်များနှင့်အညီ KYC/CDD လုပ်ထုံးလုပ်နည်းများ၊ ငွေလွှဲမှုစောင့်ကြည့်ခြင်းနှင့် သံသယဖြစ်ဖွယ်လုပ်ငန်းဆောင်တာများကို Financial Intelligence Unit (FIU) သို့ အစီရင်ခံခြင်းတို့ကို အပြည့်အဝလိုက်နာသည်။",
+                compliance_2_title: "PCI/DSS",
+                compliance_2_text: "ကတ်ကိုင်ဆောင်သူ၏ အချက်အလက်များကို လုံခြုံစွာ ကိုင်တွယ်နိုင်စေရန်နှင့် ခရက်ဒစ်ကတ်လိမ်လည်မှုများကို ကာကွယ်ရန်အတွက် Payment Card Industry Data Security Standard ကို လိုက်နာသည်။",
+                compliance_3_title: "ISO/IEC 27001",
+                compliance_3_text: "အထိခိုက်မခံနိုင်သော ကုမ္ပဏီအချက်အလက်များကို စနစ်တကျ စီမံခန့်ခွဲရန်နှင့် ဒေတာခိုင်မာမှုနှင့် လျှို့ဝှက်ချက်ကို အာမခံနိုင်ရန် ပြည့်စုံသော Information Security Management System (ISMS) ကို အကောင်အထည်ဖော်ခြင်း။",
+                secure_workflow_title: "လုံခြုံသော ငွေလွှဲမှုလုပ်ငန်းစဉ်",
+                secure_workflow_text: "လုံခြုံရေးသည် နောက်မှထည့်သွင်းသည့် အရာမဟုတ်ပါ။ ငွေလွှဲမှုတိုင်း၏ အဆင့်တိုင်းတွင် ပေါင်းစည်းထားသည်။ ဤလုပ်ငန်းစဉ်သည် ကျွန်ုပ်တို့၏ပလက်ဖောင်း၏ လုံခြုံရေးထိန်းချုပ်မှုများက ဒေတာနှင့် ငွေများကို အစမှအဆုံး ကာကွယ်ပုံကို မီးမောင်းထိုးပြထားသည်။",
+                sw_1_title: "ဒေတာ ကုဒ်သွင်းခြင်း",
+                sw_1_text: "ပေးပို့သူနှင့် လက်ခံသူ ဒေတာအားလုံးကို AES-256 ပရိုတိုကောများ (ISO/IEC 27001) ကို အသုံးပြု၍ လမ်းကြောင်းနှင့် သိမ်းဆည်းသည့် အချိန်တွင် ကုဒ်သွင်းထားသည်။",
+                sw_2_title: "KYC နှင့် AML စိစစ်ခြင်း",
+                sw_2_text: "အလိုအလျောက်စနစ်များသည် သုံးစွဲသူ၏ မည်သူမည်ဝါဖြစ်ကြောင်းနှင့် သံသယဖြစ်ဖွယ်လုပ်ငန်းဆောင်တာများကို စစ်ဆေးကာ မြန်မာနိုင်ငံ၏ AML စည်းမျဉ်းများကို လိုက်နာသည်။",
+                sw_3_title: "ငွေပေးချေမှု Tokenization",
+                sw_3_text: "ခရက်ဒစ်/ဒက်ဘစ်ကတ် အသေးစိတ်အချက်အလက်များကို လုံခြုံသော တိုကင်တစ်ခုဖြင့် အစားထိုးကာ ကတ်ကိုင်ဆောင်သူ၏ ဒေတာပေါက်ကြားမှုကို လျှော့ချသည်။",
+                sw_4_title: "လုံခြုံသော API Gateway",
+                sw_4_text: "လုပ်ငန်းသုံးဘဏ်များနှင့် ပိုက်ဆံအိတ်များအားလုံးနှင့် ဆက်သွယ်မှုများကို တင်းကျပ်သော ဝင်ရောက်ထိန်းချုပ်မှုများပါရှိသော လုံခြုံသော API Gateway မှတဆင့် လုံခြုံစေသည်။",
+                sw_5_title: "စစ်ဆေးမှတ်တမ်းနှင့် မှတ်တမ်းတင်ခြင်း",
+                sw_5_text: "ငွေလွှဲမှုတိုင်းနှင့် စနစ်လုပ်ဆောင်မှုတိုင်းကို နောင်တွင် စစ်ဆေးရန်နှင့် forensic ခွဲခြမ်းစိတ်ဖြာမှုများအတွက် မှတ်တမ်းတင်ထားကာ တာဝန်ယူမှုကို အာမခံသည်။",
+                core_flow_title: "ပလက်ဖောင်း၏ အဓိကလုပ်ငန်းစဉ်",
+                core_flow_text: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်းသည် နိုင်ငံဖြတ်ကျော် ငွေလွှဲမှုတိုင်းကို အစမှအဆုံး မည်ကဲ့သို့ လုပ်ဆောင်ပုံကို ရိုးရှင်းသော ရုပ်ပုံဖြင့် လမ်းညွှန်ချက်။",
+                cpf_1_title: "၁။ ငွေလွှဲခြင်း စတင်ခြင်း",
+                cpf_1_text: "ပေးပို့သူသည် ကျွန်ုပ်တို့၏ မိုဘိုင်း သို့မဟုတ် ဝက်ဘ်အက်ပ်တွင် ငွေပမာဏနှင့် လက်ခံမည့်သူ၏ အချက်အလက်များကို ရွေးချယ်ကာ ငွေလွှဲခြင်းကို စတင်သည်။",
+                cpf_2_title: "၂။ ငွေနှင့် FX လုပ်ဆောင်ခြင်း",
+                cpf_2_text: "ကျွန်ုပ်တို့၏စနစ်သည် ငွေများကို လုံခြုံအောင် လုပ်ဆောင်ပြီး ကောင်းမွန်သော ငွေကြေးလဲလှယ်နှုန်းဖြင့် ငွေကြေးပြောင်းလဲမှုကို အချိန်နှင့်တစ်ပြေးညီ လုပ်ဆောင်သည်။",
+                cpf_3_title: "၃။ လုံခြုံသော API ချိတ်ဆက်မှု",
+                cpf_3_text: "ပြောင်းလဲပြီးသား ငွေများကို ခိုင်မာသော API Gateway မှတစ်ဆင့် ပြည်တွင်းအေးဂျင့်၏ စနစ်သို့ လုံခြုံစွာ လွှဲပြောင်းသည်။",
+                cpf_4_title: "၄။ ဒေသတွင်း ငွေထုတ်ယူခြင်း",
+                cpf_4_text: "ဒေသတွင်း မိုဘိုင်းပိုက်ဆံအိတ် သို့မဟုတ် ဘဏ်သည် လက်ခံသူ၏အကောင့်သို့ ငွေများကို ချက်ချင်းလွှဲပေးသည်။ ၎င်းသည် MMQR မှတစ်ဆင့် ချက်ချင်းဖြစ်ပေါ်သည်။",
+                cpf_5_title: "၅။ လက်ခံသူကို အသိပေးခြင်း",
+                cpf_5_text: "ပေးပို့သူနှင့် လက်ခံသူနှစ်ဦးစလုံး ငွေလွှဲခြင်း ပြီးစီးကြောင်း အကြောင်းကြားသည်။",
+                int_workflows_title: "နိုင်ငံတကာ ဘဏ်လုပ်ငန်းစဉ်များ",
+                int_workflows_text: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်းသည် နိုင်ငံတကာ ဘဏ်လုပ်ငန်း လုပ်ဖော်ကိုင်ဖက်များနှင့် ချောမွေ့စွာ ပေါင်းစပ်ထားပြီး နိုင်ငံဖြတ်ကျော် ငွေလွှဲမှုများကို လွယ်ကူချောမွေ့စေသည်။ ဤလုပ်ငန်းစဉ်များသည် ငွေကြေးရင်းမြစ်ဘဏ်မှ မြန်မာနိုင်ငံတွင် နောက်ဆုံးပေးချေမှုအထိ လုပ်ဆောင်ပုံကို ဖော်ပြသည်။",
+                japan_workflow_title: "ဂျပန်ဘဏ်မှ မြန်မာနိုင်ငံသို့",
+                jw_1_title: "ဂျပန်ဘဏ်",
+                jw_1_text: "ပေးပို့သူသည် ကျွန်ုပ်တို့၏ ဂျပန်နိုင်ငံရှိ လုပ်ဖော်ကိုင်ဖက်ဘဏ်သို့ SWIFT ငွေလွှဲခြင်းကို စတင်သည်။",
+                jw_2_title: "ငွေကြေးပြောင်းလဲခြင်း",
+                jw_2_text: "ငွေများကို JPY မှ MMK သို့ ကောင်းမွန်သော ငွေလဲနှုန်းဖြင့် ပြောင်းလဲသည်။",
+                jw_3_title: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်း",
+                jw_3_text: "ကျွန်ုပ်တို့သည် ငွေများကို လက်ခံရရှိပြီး ဒေသတွင်း ပေးချေမှုအတွက် လုပ်ဆောင်သည်။",
+                jw_4_title: "နောက်ဆုံး ပေးချေမှု",
+                jw_4_text: "လက်ခံသူသည် ၎င်းတို့၏ ဒေသတွင်း မြန်မာပိုက်ဆံအိတ် (ဥပမာ TrueMoney) သို့ MMQR မှတဆင့် ငွေများ လက်ခံရရှိသည်။",
+                thai_workflow_title: "ထိုင်းဘဏ်မှ မြန်မာနိုင်ငံသို့",
+                tw_1_title: "ထိုင်းဘဏ်",
+                tw_1_text: "ပေးပို့သူသည် ကျွန်ုပ်တို့၏ ထိုင်းနိုင်ငံရှိ လုပ်ဖော်ကိုင်ဖက်ဘဏ် သို့မဟုတ် အေးဂျင့်ကွန်ရက်မှတစ်ဆင့် ငွေလွှဲခြင်းကို စတင်သည်။",
+                tw_2_title: "ငွေကြေးပြောင်းလဲခြင်း",
+                tw_2_text: "ငွေများကို THB မှ MMK သို့ ပြောင်းလဲကာ ငွေလွှဲခများကို အနည်းဆုံးဖြစ်အောင် လုပ်ဆောင်သည်။",
+                tw_3_title: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်း",
+                tw_3_text: "ကျွန်ုပ်တို့သည် ငွေလွှဲခြင်းကို စစ်ဆေးပြီး လုပ်ဆောင်ကာ စည်းမျဉ်းများအားလုံးကို လိုက်နာကြောင်း အာမခံသည်။",
+                tw_4_title: "နောက်ဆုံး ပေးချေမှု",
+                tw_4_text: "လက်ခံသူ၏ မိုဘိုင်းပိုက်ဆံအိတ်သို့ MMQR မှတစ်ဆင့် ချက်ချင်းငွေလွှဲပေးသည်။",
+                timeline_title: "စီမံကိန်း အခြေခံအုတ်မြစ် အချိန်ဇယား",
+                p1_title: "အဆင့် ၁- အခြေခံနှင့် စည်းမျဉ်းလိုက်နာမှု (လ ၁-၃)",
+                p1_text: "ပလက်ဖောင်းဖော်ဆောင်ခြင်း၊ ဥပဒေရေးရာမူဘောင် ချမှတ်ခြင်း၊ CBM လိုင်စင်များ ရယူခြင်းနှင့် အဓိက AML/KYC ပရိုတိုကောများ ပေါင်းစည်းခြင်း။",
+                p2_title: "အဆင့် ၂- MVP စတင်ခြင်းနှင့် ပူးပေါင်းဆောင်ရွက်မှုများ (လ ၄-၆)",
+                p2_text: "iOS/Android မိုဘိုင်းနှင့် ဝက်ဘ်ပလက်ဖောင်းများ စတင်ခြင်း။ ဂျပန်နှင့် ထိုင်းနိုင်ငံရှိ ကနဦး မိုဘိုင်းပိုက်ဆံအိတ်ပေးသူများနှင့် အဓိက နိုင်ငံတကာဘဏ်များနှင့် ပူးပေါင်းဆောင်ရွက်မှုများကို အပြီးသတ်ခြင်း။",
+                p3_title: "အဆင့် ၃- MMQR ပေါင်းစည်းခြင်းနှင့် ကြီးထွားမှု (လ ၇-၉)",
+                p3_text: "ပြည်တွင်းငွေပေးချေမှုများအတွက် MMQR ကို အပြည့်အဝ ပေါင်းစည်းခြင်း။ စျေးကွက်ရှာဖွေရေးနှင့် သုံးစွဲသူရယူရေးဗျူဟာများ စတင်ခြင်း။",
+                p4_title: "အဆင့် ၄- တိုးချဲ့ခြင်းနှင့် အင်္ဂါရပ်အသစ်များ (လ ၁၀-၁၂)",
+                p4_text: "B2B ဝန်ဆောင်မှုများ မိတ်ဆက်ခြင်း၊ ငွေလွှဲလမ်းကြောင်းရွေးချယ်မှုများ တိုးချဲ့ခြင်းနှင့် သုံးစွဲသူ၏ တုံ့ပြန်ချက်အပေါ် အခြေခံ၍ အပိုထပ်ဆောင်းတန်ဖိုးရှိ အင်္ဂါရပ်များ ထည့်သွင်းခြင်း။",
+                faq_title: "မေးလေ့ရှိသော မေးခွန်းများ (FAQ)",
+                faq_1_summary: "ဤပလက်ဖောင်းသည် ပြိုင်ဘက်များနှင့် မည်သို့ကွာခြားသနည်း။",
+                faq_1_text: "ကျွန်ုပ်တို့သည် မိုဘိုင်းပိုက်ဆံအိတ်များနှင့် MMQR စံနှုန်းအပါအဝင် မြန်မာနိုင်ငံ၏ ငွေကြေးဂေဟစနစ်နှင့် နက်ရှိုင်းစွာ ပေါင်းစည်းမှုအပေါ် အာရုံစိုက်ပါသည်။ ၎င်းသည် ရိုးရာဝန်ဆောင်မှုများထက် ပိုမိုမြန်ဆန်၊ အဆင်ပြေပြီး ကုန်ကျစရိတ်နည်းသော ပေးချေမှုများကို ခွင့်ပြုကာ ပိုမိုကောင်းမွန်သော သုံးစွဲသူအတွေ့အကြုံကို ပေးသည်။",
+                faq_2_summary: "ကျွန်ုပ်၏ငွေနှင့် ဒေတာများကို မည်သို့လုံခြုံအောင် ထားသနည်း။",
+                faq_2_text: "လုံခြုံရေးသည် ကျွန်ုပ်တို့၏ အဓိကဦးစားပေးဖြစ်သည်။ ကျွန်ုပ်တို့သည် ဒေတာအားလုံးအတွက် end-to-end ကုဒ်သွင်းခြင်းကို အသုံးပြုပြီး PCI/DSS နှင့် ISO 27001 ကဲ့သို့သော တင်းကျပ်သော နိုင်ငံတကာစံနှုန်းများကို လိုက်နာကာ ငွေလွှဲတိုင်းကို ကာကွယ်ရန် မြန်မာနိုင်ငံတော်ဗဟိုဘဏ်၏ AML/CFT စည်းမျဉ်းများကို အပြည့်အဝ လိုက်နာသည်။",
+                faq_3_summary: "MMQR ဆိုသည်မှာ အဘယ်နည်း။ ၎င်းက မည်သို့အကျိုးပြုသနည်း။",
+                faq_3_text: "MMQR သည် မြန်မာနိုင်ငံ၏ universal QR code စံနှုန်းဖြစ်သည်။ ကျွန်ုပ်တို့၏ပေါင်းစည်းမှုဆိုသည်မှာ ပေးပို့သူသည် လက်ခံသူ၏ သီးခြားဘဏ် သို့မဟုတ် ပိုက်ဆံအိတ်ကို သိရန်မလိုအပ်ပါ။ လက်ခံသူ၏အက်ပ်က MMQR ကို ထောက်ပံ့သရွေ့ ၎င်းတို့သည် ငွေကို ချက်ချင်းလက်ခံရရှိနိုင်ပြီး ငွေလွှဲခြင်းများကို ပိုမိုပြောင်းလွယ်ပြင်လွယ်ဖြစ်စေပြီး အမှားကင်းစေသည်။",
+                faq_4_summary: "မည်သည့် မိုဘိုင်းပိုက်ဆံအိတ်များသို့ ငွေပို့နိုင်ပါသနည်း။",
+                faq_4_text: "ကျွန်ုပ်တို့သည် ကျွန်ုပ်တို့၏ကွန်ရက်ကို အဆက်မပြတ်တိုးချဲ့လျက်ရှိပါသည်။ ကနဦးတွင် TrueMoney ကဲ့သို့သော အဓိကပိုက်ဆံအိတ်များကို ထောက်ပံ့ပေးပြီး MMQR ကွန်ရက်နှင့် ချိတ်ဆက်ထားသော ဘဏ္ဍာရေးအဖွဲ့အစည်းအားလုံးကို လျင်မြန်စွာ ပေါင်းစည်းရန် စီစဉ်ထားပါသည်။ ပူးပေါင်းလုပ်ဆောင်နေသော လုပ်ဖော်ကိုင်ဖက်စာရင်းအတွက် အက်ပ်ကို စစ်ဆေးပါ။",
+                footer_text: "© ၂၀၂၅ ဒစ်ဂျစ်တယ်ငွေလွှဲပလက်ဖောင်း။ အခွင့်အရေးများအားလုံးကို သိမ်းဆည်းထားသည်။",
+            }
+        };
+
+        const setLanguage = (lang) => {
+            document.querySelectorAll('[data-translate-key]').forEach(element => {
+                const key = element.getAttribute('data-translate-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'SUMMARY') {
+                        element.textContent = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update button styles
+            document.querySelectorAll('.lang-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`${lang}-btn`).classList.add('active');
+        };
+
+        document.getElementById('en-btn').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('my-btn').addEventListener('click', () => setLanguage('my'));
+
+        // Set initial language to English
+        setLanguage('en');
+
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Transaction Fees', 'Currency Exchange Spread', 'Business API Services', 'Value-Added Features'],
+                datasets: [{
+                    label: 'Revenue Streams',
+                    data: [55, 35, 7, 3],
+                    backgroundColor: ['#07575B', '#66A5AD', '#C4DFE6', '#003B46'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const competitorCtx = document.getElementById('competitorChart').getContext('2d');
+        const competitorLabels = ['Our Platform', 'Western Union', 'MoneyGram', 'PayPal/Xoom', 'Wise (TransferWise)'];
+        new Chart(competitorCtx, {
+            type: 'bar',
+            data: {
+                labels: competitorLabels.map(wrapLabel),
+                datasets: [{
+                    label: 'Avg. Fee + FX Spread ($)',
+                    data: [3.50, 12.00, 10.50, 8.00, 4.50],
+                    backgroundColor: ['#07575B', '#66A5AD', '#66A5AD', '#66A5AD', '#66A5AD'],
+                    borderColor: '#003B46',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Total Cost to Sender ($)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
