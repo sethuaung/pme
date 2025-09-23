@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="AI-Summrized">
+    <meta name="description" content="Felixent : Student Guide to AI">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent - Agentic AI: Transforming the SDLC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to supplement Tailwind */
+        body {
+            line-height: 1.6;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        /* Custom List Styling */
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 18px;
+            font-size: 1.05em;
+        }
+
+        .custom-list li::before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            color: #10b981; /* Tailwind green-500 */
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Specific border colors for cards */
+        .border-blue { border-top: 5px solid #3b82f6; }
+        .border-yellow { border-top: 5px solid #f59e0b; }
+        .border-purple { border-top: 5px solid #9333ea; }
+        .border-sky { border-top: 5px solid #0ea5e9; }
+        .border-red { border-top: 5px solid #ef4444; }
+        .border-teal { border-top: 5px solid #14b8a6; }
+        .border-green { border-top: 5px solid #10b981; }
+        .border-indigo { border-top: 5px solid #6366f1; }
+        .border-pink { border-top: 5px solid #ec4899; }
+        .border-orange { border-top: 5px solid #f97316; }
+
+        .chart-container {
+            /* Responsive height */
+            height: 300px;
+            max-height: 40vh;
+            width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .chart-container {
+                height: 350px;
+                max-height: none;
+            }
+        }
+
+        /* Styling for the MODERNIZED Flow Diagrams (Used in V and IX) */
+        .modern-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        }
+        .modern-flow-node {
+            flex: 1 1 200px; /* Base for responsive design */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            border-radius: 12px;
+            text-align: center;
+            min-height: 100px;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 10px; /* Space for wrapping */
+        }
+        .modern-flow-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        .modern-flow-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .modern-flow-arrow {
+            flex: 0 0 40px; /* Fixed width for arrow spacer */
+            display: none; /* Hide arrow on small screens for vertical stack */
+            justify-content: center;
+            align-items: center;
+            height: 100px; /* Match node height for alignment */
+            font-size: 1.5rem;
+            color: #d1d5db; /* gray-300 */
+        }
+
+        @media (min-width: 768px) {
+            .modern-flow {
+                flex-wrap: nowrap; /* No wrapping on medium screens and up */
+            }
+            .modern-flow-arrow {
+                display: flex;
+            }
+            .modern-flow-node {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-8 lg:p-12">
+        <header class="text-center pb-8 border-b-4 border-blue-600 mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-600 mb-2">THE AGENTIC AI REVOLUTION</h1>
+            <p class="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto">The Transformative Impact of Agentic AI on the Enterprise Software Development Life Cycle (SDLC).</p>
+        </header>
+
+        <nav class="mb-10 bg-white p-4 sm:p-6 rounded-xl shadow-xl">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-4">🧭 Main Menu</h2>
+            <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3 text-center text-xs sm:text-sm font-medium">
+                <a href="#summary" class="p-2 bg-blue-100 text-blue-800 rounded-lg hover:bg-blue-200 transition">I. Summary</a>
+                <a href="#foundations" class="p-2 bg-yellow-100 text-yellow-800 rounded-lg hover:bg-yellow-200 transition">II. Foundations</a>
+                <a href="#impact" class="p-2 bg-purple-100 text-purple-800 rounded-lg hover:bg-purple-200 transition">III. SDLC Impact</a>
+                <a href="#process-flow" class="p-2 bg-indigo-100 text-indigo-800 rounded-lg hover:bg-indigo-200 transition">IV. Agent Process</a>
+                <a href="#security" class="p-2 bg-red-100 text-red-800 rounded-lg hover:bg-red-200 transition">V. Security</a>
+                <a href="#strategy" class="p-2 bg-orange-100 text-orange-800 rounded-lg hover:bg-orange-200 transition">VI. Strategy</a>
+                <a href="#roles" class="p-2 bg-sky-100 text-sky-800 rounded-lg hover:bg-sky-200 transition">VII. Roles</a>
+                <a href="#devsecops" class="p-2 bg-teal-100 text-teal-800 rounded-lg hover:bg-teal-200 transition">VIII. DevSecOps</a>
+                <a href="#models" class="p-2 bg-pink-100 text-pink-800 rounded-lg hover:bg-pink-200 transition">IX. Models</a>
+                <a href="#history" class="p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">X. History of AI</a>
+                <a href="#types" class="p-2 bg-green-100 text-green-800 rounded-lg hover:bg-green-200 transition">XI. Types of AI</a>
+                <a href="#contributors" class="p-2 bg-yellow-200 text-yellow-800 rounded-lg hover:bg-yellow-300 transition">XII. Global Contrib.</a>
+            </div>
+        </nav>
+
+        <div class="grid lg:grid-cols-3 gap-8 mb-12" id="charts">
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg border-blue-600 border-2">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 border-b pb-3 mb-6">Projected Agentic AI Impact</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-medium text-blue-600 mb-4">Projected Time Reduction in SDLC Phases</h3>
+                        <div class="chart-container">
+                            <canvas id="sdlcChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-blue-600 mb-4">Shift in Human Effort Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="roleShiftChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg border-yellow-600 border-2">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 border-b pb-3 mb-6">Conceptual Agent Process (OODA Loop)</h2>
+                <div class="chart-container flex items-center justify-center">
+                    <canvas id="oodaChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-500 mt-4 text-center">Conceptual flow of the agent's decision-making process (Observe, Orient, Decide, Act).</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-blue">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4" id="summary">I. Executive Summary & Problems Solved</h2>
+                <p class="text-lg mb-4">Agentic AI is an autonomous, goal-driven system that <span class="font-bold">hyper-accelerates</span> the SDLC by enabling full lifecycle orchestration. It is distinct from simpler automation:</p>
+                <ul class="custom-list">
+                    <li><span class="font-bold">Distinction:</span> Unlike scripted automation (RPA) or single-task AI, Agentic AI <span class="font-bold">plans, self-corrects, and reasons</span> over multi-step, complex objectives.</li>
+                    <li><span class="font-bold">Key Problems Solved:</span> Effectively eliminates <span class="font-bold">context switching</span>, automates <span class="font-bold">multi-step orchestration</span>, and provides superior <span class="font-bold">error handling</span>.</li>
+                </ul>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-yellow">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4" id="foundations">II. Foundations: AI Principles & Core Cycle</h2>
+                <h3 class="text-xl font-medium text-gray-600 mb-3">A. Core Principles Underpinning Agentic AI</h3>
+                <ul class="custom-list mb-4">
+                    <li><span class="font-bold">Autonomy:</span> Ability to operate independently without constant human prompting.</li>
+                    <li><span class="font-bold">Goal-Orientation:</span> Focused on achieving defined objectives over executing simple steps.</li>
+                    <li><span class="font-bold">Tool Use:</span> Capability to select and invoke external APIs, code, or systems.</li>
+                    <li><span class="font-bold">Self-Correction:</span> Uses feedback (reflection) to adjust its own plan and execution path.</li>
+                </ul>
+                <h3 class="text-xl font-medium text-gray-600 mb-3">B. The Agentic Core Cycle (4 Phases + 1 Capability)</h3>
+                <ul class="custom-list">
+                    <li><span class="font-bold">Perceive:</span> Interpreting complex requests and environment data. (Phase 1)</li>
+                    <li><span class="font-bold">Reason:</span> Formulating multi-step, executable plans. (Phase 2)</li>
+                    <li><span class="font-bold">Act:</span> Executing tasks through system-level operations. (Phase 3)</li>
+                    <li><span class="font-bold">Learn & Reflect:</span> Refining models and adjusting strategy based on outcomes. (Phase 4)</li>
+                    <li><span class="font-bold">Coordinate:</span> <span class="font-bold">The Additional Capability</span> for orchestrating multiple specialized agents.</li>
+                </ul>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-purple">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4" id="impact">III. SDLC Transformation & Critical Advantages</h2>
+                <h3 class="text-xl font-medium text-gray-600 mb-3">A. Transformation Manifests Across Every SDLC Phase</h3>
+                <ul class="custom-list mb-6">
+                    <li><span class="font-bold">Planning:</span> Autonomously generating detailed requirements and user stories.</li>
+                    <li><span class="font-bold">Design:</span> Recommending optimal system architecture and integration schemas.</li>
+                    <li><span class="font-bold">Coding & Testing:</span> Immediate unit test generation and accelerated debugging/refactoring.</li>
+                    <li><span class="font-bold">Deployment & Ops:</span> Enabling "self-healing" and autonomous rollback procedures.</li>
+                </ul>
+                <h3 class="text-xl font-medium text-gray-600 mb-3">B. Critical Advantages Beyond Automation and Speed</h3>
+                <ul class="custom-list">
+                    <li><span class="font-bold">Institutional Memory:</span> Agents retain and apply knowledge gained from every previous execution.</li>
+                    <li><span class="font-bold">Adaptive Planning:</span> Plans are not static; they change dynamically in response to run-time errors or environment changes.</li>
+                    <li><span class="font-bold">System Self-Healing:</span> Automating the Monitor -> Diagnose -> Resolve loop, leading to highly resilient applications.</li>
+                </ul>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-indigo lg:col-span-3" id="process-flow">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">IV. AI Agent Process Architecture: The Autonomous Loop</h2>
+                <p class="text-lg mb-4">The core of Agentic AI is an autonomous, iterative loop that enables continuous operation and self-improvement, moving from observation to strategic action.</p>
+
+                <h3 class="text-xl font-medium text-indigo-600 mb-6 text-center">Autonomous Agent Flow Diagram (Perceive-Plan-Act-Reflect-Coordinate)</h3>
+                <div class="mt-8 text-center max-w-6xl mx-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
+                        <div class="flex flex-col items-center p-3 bg-blue-50 rounded-lg shadow-md">
+                            <div class="text-3xl text-blue-600 mb-2">👁️</div>
+                            <div class="font-bold text-lg">1. Perceive</div>
+                            <div class="text-sm text-gray-500">Gather Data & Context</div>
+                        </div>
+                        <div class="hidden md:block text-4xl text-gray-400">➡️</div>
+
+                        <div class="flex flex-col items-center p-3 bg-yellow-50 rounded-lg shadow-md">
+                            <div class="text-3xl text-yellow-600 mb-2">🧠</div>
+                            <div class="font-bold text-lg">2. Reason/Plan</div>
+                            <div class="text-sm text-gray-500">Formulate Multi-Step Plan</div>
+                        </div>
+                        <div class="hidden md:block text-4xl text-gray-400">➡️</div>
+
+                        <div class="flex flex-col items-center p-3 bg-red-50 rounded-lg shadow-md">
+                            <div class="text-3xl text-red-600 mb-2">🛠️</div>
+                            <div class="font-bold text-lg">3. Act/Execute</div>
+                            <div class="text-sm text-gray-500">Invoke Tools & Systems</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
+                        <div class="flex flex-col items-center p-3 bg-green-50 rounded-lg shadow-md md:col-start-1">
+                            <div class="text-3xl text-green-600 mb-2">🤝</div>
+                            <div class="font-bold text-lg">5. Coordinate</div>
+                            <div class="text-sm text-gray-500">Orchestrate Multiple Agents</div>
+                        </div>
+
+                        <div class="hidden md:block md:col-span-3 text-center">
+                            <div class="text-5xl text-gray-500 mb-2">↩️ ↪️</div>
+                            <span class="text-sm font-semibold text-gray-600">Continuous Feedback Loop & Iteration (4. Learn & Reflect)</span>
+                        </div>
+
+                        <div class="flex flex-col items-center p-3 bg-purple-50 rounded-lg shadow-md md:col-start-5">
+                            <div class="text-3xl text-purple-600 mb-2">📈</div>
+                            <div class="font-bold text-lg">4. Learn/Reflect</div>
+                            <div class="text-sm text-gray-500">Capture Feedback & Adjust</div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-gray-500 mt-6 max-w-2xl mx-auto">This flow is a continuous, autonomous loop, with the Reflect phase feeding directly back into the Perceive and Reason phases for self-correction and continuous improvement.</p>
+                </div>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-red lg:col-span-3" id="security">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">V. Security & Trust: Guardrails and Manual Checking Flow</h2>
+                <div class="grid lg:grid-cols-1 gap-6">
+                    <div>
+                        <h3 class="text-xl font-medium text-red-600 mb-3">A. Risk Mitigation Strategies</h3>
+                        <p class="text-lg mb-4">Mitigating risks like <span class="font-bold">"shadow AI"</span> and <span class="font-bold">prompt injection</span> is critical.</p>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">Policy-as-Code (PaC):</span> Automatically enforces ethical and security rules.</li>
+                            <li><span class="font-bold">Least Privilege Access:</span> Agents operate with minimal necessary permissions.</li>
+                            <li><span class="font-bold">Auditable Logs:</span> Comprehensive logging of every step and tool invocation.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3 class="text-xl font-medium text-red-600 mb-6 border-b pb-2">B. Trusting Agentic AI Outputs: The HITL Validation Flow</h3>
+                        <p class="mb-4 text-gray-600">The **Human-in-the-Loop (HITL)** process ensures validation for high-stakes decisions by layering checks before approval.</p>
+                        <div class="modern-flow bg-gray-50 p-6 rounded-xl border border-gray-200">
+
+                            <div class="modern-flow-node bg-indigo-50 text-indigo-800 border-indigo-300 border">
+                                <div class="modern-flow-icon">🤖</div>
+                                <div class="font-bold">1. Agent Output</div>
+                                <div>Code, Plan, or Solution Generated</div>
+                            </div>
+
+                            <div class="modern-flow-arrow hidden md:flex">▶️</div>
+
+                            <div class="modern-flow-node bg-green-50 text-green-800 border-green-300 border">
+                                <div class="modern-flow-icon">✅</div>
+                                <div class="font-bold">2. Automated Validation</div>
+                                <div>Agent runs Unit/Integration Tests</div>
+                            </div>
+
+                            <div class="modern-flow-arrow hidden md:flex">▶️</div>
+
+                            <div class="modern-flow-node bg-yellow-50 text-yellow-800 border-yellow-300 border">
+                                <div class="modern-flow-icon">🔒</div>
+                                <div class="font-bold">3. Security & Compliance</div>
+                                <div>Policy-as-Code (PaC) Enforcement</div>
+                            </div>
+
+                            <div class="modern-flow-arrow hidden md:flex">▶️</div>
+
+                            <div class="modern-flow-node bg-red-50 text-red-800 border-red-300 border">
+                                <div class="modern-flow-icon">👨‍💻</div>
+                                <div class="font-bold">4. Human Review (HITL)</div>
+                                <div>Strategic & Ethical Veto Point</div>
+                            </div>
+
+                            <div class="modern-flow-arrow hidden md:flex">▶️</div>
+
+                            <div class="modern-flow-node bg-blue-100 text-blue-800 border-blue-300 border">
+                                <div class="modern-flow-icon">🚀</div>
+                                <div class="font-bold">5. Approval & Deployment</div>
+                                <div>High-Trust Output is Released</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-orange lg:col-span-3" id="strategy">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">VI. Impact on Business Strategy, Principles, Standards, and Guidelines</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-xl font-medium text-orange-600 mb-3">Business Strategy</h3>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">Market Responsiveness:</span> New feature deployment accelerates from months to days, creating a continuous competitive advantage.</li>
+                            <li><span class="font-bold">Shift to Quality:</span> Resources shift from execution to defining high-level business goals, strategy, and ethical guidelines.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-orange-600 mb-3">Operating Principles & Standards</h3>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">AI Governance:</span> Mandatory requirement for new frameworks to manage agent delegation, tooling access, and decision logging.</li>
+                            <li><span class="font-bold">Tool Standardisation:</span> Requires standardized APIs and clear documentation for the Agents to effectively use corporate tools.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-orange-600 mb-3">Guidelines & Ethical Frameworks</h3>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">Ethical Code:</span> New guidelines needed to prevent autonomous bias or unintended harmful actions (e.g., recursive self-improvement failures).</li>
+                            <li><span class="font-bold">Regulatory Compliance:</span> Automated auditing and compliance checks become mandatory features of the agentic system itself.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-sky" id="roles">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">VII. Impact on Roles & Strategy</h2>
+                <p class="text-lg mb-4">Human roles are <span class="font-bold">elevated</span> from execution to strategic oversight.</p>
+                <ul class="custom-list">
+                    <li>Professionals become <span class="font-bold">"refiners" and "strategists"</span> of agent output.</li>
+                    <li>Agents automate <span class="font-bold">Documentation</span> generation and maintenance.</li>
+                    <li>Drives adaptable <span class="font-bold">Business Strategy</span> built on autonomous operations.</li>
+                </ul>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-teal" id="devsecops">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">VIII. DevSecOps & Operations</h2>
+                <ul class="custom-list">
+                    <li>Enhances DevSecOps by embedding security checks.</li>
+                    <li>Enables <span class="font-bold">self-healing IT systems</span> (monitoring, diagnosis, resolution).</li>
+                    <li><span class="font-bold">RPA is enhanced</span> by Agentic AI orchestration.</li>
+                    <li>Automates <span class="font-bold">Infrastructure as Code (IaC)</span> generation.</li>
+                </ul>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-pink lg:col-span-3" id="models">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">IX. AI Models & Specialized Architectures</h2>
+
+                <h3 class="text-xl font-medium text-pink-600 mb-6 border-b pb-2">A. The Agentic Brain Flow: Orchestrating Models for Action</h3>
+                <p class="mb-6 text-gray-600">Agentic AI combines powerful foundational models with specialized architectures and routing mechanisms to achieve complex goals.</p>
+
+                <div class="modern-flow bg-gray-50 p-6 rounded-xl border border-gray-200">
+
+                    <div class="modern-flow-node bg-purple-50 text-purple-800 border-purple-300 border">
+                        <div class="modern-flow-icon">📝</div>
+                        <div class="font-bold">1. Task Input</div>
+                        <div>Goal or Request Received</div>
+                    </div>
+
+                    <div class="modern-flow-arrow hidden md:flex">➡️</div>
+
+                    <div class="modern-flow-node bg-yellow-50 text-yellow-800 border-yellow-300 border">
+                        <div class="modern-flow-icon">🧭</div>
+                        <div class="font-bold">2. MoE Router</div>
+                        <div>Routes Task to Appropriate Model(s)</div>
+                    </div>
+
+                    <div class="modern-flow-arrow hidden md:flex">➡️</div>
+
+                    <div class="modern-flow-node bg-pink-100 text-pink-800 border-pink-300 border">
+                        <div class="modern-flow-icon">🧠</div>
+                        <div class="font-bold">3. LLM Core</div>
+                        <div>Planning, Reasoning, and Code Generation (Primary Expert)</div>
+                    </div>
+
+                    <div class="modern-flow-arrow hidden md:flex">➡️</div>
+
+                    <div class="modern-flow-node bg-teal-50 text-teal-800 border-teal-300 border">
+                        <div class="modern-flow-icon">⚙️</div>
+                        <div class="font-bold">4. Specialized Tooling</div>
+                        <div>Invokes SAMs, Code Interpreters, or APIs (Tool Expert)</div>
+                    </div>
+
+                    <div class="modern-flow-arrow hidden md:flex">➡️</div>
+
+                    <div class="modern-flow-node bg-blue-100 text-blue-800 border-blue-300 border">
+                        <div class="modern-flow-icon">🚀</div>
+                        <div class="font-bold">5. Executed Action</div>
+                        <div>Final Code, Deployment, or Solution</div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div>
+                        <h3 class="text-xl font-medium text-pink-600 mb-3">B. Model Foundations & Protocols</h3>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">LLMs:</span> Core reasoning "brain" for agents, translating goals into executable plans.</li>
+                            <li><span class="font-bold">MoE (Mixture of Experts):</span> Acts as a high-speed dispatcher, routing problems to specialized subnetworks for efficiency.</li>
+                            <li><span class="font-bold">MCP (Protocol):</span> The ethical and operational framework defining context and rules for agent behavior.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-pink-600 mb-3">C. Specialized Architectures</h3>
+                        <p>Differ from traditional approaches by being <span class="font-bold">purpose-built</span> for specific modalities and tasks (e.g., visual segmentation, code execution, complex math), optimizing for constraints like speed and precision. They execute the final task.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-gray-400 lg:col-span-3" id="history">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">X. History of AI: From Myth to Transformer</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div>
+                        <h3 class="text-xl font-medium text-gray-600 mb-3">Foundations (Pre-1950s)</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">1921:</span> Karel Čapek coins the term <span class="font-bold">"robot."</span></li>
+                            <li><span class="font-bold">1950:</span> Alan Turing proposes the <span class="font-bold">Turing Test</span>.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-gray-600 mb-3">Birth & Early Success (1956-1970s)</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">1956:</span> <span class="font-bold">Dartmouth Workshop</span>; John McCarthy coined <span class="font-bold">"Artificial Intelligence."</span></li>
+                            <li><span class="font-bold">1966:</span> Joseph Weizenbaum creates <span class="font-bold">ELIZA</span> (the first chatbot).</li>
+                            <li><span class="font-bold">1970s:</span> First major <span class="font-bold">"AI Winter"</span> (funding cuts).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-gray-600 mb-3">Resurgence & ML (1980s-2000s)</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">1980s:</span> Rise of <span class="font-bold">Expert Systems</span>.</li>
+                            <li><span class="font-bold">1997:</span> IBM's <span class="font-bold">Deep Blue</span> defeats Garry Kasparov.</li>
+                            <li><span class="font-bold">2000s:</span> <span class="font-bold">Machine Learning</span> gains traction (data/compute power).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-gray-600 mb-3">The Modern Boom (2010s-Present)</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">2010s:</span> Breakthrough of <span class="font-bold">Deep Learning</span>.</li>
+                            <li><span class="font-bold">2017:</span> Google introduces the <span class="font-bold">Transformer architecture</span>.</li>
+                            <li><span class="font-bold">2020s:</span> Rapid scaling of <span class="font-bold">LLMs</span> and <span class="font-bold">Agentic AI</span>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-green lg:col-span-3" id="types">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">XI. The AI Landscape: Types and Capabilities</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-medium text-green-600 mb-3">Classification by Capability (The Goal)</h3>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">Narrow AI (Weak AI):</span> <span class="font-bold">(Exists Today)</span> Trained for one specific task (e.g., Siri, recommendation engines).</li>
+                            <li><span class="font-bold">General AI (Strong AI / AGI):</span> <span class="font-bold">(Theoretical)</span> Can think, learn, and apply intelligence across any task.</li>
+                            <li><span class="font-bold">Superintelligent AI (ASI):</span> <span class="font-bold">(Theoretical)</span> Surpasses human intelligence in every intellectual respect.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-green-600 mb-3">Classification by Functionality (The Execution)</h3>
+                        <ul class="custom-list">
+                            <li><span class="font-bold">Reactive Machines:</span> Most basic. Responds to present data; <span class="font-bold">no memory</span> (e.g., Deep Blue).</li>
+                            <li><span class="font-bold">Limited Memory AI:</span> Uses <span class="font-bold">past data</span> (short-term) to inform decisions (e.g., Self-driving cars, modern LLMs/Agents).</li>
+                            <li><span class="font-bold">Theory of Mind AI:</span> <span class="font-bold">(Experimental)</span> Understands and interacts with human <span class="font-bold">emotions and beliefs</span>.</li>
+                            <li><span class="font-bold">Self-Aware AI:</span> <span class="font-bold">(Theoretical)</span> Possesses self-consciousness and awareness of its own existence.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-white p-6 rounded-xl shadow-lg border-yellow lg:col-span-3" id="contributors">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">XII. Global AI Contributors: Leaders in Investment and Innovation</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-xl font-medium text-yellow-600 mb-3">Top Global Leaders</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">United States:</span> Leads in private investment, quality research, and is the top destination for global talent.</li>
+                            <li><span class="font-bold">China:</span> Leads in AI publications and patents, with massive government-backed funding.</li>
+                            <li><span class="font-bold">United Kingdom:</span> Strong research base (DeepMind) and key leader in AI governance.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-yellow-600 mb-3">Key Corporate Innovators</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">US Giants:</span> Google (DeepMind, AlphaGo), OpenAI (GPT models), Microsoft, IBM (Watson).</li>
+                            <li><span class="font-bold">Chinese Giants:</span> Baidu (Ernie), Tencent (Hunyuan), Huawei (Pangu), Alibaba.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-yellow-600 mb-3">Emerging Global Centers</h3>
+                        <ul class="custom-list text-sm">
+                            <li><span class="font-bold">Canada:</span> Strong AI research hubs (Montreal, Toronto).</li>
+                            <li><span class="font-bold">Germany:</span> Focus on industrial AI, robotics, and engineering.</li>
+                            <li><span class="font-bold">Israel:</span> Leader in AI cybersecurity and military applications ("Startup Nation").</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white text-center p-6 mt-12">
+        <p class="text-lg font-semibold mb-1">© 2025 | Product of Felixent</p>
+        <p class="text-sm text-gray-400">The Transformative Impact of Agentic AI on the Enterprise SDLC.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        // Data and Configuration for SDLC Time Reduction (Bar Chart)
+        const sdlcData = {
+            labels: ['Planning', 'Design', 'Coding', 'Testing', 'Maintenance'],
+            datasets: [{
+                label: 'Efficiency Gain (%)',
+                data: [30, 45, 70, 85, 90], // Illustrative data points
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.8)', // blue-500
+                    'rgba(168, 85, 247, 0.8)', // violet-500
+                    'rgba(245, 158, 11, 0.8)', // amber-500
+                    'rgba(16, 185, 129, 0.8)', // emerald-500
+                    'rgba(234, 88, 12, 0.8)'   // orange-600
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const sdlcConfig = {
+            type: 'bar',
+            data: sdlcData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Efficiency Gain (Automation/Time Reduction)' },
+                        max: 100
+                    }
+                },
+                plugins: { legend: { display: false } }
+            }
+        };
+
+        // Data and Configuration for Role Shift (Doughnut Chart)
+        const roleShiftConfig = {
+            type: 'doughnut',
+            data: {
+                labels: ['Manual Work (Traditional)', 'Strategic Work (Traditional)', 'Manual Work (Agentic)', 'Strategic Work (Agentic)'],
+                datasets: [
+                    {
+                        label: 'Traditional SDLC Effort (%)',
+                        data: [70, 30],
+                        backgroundColor: ['#f87171', '#3b82f6'],
+                        hoverOffset: 4
+                    },
+                    {
+                        label: 'Agentic SDLC Effort (%)',
+                        data: [10, 90],
+                        backgroundColor: ['#ef4444', '#10b981'],
+                        hoverOffset: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Inner Ring: Traditional SDLC | Outer Ring: Agentic SDLC'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Data and Configuration for OODA Loop (Polar Area Chart - Conceptual Flow)
+        const oodaData = {
+            labels: ['Observe (Perceive)', 'Orient (Reason)', 'Decide (Plan)', 'Act (Execute)'],
+            datasets: [{
+                label: 'Agentic Cycle Intensity',
+                data: [90, 80, 70, 60], // Conceptual intensity/frequency
+                backgroundColor: [
+                    'rgba(251, 191, 36, 0.8)', // Amber-400
+                    'rgba(249, 115, 22, 0.8)', // Orange-500
+                    'rgba(239, 68, 68, 0.8)',  // Red-500
+                    'rgba(59, 130, 246, 0.8)'  // Blue-500
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const oodaConfig = {
+            type: 'polarArea',
+            data: oodaData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        pointLabels: {
+                            display: true,
+                            centerPointLabels: true,
+                            font: { size: 14 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Agentic AI OODA Loop Flow' }
+                }
+            }
+        };
+
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            new Chart(document.getElementById('sdlcChart'), sdlcConfig);
+            new Chart(document.getElementById('roleShiftChart'), roleShiftConfig);
+            new Chart(document.getElementById('oodaChart'), oodaConfig);
+        });
+    </script>
+</body>
+</html>
