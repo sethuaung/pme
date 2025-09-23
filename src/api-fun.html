@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="API-Summrized">
+    <meta name="description" content="Felixent : Student Guide to REST & Graph">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>REST vs. GraphQL: A Student's Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">REST vs. GraphQL</h1>
+            <p class="text-lg text-gray-600 mt-1">A Student's Guide to API Architectures</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Introduction -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Introduction to APIs</h2>
+            <p class="text-gray-700 leading-relaxed">
+                An **API** (Application Pplication Programming Interface) is a set of rules and protocols for building and interacting with software applications. Think of it as a menu in a restaurant: it tells you what dishes (data) are available and how to order them.
+            </p>
+            <p class="text-gray-700 leading-relaxed mt-4">
+                Choosing the right technology for an API is a critical decision in modern software development. REST and GraphQL are two popular architectural styles, but they solve the problem of client-server communication in fundamentally different ways. Understanding their core principles is key to becoming a proficient developer.
+            </p>
+        </section>
+
+        <!-- REST Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">REST (Representational State Transfer) 🧱</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>
+                    REST is a well-established architectural style that uses the principles of the web itself. It’s based on **resources**, which are things like `users`, `products`, or `posts`. Each resource has a unique URL, and you use standard HTTP methods to interact with it.
+                </p>
+                <ul class="list-disc list-inside mt-4">
+                    <li>
+                        <strong class="font-semibold">How it Works:</strong> To get data, you make a request to a specific endpoint (a URL).
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li>To get a list of all products, you'd use a `GET` request to `https://api.example.com/products`.</li>
+                            <li>To create a new user, you'd use a `POST` request to `https://api.example.com/users`.</li>
+                        </ul>
+                    </li>
+                    <li class="mt-2">
+                        <strong class="font-semibold">Key Concepts:</strong>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li><strong>Multiple Endpoints:</strong> Each resource type has its own URL.</li>
+                            <li><strong>Fixed Data:</strong> When you request a resource, the API returns a predefined data structure. This can lead to **over-fetching** (getting more data than you need) or **under-fetching** (needing to make multiple requests).</li>
+                            <li><strong>HTTP Methods:</strong> It uses standard methods like `GET` (read), `POST` (create), `PUT` (update), and `DELETE` (delete).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- GraphQL Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">GraphQL (Graph Query Language) 🔍</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p>
+                    GraphQL is a query language for your API. It was created by Facebook to solve the inefficiencies of REST. Instead of many endpoints, it has a single endpoint that clients can send flexible queries to.
+                </p>
+                <ul class="list-disc list-inside mt-4">
+                    <li>
+                        <strong class="font-semibold">How it Works:</strong> The client sends a single, detailed query to a single endpoint, asking for exactly what it needs. You could ask for a user's name and their last 5 posts in a **single request**.
+                    </li>
+                    <li class="mt-2">
+                        <strong class="font-semibold">Key Concepts:</strong>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li><strong>Single Endpoint:</strong> All requests go to the same URL, typically `/graphql`.</li>
+                            <li><strong>Client-driven Data:</strong> The client defines the data it wants. This eliminates over-fetching and under-fetching.</li>
+                            <li><strong>Strongly Typed Schema:</strong> The API is defined by a schema that acts as a contract between the client and server. This makes the API self-documenting.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Infographic Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Visual Summary: Infographic</h2>
+            <div class="flex justify-center">
+                <img src="http://googleusercontent.com/image_generation_content/0" alt="Infographic comparing REST and GraphQL" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+        </section>
+
+        <!-- When to Use Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">When to Use Each?</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Deciding between REST and GraphQL is a strategic choice based on your project's specific needs. Consider the following scenarios to help you make the right decision.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 rounded-lg bg-blue-50">
+                    <h3 class="font-semibold text-lg text-blue-800 mb-2">Choose REST when:</h3>
+                    <ul class="list-disc list-inside text-blue-700">
+                        <li>Your data structure is simple and predictable.</li>
+                        <li>You want to leverage standard HTTP caching for performance.</li>
+                        <li>The client's data needs are well-defined and unlikely to change frequently.</li>
+                        <li>You are building a smaller, less complex application.</li>
+                    </ul>
+                </div>
+                <div class="p-4 rounded-lg bg-purple-50">
+                    <h3 class="font-semibold text-lg text-purple-800 mb-2">Choose GraphQL when:</h3>
+                    <ul class="list-disc list-inside text-purple-700">
+                        <li>You are building a complex application with a mobile client where network efficiency is critical.</li>
+                        <li>You need to fetch data from multiple resources in a single request.</li>
+                        <li>The client's data needs are flexible and can change over time.</li>
+                        <li>You want to prevent over-fetching and under-fetching data.</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mt-4">
+                Both are powerful tools, and understanding their strengths and weaknesses is crucial for making informed decisions as a developer.
+            </p>
+        </section>
+
+        <!-- Social Media Scenario -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Scenario: Building a Social Media Profile Screen</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Imagine you are building a profile screen for a social media app. This screen needs to display:
+            </p>
+            <ul class="list-disc list-inside text-gray-700 mb-6">
+                <li>The user's profile information (name, bio, profile picture)</li>
+                <li>A list of their most recent posts</li>
+                <li>A list of their friends</li>
+            </ul>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- REST Approach -->
+                <div class="p-4 rounded-lg bg-red-50">
+                    <h3 class="font-semibold text-xl text-red-800 mb-2">REST Approach</h3>
+                    <p class="text-red-700 mb-4">
+                        A REST API would require **multiple separate requests** to different endpoints to get all the data.
+                    </p>
+                    <ul class="list-disc list-inside text-red-700 leading-relaxed">
+                        <li><code>GET /users/123</code> (to get user info)</li>
+                        <li><code>GET /users/123/posts</code> (to get their posts)</li>
+                        <li><code>GET /users/123/friends</code> (to get their friends list)</li>
+                    </ul>
+                    <p class="text-red-700 mt-4">
+                        This leads to the "N+1 problem" where the client makes a series of dependent requests. This can be slow, especially on mobile networks, and is inefficient.
+                    </p>
+                </div>
+
+                <!-- GraphQL Approach -->
+                <div class="p-4 rounded-lg bg-green-50">
+                    <h3 class="font-semibold text-xl text-green-800 mb-2">GraphQL Approach</h3>
+                    <p class="text-green-700 mb-4">
+                        A GraphQL API solves this by allowing the client to request all the data in a **single query** to a single endpoint.
+                    </p>
+                    <pre class="bg-gray-800 text-white rounded-lg p-3 text-sm overflow-x-auto"><code>query {
+  user(id: "123") {
+    name
+    bio
+    profilePic
+    posts {
+      title
+      content
+    }
+    friends {
+      name
+    }
+  }
+}</code></pre>
+                    <p class="text-green-700 mt-4">
+                        This single request fetches exactly the data needed for the profile screen, reducing network roundtrips and optimizing performance.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testing Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Testing with Postman</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Postman is an essential tool for testing APIs. Here's how to use it for both REST and GraphQL.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- REST Testing -->
+                <div class="p-4 rounded-lg bg-red-50">
+                    <h3 class="font-semibold text-xl text-red-800 mb-2">Testing a REST API</h3>
+                    <ol class="list-decimal list-inside text-red-700 leading-relaxed">
+                        <li><strong class="font-semibold">Select Method & URL:</strong> Choose the appropriate HTTP method (`GET`, `POST`, etc.) and enter the full URL of the endpoint.</li>
+                        <li><strong class="font-semibold">Add Parameters/Body:</strong> Use the "Params" tab for URL parameters or the "Body" tab for a JSON payload.</li>
+                        <li><strong class="font-semibold">Send Request:</strong> Click "Send."</li>
+                        <li><strong class="font-semibold">Validate Response:</strong> Check the **status code** (e.g., `200 OK` for success) and verify the data in the **response body**.</li>
+                    </ol>
+                </div>
+
+                <!-- GraphQL Testing -->
+                <div class="p-4 rounded-lg bg-green-50">
+                    <h3 class="font-semibold text-xl text-green-800 mb-2">Testing a GraphQL API</h3>
+                    <ol class="list-decimal list-inside text-green-700 leading-relaxed">
+                        <li><strong class="font-semibold">Set Up Request:</strong> Create a new request and select **GraphQL** from the dropdown menu.</li>
+                        <li><strong class="font-semibold">Enter Endpoint:</strong> Enter the single GraphQL endpoint URL, such as `https://api.example.com/graphql`.</li>
+                        <li><strong class="font-semibold">Write Your Query:</strong> In the "Query" tab, write the query for the specific data you need.</li>
+                        <li><strong class="font-semibold">Send & Validate:</strong> Click "Send." Postman will return a single response. Validate that the data matches exactly what you requested in your query.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- New section: API Sec University course -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">API Sec University course</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Understanding API architectures is the first step; securing them is the next. A university course on API security would dive into the vulnerabilities and best practices for protecting your web services.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 leading-relaxed">
+                <li><strong class="font-semibold">Common Vulnerabilities:</strong> Learn about the <a href="https://owasp.org/www-project-api-security/" class="text-blue-600 hover:underline" target="_blank">OWASP API Security Top 10</a>, which lists the most critical security risks to APIs.</li>
+                <li><strong class="font-semibold">Authentication & Authorization:</strong> Implement secure methods for verifying user identity and controlling access to data. This includes using JSON Web Tokens (JWTs) and OAuth 2.0.</li>
+                <li><strong class="font-semibold">Rate Limiting & Throttling:</strong> Protect your API from abuse and denial-of-service (DoS) attacks by limiting the number of requests a user can make.</li>
+                <li><strong class="font-semibold">Secure Coding Practices:</strong> Learn how to write code that prevents common security flaws like SQL injection and cross-site scripting (XSS).</li>
+            </ul>
+            <p class="text-gray-700 leading-relaxed mt-4">
+                Whether you're building a RESTful or GraphQL API, security is paramount. A dedicated course ensures you have the skills to build robust and secure applications.
+            </p>
+            <div class="mt-6 flex justify-center">
+                <a href="https://cloud.apisecapps.com/" target="_blank" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
+                    Register for the Course
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white shadow-inner py-4 mt-8">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2024 Student API Guide and Felixent. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
