@@ -18,6 +18,8 @@ A Visual Summary of Key Concepts
 
 (7) [DevSecOps & ERP Security](https://pme-felixent.vercel.app/src/dsonerp2.html)
 
+(8) [Agentic AI on the Enterprise Software Development Life Cycle](https://pme-felixent.vercel.app/src/ai-transform.html)
+
 
 ## 📃 License
 
