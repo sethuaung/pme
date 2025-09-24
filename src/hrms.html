@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HRMS-Summrized">
+    <meta name="description" content="Felixent : Guide to Human Resource Management Systems">
+    <meta name="author" content="Mosquito">
+    <link href="contents/favicon.ico" rel="icon">
+    <title>Felixent : Human Resource Management Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flowchart-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            min-height: 80px;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0077B6;
+            margin: 0.5rem 0;
+            transform: rotate(90deg);
+        }
+        @media (min-width: 768px) {
+            .flowchart-arrow {
+                transform: rotate(0deg);
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">Guide to Human Resource Management Systems (HRMS)</h1>
+            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Explore how modern HRMS solutions empower businesses by managing and optimizing their most critical resource: their people.</p>
+        </header>
+
+        <section id="advantages" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#4361EE]">Key Advantages of an HRMS</h2>
+            <p class="text-center text-md text-slate-500 max-w-3xl mx-auto mb-10">Implementing an HRMS can provide significant benefits to an organization by automating tasks, improving data quality, and enabling strategic decision-making.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-[#00B4D8]">
+                    <div class="text-4xl mb-4">&#9999;</div>
+                    <h3 class="font-bold text-xl mb-2">Improved Efficiency</h3>
+                    <p class="text-sm text-slate-600">Automates routine tasks, freeing up HR staff for strategic initiatives.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-[#0077B6]">
+                    <div class="text-4xl mb-4">&#128214;</div>
+                    <h3 class="font-bold text-xl mb-2">Enhanced Data Accuracy</h3>
+                    <p class="text-sm text-slate-600">Centralizes employee information in a single database, reducing errors.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-[#4361EE]">
+                    <div class="text-4xl mb-4">&#128274;</div>
+                    <h3 class="font-bold text-xl mb-2">Regulatory Compliance</h3>
+                    <p class="text-sm text-slate-600">Helps organizations adhere to labor laws and maintain an audit trail.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-[#00A3FF]">
+                    <div class="text-4xl mb-4">&#128100;</div>
+                    <h3 class="font-bold text-xl mb-2">Better Employee Experience</h3>
+                    <p class="text-sm text-slate-600">Provides self-service portals, increasing engagement and satisfaction.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="lifecycle" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#00B4D8]">The Employee Lifecycle Workflow</h2>
+            <p class="text-center text-md text-slate-500 max-w-3xl mx-auto mb-10">An HRMS supports the entire employee journey, often referred to as the "Hire-to-Retire" lifecycle.</p>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                <div class="flex flex-col md:flex-row items-center justify-center">
+                    <div class="flowchart-step bg-[#00A3FF] text-white">Recruitment & Onboarding</div>
+                    <div class="flowchart-arrow">&#10140;</div>
+                    <div class="flowchart-step bg-[#0077B6] text-white">Core HR & Payroll</div>
+                    <div class="flowchart-arrow">&#10140;</div>
+                    <div class="flowchart-step bg-[#4361EE] text-white">Performance Management</div>
+                    <div class="flowchart-arrow">&#10140;</div>
+                    <div class="flowchart-step bg-[#00B4D8] text-white">Learning & Development</div>
+                    <div class="flowchart-arrow">&#10140;</div>
+                    <div class="flowchart-step bg-[#00A3FF] text-white">Offboarding</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="types" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#0077B6]">System Types and Feature Comparison</h2>
+            <p class="text-center text-md text-slate-500 max-w-3xl mx-auto mb-10">HRMS solutions can be categorized by their primary function and feature set, from specialized systems to integrated all-in-one suites.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between border-l-4 border-[#00A3FF]">
+                    <div class="text-sm text-slate-600">
+                        <h3 class="font-bold text-lg mb-2 text-[#00A3FF]">Integrated Suites</h3>
+                        <p class="mb-2">All-in-one solutions that combine multiple functions like payroll, benefits, and talent management.</p>
+                        <p class="font-semibold text-xs">Example: Workday HCM</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between border-l-4 border-[#4361EE]">
+                    <div class="text-sm text-slate-600">
+                        <h3 class="font-bold text-lg mb-2 text-[#4361EE]">Core HR Systems</h3>
+                        <p class="mb-2">Focus on fundamental HR tasks like managing employee data and basic administration.</p>
+                        <p class="font-semibold text-xs">Example: BambooHR</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between border-l-4 border-[#0077B6]">
+                    <div class="text-sm text-slate-600">
+                        <h3 class="font-bold text-lg mb-2 text-[#0077B6]">Applicant Tracking Systems (ATS)</h3>
+                        <p class="mb-2">Specialized software for managing the hiring process, from job posting to candidate tracking.</p>
+                        <p class="font-semibold text-xs">Example: Greenhouse</p>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between border-l-4 border-[#00B4D8]">
+                    <div class="text-sm text-slate-600">
+                        <h3 class="font-bold text-lg mb-2 text-[#00B4D8]">Learning Management Systems (LMS)</h3>
+                        <p class="mb-2">Platforms for creating, delivering, and tracking employee training and development programs.</p>
+                        <p class="font-semibold text-xs">Example: Docebo</p>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between border-l-4 border-[#00A3FF]">
+                    <div class="text-sm text-slate-600">
+                        <h3 class="font-bold text-lg mb-2 text-[#00A3FF]">Payroll Systems</h3>
+                        <p class="mb-2">Standalone systems that specialize in calculating and processing employee salaries and taxes.</p>
+                        <p class="font-semibold text-xs">Example: Gusto</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="adoption" class="mb-20">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg border-l-4 border-slate-200">
+                 <h3 class="text-xl font-bold text-center mb-2">Key HRMS Module Adoption Rates</h3>
+                 <p class="text-sm text-slate-500 text-center mb-6">Core HR and Payroll modules are nearly universal, while talent management and analytics are becoming increasingly critical for strategic HR teams.</p>
+                 <div class="chart-container">
+                    <canvas id="hrmsModuleChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="deployment" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#90E0EF]">Deployment & Pricing Models</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-2">Cloud vs. On-Premise Hosting</h3>
+                     <p class="text-sm text-slate-500 text-center mb-6">Cloud-based SaaS solutions overwhelmingly dominate the market due to their ease of maintenance, scalability, and lower upfront costs.</p>
+                    <div class="chart-container">
+                        <canvas id="hostingModelChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-6">Open Source vs. Closed Source</h3>
+                    <div class="space-y-4">
+                        <div class="border p-4 rounded-lg bg-slate-50">
+                            <h4 class="font-bold text-[#00A3FF] mb-1">Open Source</h4>
+                            <p class="text-sm text-slate-500"><span class="font-bold text-green-600">Pros:</span> Lower cost, high customization. <span class="font-bold text-red-600">Cons:</span> Requires technical expertise, self-managed security.</p>
+                        </div>
+                        <div class="border p-4 rounded-lg bg-slate-50">
+                            <h4 class="font-bold text-[#00A3FF] mb-1">Closed Source (Proprietary)</h4>
+                            <p class="text-sm text-slate-500"><span class="font-bold text-green-600">Pros:</span> Full vendor support, robust security. <span class="font-bold text-red-600">Cons:</span> Higher cost, vendor lock-in.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faqs" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#4361EE]">Essential FAQs</h2>
+            <div class="space-y-4 max-w-4xl mx-auto">
+                <details class="bg-white shadow-lg rounded-lg p-4 group" open>
+                    <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+                        What is the difference between HRMS and HCM?
+                        <span class="text-slate-500 transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
+                    </summary>
+                    <p class="mt-2 text-slate-600 text-sm">HCM (Human Capital Management) is a broader term that encompasses all HRMS functions plus strategic talent management, such as succession planning and workforce analytics. HRMS is more focused on the operational side.</p>
+                </details>
+                <details class="bg-white shadow-lg rounded-lg p-4 group">
+                    <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+                        How long does HRMS implementation take?
+                        <span class="text-slate-500 transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
+                    </summary>
+                    <p class="mt-2 text-slate-600 text-sm">Implementation time varies widely based on system complexity and company size. It can range from a few weeks for a simple system to six months or more for a large-scale enterprise deployment.</p>
+                </details>
+                 <details class="bg-white shadow-lg rounded-lg p-4 group">
+                    <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+                        Is an HRMS suitable for small businesses?
+                        <span class="text-slate-500 transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
+                    </summary>
+                    <p class="mt-2 text-slate-600 text-sm">Yes, many HRMS solutions are designed specifically for small businesses, offering simplified features and affordable per-employee pricing models to meet their needs without the complexity of enterprise systems.</p>
+                </details>
+            </div>
+        </section>
+
+    </main>
+    <footer class="text-center text-sm text-slate-400 py-6 border-t">
+        <p>&copy; 2025 Felixent. All rights reserved.</p>
+    </footer>
+
+<script>
+    function wrapLabels(label) {
+        const maxLength = 16;
+        if (typeof label === 'string' && label.length > maxLength) {
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        return label;
+    }
+
+    const defaultTooltipCallback = {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            }
+        }
+    };
+
+    const colors = {
+        blue: '#00A3FF',
+        darkBlue: '#4361EE',
+        deepBlue: '#0077B6',
+        cyan: '#00B4D8',
+        lightCyan: '#90E0EF'
+    };
+
+    const hrmsModuleCtx = document.getElementById('hrmsModuleChart').getContext('2d');
+    new Chart(hrmsModuleCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Core HR', 'Payroll', ['Performance', 'Management'], 'Recruitment', 'Analytics'].map(wrapLabels),
+            datasets: [{
+                label: 'Importance / Adoption Rate',
+                data: [95, 90, 80, 75, 70],
+                backgroundColor: [colors.darkBlue, colors.deepBlue, colors.cyan, colors.lightCyan, colors.blue],
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            ...defaultTooltipCallback,
+            plugins: {
+                 ...defaultTooltipCallback.plugins,
+                legend: {
+                    display: false,
+                }
+            },
+            scales: {
+                 x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                     grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+
+    const hostingModelCtx = document.getElementById('hostingModelChart').getContext('2d');
+    new Chart(hostingModelCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Cloud / SaaS', 'On-Premise'],
+            datasets: [{
+                data: [85, 15],
+                backgroundColor: [colors.blue, colors.darkBlue],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            ...defaultTooltipCallback,
+             plugins: {
+                ...defaultTooltipCallback.plugins,
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
